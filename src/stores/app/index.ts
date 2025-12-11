@@ -1,0 +1,42 @@
+/**
+ * 应用状态管理（选项式）
+ */
+import type { AppState } from "./interface"
+import { defineStore } from "pinia"
+
+export const useAppStore = defineStore("app", {
+  state: (): AppState => ({
+    sidebarCollapsed: false,
+    language: "zh-CN",
+    theme: "light",
+  }),
+
+  getters: {
+    /** 侧边栏宽度 */
+    sidebarWidth: state => (state.sidebarCollapsed ? 64 : 220),
+  },
+
+  actions: {
+    /** 切换侧边栏折叠状态 */
+    toggleSidebar() {
+      this.sidebarCollapsed = !this.sidebarCollapsed
+    },
+
+    /** 设置语言 */
+    setLanguage(lang: string) {
+      this.language = lang
+    },
+
+    /** 切换主题 */
+    toggleTheme() {
+      this.theme = this.theme === "light" ? "dark" : "light"
+      document.documentElement.classList.toggle("dark", this.theme === "dark")
+    },
+  },
+
+  // 持久化配置
+  persist: {
+    key: "app-store",
+    pick: ["sidebarCollapsed", "language", "theme"],
+  },
+})

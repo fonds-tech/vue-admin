@@ -1,0 +1,94 @@
+/**
+ * 全局样式入口
+ */
+
+// 重置样式
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: $text-primary;
+  font-size: $font-size-base;
+  font-family: $font-family;
+  background-color: $bg-page;
+}
+
+a {
+  color: $primary-color;
+  transition: color $transition-duration $transition-timing;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-light;
+  }
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $text-placeholder;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $text-secondary;
+}
+
+// NProgress 进度条样式
+#nprogress {
+  .bar {
+    height: 3px;
+    background: $primary-color;
+  }
+
+  .peg {
+    box-shadow:
+      0 0 10px $primary-color,
+      0 0 5px $primary-color;
+  }
+}
+
+// 过渡动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $transition-duration $transition-timing;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all $transition-duration $transition-timing;
+}
+
+.slide-fade-leave-active {
+  transition: all $transition-duration $transition-timing;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(10px);
+}
