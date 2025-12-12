@@ -1,13 +1,10 @@
-/**
- * 侧边栏菜单组件 (TSX)
- * 使用递归渲染实现多级菜单
- */
 import type { BackendMenu } from "@/stores/permission/interface"
+import Icon from "@/components/Icon/index.vue"
 import { useAppStore } from "@/stores/app"
 import { useMenuStore } from "@/stores/menu"
 import { useRoute, useRouter } from "vue-router"
 import { computed, defineComponent } from "vue"
-import { ElIcon, ElMenu, ElSubMenu, ElMenuItem, ElScrollbar } from "element-plus"
+import { ElMenu, ElSubMenu, ElMenuItem, ElScrollbar } from "element-plus"
 import "./index.scss"
 
 export default defineComponent({
@@ -70,11 +67,7 @@ export default defineComponent({
      */
     function renderIcon(icon?: string) {
       if (!icon) return null
-      return (
-        <ElIcon>
-          <component is={icon} />
-        </ElIcon>
-      )
+      return <Icon icon={icon} size={18} />
     }
 
     /**
@@ -111,12 +104,8 @@ export default defineComponent({
       return (
         <ElSubMenu key={menu.path} index={fullPath}>
           {{
-            title: () => [
-              renderIcon(menu.meta?.icon),
-              <span>{menu.meta?.title}</span>,
-            ],
-            default: () =>
-              menu.children?.map(child => renderMenuItem(child, fullPath)),
+            title: () => [renderIcon(menu.meta?.icon), <span>{menu.meta?.title}</span>],
+            default: () => menu.children?.map(child => renderMenuItem(child, fullPath)),
           }}
         </ElSubMenu>
       )

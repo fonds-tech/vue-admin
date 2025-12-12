@@ -19,7 +19,7 @@ export const adminMenus: BackendMenu[] = [
     redirect: "/dashboard/analysis",
     meta: {
       title: "仪表盘",
-      icon: "Odometer",
+      icon: "ri:dashboard-3-line",
     },
     children: [
       {
@@ -30,7 +30,7 @@ export const adminMenus: BackendMenu[] = [
         component: "dashboard/analysis/index",
         meta: {
           title: "分析页",
-          icon: "TrendCharts",
+          icon: "ri:line-chart-line",
         },
       },
       {
@@ -41,7 +41,7 @@ export const adminMenus: BackendMenu[] = [
         component: "dashboard/workbench/index",
         meta: {
           title: "工作台",
-          icon: "Monitor",
+          icon: "ri:computer-line",
         },
       },
     ],
@@ -56,7 +56,7 @@ export const adminMenus: BackendMenu[] = [
     redirect: "/system/user",
     meta: {
       title: "系统管理",
-      icon: "Setting",
+      icon: "ri:settings-3-line",
     },
     children: [
       {
@@ -67,7 +67,7 @@ export const adminMenus: BackendMenu[] = [
         component: "system/user/index",
         meta: {
           title: "用户管理",
-          icon: "User",
+          icon: "ri:user-line",
           permissions: ["system:user:list"],
         },
       },
@@ -79,7 +79,7 @@ export const adminMenus: BackendMenu[] = [
         component: "system/role/index",
         meta: {
           title: "角色管理",
-          icon: "UserFilled",
+          icon: "ri:shield-user-line",
           permissions: ["system:role:list"],
         },
       },
@@ -91,7 +91,7 @@ export const adminMenus: BackendMenu[] = [
         component: "system/menu/index",
         meta: {
           title: "菜单管理",
-          icon: "Menu",
+          icon: "ri:menu-line",
           permissions: ["system:menu:list"],
         },
       },
@@ -103,7 +103,7 @@ export const adminMenus: BackendMenu[] = [
         component: "system/dept/index",
         meta: {
           title: "部门管理",
-          icon: "OfficeBuilding",
+          icon: "ri:building-line",
           permissions: ["system:dept:list"],
         },
       },
@@ -115,7 +115,7 @@ export const adminMenus: BackendMenu[] = [
         component: "system/dict/index",
         meta: {
           title: "字典管理",
-          icon: "Collection",
+          icon: "ri:book-2-line",
           permissions: ["system:dict:list"],
         },
       },
@@ -131,7 +131,7 @@ export const adminMenus: BackendMenu[] = [
     redirect: "/monitor/online",
     meta: {
       title: "系统监控",
-      icon: "DataLine",
+      icon: "ri:pulse-line",
       roles: ["admin"],
     },
     children: [
@@ -143,7 +143,7 @@ export const adminMenus: BackendMenu[] = [
         component: "monitor/online/index",
         meta: {
           title: "在线用户",
-          icon: "Connection",
+          icon: "ri:group-line",
         },
       },
       {
@@ -154,7 +154,7 @@ export const adminMenus: BackendMenu[] = [
         component: "monitor/log/index",
         meta: {
           title: "操作日志",
-          icon: "Document",
+          icon: "ri:file-list-3-line",
         },
       },
       {
@@ -165,7 +165,7 @@ export const adminMenus: BackendMenu[] = [
         component: "monitor/server/index",
         meta: {
           title: "服务监控",
-          icon: "Cpu",
+          icon: "ri:server-line",
         },
       },
     ],
@@ -180,7 +180,7 @@ export const adminMenus: BackendMenu[] = [
     redirect: "/components/table",
     meta: {
       title: "组件示例",
-      icon: "Grid",
+      icon: "ri:apps-2-line",
     },
     children: [
       {
@@ -191,7 +191,7 @@ export const adminMenus: BackendMenu[] = [
         component: "components/table/index",
         meta: {
           title: "表格组件",
-          icon: "Grid",
+          icon: "ri:table-line",
         },
       },
       {
@@ -202,7 +202,7 @@ export const adminMenus: BackendMenu[] = [
         component: "components/form/index",
         meta: {
           title: "表单组件",
-          icon: "Edit",
+          icon: "ri:survey-line",
         },
       },
       {
@@ -213,7 +213,7 @@ export const adminMenus: BackendMenu[] = [
         component: "components/editor/index",
         meta: {
           title: "富文本编辑器",
-          icon: "Document",
+          icon: "ri:edit-2-line",
         },
       },
       {
@@ -224,7 +224,7 @@ export const adminMenus: BackendMenu[] = [
         component: "components/upload/index",
         meta: {
           title: "上传组件",
-          icon: "Upload",
+          icon: "ri:upload-cloud-2-line",
         },
       },
     ],
@@ -239,7 +239,7 @@ export const adminMenus: BackendMenu[] = [
     redirect: "/nested/menu1/menu1-1",
     meta: {
       title: "多级菜单",
-      icon: "Operation",
+      icon: "ri:node-tree",
     },
     children: [
       {
@@ -251,6 +251,7 @@ export const adminMenus: BackendMenu[] = [
         redirect: "/nested/menu1/menu1-1",
         meta: {
           title: "菜单1",
+          icon: "ri:menu-add-line",
         },
         children: [
           {
@@ -261,6 +262,7 @@ export const adminMenus: BackendMenu[] = [
             component: "nested/menu1/menu1-1/index",
             meta: {
               title: "菜单1-1",
+              icon: "ri:menu-2-line",
             },
           },
           {
@@ -271,6 +273,7 @@ export const adminMenus: BackendMenu[] = [
             component: "nested/menu1/menu1-2/index",
             meta: {
               title: "菜单1-2",
+              icon: "ri:menu-3-line",
             },
           },
         ],
@@ -283,6 +286,7 @@ export const adminMenus: BackendMenu[] = [
         component: "nested/menu2/index",
         meta: {
           title: "菜单2",
+          icon: "ri:menu-add-fill",
         },
       },
     ],
@@ -297,7 +301,7 @@ export const adminMenus: BackendMenu[] = [
     redirect: "/profile/index",
     meta: {
       title: "个人中心",
-      icon: "Avatar",
+      icon: "ri:account-circle-line",
     },
     children: [
       {
@@ -308,7 +312,7 @@ export const adminMenus: BackendMenu[] = [
         component: "profile/index",
         meta: {
           title: "个人信息",
-          icon: "User",
+          icon: "ri:profile-line",
         },
       },
       {
@@ -319,7 +323,7 @@ export const adminMenus: BackendMenu[] = [
         component: "profile/password/index",
         meta: {
           title: "修改密码",
-          icon: "Key",
+          icon: "ri:lock-password-line",
         },
       },
     ],
@@ -334,7 +338,7 @@ export const adminMenus: BackendMenu[] = [
     redirect: "/about/index",
     meta: {
       title: "关于",
-      icon: "InfoFilled",
+      icon: "ri:information-line",
     },
     children: [
       {
@@ -345,7 +349,7 @@ export const adminMenus: BackendMenu[] = [
         component: "about/index",
         meta: {
           title: "关于项目",
-          icon: "InfoFilled",
+          icon: "ri:information-2-line",
         },
       },
     ],
@@ -367,7 +371,7 @@ export const userMenus: BackendMenu[] = [
     redirect: "/dashboard/workbench",
     meta: {
       title: "仪表盘",
-      icon: "Odometer",
+      icon: "ri:dashboard-3-line",
     },
     children: [
       {
@@ -378,7 +382,7 @@ export const userMenus: BackendMenu[] = [
         component: "dashboard/workbench/index",
         meta: {
           title: "工作台",
-          icon: "Monitor",
+          icon: "ri:computer-line",
         },
       },
     ],
@@ -393,7 +397,7 @@ export const userMenus: BackendMenu[] = [
     redirect: "/components/table",
     meta: {
       title: "组件示例",
-      icon: "Grid",
+      icon: "ri:apps-2-line",
     },
     children: [
       {
@@ -404,7 +408,7 @@ export const userMenus: BackendMenu[] = [
         component: "components/table/index",
         meta: {
           title: "表格组件",
-          icon: "Grid",
+          icon: "ri:table-line",
         },
       },
       {
@@ -415,7 +419,7 @@ export const userMenus: BackendMenu[] = [
         component: "components/form/index",
         meta: {
           title: "表单组件",
-          icon: "Edit",
+          icon: "ri:survey-line",
         },
       },
     ],
@@ -430,7 +434,7 @@ export const userMenus: BackendMenu[] = [
     redirect: "/profile/index",
     meta: {
       title: "个人中心",
-      icon: "Avatar",
+      icon: "ri:account-circle-line",
     },
     children: [
       {
@@ -441,7 +445,7 @@ export const userMenus: BackendMenu[] = [
         component: "profile/index",
         meta: {
           title: "个人信息",
-          icon: "User",
+          icon: "ri:profile-line",
         },
       },
       {
@@ -452,7 +456,7 @@ export const userMenus: BackendMenu[] = [
         component: "profile/password/index",
         meta: {
           title: "修改密码",
-          icon: "Key",
+          icon: "ri:lock-password-line",
         },
       },
     ],
@@ -467,7 +471,7 @@ export const userMenus: BackendMenu[] = [
     redirect: "/about/index",
     meta: {
       title: "关于",
-      icon: "InfoFilled",
+      icon: "ri:information-line",
     },
     children: [
       {
@@ -478,7 +482,7 @@ export const userMenus: BackendMenu[] = [
         component: "about/index",
         meta: {
           title: "关于项目",
-          icon: "InfoFilled",
+          icon: "ri:information-2-line",
         },
       },
     ],

@@ -25,6 +25,7 @@ const width = computed(() => `${appStore.sidebarWidth}px`)
   overflow: hidden;
   position: relative;
   flex-direction: column;
+  background-color: var(--el-bg-color);
   &::before {
     top: 0;
     right: 0;

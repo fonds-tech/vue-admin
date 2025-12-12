@@ -16,37 +16,18 @@
     <!-- 标签列表区 -->
     <div ref="scrollContainer" class="process__list" @wheel="onWheel">
       <div class="process__scroll">
-        <el-dropdown
-          v-for="(item, index) in processStore.list"
-          :key="item.path"
-          trigger="contextmenu"
-          @command="(cmd: string) => onContextMenuCommand(cmd, item, index)"
-        >
-          <div
-            class="process-item"
-            :class="{ 'is-active': item.path === route.path }"
-            @click="onClickItem(item)"
-          >
+        <el-dropdown v-for="(item, index) in processStore.list" :key="item.path" trigger="contextmenu" @command="(cmd: string) => onContextMenuCommand(cmd, item, index)">
+          <div class="process-item" :class="{ 'is-active': item.path === route.path }" @click="onClickItem(item)">
             <span class="process-item__title">{{ item.title }}</span>
-            <el-icon
-              v-if="!item.affix"
-              class="process-item__close"
-              @click.stop="onClickClose(index)"
-            >
+            <el-icon v-if="!item.affix" class="process-item__close" @click.stop="onClickClose(index)">
               <Close />
             </el-icon>
           </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item command="close" :disabled="item.affix">
-                关闭当前
-              </el-dropdown-item>
-              <el-dropdown-item command="closeOther">
-                关闭其他
-              </el-dropdown-item>
-              <el-dropdown-item command="closeAll">
-                关闭所有
-              </el-dropdown-item>
+              <el-dropdown-item command="close" :disabled="item.affix"> 关闭当前 </el-dropdown-item>
+              <el-dropdown-item command="closeOther"> 关闭其他 </el-dropdown-item>
+              <el-dropdown-item command="closeAll"> 关闭所有 </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
