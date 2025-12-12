@@ -92,3 +92,22 @@ a {
   opacity: 0;
   transform: translateX(10px);
 }
+
+// 顶栏图标按钮通用样式
+.header-icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius;
+  transition: all $transition-duration $transition-timing;
+  color: $text-regular;
+  font-size: 18px;
+
+  &:hover {
+    background-color: var(--el-fill-color-light); // 使用 Element Plus 的填充色
+    color: $text-primary;
+  }
+}

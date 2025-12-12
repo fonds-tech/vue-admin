@@ -1,5 +1,5 @@
 <template>
-  <el-icon class="collapse-btn" @click="toggle">
+  <el-icon class="header-icon-btn" @click="toggle">
     <Fold v-if="!collapsed" />
     <Expand v-else />
   </el-icon>
@@ -24,13 +24,5 @@ function toggle() {
 </script>
 
 <style lang="scss" scoped>
-.collapse-btn {
-  cursor: pointer;
-  font-size: 20px;
-  transition: color $transition-duration;
-
-  &:hover {
-    color: $primary-color;
-  }
-}
+// 样式已移至全局 .header-icon-btn
 </style>

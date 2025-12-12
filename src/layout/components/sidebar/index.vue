@@ -13,8 +13,8 @@
  * 侧边栏容器组件
  * 组合 Logo 和 Menu 子组件
  */
-import SidebarLogo from "./Logo.vue"
-import SidebarMenu from "./Menu.vue"
+import SidebarLogo from "../logo/index.vue"
+import SidebarMenu from "../menu/index.tsx"
 import { computed } from "vue"
 import { useAppStore } from "@/stores/app"
 
@@ -37,8 +37,10 @@ const sidebarStyle = computed(() => ({
   z-index: $z-index-fixed;
   overflow: hidden;
   position: fixed;
-  background-color: #001529; // 平铺深色背景
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  box-shadow: 2px 0 8px rgb(0 0 0 / 4%);
   transition: width $transition-duration $transition-timing;
+  border-right: 1px solid #e2e8f0;
   flex-direction: column;
 }
 </style>

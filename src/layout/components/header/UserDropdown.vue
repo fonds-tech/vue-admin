@@ -82,7 +82,7 @@ async function handleLogout() {
   border-radius: $border-radius;
 
   &:hover {
-    background-color: $bg-color;
+    background-color: var(--el-fill-color-light);
   }
 
   .user-name {

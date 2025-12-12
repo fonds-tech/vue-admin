@@ -40,19 +40,5 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.header-action {
-  width: 36px;
-  cursor: pointer;
-  height: 36px;
-  display: flex;
-  font-size: 18px;
-  transition: background-color $transition-duration;
-  align-items: center;
-  border-radius: $border-radius;
-  justify-content: center;
-
-  &:hover {
-    background-color: $bg-color;
-  }
-}
+// 样式已移至全局 .header-icon-btn
 </style>

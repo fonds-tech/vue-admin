@@ -23,7 +23,7 @@
 
       <!-- 设置按钮 -->
       <el-tooltip content="设置">
-        <el-icon class="header-action" @click="openSettings">
+        <el-icon class="header-icon-btn" @click="openSettings">
           <Setting />
         </el-icon>
       </el-tooltip>
@@ -90,22 +90,6 @@ function openSettings() {
     gap: $spacing-sm;
     display: flex;
     align-items: center;
-  }
-
-  &-action {
-    width: 36px;
-    cursor: pointer;
-    height: 36px;
-    display: flex;
-    font-size: 18px;
-    transition: background-color $transition-duration;
-    align-items: center;
-    border-radius: $border-radius;
-    justify-content: center;
-
-    &:hover {
-      background-color: $bg-color;
-    }
   }
 }
 </style>
