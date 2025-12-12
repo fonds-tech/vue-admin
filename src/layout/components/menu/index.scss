@@ -1,12 +1,11 @@
 /**
  * 侧边栏菜单样式 - 清新浅色主题
  */
-.sidebar-menu {
-  flex: 1;
+.menu {
+  height: calc(100vh - #{$header-height});
   overflow: hidden;
 
-  :deep(.el-menu) {
-    background: transparent;
+  .el-menu {
     border-right: none;
   }
 

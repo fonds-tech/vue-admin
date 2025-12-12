@@ -11,7 +11,7 @@ import { ElIcon, ElMenu, ElSubMenu, ElMenuItem, ElScrollbar } from "element-plus
 import "./index.scss"
 
 export default defineComponent({
-  name: "sidebar-menu",
+  name: "menu",
   props: {
     /** 是否折叠 */
     collapsed: {
@@ -123,7 +123,7 @@ export default defineComponent({
     }
 
     return () => (
-      <ElScrollbar class="sidebar-menu">
+      <ElScrollbar class="menu">
         <ElMenu
           defaultActive={activeMenu.value}
           collapse={props.collapsed}

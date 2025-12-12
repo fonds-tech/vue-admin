@@ -1,31 +1,22 @@
 <template>
-  <aside class="sidebar" :style="sidebarStyle">
-    <!-- Logo -->
+  <el-aside class="sidebar" :width="width">
     <sidebar-logo :collapsed="appStore.sidebarCollapsed" />
-
-    <!-- 菜单 -->
     <sidebar-menu :collapsed="appStore.sidebarCollapsed" />
-  </aside>
+  </el-aside>
 </template>
 
 <script setup lang="ts">
-/**
- * 侧边栏容器组件
- * 组合 Logo 和 Menu 子组件
- */
 import SidebarLogo from "../logo/index.vue"
 import SidebarMenu from "../menu/index.tsx"
+import { ElAside } from "element-plus"
 import { computed } from "vue"
 import { useAppStore } from "@/stores/app"
 
-defineOptions({ name: "layout-sidebar" })
+defineOptions({ name: "sidebar" })
 
 const appStore = useAppStore()
 
-/** 侧边栏样式 */
-const sidebarStyle = computed(() => ({
-  width: `${appStore.sidebarWidth}px`,
-}))
+const width = computed(() => `${appStore.sidebarWidth}px`)
 </script>
 
 <style lang="scss" scoped>
@@ -34,13 +25,18 @@ const sidebarStyle = computed(() => ({
   left: 0;
   height: 100vh;
   display: flex;
-  z-index: $z-index-fixed;
   overflow: hidden;
+  position: relative;
   position: fixed;
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-  box-shadow: 2px 0 8px rgb(0 0 0 / 4%);
-  transition: width $transition-duration $transition-timing;
-  border-right: 1px solid #e2e8f0;
   flex-direction: column;
+  &::before {
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    content: "";
+    position: absolute;
+    background-color: var(--el-menu-border-color);
+  }
 }
 </style>
