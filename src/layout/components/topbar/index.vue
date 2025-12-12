@@ -76,6 +76,7 @@ onUnmounted(() => {
   display: flex;
   padding: 0 $spacing-md;
   align-items: center;
+  border-bottom: 1px solid var(--el-border-color);
   justify-content: space-between;
   background-color: var(--el-bg-color);
 
