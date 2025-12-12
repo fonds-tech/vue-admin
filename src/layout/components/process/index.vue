@@ -182,48 +182,40 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .process {
-  height: $tags-view-height;
   display: flex;
-  padding: 0 $spacing-base;
+  padding: $spacing-xs $spacing-md;
   align-items: center;
-  border-bottom: 1px solid $border-light;
   background-color: $bg-white;
 
   // 导航操作区
   &__nav {
     height: 100%;
     display: flex;
+    align-items: center;
     flex-shrink: 0;
-    border-radius: $border-radius-sm;
-    background-color: $bg-white;
+    margin-right: $spacing-md;
 
     .nav-item {
+      width: 30px;
+      border: 1px solid var(--el-fill-color-dark);
       cursor: pointer;
-      height: 100%;
+      height: 30px;
       display: flex;
-      padding: 0 $spacing-md;
-      position: relative;
-      font-size: 14px;
-      transition: color $transition-duration;
+      transition: all 0.2s ease-in-out;
       align-items: center;
+      margin-right: $spacing-xs;
+      border-radius: 6px;
       justify-content: center;
 
       &:hover {
-        color: $primary-color;
+        border-color: var(--el-color-primary);
+        background-color: transparent;
       }
 
-      // 分隔线
-      &:not(:last-child)::after {
-        top: 50%;
-        right: 0;
-        width: 1px;
-        height: 12px;
-        content: "";
-        position: absolute;
-        transform: translateY(-50%);
-        background-color: $border-color;
+      &:last-child {
+        margin-right: 0;
       }
     }
   }
@@ -235,7 +227,6 @@ onMounted(() => {
     overflow: hidden;
     position: relative;
     overflow-x: auto;
-    border-radius: $border-radius-sm;
 
     // 隐藏滚动条
     &::-webkit-scrollbar {
@@ -245,63 +236,68 @@ onMounted(() => {
   }
 
   &__scroll {
-    gap: $spacing-sm;
+    gap: $spacing-xs;
     height: 100%;
     display: flex;
-    position: absolute;
-    white-space: nowrap;
+    padding: 4px 0;
+    align-items: center;
   }
 
   // 标签项
   .process-item {
-    gap: $spacing-xs;
-    border: 1px solid $border-light;
-    border: 1px solid $border-light;
+    color: $text-regular;
+    border: 1px solid var(--el-fill-color-dark);
     cursor: pointer;
-    height: 100%;
+    height: 30px;
     display: flex;
-    padding: 0 $spacing-md;
+    padding: 0 8px 0 12px;
+    position: relative;
     font-size: 12px;
-    transition: all $transition-duration;
+    transition: all 0.2s ease-in-out;
     align-items: center;
-    border-radius: 2px;
-    background-color: $bg-white;
+    border-radius: 6px;
+    background-color: transparent;
 
     &__title {
       overflow: hidden;
       max-width: 120px;
       white-space: nowrap;
+      margin-right: 4px;
       text-overflow: ellipsis;
     }
 
     &__close {
-      width: 0;
-      opacity: 0;
-      font-size: 12px;
-      transition: all $transition-duration;
+      width: 14px;
+      height: 14px;
+      display: flex;
+      opacity: 0.6;
+      font-size: 10px;
+      transition: all 0.2s;
+      align-items: center;
+      border-radius: 50%;
+      justify-content: center;
 
       &:hover {
-        color: $danger-color;
+        color: #fff;
+        opacity: 1;
+        background-color: $danger-color;
       }
     }
 
     &:hover {
-      background-color: $bg-color;
-
-      .process-item__close {
-        width: 14px;
-        opacity: 1;
-      }
+      color: var(--el-color-primary);
+      border-color: var(--el-color-primary);
+      background-color: transparent;
     }
 
     // 激活状态
     &.is-active {
-      color: $primary-color;
-      border-color: $primary-color;
-      background-color: $primary-light-9; // 需要确认是否有这个变量，如果没有则用 primary-light 配合透明度，或者直接用 hex
+      color: var(--el-color-primary);
+      font-weight: 500;
+      border-color: var(--el-color-primary);
+      background-color: transparent;
 
       .process-item__close {
-        width: 14px;
         opacity: 1;
       }
     }

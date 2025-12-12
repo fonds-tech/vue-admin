@@ -75,10 +75,20 @@ onUnmounted(() => {
   height: $header-height;
   display: flex;
   padding: 0 $spacing-md;
+  position: relative;
   align-items: center;
-  border-bottom: 1px solid var(--el-border-color);
   justify-content: space-between;
   background-color: var(--el-bg-color);
+
+  &::before {
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    height: 1px;
+    content: "";
+    position: absolute;
+    background-color: var(--el-border-color);
+  }
 
   &__left {
     gap: $spacing-md;
