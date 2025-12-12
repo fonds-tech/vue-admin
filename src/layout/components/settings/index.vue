@@ -1,30 +1,15 @@
 <template>
-  <el-drawer
-    v-model="visible"
-    title="系统设置"
-    direction="rtl"
-    size="320px"
-    :show-close="true"
-    :close-on-click-modal="true"
-  >
+  <el-drawer v-model="visible" title="系统设置" direction="rtl" size="320px" :show-close="true" :close-on-click-modal="true">
     <div class="settings">
       <!-- 主题模式 -->
       <div class="settings-section">
         <div class="settings-title">主题模式</div>
         <div class="settings-options">
-          <div
-            class="theme-option"
-            :class="{ 'is-active': theme === 'light' }"
-            @click="setTheme('light')"
-          >
+          <div class="theme-option" :class="{ 'is-active': theme === 'light' }" @click="setTheme('light')">
             <el-icon :size="24"><Sunny /></el-icon>
             <span>亮色</span>
           </div>
-          <div
-            class="theme-option"
-            :class="{ 'is-active': theme === 'dark' }"
-            @click="setTheme('dark')"
-          >
+          <div class="theme-option" :class="{ 'is-active': theme === 'dark' }" @click="setTheme('dark')">
             <el-icon :size="24"><Moon /></el-icon>
             <span>暗色</span>
           </div>
@@ -60,7 +45,37 @@
             <span>固定顶栏</span>
             <el-switch v-model="fixedHeader" />
           </div>
+          <div class="settings-item">
+            <span>显示水印</span>
+            <el-switch v-model="showWatermark" />
+          </div>
         </div>
+      </div>
+
+      <!-- 菜单设置 -->
+      <div class="settings-section">
+        <div class="settings-title">菜单设置</div>
+        <div class="settings-items">
+          <div class="settings-item">
+            <span>菜单模式</span>
+            <el-select v-model="menuMode" class="settings-select-sm">
+              <el-option value="accordion" label="手风琴" />
+              <el-option value="expand" label="全部展开" />
+              <el-option value="collapse" label="全部折叠" />
+            </el-select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 动画设置 -->
+      <div class="settings-section">
+        <div class="settings-title">过渡动画</div>
+        <el-select v-model="transition" class="settings-select">
+          <el-option value="fade" label="淡入淡出" />
+          <el-option value="slide" label="滑动" />
+          <el-option value="zoom" label="缩放" />
+          <el-option value="none" label="无动画" />
+        </el-select>
       </div>
 
       <!-- 语言设置 -->
@@ -79,6 +94,7 @@
 /**
  * 系统设置抽屉组件
  */
+import type { MenuMode, TransitionName } from "@/stores/app/interface"
 import { useAppStore } from "@/stores/app"
 import { ref, watch, computed } from "vue"
 
@@ -112,7 +128,28 @@ const showProcess = computed({
 })
 
 /** 固定顶栏 */
-const fixedHeader = ref(true)
+const fixedHeader = computed({
+  get: () => appStore.fixedHeader,
+  set: val => appStore.setFixedHeader(val),
+})
+
+/** 显示水印 */
+const showWatermark = computed({
+  get: () => appStore.showWatermark,
+  set: val => appStore.setShowWatermark(val),
+})
+
+/** 菜单模式 */
+const menuMode = computed({
+  get: () => appStore.menuMode,
+  set: val => appStore.setMenuMode(val as MenuMode),
+})
+
+/** 过渡动画 */
+const transition = computed({
+  get: () => appStore.transition,
+  set: val => appStore.setTransition(val as TransitionName),
+})
 
 /** 当前语言 */
 const language = computed({
@@ -138,9 +175,13 @@ function changeLanguage() {
 }
 
 // 监听主题变化，同步到 DOM
-watch(theme, (val) => {
-  document.documentElement.setAttribute("data-theme", val)
-}, { immediate: true })
+watch(
+  theme,
+  (val) => {
+    document.documentElement.setAttribute("data-theme", val)
+  },
+  { immediate: true },
+)
 </script>
 
 <style lang="scss" scoped>
@@ -245,6 +286,10 @@ watch(theme, (val) => {
 
   &-select {
     width: 100%;
+  }
+
+  &-select-sm {
+    width: 120px;
   }
 }
 </style>

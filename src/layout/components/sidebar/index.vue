@@ -37,7 +37,7 @@ const sidebarStyle = computed(() => ({
   z-index: $z-index-fixed;
   overflow: hidden;
   position: fixed;
-  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  background-color: #001529; // 平铺深色背景
   transition: width $transition-duration $transition-timing;
   flex-direction: column;
 }

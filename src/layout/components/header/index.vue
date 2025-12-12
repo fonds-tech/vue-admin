@@ -75,8 +75,8 @@ function openSettings() {
   padding: 0 $spacing-base;
   z-index: $z-index-sticky;
   position: sticky;
-  box-shadow: $shadow;
   align-items: center;
+  border-bottom: 1px solid $border-light;
   justify-content: space-between;
   background-color: $bg-white;
 

@@ -1,7 +1,7 @@
 <template>
   <main class="layout-view">
     <router-view v-slot="{ Component, route }">
-      <transition name="fade" mode="out-in">
+      <transition :name="transitionName" mode="out-in">
         <keep-alive :include="cacheList">
           <component :is="Component" v-if="!isRefreshing" :key="route.path" />
         </keep-alive>
@@ -16,18 +16,26 @@
  * 封装 router-view + keep-alive + transition
  */
 import { emitter } from "@/utils/mitt"
-import { useProcessStore } from "@/stores"
+import { useAppStore, useProcessStore } from "@/stores"
 import { ref, computed, nextTick, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "layout-view" })
 
 const processStore = useProcessStore()
+const appStore = useAppStore()
 
 /** 是否正在刷新（用于 keep-alive 刷新） */
 const isRefreshing = ref(false)
 
 /** 缓存列表 */
 const cacheList = computed(() => processStore.cacheList)
+
+/** 过渡动画名称 */
+const transitionName = computed(() => {
+  // 如果设置为 none，则不使用过渡动画
+  if (appStore.transition === "none") return ""
+  return appStore.transition
+})
 
 /**
  * 处理页面刷新
@@ -52,7 +60,7 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .layout-view {
   flex: 1;
-  padding: $spacing-base;
+  padding: $spacing-lg;
   background-color: $bg-page;
 }
 
@@ -65,5 +73,37 @@ onUnmounted(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+// 滑动过渡
+.slide-enter-active,
+.slide-leave-active {
+  transition: all $transition-duration;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+// 缩放过渡
+.zoom-enter-active,
+.zoom-leave-active {
+  transition: all $transition-duration;
+}
+
+.zoom-enter-from {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.zoom-leave-to {
+  opacity: 0;
+  transform: scale(1.05);
 }
 </style>

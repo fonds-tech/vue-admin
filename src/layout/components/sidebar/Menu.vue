@@ -4,7 +4,7 @@
       :default-active="activeMenu"
       :collapse="collapsed"
       :collapse-transition="false"
-      :unique-opened="true"
+      :unique-opened="menuUniqueOpened"
       background-color="transparent"
       text-color="#e5e7eb"
       active-text-color="#818cf8"
@@ -61,6 +61,7 @@
  */
 import SidebarMenuItem from "./MenuItem.vue"
 import { computed } from "vue"
+import { useAppStore } from "@/stores/app"
 import { useMenuStore } from "@/stores/menu"
 import { useRoute, useRouter } from "vue-router"
 
@@ -72,9 +73,13 @@ defineProps<{
 const route = useRoute()
 const router = useRouter()
 const menuStore = useMenuStore()
+const appStore = useAppStore()
 
 /** 从 menuStore 获取可见菜单列表 */
 const menuList = computed(() => menuStore.visibleMenus)
+
+/** 菜单是否使用手风琴模式（同时只展开一个子菜单） */
+const menuUniqueOpened = computed(() => appStore.menuMode === "accordion")
 
 /** 当前激活的菜单 */
 const activeMenu = computed(() => {

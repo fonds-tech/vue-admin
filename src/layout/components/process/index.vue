@@ -184,11 +184,12 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .process {
-  gap: $spacing-md;
   height: $tags-view-height;
-  margin: 0 $spacing-base;
   display: flex;
+  padding: 0 $spacing-base;
   align-items: center;
+  border-bottom: 1px solid $border-light;
+  background-color: $bg-white;
 
   // 导航操作区
   &__nav {
@@ -254,14 +255,16 @@ onMounted(() => {
   // 标签项
   .process-item {
     gap: $spacing-xs;
+    border: 1px solid $border-light;
+    border: 1px solid $border-light;
     cursor: pointer;
     height: 100%;
     display: flex;
     padding: 0 $spacing-md;
-    font-size: $font-size-sm;
+    font-size: 12px;
     transition: all $transition-duration;
     align-items: center;
-    border-radius: $border-radius-sm;
+    border-radius: 2px;
     background-color: $bg-white;
 
     &__title {
@@ -293,8 +296,9 @@ onMounted(() => {
 
     // 激活状态
     &.is-active {
-      color: #fff;
-      background-color: $primary-color;
+      color: $primary-color;
+      border-color: $primary-color;
+      background-color: $primary-light-9; // 需要确认是否有这个变量，如果没有则用 primary-light 配合透明度，或者直接用 hex
 
       .process-item__close {
         width: 14px;
