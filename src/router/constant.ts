@@ -1,10 +1,10 @@
-import type { RouteRecordRaw } from "vue-router"
-
 /**
  * 静态路由
  * 无需权限即可访问
  * 这些页面放在 pages 目录下，路由硬编码
  */
+import type { RouteRecordRaw } from "vue-router"
+
 export const constantRoutes: RouteRecordRaw[] = [
   // 登录页
   {
@@ -54,5 +54,11 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: { title: "外部页面", hidden: true },
       },
     ],
+  },
+  // 404 兜底路由
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
+    meta: { hidden: true },
   },
 ]

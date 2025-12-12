@@ -12,6 +12,8 @@ pinia.use(piniaPluginPersistedstate)
 export default pinia
 
 export { useAppStore } from "./app"
+export { useMenuStore } from "./menu"
 export { usePermissionStore } from "./permission"
 // 导出所有 Store
 export { useUserStore } from "./user"
+

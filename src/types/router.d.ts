@@ -30,6 +30,8 @@ declare module "vue-router" {
     activeMenu?: string
     /** 面包屑是否可点击 */
     breadcrumbLink?: boolean
+    /** 是否为动态注册的路由 */
+    dynamic?: boolean
   }
 }
 

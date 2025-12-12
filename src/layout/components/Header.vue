@@ -28,7 +28,7 @@
       <!-- 语言切换 -->
       <el-dropdown @command="changeLanguage">
         <el-icon class="header-action">
-          <i-ep-document />
+          <Document />
         </el-icon>
         <template #dropdown>
           <el-dropdown-menu>

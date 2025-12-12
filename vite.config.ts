@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      port: 5173,
+      port: 5300,
       host: true,
       open: true,
       proxy: {

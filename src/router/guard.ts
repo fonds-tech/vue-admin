@@ -1,8 +1,12 @@
-import type { Router, RouteRecordRaw } from "vue-router"
+/**
+ * 路由守卫
+ * 实现动态路由懒注册
+ */
+import type { AppRouter } from "./index"
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 import { useUserStore } from "@/stores/user"
-import { usePermissionStore } from "@/stores/permission"
+import { useMenuStore } from "@/stores/menu"
 
 // 配置 NProgress
 NProgress.configure({ showSpinner: false })
@@ -13,69 +17,88 @@ const whiteList = ["/login", "/404", "/403", "/500"]
 /**
  * 创建路由守卫
  */
-export function setupRouterGuard(router: Router) {
+export function setupRouterGuard(router: AppRouter) {
   // 前置守卫
   router.beforeEach(async (to, _from, next) => {
     NProgress.start()
+
+    // 设置页面标题
     document.title = `${to.meta.title || ""} - ${import.meta.env.VITE_APP_TITLE}`
 
     const userStore = useUserStore()
-    const permissionStore = usePermissionStore()
-    const hasToken = userStore.token
+    const menuStore = useMenuStore()
 
-    // 已登录
-    if (hasToken) {
-      if (to.path === "/login") {
-        // 已登录访问登录页，重定向到首页
-        next({ path: "/" })
+    // 白名单路由直接放行
+    if (whiteList.includes(to.path)) {
+      next()
+      return
+    }
+
+    // 未登录跳转登录页
+    if (!userStore.token) {
+      next(`/login?redirect=${to.path}`)
+      NProgress.done()
+      return
+    }
+
+    // 已登录访问登录页，重定向到首页
+    if (to.path === "/login") {
+      next({ path: "/" })
+      NProgress.done()
+      return
+    }
+
+    // 菜单未初始化，先获取菜单
+    if (!menuStore.initialized) {
+      try {
+        await menuStore.fetchMenus()
+      }
+      catch (error) {
+        console.error("[Router Guard] Failed to fetch menus:", error)
+        userStore.logout()
+        menuStore.reset()
+        next(`/login?redirect=${to.path}`)
         NProgress.done()
         return
       }
+    }
 
-      // 检查是否已生成动态路由
-      if (permissionStore.isRoutesGenerated) {
+    // 查找菜单
+    const menu = menuStore.findMenu(to.path)
+
+    // 菜单不存在，跳转 404
+    if (!menu) {
+      // 可能是静态路由（如首页），直接放行
+      if (router.hasRoute(to.name as string)) {
         next()
+        return
+      }
+      next("/404")
+      NProgress.done()
+      return
+    }
+
+    // 路由未注册，动态添加
+    if (!router.hasRoute(menu.name)) {
+      // 查找父级菜单（Layout 级别）
+      const parentMenu = menuStore.menus.find((m) => {
+        if (m.path === to.path) return true
+        return m.children?.some(c => `${m.path}/${c.path}` === to.path)
+      })
+
+      if (parentMenu) {
+        router.add(parentMenu)
       }
       else {
-        try {
-          // 获取用户信息（如果尚未获取）
-          if (!userStore.userInfo.id) {
-            await userStore.getUserInfo()
-          }
-
-          // 生成动态路由
-          const { roles, permissions } = userStore.userInfo
-          const dynamicRoutes = permissionStore.generateRoutes(roles, permissions)
-
-          // 动态添加路由
-          dynamicRoutes.forEach((route: RouteRecordRaw) => {
-            router.addRoute(route)
-          })
-
-          // 触发重新导航，确保新路由生效
-          next({ ...to, replace: true })
-        }
-        catch (error) {
-          console.error("[Router Guard] Failed to generate routes:", error)
-          // 获取信息失败，清除登录状态
-          userStore.logout()
-          permissionStore.resetRoutes()
-          next(`/login?redirect=${to.path}`)
-        }
+        router.add(menu)
       }
+
+      // 重新导航，确保新路由生效
+      next({ ...to, replace: true })
+      return
     }
-    else {
-      // 未登录
-      if (whiteList.includes(to.path)) {
-        // 白名单路由直接放行
-        next()
-      }
-      else {
-        // 重定向到登录页
-        next(`/login?redirect=${to.path}`)
-        NProgress.done()
-      }
-    }
+
+    next()
   })
 
   // 后置守卫
@@ -87,5 +110,11 @@ export function setupRouterGuard(router: Router) {
   router.onError((error) => {
     console.error("[Router Error]:", error)
     NProgress.done()
+
+    // 动态导入失败时刷新页面
+    if (error.message.includes("Failed to fetch dynamically imported module")) {
+      window.location.reload()
+    }
   })
 }
+

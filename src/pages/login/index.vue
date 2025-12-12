@@ -38,7 +38,8 @@
           </el-form>
 
           <div class="login-tips">
-            <p>演示账号：admin / 123456</p>
+            <p>管理员：admin / 123456</p>
+            <p>普通用户：user / 123456</p>
           </div>
         </div>
       </div>

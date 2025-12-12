@@ -12,27 +12,53 @@
         :default-active="activeMenu"
         :collapse="appStore.sidebarCollapsed"
         :collapse-transition="false"
+        :unique-opened="true"
         background-color="transparent"
         text-color="#e5e7eb"
         active-text-color="#818cf8"
         @select="handleMenuSelect"
       >
-        <!-- 首页 -->
-        <el-menu-item index="/dashboard">
-          <el-icon><HomeFilled /></el-icon>
-          <template #title>{{ $t("menu.dashboard") }}</template>
-        </el-menu-item>
-
-        <!-- 系统管理 -->
-        <el-sub-menu v-for="menu in asyncRoutes.filter((r) => !r.meta?.hidden)" :key="menu.path" :index="menu.path">
-          <template #title>
-            <el-icon><Setting /></el-icon>
-            <span>{{ menu.meta?.title }}</span>
-          </template>
-          <el-menu-item v-for="child in menu.children" :key="child.path" :index="`${menu.path}/${child.path}`">
-            {{ child.meta?.title }}
+        <!-- 递归渲染菜单项 -->
+        <template v-for="menu in menuList" :key="menu.path">
+          <!-- 无子菜单或只有一个子菜单的情况 -->
+          <el-menu-item
+            v-if="!menu.children || menu.children.length === 0"
+            :index="menu.path"
+          >
+            <el-icon v-if="menu.meta?.icon">
+              <component :is="menu.meta.icon" />
+            </el-icon>
+            <template #title>{{ menu.meta?.title }}</template>
           </el-menu-item>
-        </el-sub-menu>
+
+          <!-- 单个子菜单（不展示父级，直接展示子菜单） -->
+          <el-menu-item
+            v-else-if="menu.children.length === 1 && !menu.children[0].children?.length"
+            :index="`${menu.path}/${menu.children[0].path}`"
+          >
+            <el-icon v-if="menu.children[0].meta?.icon || menu.meta?.icon">
+              <component :is="menu.children[0].meta?.icon || menu.meta?.icon" />
+            </el-icon>
+            <template #title>{{ menu.children[0].meta?.title || menu.meta?.title }}</template>
+          </el-menu-item>
+
+          <!-- 多个子菜单 -->
+          <el-sub-menu v-else :index="menu.path">
+            <template #title>
+              <el-icon v-if="menu.meta?.icon">
+                <component :is="menu.meta.icon" />
+              </el-icon>
+              <span>{{ menu.meta?.title }}</span>
+            </template>
+            <!-- 递归渲染子菜单 -->
+            <sidebar-menu-item
+              v-for="child in menu.children"
+              :key="child.path"
+              :menu="child"
+              :base-path="menu.path"
+            />
+          </el-sub-menu>
+        </template>
       </el-menu>
     </el-scrollbar>
   </aside>
@@ -43,21 +69,37 @@
  * 侧边栏组件
  */
 import { computed } from "vue"
-import { asyncRoutes } from "@/router"
 import { useAppStore } from "@/stores/app"
+import { useMenuStore } from "@/stores/menu"
 import { useRoute, useRouter } from "vue-router"
+import SidebarMenuItem from "./SidebarMenuItem.vue"
 
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
+const menuStore = useMenuStore()
 
-const activeMenu = computed(() => route.path)
+// 从 menuStore 获取可见菜单列表
+const menuList = computed(() => menuStore.visibleMenus)
+
+const activeMenu = computed(() => {
+  // 如果设置了 activeMenu，使用它（用于详情页高亮列表菜单）
+  if (route.meta.activeMenu) {
+    return route.meta.activeMenu as string
+  }
+  return route.path
+})
 
 const sidebarStyle = computed(() => ({
   width: `${appStore.sidebarWidth}px`,
 }))
 
 function handleMenuSelect(path: string) {
+  // 外链处理
+  if (path.startsWith("http")) {
+    window.open(path, "_blank")
+    return
+  }
   router.push(path)
 }
 </script>
@@ -118,3 +160,4 @@ function handleMenuSelect(path: string) {
   }
 }
 </style>
+
