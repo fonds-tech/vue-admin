@@ -38,6 +38,7 @@ const settingsVisible = ref(false)
   height: 100vh;
   display: flex;
   overflow: hidden;
+  background-color: var(--el-bg-color);
 
   &__content {
     flex: 1;

@@ -162,7 +162,7 @@ onMounted(() => {
   display: flex;
   padding: $spacing-xs $spacing-md;
   align-items: center;
-  background-color: $bg-white;
+  background-color: var(--el-bg-color);
 
   // 导航操作区
   &__nav {

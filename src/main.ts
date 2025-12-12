@@ -7,6 +7,7 @@ import "element-plus/theme-chalk/dark/css-vars.css"
 import App from "./App.vue"
 import pinia from "./stores"
 import router from "./router"
+import { Crud } from "@fonds/vue-crud"
 import { useAppStore } from "./stores/app"
 import i18n, { elementPlusLocales } from "./locales"
 
@@ -20,6 +21,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 // 安装插件
+app.use(Crud)
 app.use(pinia)
 app.use(router)
 app.use(i18n)
