@@ -8,7 +8,7 @@ import { ElMenu, ElSubMenu, ElMenuItem, ElScrollbar } from "element-plus"
 import "./index.scss"
 
 export default defineComponent({
-  name: "menu",
+  name: "menus",
   props: {
     /** 是否折叠 */
     collapsed: {

@@ -52,7 +52,17 @@ export function setupRouterGuard(router: AppRouter) {
     // 菜单未初始化，先获取菜单
     if (!menuStore.initialized) {
       try {
-        await menuStore.fetchMenus()
+        const menus = await menuStore.fetchMenus()
+        // 注册所有菜单路由
+        router.add(menus)
+        // 添加 404 兜底路由（必须在动态路由之后）
+        if (!router.hasRoute("NotFoundRedirect")) {
+          const { notFoundRoute } = await import("./constant")
+          router.addRoute(notFoundRoute)
+        }
+        // 重新导航以匹配新注册的路由
+        next({ ...to, replace: true })
+        return
       }
       catch (error) {
         console.error("[Router Guard] Failed to fetch menus:", error)
@@ -64,41 +74,7 @@ export function setupRouterGuard(router: AppRouter) {
       }
     }
 
-    // 查找菜单
-    const menu = menuStore.findMenu(to.path)
-
-    // 菜单不存在，跳转 404
-    if (!menu) {
-      // 可能是静态路由（如首页），直接放行
-      if (router.hasRoute(to.name as string)) {
-        next()
-        return
-      }
-      next("/404")
-      NProgress.done()
-      return
-    }
-
-    // 路由未注册，动态添加
-    if (!router.hasRoute(menu.name)) {
-      // 查找父级菜单（Layout 级别）
-      const parentMenu = menuStore.menus.find((m) => {
-        if (m.path === to.path) return true
-        return m.children?.some(c => `${m.path}/${c.path}` === to.path)
-      })
-
-      if (parentMenu) {
-        router.add(parentMenu)
-      }
-      else {
-        router.add(menu)
-      }
-
-      // 重新导航，确保新路由生效
-      next({ ...to, replace: true })
-      return
-    }
-
+    // 已初始化，直接放行
     next()
   })
 

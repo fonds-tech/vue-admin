@@ -20,7 +20,10 @@ export function transformMenuToRoute(menu: BackendMenu, parentPath = ""): RouteR
   }
 
   // 计算完整路径
-  const fullPath = parentPath ? `${parentPath}/${menu.path}` : menu.path
+  let fullPath = menu.path
+  if (!fullPath.startsWith("/")) {
+    fullPath = parentPath ? `${parentPath}/${fullPath}` : fullPath
+  }
 
   // 获取组件
   const component = getComponent(menu.component, menu.meta)
@@ -31,7 +34,7 @@ export function transformMenuToRoute(menu: BackendMenu, parentPath = ""): RouteR
   }
 
   const route: RouteRecordRaw = {
-    path: menu.path,
+    path: fullPath,
     name: menu.name,
     component,
     meta: {

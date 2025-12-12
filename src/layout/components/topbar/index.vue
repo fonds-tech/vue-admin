@@ -3,7 +3,7 @@
     <div class="topbar__left">
       <!-- 侧边栏折叠按钮 -->
       <div class="action-btn" @click="appStore.toggleSidebar">
-        <Icon :icon="appStore.sidebarCollapsed ? 'ri:menu-unfold-line' : 'ri:menu-fold-line'" :size="16" />
+        <icon :icon="appStore.sidebarCollapsed ? 'ri:menu-unfold-line' : 'ri:menu-fold-line'" :size="16" />
       </div>
     </div>
 
@@ -11,21 +11,21 @@
       <!-- 主题切换 -->
       <el-tooltip :content="isDark ? '亮色模式' : '暗色模式'">
         <div class="action-btn" @click="appStore.toggleTheme">
-          <Icon :icon="isDark ? 'ri:sun-line' : 'ri:moon-line'" :size="16" />
+          <icon :icon="isDark ? 'ri:sun-line' : 'ri:moon-line'" :size="16" />
         </div>
       </el-tooltip>
 
       <!-- 全屏 -->
       <el-tooltip :content="isFullscreen ? '退出全屏' : '全屏'">
         <div class="action-btn" @click="toggleFullscreen">
-          <Icon :icon="isFullscreen ? 'ri:fullscreen-exit-line' : 'ri:fullscreen-line'" :size="16" />
+          <icon :icon="isFullscreen ? 'ri:fullscreen-exit-line' : 'ri:fullscreen-line'" :size="16" />
         </div>
       </el-tooltip>
 
       <!-- 设置按钮 -->
       <el-tooltip content="设置">
         <div class="action-btn" @click="emit('openSettings')">
-          <Icon icon="ri:settings-3-line" :size="16" />
+          <icon icon="ri:settings-3-line" :size="16" />
         </div>
       </el-tooltip>
     </div>

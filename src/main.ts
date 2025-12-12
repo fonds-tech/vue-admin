@@ -1,6 +1,3 @@
-/**
- * 应用入口文件
- */
 import ElementPlus from "element-plus"
 import { createApp } from "vue"
 import * as ElementPlusIconsVue from "@element-plus/icons-vue"

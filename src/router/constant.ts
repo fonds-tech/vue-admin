@@ -55,10 +55,12 @@ export const constantRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-  // 404 兜底路由
-  {
-    path: "/:pathMatch(.*)*",
-    redirect: "/404",
-    meta: { hidden: true },
-  },
 ]
+
+/** 404 兜底路由（需要在动态路由注册后添加） */
+export const notFoundRoute: RouteRecordRaw = {
+  path: "/:pathMatch(.*)*",
+  name: "NotFoundRedirect",
+  redirect: "/404",
+  meta: { hidden: true },
+}

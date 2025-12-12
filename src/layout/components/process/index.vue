@@ -3,13 +3,13 @@
     <!-- 导航操作区 -->
     <div class="process__nav">
       <div class="nav-item" title="返回" @click="onClickBack">
-        <el-icon><ArrowLeft /></el-icon>
+        <icon icon="ri:arrow-left-line" :size="14" />
       </div>
       <div class="nav-item" title="刷新" @click="onClickRefresh">
-        <el-icon><Refresh /></el-icon>
+        <icon icon="ri:refresh-line" :size="14" />
       </div>
       <div class="nav-item" title="首页" @click="onClickHome">
-        <el-icon><HomeFilled /></el-icon>
+        <icon icon="ri:home-4-line" :size="14" />
       </div>
     </div>
 
@@ -19,9 +19,7 @@
         <el-dropdown v-for="(item, index) in processStore.list" :key="item.path" trigger="contextmenu" @command="(cmd: string) => onContextMenuCommand(cmd, item, index)">
           <div class="process-item" :class="{ 'is-active': item.path === route.path }" @click="onClickItem(item)">
             <span class="process-item__title">{{ item.title }}</span>
-            <el-icon v-if="!item.affix" class="process-item__close" @click.stop="onClickClose(index)">
-              <Close />
-            </el-icon>
+            <icon v-if="!item.affix" icon="ri:close-line" :size="14" class="process-item__close" @click.stop="onClickClose(index)" />
           </div>
           <template #dropdown>
             <el-dropdown-menu>
@@ -37,10 +35,6 @@
 </template>
 
 <script setup lang="ts">
-/**
- * 进程标签组件
- * 多标签页导航
- */
 import type { ProcessItem } from "@/stores/process/interface"
 import { emitter } from "@/utils/mitt"
 import { useProcessStore } from "@/stores"
@@ -207,6 +201,7 @@ onMounted(() => {
     height: 100%;
     overflow: hidden;
     position: relative;
+    min-width: 0;
     overflow-x: auto;
 
     // 隐藏滚动条
@@ -226,60 +221,84 @@ onMounted(() => {
 
   // 标签项
   .process-item {
+    gap: $spacing-xs;
     color: $text-regular;
     border: 1px solid var(--el-fill-color-dark);
     cursor: pointer;
     height: 30px;
     display: flex;
-    padding: 0 8px 0 12px;
+    padding: 0 12px;
     position: relative;
     font-size: 12px;
     transition: all 0.2s ease-in-out;
     align-items: center;
-    border-radius: 6px;
+    border-radius: 4px;
     background-color: transparent;
 
     &__title {
       overflow: hidden;
       max-width: 120px;
+      transition: margin-right 0.2s ease-in-out;
       white-space: nowrap;
-      margin-right: 4px;
       text-overflow: ellipsis;
     }
 
     &__close {
-      width: 14px;
+      width: 0;
       height: 14px;
       display: flex;
-      opacity: 0.6;
+      opacity: 0;
+      overflow: hidden;
       font-size: 10px;
-      transition: all 0.2s;
+      transition: all 0.2s ease-in-out;
       align-items: center;
+      flex-shrink: 0;
       border-radius: 50%;
+      pointer-events: none;
       justify-content: center;
 
       &:hover {
-        color: #fff;
-        opacity: 1;
-        background-color: $danger-color;
+        color: var(--el-color-primary);
+        background-color: var(--el-color-primary-light-7);
       }
     }
 
+    // hover 状态
     &:hover {
       color: var(--el-color-primary);
       border-color: var(--el-color-primary);
-      background-color: transparent;
+      background-color: var(--el-color-primary-light-9);
+
+      .process-item__close {
+        color: var(--el-text-color-secondary);
+        width: 14px;
+        opacity: 1;
+        pointer-events: auto;
+
+        &:hover {
+          color: var(--el-color-primary);
+          background-color: var(--el-color-primary-light-7);
+        }
+      }
     }
 
     // 激活状态
     &.is-active {
-      color: var(--el-color-primary);
+      color: #fff;
       font-weight: 500;
       border-color: var(--el-color-primary);
-      background-color: transparent;
+      background-color: var(--el-color-primary);
 
       .process-item__close {
+        color: #fff;
+        width: 14px;
         opacity: 1;
+        pointer-events: auto;
+
+        &:hover {
+          color: #fff;
+          background-color: rgba(255, 255, 255, 0.2);
+        }
       }
     }
   }
