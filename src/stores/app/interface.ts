@@ -9,6 +9,8 @@ export interface AppState {
   language: string
   /** 当前主题 */
   theme: ThemeType
+  /** 是否显示进程标签栏 */
+  showProcess: boolean
 }
 
 export type ThemeType = "light" | "dark"

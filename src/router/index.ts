@@ -4,8 +4,8 @@
  */
 import type { Router } from "vue-router"
 import type { BackendMenu } from "@/stores/permission/interface"
-import { setupRouterGuard } from "./guard"
 import { constantRoutes } from "./constant"
+import { setupRouterGuard } from "./guard"
 import { transformMenuToRoute } from "./helper"
 import { createRouter, createWebHistory } from "vue-router"
 
@@ -113,4 +113,3 @@ setupRouterGuard(router)
 export { constantRoutes }
 
 export default router
-

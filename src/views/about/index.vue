@@ -53,8 +53,8 @@
   }
 
   .el-descriptions {
-    max-width: 400px;
     margin: 0 auto;
+    max-width: 400px;
   }
 }
 </style>

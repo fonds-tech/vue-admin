@@ -32,6 +32,8 @@ declare module "vue-router" {
     breadcrumbLink?: boolean
     /** 是否为动态注册的路由 */
     dynamic?: boolean
+    /** 是否在进程标签栏显示（默认 true） */
+    process?: boolean
   }
 }
 

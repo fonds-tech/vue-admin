@@ -9,6 +9,7 @@ export const useAppStore = defineStore("app", {
     sidebarCollapsed: false,
     language: "zh-CN",
     theme: "light",
+    showProcess: true,
   }),
 
   getters: {
@@ -32,11 +33,27 @@ export const useAppStore = defineStore("app", {
       this.theme = this.theme === "light" ? "dark" : "light"
       document.documentElement.classList.toggle("dark", this.theme === "dark")
     },
+
+    /** 切换进程标签栏显示状态 */
+    toggleProcess() {
+      this.showProcess = !this.showProcess
+    },
+
+    /** 设置进程标签栏显示状态 */
+    setShowProcess(show: boolean) {
+      this.showProcess = show
+    },
+
+    /** 设置主题 */
+    setTheme(mode: "light" | "dark") {
+      this.theme = mode
+      document.documentElement.classList.toggle("dark", mode === "dark")
+    },
   },
 
   // 持久化配置
   persist: {
     key: "app-store",
-    pick: ["sidebarCollapsed", "language", "theme"],
+    pick: ["sidebarCollapsed", "language", "theme", "showProcess"],
   },
 })

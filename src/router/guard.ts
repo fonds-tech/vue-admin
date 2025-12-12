@@ -5,8 +5,9 @@
 import type { AppRouter } from "./index"
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
-import { useUserStore } from "@/stores/user"
 import { useMenuStore } from "@/stores/menu"
+import { useUserStore } from "@/stores/user"
+import { useProcessStore } from "@/stores/process"
 
 // 配置 NProgress
 NProgress.configure({ showSpinner: false })
@@ -102,8 +103,21 @@ export function setupRouterGuard(router: AppRouter) {
   })
 
   // 后置守卫
-  router.afterEach(() => {
+  router.afterEach((to) => {
     NProgress.done()
+
+    // 添加进程标签
+    // 跳过白名单路由和明确禁用 process 的路由
+    if (!whiteList.includes(to.path) && to.meta?.process !== false) {
+      const processStore = useProcessStore()
+      processStore.add({
+        path: to.path,
+        fullPath: to.fullPath,
+        name: to.name as string,
+        title: (to.meta?.title as string) || (to.name as string) || "未命名",
+        affix: to.meta?.affix,
+      })
+    }
   })
 
   // 路由错误处理
@@ -117,4 +131,3 @@ export function setupRouterGuard(router: AppRouter) {
     }
   })
 }
-

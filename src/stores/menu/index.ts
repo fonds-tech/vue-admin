@@ -2,12 +2,12 @@
  * 菜单状态管理
  * 统一管理菜单数据、扁平化菜单、路由注册状态
  */
-import type { BackendMenu } from "../permission/interface"
 import type { MenuState } from "./interface"
+import type { BackendMenu } from "../permission/interface"
 import { defineStore } from "pinia"
-import { flattenMenus, getVisibleMenus } from "@/router/helper"
-import { getMenusByUsername } from "../mock/menu"
 import { useUserStore } from "../user"
+import { getMenusByUsername } from "../mock/menu"
+import { flattenMenus, getVisibleMenus } from "@/router/helper"
 
 export const useMenuStore = defineStore("menu", {
   state: (): MenuState => ({

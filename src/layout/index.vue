@@ -6,33 +6,39 @@
     <!-- 主体区域 -->
     <div class="layout-main" :style="mainStyle">
       <!-- 顶栏 -->
-      <layout-header />
+      <layout-header @open-settings="settingsVisible = true" />
+
+      <!-- 进程标签栏 -->
+      <layout-process v-if="appStore.showProcess" />
 
       <!-- 内容区 -->
-      <main class="layout-content">
-        <router-view v-slot="{ Component, route }">
-          <transition name="fade" mode="out-in">
-            <keep-alive :include="[]">
-              <component :is="Component" :key="route.path" />
-            </keep-alive>
-          </transition>
-        </router-view>
-      </main>
+      <layout-view />
     </div>
+
+    <!-- 设置抽屉 -->
+    <layout-settings v-model="settingsVisible" />
   </div>
 </template>
 
 <script setup lang="ts">
 /**
  * 主布局组件
+ * 组装侧边栏、顶栏、进程标签、视图出口和设置抽屉
  */
-import LayoutHeader from "./components/Header.vue"
-import LayoutSidebar from "./components/Sidebar.vue"
-import { computed } from "vue"
-import { useAppStore } from "@/stores/app"
+import LayoutView from "./components/view/index.vue"
+import LayoutHeader from "./components/header/index.vue"
+import LayoutProcess from "./components/process/index.vue"
+import LayoutSidebar from "./components/sidebar/index.vue"
+import LayoutSettings from "./components/settings/index.vue"
+import { useAppStore } from "@/stores"
+import { ref, computed } from "vue"
 
 const appStore = useAppStore()
 
+/** 设置抽屉是否可见 */
+const settingsVisible = ref(false)
+
+/** 主体区域样式 */
 const mainStyle = computed(() => ({
   marginLeft: `${appStore.sidebarWidth}px`,
 }))
@@ -47,12 +53,6 @@ const mainStyle = computed(() => ({
     min-height: 100vh;
     transition: margin-left $transition-duration $transition-timing;
     flex-direction: column;
-  }
-
-  &-content {
-    flex: 1;
-    padding: $spacing-base;
-    background-color: $bg-page;
   }
 }
 </style>

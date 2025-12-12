@@ -2,8 +2,8 @@
  * 路由工具函数
  * 提供菜单转换、路径匹配等功能
  */
-import type { RouteRecordRaw } from "vue-router"
 import type { BackendMenu } from "@/stores/permission/interface"
+import type { RouteRecordRaw } from "vue-router"
 
 // 视图模块映射（用于动态导入）
 const viewModules = import.meta.glob("/src/views/**/*.vue")

@@ -17,6 +17,9 @@ importers:
       '@fonds/utils':
         specifier: ^1.0.8
         version: 1.0.8
+      '@fonds/vue-crud':
+        specifier: ^1.0.6
+        version: 1.0.6(typescript@5.9.3)
       '@vueuse/core':
         specifier: ^13.5.0
         version: 13.9.0(vue@3.5.25(typescript@5.9.3))
@@ -75,6 +78,9 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.19
+      eslint:
+        specifier: ^9.39.1
+        version: 9.39.1
       eslint-plugin-format:
         specifier: ^1.1.0
         version: 1.1.0(eslint@9.39.1)
@@ -664,6 +670,9 @@ packages:
 
   '@fonds/utils@1.0.8':
     resolution: {integrity: sha512-+nJLztHpemBifhsO69YvmSLMzdmko9wwlr1w8/mSHvsH+CL3PsUUU9nVMVzhtOmQIFU6bScliABsa/CmiN4sIg==}
+
+  '@fonds/vue-crud@1.0.6':
+    resolution: {integrity: sha512-frlQOkQqLYUGavbif/6hMICGe//Vu1otInpPp8ZkUBqMCXkrx6rLr4DOzx2OPPMJzJXf7b04YeuvkEg09TMS7g==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -3069,6 +3078,12 @@ packages:
     resolution: {integrity: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==}
     engines: {node: '>=10'}
 
+  sortablejs@1.14.0:
+    resolution: {integrity: sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==}
+
+  sortablejs@1.15.6:
+    resolution: {integrity: sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -3418,6 +3433,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  uuid@13.0.0:
+    resolution: {integrity: sha512-XQegIaBTVUjSHliKqcnFqYypAd4S+WCYt5NIeRs6w/UAry7z8Y9j5ZwRRL4kzq9U3sD6v+85er9FvkEaBpji2w==}
+    hasBin: true
+
   varint@6.0.0:
     resolution: {integrity: sha512-cXEIW6cfr15lFv563k4GuVuW/fiwjknytD37jIOLSdSWuOI6WnO/oKwmP2FQTU2l01LP8/M5TSAJpzUaGe3uWg==}
 
@@ -3572,6 +3591,11 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  vuedraggable@4.1.0:
+    resolution: {integrity: sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww==}
+    peerDependencies:
+      vue: ^3.0.1
 
   w3c-xmlserializer@5.0.0:
     resolution: {integrity: sha512-o8qghlI8NZHU1lLPrpi2+Uq7abh4GGPpYANlalzWxyWteJOCsr/P+oPBA49TOLu5FTZO4d3F9MnWJfiMo4BkmA==}
@@ -4201,6 +4225,21 @@ snapshots:
   '@fonds/utils@1.0.8':
     dependencies:
       lodash-es: 4.17.21
+
+  '@fonds/vue-crud@1.0.6(typescript@5.9.3)':
+    dependencies:
+      '@element-plus/icons-vue': 2.3.2(vue@3.5.25(typescript@5.9.3))
+      '@fonds/utils': 1.0.8
+      element-plus: 2.12.0(vue@3.5.25(typescript@5.9.3))
+      lodash-es: 4.17.21
+      sortablejs: 1.15.6
+      uuid: 13.0.0
+      vue: 3.5.25(typescript@5.9.3)
+      vue-router: 4.6.3(vue@3.5.25(typescript@5.9.3))
+      vuedraggable: 4.1.0(vue@3.5.25(typescript@5.9.3))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
 
   '@humanfs/core@0.19.1': {}
 
@@ -6818,6 +6857,10 @@ snapshots:
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
 
+  sortablejs@1.14.0: {}
+
+  sortablejs@1.15.6: {}
+
   source-map-js@1.2.1: {}
 
   spdx-exceptions@2.5.0: {}
@@ -7208,6 +7251,8 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
+  uuid@13.0.0: {}
+
   varint@6.0.0: {}
 
   vite-dev-rpc@1.1.0(vite@7.2.7(@types/node@24.10.3)(sass-embedded@1.96.0)(sass@1.96.0)(yaml@2.8.2)):
@@ -7390,6 +7435,11 @@ snapshots:
       '@vue/shared': 3.5.25
     optionalDependencies:
       typescript: 5.9.3
+
+  vuedraggable@4.1.0(vue@3.5.25(typescript@5.9.3)):
+    dependencies:
+      sortablejs: 1.14.0
+      vue: 3.5.25(typescript@5.9.3)
 
   w3c-xmlserializer@5.0.0:
     dependencies:

@@ -29,17 +29,19 @@
 /**
  * 侧边栏菜单项组件（递归）
  */
-import type { RouteRecordRaw } from "vue-router"
+import type { BackendMenu } from "@/stores/permission/interface"
 import { computed } from "vue"
+
+defineOptions({ name: "sidebar-menu-item" })
 
 const props = defineProps<{
   /** 菜单项 */
-  menu: RouteRecordRaw
+  menu: BackendMenu
   /** 父级路径 */
   basePath: string
 }>()
 
-// 计算完整路径
+/** 计算完整路径 */
 const fullPath = computed(() => {
   // 如果是外链，直接返回
   if (props.menu.path.startsWith("http")) {
