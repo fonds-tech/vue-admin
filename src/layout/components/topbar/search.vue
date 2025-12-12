@@ -2,7 +2,7 @@
   <div>
     <!-- 搜索按钮 -->
     <el-tooltip content="搜索 (Ctrl+K)">
-      <el-icon class="header-icon-btn" @click="openSearch">
+      <el-icon class="action-btn" @click="openSearch">
         <Search />
       </el-icon>
     </el-tooltip>
@@ -71,14 +71,12 @@
 </template>
 
 <script setup lang="ts">
-/**
- * 全局搜索组件
- * 支持菜单搜索和快捷键操作
- */
 import type { BackendMenu } from "@/stores/permission/interface"
 import { useRouter } from "vue-router"
 import { useMenuStore } from "@/stores/menu"
 import { ref, watch, computed, nextTick, onMounted, onUnmounted } from "vue"
+
+defineOptions({ name: "topbar-search" })
 
 interface SearchMenuItem {
   path: string
@@ -94,7 +92,7 @@ const keyword = ref("")
 const activeIndex = ref(0)
 const inputRef = ref<HTMLInputElement>()
 
-/** 扁平化菜单列表（用于搜索） */
+/** 扁平化菜单列表 */
 const flattenMenus = computed(() => {
   const result: SearchMenuItem[] = []
 
@@ -102,7 +100,6 @@ const flattenMenus = computed(() => {
     menus.forEach((menu) => {
       const path = parentPath ? `${parentPath}/${menu.path}` : menu.path
 
-      // 只添加有 title 的菜单
       if (menu.meta?.title) {
         result.push({
           path,
@@ -111,7 +108,6 @@ const flattenMenus = computed(() => {
         })
       }
 
-      // 递归处理子菜单
       if (menu.children?.length) {
         flatten(menu.children, path)
       }
@@ -125,55 +121,41 @@ const flattenMenus = computed(() => {
 /** 过滤后的菜单列表 */
 const filteredMenus = computed(() => {
   if (!keyword.value) return []
-
   const kw = keyword.value.toLowerCase()
   return flattenMenus.value.filter(
     item => item.title.toLowerCase().includes(kw) || item.path.toLowerCase().includes(kw),
   )
 })
 
-/** 打开搜索 */
 function openSearch() {
   visible.value = true
   keyword.value = ""
   activeIndex.value = 0
-  nextTick(() => {
-    inputRef.value?.focus()
-  })
+  nextTick(() => inputRef.value?.focus())
 }
 
-/** 关闭搜索 */
 function closeSearch() {
   visible.value = false
 }
 
-/** 选择菜单项 */
 function handleSelect(item: SearchMenuItem | undefined) {
   if (!item) return
   router.push(item.path)
   closeSearch()
 }
 
-/** 向上移动 */
 function moveUp() {
-  if (activeIndex.value > 0) {
-    activeIndex.value--
-  }
+  if (activeIndex.value > 0) activeIndex.value--
 }
 
-/** 向下移动 */
 function moveDown() {
-  if (activeIndex.value < filteredMenus.value.length - 1) {
-    activeIndex.value++
-  }
+  if (activeIndex.value < filteredMenus.value.length - 1) activeIndex.value++
 }
 
-/** 监听关键词变化，重置激活索引 */
 watch(keyword, () => {
   activeIndex.value = 0
 })
 
-/** 全局快捷键监听 */
 function handleKeydown(e: KeyboardEvent) {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
     e.preventDefault()
@@ -181,16 +163,24 @@ function handleKeydown(e: KeyboardEvent) {
   }
 }
 
-onMounted(() => {
-  document.addEventListener("keydown", handleKeydown)
-})
-
-onUnmounted(() => {
-  document.removeEventListener("keydown", handleKeydown)
-})
+onMounted(() => document.addEventListener("keydown", handleKeydown))
+onUnmounted(() => document.removeEventListener("keydown", handleKeydown))
 </script>
 
 <style lang="scss" scoped>
+.action-btn {
+  cursor: pointer;
+  padding: 8px;
+  font-size: 18px;
+  transition: all 0.2s;
+  border-radius: 6px;
+
+  &:hover {
+    color: var(--el-color-primary);
+    background-color: var(--el-fill-color-light);
+  }
+}
+
 .search-dialog {
   :deep(.el-dialog__header) {
     margin: 0;
@@ -209,35 +199,35 @@ onUnmounted(() => {
   display: flex;
   padding: $spacing-base;
   align-items: center;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--el-border-color);
 
   .search-icon {
-    color: $text-secondary;
+    color: var(--el-text-color-secondary);
     font-size: 20px;
     flex-shrink: 0;
   }
 
   .search-input {
     flex: 1;
-    color: $text-primary;
+    color: var(--el-text-color-primary);
     border: none;
     outline: none;
     font-size: 16px;
     background: transparent;
 
     &::placeholder {
-      color: $text-placeholder;
+      color: var(--el-text-color-placeholder);
     }
   }
 
   .search-kbd {
-    color: $text-secondary;
-    border: 1px solid $border-color;
+    color: var(--el-text-color-secondary);
+    border: 1px solid var(--el-border-color);
     padding: 2px 6px;
     font-size: 12px;
     flex-shrink: 0;
     border-radius: 4px;
-    background-color: $bg-color;
+    background-color: var(--el-fill-color);
   }
 }
 
@@ -250,17 +240,17 @@ onUnmounted(() => {
   cursor: pointer;
   display: flex;
   padding: $spacing-sm $spacing-base;
-  transition: all $transition-duration;
+  transition: all 0.2s;
   align-items: center;
-  border-radius: $border-radius;
+  border-radius: 6px;
 
   &:hover,
   &.is-active {
-    background-color: $bg-color;
+    background-color: var(--el-fill-color);
   }
 
   &.is-active {
-    color: $primary-color;
+    color: var(--el-color-primary);
   }
 
   &__icon {
@@ -274,7 +264,7 @@ onUnmounted(() => {
   }
 
   &__path {
-    color: $text-secondary;
+    color: var(--el-text-color-secondary);
     font-size: 12px;
   }
 }
@@ -282,7 +272,7 @@ onUnmounted(() => {
 .search-empty,
 .search-tips {
   gap: $spacing-sm;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   display: flex;
   padding: $spacing-xl;
   text-align: center;
@@ -291,20 +281,18 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-.search-tips {
-  &__keys {
-    gap: $spacing-base;
-    display: flex;
-    font-size: 12px;
+.search-tips__keys {
+  gap: $spacing-base;
+  display: flex;
+  font-size: 12px;
 
-    kbd {
-      color: $text-secondary;
-      border: 1px solid $border-color;
-      margin: 0 2px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background-color: $bg-color;
-    }
+  kbd {
+    color: var(--el-text-color-secondary);
+    border: 1px solid var(--el-border-color);
+    margin: 0 2px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--el-fill-color);
   }
 }
 </style>

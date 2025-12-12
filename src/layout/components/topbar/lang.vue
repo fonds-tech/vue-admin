@@ -1,6 +1,6 @@
 <template>
   <el-dropdown @command="changeLanguage">
-    <el-icon class="header-icon-btn">
+    <el-icon class="action-btn">
       <Document />
     </el-icon>
     <template #dropdown>
@@ -17,18 +17,15 @@
 </template>
 
 <script setup lang="ts">
-/**
- * 语言切换下拉菜单
- */
 import { computed } from "vue"
 import { useAppStore } from "@/stores/app"
 
+defineOptions({ name: "topbar-lang" })
+
 const appStore = useAppStore()
 
-/** 当前语言 */
 const locale = computed(() => appStore.language)
 
-/** 切换语言 */
 function changeLanguage(lang: string) {
   appStore.setLanguage(lang)
   window.location.reload()
@@ -36,7 +33,20 @@ function changeLanguage(lang: string) {
 </script>
 
 <style lang="scss" scoped>
+.action-btn {
+  cursor: pointer;
+  padding: 8px;
+  font-size: 18px;
+  transition: all 0.2s;
+  border-radius: 6px;
+
+  &:hover {
+    color: var(--el-color-primary);
+    background-color: var(--el-fill-color-light);
+  }
+}
+
 :deep(.is-active) {
-  color: $primary-color;
+  color: var(--el-color-primary);
 }
 </style>

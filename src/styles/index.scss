@@ -95,16 +95,16 @@ a {
 
 // 顶栏图标按钮通用样式
 .header-icon-btn {
+  color: $text-regular;
   width: 40px;
+  cursor: pointer;
   height: 40px;
   display: flex;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  border-radius: $border-radius;
-  transition: all $transition-duration $transition-timing;
-  color: $text-regular;
   font-size: 18px;
+  transition: all $transition-duration $transition-timing;
+  align-items: center;
+  border-radius: $border-radius;
+  justify-content: center;
 
   &:hover {
     background-color: var(--el-fill-color-light); // 使用 Element Plus 的填充色

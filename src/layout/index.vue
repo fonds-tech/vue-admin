@@ -1,13 +1,13 @@
 <template>
   <div class="layout">
-    <el-container>
+    <div class="layout__sidebar">
       <sidebar />
-      <el-container>
-        <layout-header :class="{ 'is-fixed': appStore.fixedHeader }" @open-settings="settingsVisible = true" />
-        <layout-process v-if="appStore.showProcess" />
-        <layout-view />
-      </el-container>
-    </el-container>
+    </div>
+    <div class="layout__content">
+      <topbar />
+      <process v-if="appStore.showProcess" />
+      <layout-view />
+    </div>
 
     <!-- 水印 -->
     <layout-watermark />
@@ -18,15 +18,14 @@
 </template>
 
 <script setup lang="ts">
+import Topbar from "./components/topbar/index.vue"
+import Process from "./components/process/index.vue"
 import Sidebar from "./components/sidebar/index.vue"
 import LayoutView from "./components/view/index.vue"
-import LayoutHeader from "./components/header/index.vue"
-import LayoutProcess from "./components/process/index.vue"
 import LayoutSettings from "./components/settings/index.vue"
 import LayoutWatermark from "./components/watermark/index.vue"
 import { ref } from "vue"
 import { useAppStore } from "@/stores"
-import { ElContainer } from "element-plus"
 
 const appStore = useAppStore()
 
@@ -36,7 +35,14 @@ const settingsVisible = ref(false)
 
 <style lang="scss" scoped>
 .layout {
+  height: 100vh;
   display: flex;
-  min-height: 100vh;
+  overflow: hidden;
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

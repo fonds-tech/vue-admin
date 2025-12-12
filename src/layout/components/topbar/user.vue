@@ -12,7 +12,7 @@
           <el-icon><User /></el-icon>
           {{ $t("header.profile") }}
         </el-dropdown-item>
-        <el-dropdown-item @click="openSettings">
+        <el-dropdown-item @click="emit('openSettings')">
           <el-icon><Setting /></el-icon>
           {{ $t("header.settings") }}
         </el-dropdown-item>
@@ -26,14 +26,13 @@
 </template>
 
 <script setup lang="ts">
-/**
- * 用户下拉菜单组件
- */
 import { useI18n } from "vue-i18n"
 import { computed } from "vue"
 import { useRouter } from "vue-router"
 import { useUserStore } from "@/stores/user"
 import { ElMessageBox } from "element-plus"
+
+defineOptions({ name: "topbar-user" })
 
 const emit = defineEmits<{
   openSettings: []
@@ -43,20 +42,12 @@ const router = useRouter()
 const { t } = useI18n()
 const userStore = useUserStore()
 
-/** 用户信息 */
 const userInfo = computed(() => userStore.userInfo)
 
-/** 跳转个人中心 */
 function goProfile() {
   router.push("/profile")
 }
 
-/** 打开设置 */
-function openSettings() {
-  emit("openSettings")
-}
-
-/** 退出登录 */
 async function handleLogout() {
   try {
     await ElMessageBox.confirm(t("header.logoutConfirm"), t("common.confirm"), {
@@ -77,9 +68,9 @@ async function handleLogout() {
   cursor: pointer;
   display: flex;
   padding: 4px 8px;
-  transition: background-color $transition-duration;
+  transition: background-color 0.2s;
   align-items: center;
-  border-radius: $border-radius;
+  border-radius: 6px;
 
   &:hover {
     background-color: var(--el-fill-color-light);
