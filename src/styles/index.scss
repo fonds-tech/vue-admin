@@ -25,6 +25,23 @@ body {
   background-color: $bg-page;
 }
 
+// View Transitions API 主题切换动画样式
+// 禁用默认的淡入淡出动画，由 JS 控制圆形扩散动画
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+// 新视图始终在上层，通过圆形扩散显示
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 999;
+}
+
 a {
   color: $primary-color;
   transition: color $transition-duration $transition-timing;

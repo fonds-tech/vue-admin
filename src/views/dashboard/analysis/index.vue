@@ -18,10 +18,6 @@
 </script>
 
 <style lang="scss" scoped>
-.page-container {
-  padding: $spacing-base;
-}
-
 .card-header {
   font-weight: 600;
 }

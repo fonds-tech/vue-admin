@@ -60,7 +60,7 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .layout-view {
   flex: 1;
-  padding: $spacing-lg;
+  padding: $spacing-md;
   background-color: $bg-page;
 }
 

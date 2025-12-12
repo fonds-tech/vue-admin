@@ -10,7 +10,7 @@
     <div class="right">
       <!-- 主题切换 -->
       <el-tooltip :content="isDark ? '亮色模式' : '暗色模式'">
-        <div class="action-btn" @click="appStore.toggleTheme">
+        <div class="action-btn" @click="appStore.toggleTheme($event)">
           <icon :icon="isDark ? 'ri:sun-line' : 'ri:moon-line'" :size="16" />
         </div>
       </el-tooltip>

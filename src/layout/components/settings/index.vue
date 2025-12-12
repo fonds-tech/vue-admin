@@ -5,11 +5,11 @@
       <div class="settings-section">
         <div class="settings-title">主题模式</div>
         <div class="settings-options">
-          <div class="theme-option" :class="{ 'is-active': theme === 'light' }" @click="setTheme('light')">
+          <div class="theme-option" :class="{ 'is-active': theme === 'light' }" @click="setTheme('light', $event)">
             <el-icon :size="24"><Sunny /></el-icon>
             <span>亮色</span>
           </div>
-          <div class="theme-option" :class="{ 'is-active': theme === 'dark' }" @click="setTheme('dark')">
+          <div class="theme-option" :class="{ 'is-active': theme === 'dark' }" @click="setTheme('dark', $event)">
             <el-icon :size="24"><Moon /></el-icon>
             <span>暗色</span>
           </div>
@@ -96,7 +96,7 @@
  */
 import type { MenuMode, TransitionName } from "@/stores/app/interface"
 import { useAppStore } from "@/stores/app"
-import { ref, watch, computed } from "vue"
+import { ref, computed } from "vue"
 
 const visible = defineModel<boolean>({ default: false })
 
@@ -158,8 +158,8 @@ const language = computed({
 })
 
 /** 设置主题 */
-function setTheme(mode: "light" | "dark") {
-  appStore.setTheme(mode)
+function setTheme(mode: "light" | "dark", event: MouseEvent) {
+  appStore.setTheme(mode, event)
 }
 
 /** 设置主题色 */
@@ -173,15 +173,6 @@ function setPrimaryColor(color: string) {
 function changeLanguage() {
   window.location.reload()
 }
-
-// 监听主题变化，同步到 DOM
-watch(
-  theme,
-  (val) => {
-    document.documentElement.setAttribute("data-theme", val)
-  },
-  { immediate: true },
-)
 </script>
 
 <style lang="scss" scoped>

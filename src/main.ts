@@ -2,6 +2,7 @@ import ElementPlus from "element-plus"
 import { createApp } from "vue"
 import * as ElementPlusIconsVue from "@element-plus/icons-vue"
 import "element-plus/dist/index.css"
+import "element-plus/theme-chalk/dark/css-vars.css"
 
 import App from "./App.vue"
 import pinia from "./stores"
@@ -27,5 +28,8 @@ app.use(i18n)
 const appStore = useAppStore()
 const locale = elementPlusLocales[appStore.language as keyof typeof elementPlusLocales]
 app.use(ElementPlus, { locale })
+
+// 初始化主题
+appStore.initTheme()
 
 app.mount("#app")
