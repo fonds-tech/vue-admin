@@ -15,24 +15,24 @@
   // 菜单项与子菜单标题通用样式
   .el-menu-item,
   .el-sub-menu__title {
-    height: 38px;
-    margin: 4px 16px;
-    position: relative;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 38px;
-    border-radius: 6px;
+    // height: 38px;
+    // margin: 4px 16px;
+    // position: relative;
+    // font-size: 14px;
+    // font-weight: 500;
+    // line-height: 38px;
+    // border-radius: 6px;
 
     // 图标样式
     .el-icon,
     > svg,
     > .iconify {
-      color: #94a3b8;
-      font-size: 18px;
-      min-width: 18px;
-      transition: color 0.2s ease;
-      flex-shrink: 0;
-      margin-right: 12px;
+      // color: #94a3b8;
+      // font-size: 18px;
+      // min-width: 18px;
+      // transition: color 0.2s ease;
+      // flex-shrink: 0;
+      // margin-right: 12px;
     }
 
     // Hover 状态
@@ -50,7 +50,6 @@
     // 激活状态
     &.is-active {
       color: $primary-color;
-      font-weight: 600;
       background-color: var(--el-color-primary-light-8);
 
       .el-icon,
@@ -64,15 +63,15 @@
   // 子菜单标题特殊处理
   .el-sub-menu__title {
     // 箭头图标调整
-    .el-sub-menu__icon-arrow {
-      right: 12px;
-      font-size: 12px;
-      transition: transform 0.25s ease;
-    }
+    // .el-sub-menu__icon-arrow {
+    //   right: 12px;
+    //   font-size: 12px;
+    //   transition: transform 0.25s ease;
+    // }
 
-    &:hover .el-sub-menu__icon-arrow {
-      color: $primary-color;
-    }
+    // &:hover .el-sub-menu__icon-arrow {
+    //   color: $primary-color;
+    // }
   }
 
   // 子菜单展开状态
@@ -94,24 +93,25 @@
   }
 
   // 嵌套子菜单项样式
-  .el-sub-menu .el-menu {
-    background: transparent;
+  // .el-sub-menu .el-menu {
+  //   overflow: hidden;
+  //   background: transparent; // Force BFC to prevent margin collapsing toggle during animation
 
-    .el-menu-item {
-      &:hover,
-      &.is-active {
-        color: $primary-color;
-      }
-    }
-  }
+  //   .el-menu-item {
+  //     &:hover,
+  //     &.is-active {
+  //       color: $primary-color;
+  //     }
+  //   }
+  // }
 
   // 折叠状态下的菜单样式微调
-  .el-menu--collapse {
-    .el-menu-item,
-    .el-sub-menu__title {
-      margin: 4px 8px;
-      padding: 0 !important;
-      justify-content: center;
-    }
-  }
+  // .el-menu--collapse {
+  //   .el-menu-item,
+  //   .el-sub-menu__title {
+  //     margin: 4px 8px;
+  //     padding: 0 !important;
+  //     justify-content: center;
+  //   }
+  // }
 }
