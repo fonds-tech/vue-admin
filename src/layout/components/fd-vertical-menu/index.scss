@@ -1,3 +1,10 @@
+// 菜单样式变量
+$menu-height: 44px;
+$menu-font-size: 14px;
+$menu-icon-size: 18px;
+$menu-item-margin: 8px;
+$menu-item-radius: 8px;
+
 // 菜单项通用交互样式
 @mixin menu-item-states {
   &:hover,
@@ -7,14 +14,29 @@
   }
 }
 
-// 菜单图标通用样式
-@mixin menu-icon($size: 18px) {
-  font-size: $size;
-  flex-shrink: 0;
-  margin-right: 12px;
+// 菜单项基础样式 - 确保折叠/展开时图标位置一致
+@mixin menu-item-base {
+  width: calc(100% - #{$menu-item-margin * 2});
+  margin-left: $menu-item-margin;
+  border-radius: $menu-item-radius;
 }
 
 // ==================== 单列菜单 ====================
+
+.fd-vertical-menu {
+  height: 100vh;
+  display: flex;
+
+  .el-menu {
+    &:not(.el-menu--collapse) {
+      width: var(--menu-expand-width);
+    }
+
+    &.el-menu--collapse {
+      width: var(--menu-collapse-width);
+    }
+  }
+}
 
 .fd-menu {
   height: 100%;
@@ -28,18 +50,28 @@
 
   .el-menu-item,
   .el-sub-menu__title {
-    height: 44px;
-    margin: 0 12px;
-    font-size: 14px;
-    border-radius: 8px;
+    @include menu-item-base;
+    height: $menu-height;
+    font-size: $menu-font-size;
+    line-height: $menu-height;
+    margin-bottom: 4px;
 
+    // 图标样式 - 使用负边距调整位置
     > .iconify {
-      @include menu-icon;
+      font-size: $menu-icon-size;
+      transition: margin-right 0.3s ease;
+      flex-shrink: 0;
+      margin-left: -4px;
+      margin-right: 8px;
     }
 
     .fd-menu__title {
       flex: 1;
+      opacity: 1;
       overflow: hidden;
+      transition:
+        opacity 0.2s ease,
+        width 0.3s ease;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -49,31 +81,31 @@
 
   // 子菜单
   .el-sub-menu .el-menu .el-menu-item {
-    margin: 4px 12px;
-    padding-left: 36px;
+    padding-left: 36px !important;
+    margin-bottom: 4px;
   }
 
   .el-sub-menu__title .el-sub-menu__icon-arrow {
-    right: 16px;
-    font-size: 12px;
+    width: auto;
   }
 
   .el-sub-menu.is-opened > .el-sub-menu__title {
     color: var(--el-color-primary);
   }
 
-  // 折叠状态
+  // 折叠状态 - 图标位置不变，文字渐隐
   .el-menu--collapse {
     width: 62px;
 
     .el-menu-item,
     .el-sub-menu__title {
-      margin: 4px 8px;
-      padding: 0 !important;
-      justify-content: center;
+      @include menu-item-base;
+      margin-bottom: 4px;
 
       .fd-menu__title {
-        display: none;
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
       }
 
       > .iconify {
@@ -82,29 +114,39 @@
     }
 
     .el-sub-menu__icon-arrow {
-      display: none;
+      opacity: 0;
+      pointer-events: none;
     }
   }
 }
 
 // ==================== 弹出菜单 ====================
 
-.el-popper.el-menu--popup {
+// 弹出菜单容器（折叠模式下的子菜单弹窗）
+.el-menu--popup-container {
+  border: none !important;
+  outline: none;
   padding: 4px 0;
   min-width: 180px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 
-  .el-menu-item,
-  .el-sub-menu__title {
-    height: 40px;
-    margin: 2px 8px;
-    padding: 0 12px !important;
-    font-size: 14px;
-    line-height: 40px;
-    border-radius: 6px;
+  .el-menu--popup {
+    border: none;
+  }
 
-    @include menu-item-states;
+  .el-menu--popup {
+    .el-menu-item,
+    .el-sub-menu__title {
+      height: 40px;
+      margin: 2px 8px;
+      padding: 0 12px !important;
+      font-size: 14px;
+      line-height: 40px;
+      border-radius: 6px;
+
+      @include menu-item-states;
+    }
   }
 }
 
@@ -189,7 +231,9 @@
     .iconify,
     svg,
     .el-icon {
-      @include menu-icon;
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-right: 12px;
     }
 
     @include menu-item-states;

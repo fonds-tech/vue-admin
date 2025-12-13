@@ -21,10 +21,10 @@ export type ThemeStyle = "light" | "dark" | "auto"
 export interface SettingsState {
   // ========== 菜单设置 ==========
 
-  /** 菜单宽度（px） */
-  menuWidth: number
-  /** 折叠后菜单宽度（px） */
-  menuCollapsedWidth: number
+  /** 菜单展开宽度（px） */
+  menuExpandWidth: number
+  /** 菜单折叠宽度（px） */
+  menuCollapseWidth: number
   /** 菜单布局模式 */
   menuLayout: MenuLayout
   /** 菜单风格 */

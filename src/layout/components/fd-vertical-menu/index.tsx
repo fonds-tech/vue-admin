@@ -10,8 +10,6 @@ import { ref, watch, computed, defineComponent } from "vue"
 import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
 import "./index.scss"
 
-// ==================== 常量配置 ====================
-
 /** 菜单配置常量 */
 const MENU_CONFIG = {
   /** 一级菜单图标大小 */
@@ -26,7 +24,6 @@ const MENU_CONFIG = {
 
 export default defineComponent({
   name: "fd-vertical-menu",
-
   setup() {
     const route = useRoute()
     const router = useRouter()
@@ -47,7 +44,7 @@ export default defineComponent({
     /** 可见菜单列表 */
     const menuList = computed<BackendMenu[]>(() => menuStore.visibleMenus)
 
-    /** 菜单是否折叠 */
+    /** 菜单是否折叠（优先使用 prop，否则使用 store） */
     const isCollapsed = computed<boolean>(() => settingsStore.isMenuCollapsed)
 
     /** 菜单是否使用手风琴模式 */
@@ -61,10 +58,10 @@ export default defineComponent({
       return route.path
     })
 
-    /** 滚动容器样式 */
-    const scrollbarStyle = computed<CSSProperties>(() => ({
-      height: "100%",
-      width: "100%",
+    /** 菜单容器样式（根据折叠状态动态设置宽度） */
+    const style = computed<CSSProperties>(() => ({
+      "--menu-expand-width": `${settingsStore.menuExpandWidth}px`,
+      "--menu-collapse-width": `${settingsStore.menuCollapseWidth}px`,
     }))
 
     // ========== 双列模式专用计算属性 ==========
@@ -90,7 +87,7 @@ export default defineComponent({
 
     /** 二级菜单容器样式（双列模式） */
     const secondColumnStyle = computed<CSSProperties>(() => ({
-      width: `${settingsStore.menuWidth}px`,
+      width: `${settingsStore.menuExpandWidth}px`,
       flexShrink: 0,
     }))
 
@@ -263,9 +260,7 @@ export default defineComponent({
         <div class="fd-menu-dual__first" style={firstLevelStyle.value}>
           <FdLogo />
           <ElScrollbar>
-            <div class="fd-menu-dual__first-menu">
-              {firstLevelMenus.value.map((menu) => renderFirstLevelItem(menu))}
-            </div>
+            <div class="fd-menu-dual__first-menu">{firstLevelMenus.value.map((menu) => renderFirstLevelItem(menu))}</div>
           </ElScrollbar>
         </div>
       )
@@ -343,35 +338,35 @@ export default defineComponent({
     /** 渲染双列布局 */
     function renderDualColumnLayout() {
       return (
-        <div class="fd-menu-dual">
+        <div class="fd-vertical-menu fd-menu-dual" style={style.value}>
           {renderFirstLevelMenu()}
           {renderSubMenuList()}
         </div>
       )
     }
 
-    /** 渲染单列布局（原有逻辑） */
     function renderSingleColumnLayout() {
       return (
-        <ElScrollbar class="fd-menu" style={scrollbarStyle.value}>
-          <ElMenu
-            class="fd-menu__container"
-            defaultActive={activeMenuPath.value}
-            collapse={isCollapsed.value}
-            collapseTransition={false}
-            uniqueOpened={isAccordionMode.value}
-            backgroundColor="transparent"
-            textColor="#303133"
-            activeTextColor="var(--el-color-primary)"
-            onSelect={handleMenuSelect}
-          >
-            {menuList.value.map((menu) => renderMenuItem(menu, ""))}
-          </ElMenu>
-        </ElScrollbar>
+        <div class="fd-vertical-menu" style={style.value}>
+          <ElScrollbar class="fd-menu">
+            <ElMenu
+              class="fd-menu__container"
+              showTimeout={50}
+              hideTimeout={50}
+              defaultActive={activeMenuPath.value}
+              collapse={isCollapsed.value}
+              uniqueOpened={isAccordionMode.value}
+              backgroundColor="transparent"
+              textColor="#303133"
+              onSelect={handleMenuSelect}
+            >
+              {menuList.value.map((menu) => renderMenuItem(menu, ""))}
+            </ElMenu>
+          </ElScrollbar>
+        </div>
+
       )
     }
-
-    // ==================== 组件渲染 ====================
 
     return () => (isDualMode.value ? renderDualColumnLayout() : renderSingleColumnLayout())
   },

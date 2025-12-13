@@ -1,20 +1,11 @@
-import type { MenuStyle, MenuLayout, ThemeStyle, SettingsState } from "./types"
+import type { MenuStyle, MenuLayout, ThemeStyle } from "./types"
 import { defineStore } from "pinia"
+import { SETTING_CONFIG } from "@/config"
 
 // ==================== Store 定义 ====================
 
 export const useSettingsStore = defineStore("settings", {
-  state: (): SettingsState => ({
-    // 菜单设置
-    menuWidth: 220,
-    menuCollapsedWidth: 62,
-    menuLayout: "vertical",
-    menuStyle: "light",
-    menuCollapsed: false,
-    // 主题设置
-    themeStyle: "light",
-    primaryColor: "#6366f1",
-  }),
+  state: () => ({ ...SETTING_CONFIG }),
 
   getters: {
     /** 当前菜单是否为暗色风格 */
@@ -42,14 +33,9 @@ export const useSettingsStore = defineStore("settings", {
   actions: {
     // ========== 菜单设置 ==========
 
-    /** 设置菜单宽度 */
-    setMenuWidth(width: number) {
-      this.menuWidth = width
-    },
-
-    /** 设置折叠后菜单宽度 */
-    setMenuCollapsedWidth(width: number) {
-      this.menuCollapsedWidth = width
+    /** 设置菜单展开宽度 */
+    setMenuExpandWidth(width: number) {
+      this.menuExpandWidth = width
     },
 
     /** 设置菜单布局模式 */
@@ -94,18 +80,11 @@ export const useSettingsStore = defineStore("settings", {
 
     /** 重置为默认设置 */
     resetSettings() {
-      this.menuWidth = 220
-      this.menuCollapsedWidth = 62
-      this.menuLayout = "vertical"
-      this.menuStyle = "light"
-      this.menuCollapsed = false
-      this.themeStyle = "light"
-      this.primaryColor = "#6366f1"
+      this.$patch({ ...SETTING_CONFIG })
     },
 
     /** 初始化设置（应用启动时调用） */
     initSettings() {
-      // 应用主题色
       this.applyPrimaryColor(this.primaryColor)
     },
   },
@@ -113,6 +92,5 @@ export const useSettingsStore = defineStore("settings", {
   // 持久化配置
   persist: {
     key: "settings-store",
-    pick: ["menuWidth", "menuCollapsedWidth", "menuLayout", "menuStyle", "menuCollapsed", "themeStyle", "primaryColor"],
   },
 })
