@@ -1,13 +1,6 @@
 @charset "UTF-8";
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-// 移除所有元素的焦点边框（无障碍边框）
+// 移除所有元素的焦点边框
 *:focus {
   outline: none;
 }

@@ -1,3 +1,6 @@
+// UnoCSS
+import "virtual:uno.css"
+
 import ElementPlus from "element-plus"
 import { createApp } from "vue"
 import * as ElementPlusIconsVue from "@element-plus/icons-vue"

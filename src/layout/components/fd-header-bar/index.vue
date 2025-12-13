@@ -5,12 +5,14 @@
       <div class="action-btn" @click="handleToggleCollapse">
         <icon :icon="collapseIcon" :size="20" />
       </div>
+      <fd-breadcrumb />
     </div>
     <div class="fd-header-bar__right"></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import FdBreadcrumb from "../fd-breadcrumb/index.vue"
 import { Icon } from "@/components/core/fd-icon"
 import { computed } from "vue"
 import { useSettingsStore } from "@/stores/settings"
