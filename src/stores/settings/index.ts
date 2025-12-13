@@ -8,8 +8,9 @@ export const useSettingsStore = defineStore("settings", {
     // 菜单设置
     menuWidth: 220,
     menuCollapsedWidth: 62,
-    menuLayout: "dual",
+    menuLayout: "vertical",
     menuStyle: "light",
+    menuCollapsed: false,
     // 主题设置
     themeStyle: "light",
     primaryColor: "#6366f1",
@@ -33,6 +34,9 @@ export const useSettingsStore = defineStore("settings", {
 
     /** 是否使用双列菜单布局 */
     isDualLayout: (state) => state.menuLayout === "dual",
+
+    /** 菜单是否折叠 */
+    isMenuCollapsed: (state) => state.menuCollapsed,
   },
 
   actions: {
@@ -56,6 +60,16 @@ export const useSettingsStore = defineStore("settings", {
     /** 设置菜单风格 */
     setMenuStyle(style: MenuStyle) {
       this.menuStyle = style
+    },
+
+    /** 切换菜单折叠状态 */
+    toggleMenuCollapsed() {
+      this.menuCollapsed = !this.menuCollapsed
+    },
+
+    /** 设置菜单折叠状态 */
+    setMenuCollapsed(collapsed: boolean) {
+      this.menuCollapsed = collapsed
     },
 
     // ========== 主题设置 ==========
@@ -84,6 +98,7 @@ export const useSettingsStore = defineStore("settings", {
       this.menuCollapsedWidth = 62
       this.menuLayout = "vertical"
       this.menuStyle = "light"
+      this.menuCollapsed = false
       this.themeStyle = "light"
       this.primaryColor = "#6366f1"
     },
@@ -98,6 +113,6 @@ export const useSettingsStore = defineStore("settings", {
   // 持久化配置
   persist: {
     key: "settings-store",
-    pick: ["menuWidth", "menuCollapsedWidth", "menuLayout", "menuStyle", "themeStyle", "primaryColor"],
+    pick: ["menuWidth", "menuCollapsedWidth", "menuLayout", "menuStyle", "menuCollapsed", "themeStyle", "primaryColor"],
   },
 })

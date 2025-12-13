@@ -4,7 +4,7 @@
       <fd-sidebar />
     </aside>
     <main class="app-main">
-      <topbar />
+      <fd-header-bar />
       <process v-if="appStore.showProcess" />
       <layout-view />
     </main>
@@ -12,10 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import Topbar from "./components/topbar/index.vue"
 import Process from "./components/process/index.vue"
 import FdSidebar from "./components/fd-sidebar/index.vue"
 import LayoutView from "./components/view/index.vue"
+import FdHeaderBar from "./components/fd-header-bar/index.vue"
 import { useAppStore } from "@/stores"
 
 const appStore = useAppStore()

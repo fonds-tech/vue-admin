@@ -47,6 +47,9 @@ export default defineComponent({
     /** 可见菜单列表 */
     const menuList = computed<BackendMenu[]>(() => menuStore.visibleMenus)
 
+    /** 菜单是否折叠 */
+    const isCollapsed = computed<boolean>(() => settingsStore.isMenuCollapsed)
+
     /** 菜单是否使用手风琴模式 */
     const isAccordionMode = computed<boolean>(() => appStore.menuMode === "accordion")
 
@@ -354,6 +357,7 @@ export default defineComponent({
           <ElMenu
             class="fd-menu__container"
             defaultActive={activeMenuPath.value}
+            collapse={isCollapsed.value}
             collapseTransition={false}
             uniqueOpened={isAccordionMode.value}
             backgroundColor="transparent"

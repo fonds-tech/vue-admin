@@ -29,6 +29,8 @@ export interface SettingsState {
   menuLayout: MenuLayout
   /** 菜单风格 */
   menuStyle: MenuStyle
+  /** 菜单是否折叠 */
+  menuCollapsed: boolean
 
   // ========== 主题设置 ==========
 
