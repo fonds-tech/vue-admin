@@ -1,5 +1,5 @@
-import type { BackendMenu } from "@/stores/permission/interface"
-import Icon from "@/components/Icon/index.vue"
+import type { BackendMenu } from "@/stores/permission/types"
+import { Icon } from "@/components/core/fd-icon"
 import { useAppStore } from "@/stores/app"
 import { useMenuStore } from "@/stores/menu"
 import { useRoute, useRouter } from "vue-router"
@@ -105,7 +105,7 @@ export default defineComponent({
         <ElSubMenu key={menu.path} index={fullPath}>
           {{
             title: () => [renderIcon(menu.meta?.icon), <span>{menu.meta?.title}</span>],
-            default: () => menu.children?.map(child => renderMenuItem(child, fullPath)),
+            default: () => menu.children?.map((child) => renderMenuItem(child, fullPath)),
           }}
         </ElSubMenu>
       )
@@ -123,7 +123,7 @@ export default defineComponent({
           activeTextColor="#6366f1"
           onSelect={handleMenuSelect}
         >
-          {menuList.value.map(menu => renderMenuItem(menu, ""))}
+          {menuList.value.map((menu) => renderMenuItem(menu, ""))}
         </ElMenu>
       </ElScrollbar>
     )

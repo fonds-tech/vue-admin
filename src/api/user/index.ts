@@ -1,7 +1,7 @@
 /**
  * 用户管理模块 API
  */
-import type { UserForm, UserItem, UserListResult, UserQueryParams } from "./interface"
+import type { UserForm, UserItem, UserListResult, UserQueryParams } from "./types"
 import { alova } from "@/http"
 
 /** 获取用户列表 */
@@ -45,4 +45,4 @@ export function updateUserStatus(id: number, status: number) {
 }
 
 // 导出类型
-export * from "./interface"
+export * from "./types"

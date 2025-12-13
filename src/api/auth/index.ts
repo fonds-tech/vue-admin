@@ -1,7 +1,7 @@
 /**
  * 认证模块 API
  */
-import type { UserInfo, LoginParams, LoginResult } from "./interface"
+import type { UserInfo, LoginParams, LoginResult } from "./types"
 import { alova } from "@/http"
 
 /** 用户登录 */
@@ -25,4 +25,4 @@ export function refreshToken() {
 }
 
 // 导出类型
-export * from "./interface"
+export * from "./types"

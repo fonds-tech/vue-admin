@@ -6,4 +6,4 @@
 export { default as alova } from "./alova"
 
 // 导出类型
-export * from "./interface"
+export * from "./types"

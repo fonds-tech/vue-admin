@@ -2,7 +2,7 @@
  * Process 进程标签状态管理
  * 管理多标签页的添加、删除、切换等操作
  */
-import type { ProcessItem, ProcessState } from "./interface"
+import type { ProcessItem, ProcessState } from "./types"
 import { defineStore } from "pinia"
 
 export const useProcessStore = defineStore("process", {

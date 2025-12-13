@@ -38,8 +38,9 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    FdIcon: typeof import('./../components/core/fd-icon/fd-icon.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
-    Icon: typeof import('./../components/Icon/index.vue')['default']
+    Icon: typeof import('./../components/core/fd-icon/fd-icon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
@@ -76,8 +77,9 @@ declare global {
   const ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
   const ElTag: typeof import('element-plus/es')['ElTag']
   const ElTooltip: typeof import('element-plus/es')['ElTooltip']
+  const FdIcon: typeof import('./../components/core/fd-icon/fd-icon.vue')['default']
   const HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
-  const Icon: typeof import('./../components/Icon/index.vue')['default']
+  const Icon: typeof import('./../components/core/fd-icon/fd-icon.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
 }

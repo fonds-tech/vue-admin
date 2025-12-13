@@ -1,7 +1,7 @@
 /**
  * 角色管理模块 API
  */
-import type { RoleForm, RoleItem, RoleListResult, RoleQueryParams } from "./interface"
+import type { RoleForm, RoleItem, RoleListResult, RoleQueryParams } from "./types"
 import { alova } from "@/http"
 
 /** 获取角色列表 */
@@ -45,4 +45,4 @@ export function updateRoleMenus(id: number, menuIds: number[]) {
 }
 
 // 导出类型
-export * from "./interface"
+export * from "./types"

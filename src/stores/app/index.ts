@@ -1,7 +1,7 @@
 /**
  * 应用状态管理（选项式）
  */
-import type { AppState, MenuMode, TransitionName } from "./interface"
+import type { AppState, MenuMode, TransitionName } from "./types"
 import { defineStore } from "pinia"
 
 export const useAppStore = defineStore("app", {

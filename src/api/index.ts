@@ -5,10 +5,10 @@
 // 认证相关
 export * from "./auth"
 
-// 通用类型
-export * from "./interface"
-
 export * from "./menu"
+
 export * from "./role"
+// 通用类型
+export * from "./types"
 // 系统管理
 export * from "./user"

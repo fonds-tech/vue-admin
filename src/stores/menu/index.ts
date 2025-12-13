@@ -2,7 +2,7 @@
  * 菜单状态管理
  * 统一管理菜单数据、扁平化菜单、路由注册状态
  */
-import type { MenuState } from "./interface"
+import type { MenuState } from "./types"
 import type { BackendMenu } from "../permission/interface"
 import { defineStore } from "pinia"
 import { useUserStore } from "../user"

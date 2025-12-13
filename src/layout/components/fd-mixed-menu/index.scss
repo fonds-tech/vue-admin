@@ -1,0 +1,219 @@
+/**
+ * FdMixedMenu 组件样式
+ *
+ * 设计规范：
+ * - 双列布局：左侧一级菜单 + 右侧二级菜单
+ * - 一级菜单使用深色背景，图标居中
+ * - 二级菜单使用浅色背景，支持折叠
+ */
+
+// ==================== 变量定义 ====================
+
+$menu-transition: all 0.3s ease;
+$menu-item-height: 44px;
+$menu-item-radius: 8px;
+$second-level-width: 200px;
+
+$first-level-width-icon: 64px;
+$first-level-width-text: 80px;
+$second-level-collapsed-width: 0px;
+
+// ==================== 主容器 ====================
+
+.fd-mixed-menu {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+
+  // ==================== 一级菜单（左侧） ====================
+
+  &__first {
+    height: 100%;
+    display: flex;
+    transition: width 0.3s ease;
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+
+  &__first-scroll {
+    flex: 1;
+    padding: 8px 0;
+  }
+
+  &__first-item {
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    margin: 4px 8px;
+    display: flex;
+    transition: $menu-transition;
+    align-items: center;
+    border-radius: $menu-item-radius;
+    flex-direction: column;
+    justify-content: center;
+
+    // 图标样式
+    .iconify,
+    svg {
+      font-size: 20px;
+      transition: color 0.2s ease;
+    }
+
+    // 悬浮状态
+    &:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    // 激活状态
+    &.is-active {
+      color: #ffffff;
+      background-color: var(--el-color-primary);
+
+      .iconify,
+      svg {
+        color: #ffffff;
+      }
+    }
+  }
+
+  &__first-text {
+    overflow: hidden;
+    font-size: 12px;
+    max-width: 100%;
+    margin-top: 4px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  // ==================== 二级菜单（右侧） ====================
+
+  &__second {
+    width: $second-level-width;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    transition: width 0.3s ease;
+    border-left: 1px solid var(--el-border-color-lighter);
+    flex-direction: column;
+
+    // 折叠状态
+    &.is-collapsed {
+      width: $second-level-collapsed-width;
+      border-left: none;
+    }
+  }
+
+  &__second-scroll {
+    flex: 1;
+    padding: 8px 0;
+  }
+
+  &__menu {
+    background: transparent;
+    border-right: none;
+
+    &.el-menu {
+      border: none;
+    }
+  }
+
+  // 二级菜单项样式
+  &__sub-item,
+  .el-sub-menu__title {
+    height: $menu-item-height;
+    margin: 4px 12px;
+    padding: 0 16px !important;
+    font-size: 14px;
+    transition: $menu-transition;
+    font-weight: 500;
+    line-height: $menu-item-height;
+    border-radius: $menu-item-radius;
+
+    // 图标
+    .iconify,
+    svg,
+    .el-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-right: 12px;
+    }
+
+    // 悬浮状态
+    &:hover {
+      color: var(--el-color-primary);
+      background-color: var(--el-color-primary-light-9);
+    }
+
+    // 激活状态
+    &.is-active {
+      color: var(--el-color-primary);
+      background-color: var(--el-color-primary-light-8);
+    }
+  }
+
+  // 子菜单展开状态
+  .el-sub-menu.is-opened {
+    > .el-sub-menu__title {
+      color: var(--el-color-primary);
+      background-color: var(--el-color-primary-light-9);
+    }
+  }
+
+  // 嵌套子菜单
+  .el-sub-menu .el-menu {
+    background: transparent;
+
+    .fd-mixed-menu__sub-item,
+    .el-sub-menu__title {
+      margin-left: 20px;
+      margin-right: 12px;
+    }
+  }
+
+  // ==================== 折叠按钮 ====================
+
+  &__collapse-btn {
+    color: var(--el-text-color-secondary);
+    right: 0;
+    width: 24px;
+    border: 1px solid var(--el-border-color-lighter);
+    bottom: 20px;
+    cursor: pointer;
+    height: 48px;
+    display: flex;
+    position: absolute;
+    transition: $menu-transition;
+    align-items: center;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    justify-content: center;
+    background-color: var(--el-bg-color);
+
+    &:hover {
+      color: var(--el-color-primary);
+      background-color: var(--el-color-primary-light-9);
+    }
+  }
+}
+
+// ==================== 暗色主题适配 ====================
+
+.dark {
+  .fd-mixed-menu {
+    &__first-item {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    &__second {
+      border-left-color: var(--el-border-color);
+    }
+
+    &__collapse-btn {
+      border-color: var(--el-border-color);
+    }
+  }
+}

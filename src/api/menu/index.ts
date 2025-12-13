@@ -1,7 +1,7 @@
 /**
  * 菜单管理模块 API
  */
-import type { MenuForm, MenuItem } from "./interface"
+import type { MenuForm, MenuItem } from "./types"
 import { alova } from "@/http"
 
 /** 获取菜单树形列表 */
@@ -35,4 +35,4 @@ export function deleteMenu(id: number) {
 }
 
 // 导出类型
-export * from "./interface"
+export * from "./types"

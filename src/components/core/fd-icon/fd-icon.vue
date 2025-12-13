@@ -4,24 +4,16 @@
 </template>
 
 <script setup lang="ts">
+import type { IconProps } from "./types"
+import type { CSSProperties } from "vue"
 import { Icon } from "@iconify/vue"
+import { computed } from "vue"
 
-interface Props {
-  /** 图标名称，Iconify 格式如 "mdi:home" 或 Element Plus 图标组件 */
-  icon: string | object
-  /** 图标尺寸，可以是数字（px）或字符串（如 "1.5em"） */
-  size?: number | string
-  /** 图标颜色 */
-  color?: string
-  /** 水平翻转 */
-  hFlip?: boolean
-  /** 垂直翻转 */
-  vFlip?: boolean
-  /** 旋转角度：0=0deg, 1=90deg, 2=180deg, 3=270deg */
-  rotate?: 0 | 1 | 2 | 3
-}
+defineOptions({
+  name: "fd-icon",
+})
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<IconProps>(), {
   size: "1em",
   color: "currentColor",
   hFlip: false,
@@ -30,12 +22,12 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 /** 判断是否为 Iconify 图标（字符串格式且包含冒号） */
-const isIconify = computed(() => {
+const isIconify = computed<boolean>(() => {
   return typeof props.icon === "string" && props.icon.includes(":")
 })
 
 /** 计算图标样式 */
-const iconStyle = computed(() => {
+const iconStyle = computed<CSSProperties>(() => {
   const size = typeof props.size === "number" ? `${props.size}px` : props.size
   return {
     fontSize: size,

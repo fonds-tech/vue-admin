@@ -1,9 +1,9 @@
 /**
  * 用户状态管理（选项式）
  */
-import type { UserState } from "./interface"
+import type { UserState } from "./types"
 import { defineStore } from "pinia"
-import { defaultUserInfo } from "./interface"
+import { defaultUserInfo } from "./types"
 import { getMockUserByUsername } from "../mock/menu"
 
 export const useUserStore = defineStore("user", {

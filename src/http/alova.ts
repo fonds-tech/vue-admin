@@ -2,12 +2,12 @@
  * Alova 请求实例
  * 使用 axios 适配器
  */
-import type { ApiResponse } from "./interface"
+import type { ApiResponse } from "./types"
 import router from "@/router"
 import VueHook from "alova/vue"
 import { ElMessage } from "element-plus"
 import { createAlova } from "alova"
-import { ResponseCode } from "./interface"
+import { ResponseCode } from "./types"
 import { useUserStore } from "@/stores/user"
 import { axiosRequestAdapter } from "@alova/adapter-axios"
 
