@@ -15,7 +15,7 @@
 import Process from "./components/process/index.vue"
 import FdSidebar from "./components/fd-sidebar/index.vue"
 import LayoutView from "./components/view/index.vue"
-import FdHeaderBar from "./components/fd-header-bar/index.vue"
+import FdHeaderBar from "./components/fd-header-bar"
 import { useAppStore } from "@/stores"
 
 const appStore = useAppStore()
@@ -35,6 +35,7 @@ const appStore = useAppStore()
   .app-main {
     flex: 1;
     display: flex;
+    overflow-x: hidden;
     flex-direction: column;
   }
 }

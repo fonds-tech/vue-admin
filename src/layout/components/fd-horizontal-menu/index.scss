@@ -1,0 +1,250 @@
+// ==================== 水平菜单样式变量 ====================
+
+$menu-height: 50px;
+$menu-item-gap: 4px;
+$menu-font-size: 14px;
+$menu-icon-size: 18px;
+$menu-item-height: 40px;
+$menu-item-radius: 6px;
+$menu-item-padding: 16px;
+
+// 弹窗菜单变量
+$popup-menu-height: 40px;
+$popup-menu-margin: 4px;
+$popup-menu-radius: 6px;
+$popup-menu-padding: 8px;
+
+// 颜色变量
+$active-color: var(--el-color-primary);
+$dark-hover-bg: #0f1015;
+$dark-active-bg: #27282d;
+$hover-bg-color: var(--el-color-primary-light-9);
+
+// ==================== Mixin 定义 ====================
+
+// 菜单项 hover 效果
+@mixin menu-hover($bg-color: $hover-bg-color) {
+  &:hover {
+    background-color: $bg-color !important;
+  }
+}
+
+// 菜单项选中效果
+@mixin menu-active($color: $active-color, $bg-color: $hover-bg-color, $icon-color: $active-color) {
+  &.is-active {
+    color: $color !important;
+    background-color: $bg-color;
+
+    .iconify,
+    svg {
+      color: $icon-color !important;
+    }
+  }
+}
+
+// 菜单项通用交互样式（组合 hover + active）
+@mixin menu-item-states($hover-bg: $hover-bg-color, $active-color: $active-color, $active-bg: $hover-bg-color) {
+  @include menu-hover($hover-bg);
+  @include menu-active($active-color, $active-bg);
+}
+
+// 弹窗菜单项样式
+@mixin popup-menu-item {
+  height: $popup-menu-height;
+  border-radius: $popup-menu-radius;
+  margin-bottom: $popup-menu-margin;
+
+  .iconify {
+    margin-right: 8px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+// ==================== 水平菜单主体 ====================
+
+.fd-horizontal-menu {
+  flex: 1;
+  height: $menu-height;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  user-select: none;
+
+  // 菜单容器
+  &__container {
+    flex: 1;
+    border: none;
+    height: 100%;
+    background: transparent;
+
+    // 覆盖 Element Plus 默认边框
+    &.el-menu--horizontal {
+      border-bottom: none;
+    }
+  }
+
+  // 一级菜单项和子菜单标题通用样式
+  .el-menu-item,
+  .el-sub-menu__title {
+    height: $menu-item-height;
+    padding: 0 $menu-item-padding;
+    font-size: $menu-font-size;
+    transition: all 0.2s ease;
+    line-height: $menu-item-height;
+    border-bottom: none !important;
+    border-radius: $menu-item-radius;
+
+    // 图标样式
+    > .iconify {
+      font-size: $menu-icon-size;
+      flex-shrink: 0;
+      margin-right: 6px;
+    }
+
+    @include menu-item-states;
+  }
+
+  // 一级菜单项间距
+  > .el-menu > .el-menu-item,
+  > .el-menu > .el-sub-menu > .el-sub-menu__title {
+    margin: 0 $menu-item-gap;
+  }
+
+  // 子菜单标题样式
+  .el-sub-menu {
+    .el-sub-menu__title {
+      .el-sub-menu__icon-arrow {
+        color: var(--el-text-color-secondary);
+        transition: transform 0.3s;
+        margin-left: 4px;
+      }
+    }
+
+    // 展开状态
+    &.is-opened > .el-sub-menu__title,
+    &.is-active > .el-sub-menu__title {
+      color: var(--el-color-primary);
+
+      .iconify,
+      svg {
+        color: var(--el-color-primary);
+      }
+    }
+
+    &.is-opened > .el-sub-menu__title {
+      .el-sub-menu__icon-arrow {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+// ==================== 弹出菜单（子菜单） ====================
+
+.fd-horizontal-menu__popper,
+.fd-horizontal-menu__popper--nested,
+.el-menu--horizontal .el-menu--popup-container {
+  border-radius: 8px;
+  .el-menu--popup {
+    border: none;
+    padding: $popup-menu-padding;
+    min-width: unset;
+  }
+
+  .el-menu-item,
+  .el-sub-menu__title {
+    height: $popup-menu-height;
+    padding: 0 12px !important;
+    font-size: $menu-font-size;
+    line-height: $popup-menu-height;
+    border-radius: $popup-menu-radius;
+
+    // 图标样式
+    > .iconify {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+
+    @include menu-item-states;
+  }
+
+  // 弹窗中的子菜单
+  .el-sub-menu {
+    @include popup-menu-item;
+    height: $popup-menu-height !important;
+
+    .el-sub-menu__title {
+      height: $popup-menu-height !important;
+      border-radius: $popup-menu-radius;
+    }
+
+    .el-sub-menu__icon-arrow {
+      right: 10px !important;
+    }
+  }
+}
+
+// ==================== 响应式适配 ====================
+
+@media only screen and (width <= 1200px) {
+  .fd-horizontal-menu {
+    .el-menu-item,
+    .el-sub-menu__title {
+      padding: 0 12px;
+    }
+
+    > .el-menu > .el-menu-item,
+    > .el-menu > .el-sub-menu > .el-sub-menu__title {
+      margin: 0 2px;
+    }
+  }
+}
+
+@media only screen and (width <= 992px) {
+  .fd-horizontal-menu {
+    display: none;
+  }
+}
+
+// ==================== 暗黑模式 ====================
+
+.dark {
+  // 弹窗菜单暗黑模式
+  .fd-horizontal-menu__popper,
+  .fd-horizontal-menu__popper--nested,
+  .el-menu--horizontal .el-menu--popup-container {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+    .el-menu-item,
+    .el-sub-menu__title {
+      @include menu-item-states($dark-hover-bg, #fff, $dark-active-bg);
+    }
+  }
+
+  // 水平菜单暗黑模式
+  .fd-horizontal-menu {
+    .el-menu-item,
+    .el-sub-menu__title {
+      .iconify {
+        color: var(--el-text-color-regular);
+      }
+
+      @include menu-item-states($dark-hover-bg, var(--el-color-primary), $dark-active-bg);
+    }
+
+    .el-menu-item.is-active,
+    .el-sub-menu.is-active > .el-sub-menu__title {
+      .iconify {
+        color: var(--el-color-primary) !important;
+      }
+    }
+
+    .el-sub-menu__icon-arrow {
+      color: var(--el-text-color-secondary);
+    }
+  }
+}

@@ -9,7 +9,7 @@ export const SETTING_CONFIG = {
   menuCollapseWidth: 62,
 
   /** 菜单布局模式 */
-  menuLayout: "vertical",
+  menuLayout: "horizontal",
 
   /** 菜单风格 */
   menuStyle: "light",
