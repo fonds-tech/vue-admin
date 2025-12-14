@@ -62,14 +62,14 @@ export default defineComponent({
     /** 是否有子菜单可显示 */
     const hasSubMenus = computed<boolean>(() => currentSubMenus.value.length > 0)
 
-    /** 一级菜单容器样式 */
-    const firstLevelStyle = computed<CSSProperties>(() => ({
+    /** 左侧菜单容器样式 */
+    const leftColumnStyle = computed<CSSProperties>(() => ({
       width: "62px",
       flexShrink: 0,
     }))
 
-    /** 二级菜单容器样式（双列模式） */
-    const secondColumnStyle = computed<CSSProperties>(() => ({
+    /** 右侧菜单容器样式（双列模式） */
+    const rightColumnStyle = computed<CSSProperties>(() => ({
       width: `${settingsStore.menuExpandWidth}px`,
       flexShrink: 0,
     }))
@@ -211,11 +211,11 @@ export default defineComponent({
     }
 
     /** 渲染一级菜单项（双列模式） */
-    function renderFirstLevelItem(menu: BackendMenu) {
+    function renderLeftMenuItem(menu: BackendMenu) {
       const isActive = isFirstLevelActive(menu)
 
       const itemContent = (
-        <div class={["fd-menu-dual__first-item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
+        <div class={["fd-vertical-menu__left-item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
           {renderIcon(menu.meta?.icon, 20)}
         </div>
       )
@@ -227,13 +227,15 @@ export default defineComponent({
       )
     }
 
-    /** 渲染一级菜单列表（双列模式） */
-    function renderFirstLevelMenu() {
+    /** 渲染左侧菜单（双列模式） */
+    function renderLeftColumn() {
       return (
-        <div class="fd-menu-dual__first" style={firstLevelStyle.value}>
-          <FdLogo />
+        <div class="fd-vertical-menu__left" style={leftColumnStyle.value}>
+          <div class="fd-vertical-menu__left-header">
+            <FdLogo />
+          </div>
           <ElScrollbar>
-            <div class="fd-menu-dual__first-menu">{firstLevelMenus.value.map((menu) => renderFirstLevelItem(menu))}</div>
+            <div class="fd-vertical-menu__left-menu">{firstLevelMenus.value.map((menu) => renderLeftMenuItem(menu))}</div>
           </ElScrollbar>
         </div>
       )
@@ -257,7 +259,7 @@ export default defineComponent({
 
       if (!menu.children || menu.children.length === 0) {
         return (
-          <ElMenuItem key={menu.path} index={fullPath} class="fd-menu-dual__sub-item">
+          <ElMenuItem key={menu.path} index={fullPath} class="fd-vertical-menu__right-item">
             {renderIcon(menu.meta?.icon)}
             <span>{menu.meta?.title}</span>
           </ElMenuItem>
@@ -268,7 +270,7 @@ export default defineComponent({
         const firstChild = menu.children[0]!
         const childFullPath = getFullPath(firstChild.path, fullPath)
         return (
-          <ElMenuItem key={childFullPath} index={childFullPath} class="fd-menu-dual__sub-item">
+          <ElMenuItem key={childFullPath} index={childFullPath} class="fd-vertical-menu__right-item">
             {renderIcon(firstChild.meta?.icon || menu.meta?.icon)}
             <span>{firstChild.meta?.title || menu.meta?.title}</span>
           </ElMenuItem>
@@ -276,7 +278,7 @@ export default defineComponent({
       }
 
       return (
-        <ElSubMenu key={menu.path} index={fullPath} class="fd-menu-dual__submenu">
+        <ElSubMenu key={menu.path} index={fullPath} class="fd-vertical-menu__right-submenu">
           {{
             title: () => (
               <>
@@ -290,20 +292,18 @@ export default defineComponent({
       )
     }
 
-    /** 渲染二级菜单列表（双列模式） */
-    function renderSubMenuList() {
-      const appTitle = import.meta.env.VITE_APP_TITLE
-
+    /** 渲染右侧菜单（双列模式） */
+    function renderRightColumn() {
       return (
-        <div class="fd-menu-dual__second" style={secondColumnStyle.value}>
-          {/* 项目名称标题 */}
-          <div class="fd-menu-dual__header">
-            <h1 class="fd-menu-dual__title">{appTitle}</h1>
+        <div class="fd-vertical-menu__right" style={rightColumnStyle.value}>
+          {/* 右侧头部标题 */}
+          <div class="fd-vertical-menu__right-header">
+            <FdName />
           </div>
           {hasSubMenus.value && (
-            <ElScrollbar class="fd-menu-dual__second-scroll">
+            <ElScrollbar class="fd-vertical-menu__right-scroll">
               <ElMenu
-                class="fd-menu-dual__menu"
+                class="fd-vertical-menu__right-menu"
                 defaultActive={activeMenuPath.value}
                 collapseTransition={false}
                 uniqueOpened={isAccordionMode.value}
@@ -324,8 +324,8 @@ export default defineComponent({
     function renderDualColumnLayout() {
       return (
         <>
-          {renderFirstLevelMenu()}
-          {renderSubMenuList()}
+          {renderLeftColumn()}
+          {renderRightColumn()}
         </>
       )
     }

@@ -10,6 +10,7 @@ defineOptions({ name: "fd-logo" })
 
 <style lang="scss" scoped>
 .fd-logo {
+  cursor: pointer;
   display: flex;
   flex-shrink: 0;
 
