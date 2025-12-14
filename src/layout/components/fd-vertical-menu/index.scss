@@ -70,6 +70,10 @@ $dark-active-bg: #27282d;
     background-color: var(--el-border-color-extra-light);
   }
 
+  &--vertical {
+    flex-direction: column;
+  }
+
   // 头部区域样式
   &__header {
     width: 100%;

@@ -2,14 +2,12 @@
   <div class="fd-header-bar">
     <div class="fd-header-bar__left">
       <!-- 非水平布局显示折叠按钮和面包屑 -->
-      <template v-if="!isHorizontalLayout">
-        <div class="fd-header-bar__action-btn" @click="handleToggleCollapse">
-          <fd-icon :icon="collapseIcon" :size="20" />
-        </div>
-        <fd-breadcrumb />
-      </template>
+      <div v-if="isVerticalLayout" class="fd-header-bar__action-btn" @click="handleToggleCollapse">
+        <fd-icon :icon="collapseIcon" :size="20" />
+      </div>
+      <fd-breadcrumb />
       <!-- 水平布局显示水平菜单 -->
-      <fd-horizontal-menu v-else />
+      <!-- <fd-horizontal-menu /> -->
     </div>
     <div class="fd-header-bar__right">
       <!-- 全屏按钮 -->
@@ -49,8 +47,9 @@ defineOptions({ name: "fd-header-bar" })
 const settingsStore = useSettingsStore()
 
 // ===================== 布局判断 =====================
-/** 是否为水平布局 */
-const isHorizontalLayout = computed(() => settingsStore.isHorizontalLayout)
+
+/** 是否为垂直布局 */
+const isVerticalLayout = computed(() => settingsStore.isVerticalLayout)
 
 // ===================== 折叠功能 =====================
 /** 折叠图标 */

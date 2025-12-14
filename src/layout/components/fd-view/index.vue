@@ -1,5 +1,5 @@
 <template>
-  <main class="layout-view">
+  <main class="fd-view">
     <router-view v-slot="{ Component, route }">
       <transition :name="transitionName" mode="out-in">
         <keep-alive :include="cacheList">
@@ -55,10 +55,10 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.layout-view {
+.fd-view {
   flex: 1;
-  padding: $spacing-md;
-  background-color: $bg-page;
+  padding: 12px;
+  background-color: var(--el-fill-color-lighter);
 }
 
 // 淡入淡出过渡

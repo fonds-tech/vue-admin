@@ -1,42 +1,170 @@
 <template>
   <el-drawer v-model="visible" title="系统设置" direction="rtl" size="320px" :show-close="true" :close-on-click-modal="true" class="fd-setting">
     <div class="fd-setting__content">
-      <!-- 主题模式 -->
+      <!-- 主题风格 -->
       <div class="fd-setting__section">
-        <div class="fd-setting__title">主题模式</div>
+        <div class="fd-setting__title">主题风格</div>
         <div class="fd-setting__options">
-          <div class="fd-setting__theme-option" :class="{ 'is-active': theme === 'light' }" @click="setTheme('light', $event)">
-            <el-icon :size="24"><Sunny /></el-icon>
-            <span>亮色</span>
+          <div class="fd-setting__card" :class="{ 'is-active': theme === 'light' }" @click="setTheme('light', $event)">
+            <div class="fd-setting__preview fd-setting__preview--light">
+              <div class="preview-header"></div>
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-main">
+                  <div class="preview-content-p"></div>
+                  <div class="preview-content-p"></div>
+                </div>
+              </div>
+            </div>
+            <span>浅色</span>
           </div>
-          <div class="fd-setting__theme-option" :class="{ 'is-active': theme === 'dark' }" @click="setTheme('dark', $event)">
-            <el-icon :size="24"><Moon /></el-icon>
-            <span>暗色</span>
+          <div class="fd-setting__card" :class="{ 'is-active': theme === 'dark' }" @click="setTheme('dark', $event)">
+            <div class="fd-setting__preview fd-setting__preview--dark">
+              <div class="preview-header"></div>
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-main">
+                  <div class="preview-content-p"></div>
+                  <div class="preview-content-p"></div>
+                </div>
+              </div>
+            </div>
+            <span>深色</span>
+          </div>
+          <div class="fd-setting__card" :class="{ 'is-active': theme === 'auto' }" @click="setTheme('auto', $event)">
+            <div class="fd-setting__preview fd-setting__preview--system">
+              <div class="preview-header"></div>
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-main">
+                  <div class="preview-content-p"></div>
+                  <div class="preview-content-p"></div>
+                </div>
+              </div>
+            </div>
+            <span>系统</span>
           </div>
         </div>
       </div>
 
-      <!-- 主题色 -->
+      <!-- 菜单布局 -->
       <div class="fd-setting__section">
-        <div class="fd-setting__title">主题色</div>
+        <div class="fd-setting__title">菜单布局</div>
+        <div class="fd-setting__options">
+          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'vertical' }" @click="menuLayout = 'vertical'">
+            <div class="fd-setting__preview fd-setting__preview--vertical">
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-wrapper">
+                  <div class="preview-header"></div>
+                  <div class="preview-main"></div>
+                </div>
+              </div>
+            </div>
+            <span>垂直</span>
+          </div>
+          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'horizontal' }" @click="menuLayout = 'horizontal'">
+            <div class="fd-setting__preview fd-setting__preview--horizontal">
+              <div class="preview-header"></div>
+              <div class="preview-main"></div>
+            </div>
+            <span>水平</span>
+          </div>
+          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'mixed' }" @click="menuLayout = 'mixed'">
+            <div class="fd-setting__preview fd-setting__preview--mixed">
+              <div class="preview-header"></div>
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-main"></div>
+              </div>
+            </div>
+            <span>混合</span>
+          </div>
+          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'dual' }" @click="menuLayout = 'dual'">
+            <div class="fd-setting__preview fd-setting__preview--dual">
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-aside-sub"></div>
+                <div class="preview-wrapper">
+                  <div class="preview-header"></div>
+                  <div class="preview-main"></div>
+                </div>
+              </div>
+            </div>
+            <span>双列</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 菜单风格 -->
+      <div class="fd-setting__section">
+        <div class="fd-setting__title">菜单风格</div>
+        <div class="fd-setting__options">
+          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'light' }" @click="menuStyle = 'light'">
+            <div class="fd-setting__preview fd-setting__preview--vertical preview-light">
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-wrapper">
+                  <div class="preview-header"></div>
+                  <div class="preview-main"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'dark' }" @click="menuStyle = 'dark'">
+            <div class="fd-setting__preview fd-setting__preview--vertical preview-dark">
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-wrapper">
+                  <div class="preview-header"></div>
+                  <div class="preview-main"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'transparent' }" @click="menuStyle = 'transparent'">
+            <div class="fd-setting__preview fd-setting__preview--vertical preview-transparent">
+              <div class="preview-container">
+                <div class="preview-aside"></div>
+                <div class="preview-wrapper">
+                  <div class="preview-header"></div>
+                  <div class="preview-main"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 系统主题色 -->
+      <div class="fd-setting__section">
+        <div class="fd-setting__title">系统主题色</div>
         <div class="fd-setting__colors">
           <div
             v-for="color in themeColors"
             :key="color"
             class="fd-setting__color-option"
             :style="{ backgroundColor: color }"
-            :class="{ 'is-active': primaryColor === color }"
             @click="setPrimaryColor(color)"
           >
-            <el-icon v-if="primaryColor === color" :size="14"><Check /></el-icon>
+            <el-icon v-if="primaryColor === color" :size="14"><check /></el-icon>
           </div>
         </div>
       </div>
 
-      <!-- 界面设置 -->
+      <el-divider />
+
+      <!-- 界面设置 (Folded or Secondary) -->
       <div class="fd-setting__section">
-        <div class="fd-setting__title">界面设置</div>
         <div class="fd-setting__items">
+          <div class="fd-setting__item">
+            <span>菜单模式</span>
+            <el-select v-model="menuMode" class="fd-setting__select--sm">
+              <el-option value="accordion" label="手风琴" />
+              <el-option value="expand" label="全部展开" />
+              <el-option value="collapse" label="全部折叠" />
+            </el-select>
+          </div>
           <div class="fd-setting__item">
             <span>显示标签栏</span>
             <el-switch v-model="showProcess" />
@@ -49,33 +177,17 @@
             <span>显示水印</span>
             <el-switch v-model="showWatermark" />
           </div>
-        </div>
-      </div>
-
-      <!-- 菜单设置 -->
-      <div class="fd-setting__section">
-        <div class="fd-setting__title">菜单设置</div>
-        <div class="fd-setting__items">
+          <!-- 动画设置 -->
           <div class="fd-setting__item">
-            <span>菜单模式</span>
-            <el-select v-model="menuMode" class="fd-setting__select--sm">
-              <el-option value="accordion" label="手风琴" />
-              <el-option value="expand" label="全部展开" />
-              <el-option value="collapse" label="全部折叠" />
+            <span>过渡动画</span>
+            <el-select v-model="transition" class="fd-setting__select--sm">
+              <el-option value="fade" label="淡入淡出" />
+              <el-option value="slide" label="滑动" />
+              <el-option value="zoom" label="缩放" />
+              <el-option value="none" label="无动画" />
             </el-select>
           </div>
         </div>
-      </div>
-
-      <!-- 动画设置 -->
-      <div class="fd-setting__section">
-        <div class="fd-setting__title">过渡动画</div>
-        <el-select v-model="transition" class="fd-setting__select">
-          <el-option value="fade" label="淡入淡出" />
-          <el-option value="slide" label="滑动" />
-          <el-option value="zoom" label="缩放" />
-          <el-option value="none" label="无动画" />
-        </el-select>
       </div>
 
       <!-- 语言设置 -->
@@ -91,7 +203,8 @@
 </template>
 
 <script setup lang="ts">
-import type { MenuMode, LanguageType, TransitionName } from "@/stores/settings/types"
+import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, LanguageType, TransitionName } from "@/stores/settings/types"
+import { Check } from "@element-plus/icons-vue"
 import { computed } from "vue"
 import { useSettingsStore } from "@/stores/settings"
 
@@ -107,15 +220,13 @@ const visible = computed({
 
 /** 预设主题色列表 */
 const themeColors = [
-  "#6366f1", // 靛蓝
-  "#8b5cf6", // 紫色
-  "#ec4899", // 粉色
-  "#ef4444", // 红色
-  "#f97316", // 橙色
-  "#eab308", // 黄色
-  "#22c55e", // 绿色
-  "#14b8a6", // 青色
-  "#0ea5e9", // 蓝色
+  "#3b82f6", // 蓝 (Default)
+  "#8b5cf6", // 紫
+  "#2563eb", // 深蓝
+  "#52c41a", // 绿
+  "#06b6d4", // 青
+  "#fa8c16", // 橙
+  "#f43f5e", // 粉/红
 ]
 
 /** 当前主题 */
@@ -145,6 +256,18 @@ const showWatermark = computed({
   set: (val) => settingsStore.setShowWatermark(val),
 })
 
+/** 菜单布局 */
+const menuLayout = computed({
+  get: () => settingsStore.menuLayout,
+  set: (val) => settingsStore.setMenuLayout(val as MenuLayout),
+})
+
+/** 菜单风格 */
+const menuStyle = computed({
+  get: () => settingsStore.menuStyle,
+  set: (val) => settingsStore.setMenuStyle(val as MenuStyle),
+})
+
 /** 菜单模式 */
 const menuMode = computed({
   get: () => settingsStore.menuMode,
@@ -164,8 +287,22 @@ const language = computed({
 })
 
 /** 设置主题 */
-function setTheme(mode: "light" | "dark", _event: MouseEvent) {
-  settingsStore.setTheme(mode)
+function setTheme(mode: ThemeStyle, _event: MouseEvent) {
+  // Use setThemeStyle to generic set
+  settingsStore.setThemeStyle(mode)
+
+  if (mode !== "auto") {
+    settingsStore.setTheme(mode as "light" | "dark")
+  }
+  else {
+    // Simple auto logic for demo
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    settingsStore.applyTheme() // This function likely needs updating in store to handle auto if not already
+    // Or just manully:
+    const html = document.documentElement
+    html.classList.toggle("dark", isDark)
+    html.setAttribute("data-theme", isDark ? "dark" : "light")
+  }
 }
 
 /** 设置主题色 */
@@ -182,80 +319,231 @@ function changeLanguage() {
 <style lang="scss" scoped>
 .fd-setting {
   &__content {
-    gap: $spacing-lg;
+    gap: 20px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 20px;
   }
 
   &__section {
-    gap: $spacing-sm;
+    gap: 12px;
     display: flex;
     flex-direction: column;
   }
 
   &__title {
-    color: $text-primary;
+    color: var(--el-text-color-primary);
     font-size: 14px;
-    font-weight: 600;
+    text-align: center;
+    margin-bottom: 5px;
   }
 
   &__options {
-    gap: $spacing-base;
+    gap: 12px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  &__theme-option {
-    gap: $spacing-xs;
-    flex: 1;
-    border: 2px solid $border-color;
+  &__card {
+    gap: 8px;
     cursor: pointer;
     display: flex;
-    padding: $spacing-base;
-    transition: all $transition-duration;
     align-items: center;
-    border-radius: $border-radius;
     flex-direction: column;
-    justify-content: center;
 
-    &:hover {
-      border-color: $primary-color;
+    span {
+      color: var(--el-text-color-regular);
+      font-size: 12px;
     }
 
     &.is-active {
-      color: $primary-color;
-      border-color: $primary-color;
-      background-color: var(--el-color-primary-light-9);
+      .fd-setting__preview {
+        border-color: var(--el-color-primary);
+      }
+      span {
+        color: var(--el-color-primary);
+      }
+    }
+  }
+
+  &__preview {
+    width: 52px;
+    border: 2px solid transparent;
+    height: 36px;
+    padding: 4px;
+    overflow: hidden;
+    position: relative;
+    background: #f0f2f5;
+    box-shadow: 0 1px 2.5px rgba(0, 0, 0, 0.18);
+    transition: all 0.3s;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #e6e6e6;
     }
 
-    span {
-      font-size: 12px;
+    .preview-container {
+      gap: 2px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
+    .preview-wrapper {
+      gap: 2px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .preview-header {
+      width: 100%;
+      height: 6px;
+      background: #fff;
+      border-radius: 2px;
+    }
+    .preview-aside {
+      width: 10px;
+      height: 100%;
+      background: #fff;
+      border-radius: 2px;
+    }
+    .preview-aside-sub {
+      width: 6px;
+      height: 100%;
+      background: #fff;
+      border-radius: 2px;
+    }
+    .preview-main {
+      gap: 2px;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      padding: 2px;
+      background: #fff;
+      border-radius: 2px;
+      flex-direction: column;
+    }
+    .preview-content-p {
+      width: 100%;
+      height: 3px;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 1px;
+    }
+
+    // --- Variations ---
+    &--dark {
+      background: #2b2b2b;
+      .preview-header {
+        background: #454545;
+      }
+      .preview-aside {
+        background: #454545;
+      }
+      .preview-main {
+        background: #1f1f1f;
+      }
+      .preview-content-p {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+    &--system {
+      background: linear-gradient(90deg, #f0f2f5 50%, #2b2b2b 50%);
+      .preview-header {
+        background: linear-gradient(90deg, #fff 50%, #454545 50%);
+      }
+      .preview-aside {
+        background: linear-gradient(90deg, #fff 50%, #454545 50%);
+      }
+      .preview-main {
+        background: linear-gradient(90deg, #fff 50%, #1f1f1f 50%);
+      }
+    }
+
+    &--vertical {
+      .preview-header {
+        display: none;
+      }
+      .preview-wrapper {
+        .preview-header {
+          display: block;
+        }
+      }
+    }
+    &--horizontal {
+      gap: 2px;
+      display: flex;
+      flex-direction: column;
+      .preview-aside {
+        display: none;
+      }
+    }
+    &--mixed {
+      gap: 2px;
+      display: flex;
+      flex-direction: column;
+      .preview-container {
+        height: calc(100% - 8px);
+      }
+    }
+    &--dual {
+      .preview-header {
+        display: none;
+      }
+    }
+
+    // Menu Styles
+    &.preview-light {
+      // Default
+    }
+
+    &.preview-dark {
+      .preview-aside {
+        background: #2b2b2b;
+      }
+    }
+
+    &.preview-transparent {
+      background-size: 8px 8px;
+      background-image:
+        linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
+        linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+      background-position:
+        0 0,
+        4px 4px;
+
+      .preview-aside {
+        opacity: 0.8;
+      }
+      .preview-header {
+        opacity: 0.8;
+      }
+      .preview-main {
+        opacity: 0.8;
+      }
     }
   }
 
   &__colors {
-    gap: $spacing-sm;
+    gap: 12px;
     display: flex;
+    padding: 0 10px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   &__color-option {
-    width: 28px;
+    width: 24px;
     cursor: pointer;
-    height: 28px;
+    height: 24px;
     display: flex;
-    transition: all $transition-duration;
+    transition: all 0.2s;
     align-items: center;
     border-radius: 50%;
     justify-content: center;
 
     &:hover {
       transform: scale(1.1);
-    }
-
-    &.is-active {
-      box-shadow:
-        0 0 0 2px #fff,
-        0 0 0 4px currentColor;
     }
 
     .el-icon {
@@ -265,19 +553,24 @@ function changeLanguage() {
 
   &__items {
     display: flex;
+    padding: 0 10px;
     flex-direction: column;
   }
 
   &__item {
     display: flex;
-    padding: $spacing-sm 0;
+    padding: 10px 0;
     font-size: 14px;
     align-items: center;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     justify-content: space-between;
 
     &:last-child {
       border-bottom: none;
+    }
+
+    span {
+      color: var(--el-text-color-primary);
     }
   }
 

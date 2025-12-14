@@ -352,6 +352,9 @@ export default defineComponent({
       )
     }
 
-    return () => <div class="fd-vertical-menu" style={style.value}>{isDualMode.value ? renderDualLayout() : renderSingleLayout()}</div>
+    /** 菜单容器类名（根据布局模式添加修饰符） */
+    const containerClass = computed(() => ["fd-vertical-menu", `fd-vertical-menu--${settingsStore.menuLayout}`])
+
+    return () => <div class={containerClass.value} style={style.value}>{isDualMode.value ? renderDualLayout() : renderSingleLayout()}</div>
   },
 })
