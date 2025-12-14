@@ -1,50 +1,16 @@
 <svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <!-- 菜单布局：垂直（缩略图友好：仅保持结构相对关系，强化可读性） -->
-  <rect width="160" height="90" rx="10" fill="#F7F8FA"/>
+  <!-- 垂直布局：左侧主菜单 + 右侧内容，聚焦结构对比 -->
+  <rect width="160" height="90" rx="12" fill="#F6F7FB"/>
 
-  <!-- 侧边栏 -->
-  <rect x="0" y="0" width="50" height="90" fill="#FFFFFF"/>
-  <line x1="50" y1="0" x2="50" y2="90" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <!-- 左侧菜单 -->
+  <rect x="10" y="12" width="36" height="66" rx="6" fill="#EAF1FF" stroke="#D7DDE6" stroke-width="2"/>
+  <rect x="14" y="20" width="24" height="8" rx="3" fill="#409EFF" fill-opacity="0.85"/>
+  <rect x="14" y="34" width="24" height="8" rx="3" fill="#D7DDE6"/>
+  <rect x="14" y="48" width="24" height="8" rx="3" fill="#D7DDE6" fill-opacity="0.75"/>
 
-  <!-- 侧边栏 Header（Logo + 项目名） -->
-  <line x1="0" y1="16" x2="50" y2="16" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-  <rect x="6" y="4" width="8" height="8" rx="2" fill="#409EFF"/>
-  <rect x="16" y="6" width="30" height="4" rx="2" fill="#C9CDD4" fill-opacity="0.85"/>
-
-  <!-- 菜单项（占位） -->
-  <rect x="6" y="22" width="38" height="10" rx="4" fill="#409EFF" fill-opacity="0.14"/>
-  <rect x="10" y="25" width="4" height="4" rx="1.2" fill="#409EFF"/>
-  <rect x="16" y="26" width="24" height="3" rx="1.5" fill="#409EFF" fill-opacity="0.65"/>
-
-  <rect x="10" y="36" width="4" height="4" rx="1.2" fill="#C9CDD4" fill-opacity="0.9"/>
-  <rect x="16" y="37" width="24" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
-
-  <rect x="10" y="48" width="4" height="4" rx="1.2" fill="#C9CDD4" fill-opacity="0.9"/>
-  <rect x="16" y="49" width="22" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
-
-  <!-- 顶部栏 -->
-  <rect x="50" y="0" width="110" height="16" fill="#FFFFFF"/>
-  <line x1="50" y1="16" x2="160" y2="16" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-  <rect x="56" y="6" width="44" height="4" rx="2" fill="#F2F3F5"/>
-  <circle cx="154" cy="8" r="2.5" fill="#C9CDD4" fill-opacity="0.6"/>
-  <circle cx="147" cy="8" r="2.5" fill="#C9CDD4" fill-opacity="0.6"/>
-  <circle cx="140" cy="8" r="2.5" fill="#C9CDD4" fill-opacity="0.6"/>
-
-  <!-- 进程栏 -->
-  <rect x="50" y="16" width="110" height="12" fill="#FFFFFF"/>
-  <line x1="50" y1="28" x2="160" y2="28" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-  <rect x="56" y="19" width="30" height="6" rx="3" fill="#409EFF" fill-opacity="0.12"/>
-  <rect x="56" y="24.8" width="30" height="2" rx="1" fill="#409EFF"/>
-  <rect x="88" y="19" width="28" height="6" rx="3" fill="#F2F3F5"/>
-
-  <!-- 内容区 -->
-  <rect x="50" y="28" width="110" height="62" fill="#F7F8FA"/>
-  <rect x="56" y="34" width="48" height="18" rx="4" fill="#FFFFFF" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-  <rect x="60" y="38" width="22" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
-
-  <rect x="108" y="34" width="46" height="18" rx="4" fill="#FFFFFF" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-  <rect x="112" y="38" width="22" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
-
-  <rect x="56" y="56" width="98" height="28" rx="4" fill="#FFFFFF" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-  <path d="M60 78 L74 66 L88 70 L102 62 L116 72 L130 68 L144 74" stroke="#409EFF" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 右侧区域 -->
+  <rect x="54" y="12" width="96" height="12" rx="6" fill="#EDF0F5"/>
+  <rect x="54" y="28" width="96" height="50" rx="8" fill="#FFFFFF" stroke="#D7DDE6" stroke-width="2"/>
+  <rect x="66" y="36" width="44" height="8" rx="4" fill="#EAF1FF"/>
+  <rect x="66" y="50" width="70" height="6" rx="3" fill="#E1E5ED"/>
 </svg>

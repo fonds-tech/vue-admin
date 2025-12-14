@@ -225,22 +225,25 @@ const language = computed({
   set: (val) => settingsStore.setLanguage(val as LanguageType),
 })
 
-/** 设置主题 */
-function setTheme(mode: ThemeStyle, _event: MouseEvent) {
-  // Use setThemeStyle to generic set
-  settingsStore.setThemeStyle(mode)
+/** 设置主题（从点击位置开始圆形扩散动画） */
+function setTheme(mode: ThemeStyle, event: MouseEvent) {
+  // 获取点击坐标用于动画
+  const animationOptions = {
+    x: event.clientX,
+    y: event.clientY,
+  }
 
-  if (mode !== "auto") {
-    settingsStore.setTheme(mode as "light" | "dark")
+  // 根据模式设置主题
+  if (mode === "auto") {
+    // 系统模式：根据系统偏好设置
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    settingsStore.setThemeStyle("auto")
+    settingsStore.setTheme(isDark ? "dark" : "light", animationOptions)
   }
   else {
-    // Simple auto logic for demo
-    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    settingsStore.applyTheme() // This function likely needs updating in store to handle auto if not already
-    // Or just manully:
-    const html = document.documentElement
-    html.classList.toggle("dark", isDark)
-    html.setAttribute("data-theme", isDark ? "dark" : "light")
+    // 手动指定 light 或 dark
+    settingsStore.setThemeStyle(mode)
+    settingsStore.setTheme(mode as "light" | "dark", animationOptions)
   }
 }
 

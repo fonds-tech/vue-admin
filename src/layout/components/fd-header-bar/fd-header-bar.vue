@@ -8,6 +8,10 @@
       <fd-breadcrumb />
     </div>
     <div class="fd-header-bar__right">
+      <!-- 主题切换按钮 -->
+      <div class="fd-header-bar__action-btn" @click="handleToggleTheme">
+        <fd-icon :icon="themeIcon" :size="20" />
+      </div>
       <!-- 全屏按钮 -->
       <div class="fd-header-bar__action-btn" @click="handleToggleFullscreen">
         <fd-icon :icon="fullscreenIcon" :size="20" />
@@ -69,6 +73,23 @@ function handleChangeLanguage(lang: string) {
     settingsStore.setLanguage(lang as LanguageType)
     window.location.reload()
   }
+}
+
+// ===================== 主题切换功能 =====================
+/** 当前是否为暗色主题 */
+const isDarkTheme = computed(() => settingsStore.isThemeDark)
+
+/** 主题图标 */
+const themeIcon = computed(() => {
+  return isDarkTheme.value ? "ri:sun-line" : "ri:moon-line"
+})
+
+/** 切换主题（从点击位置开始动画） */
+function handleToggleTheme(event: MouseEvent) {
+  settingsStore.toggleTheme({
+    x: event.clientX,
+    y: event.clientY,
+  })
 }
 
 // ===================== 全屏功能 =====================

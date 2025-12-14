@@ -1,6 +1,10 @@
+import type { ThemeMode, ThemeToggleOptions } from "@/utils/theme"
 import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, LanguageType, TransitionName } from "./types"
+
 import { defineStore } from "pinia"
+
 import { SETTING_CONFIG } from "@/config"
+import { applyTheme, toggleTheme as toggleThemeWithAnimation } from "@/utils/theme"
 
 // ==================== Store 定义 ====================
 
@@ -26,7 +30,7 @@ export const useSettingsStore = defineStore("settings", {
     /** 是否使用混合菜单布局 */
     isMixedLayout: (state) => state.menuLayout === "mixed",
 
-    /** 是否使用双列菜单布局 */
+    /** 是否使用双列菜团布局 */
     isDualLayout: (state) => state.menuLayout === "dual",
 
     /** 菜单是否折叠 */
@@ -68,28 +72,34 @@ export const useSettingsStore = defineStore("settings", {
 
     // ========== 主题设置 ==========
 
-    /** 设置主题风格 */
+    /** 设置主题风格（仅更新状态，不触发 DOM 变更） */
     setThemeStyle(style: ThemeStyle) {
       this.themeStyle = style
     },
 
-    /** 设置主题（带 DOM 操作） */
-    setTheme(mode: "light" | "dark") {
+    /**
+     * 设置主题（带圆形扩散动画）
+     * @param mode - 目标主题
+     * @param options - 动画配置选项
+     */
+    async setTheme(mode: ThemeMode, options?: ThemeToggleOptions) {
       this.themeStyle = mode
-      this.applyTheme()
+      await toggleThemeWithAnimation(mode, options)
     },
 
-    /** 切换主题 */
-    toggleTheme() {
-      this.themeStyle = this.themeStyle === "light" ? "dark" : "light"
-      this.applyTheme()
+    /**
+     * 切换主题（带圆形扩散动画）
+     * @param options - 动画配置选项，可传入点击坐标实现从点击位置开始动画
+     */
+    async toggleTheme(options?: ThemeToggleOptions) {
+      const newTheme: ThemeMode = this.themeStyle === "light" ? "dark" : "light"
+      this.themeStyle = newTheme
+      await toggleThemeWithAnimation(newTheme, options)
     },
 
-    /** 应用主题到 DOM */
+    /** 应用主题到 DOM（不带动画，用于内部调用） */
     applyTheme() {
-      const html = document.documentElement
-      html.classList.toggle("dark", this.themeStyle === "dark")
-      html.setAttribute("data-theme", this.themeStyle)
+      applyTheme(this.themeStyle as ThemeMode)
     },
 
     /** 初始化主题（应用启动时调用，不触发动画） */
