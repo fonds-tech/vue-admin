@@ -107,6 +107,22 @@ $mobile-breakpoint: 800px;
 .fd-vertical-menu {
   height: 100vh;
   display: flex;
+  overflow-x: hidden;
+  flex-direction: column;
+
+  // 头部区域样式
+  &__header {
+    gap: 12px;
+    width: 100%;
+    cursor: pointer;
+    height: 50px;
+    display: flex;
+    padding: 0 16px;
+    overflow: hidden;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+  }
 
   .el-menu {
     gap: 6px;

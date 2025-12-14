@@ -1,6 +1,7 @@
 import type { BackendMenu } from "./types"
 import type { CSSProperties } from "vue"
 import FdLogo from "../fd-logo/index.vue"
+import FdName from "../fd-name/index.vue"
 import FdIcon from "@/components/core/fd-icon"
 import { useAppStore } from "@/stores/app"
 import { useMenuStore } from "@/stores/menu"
@@ -238,6 +239,16 @@ export default defineComponent({
       )
     }
 
+    /** 渲染头部区域（Logo + 名称） */
+    function renderHeader() {
+      return (
+        <div class="fd-vertical-menu__header">
+          <FdLogo />
+          {isCollapsed.value ? null : <FdName />}
+        </div>
+      )
+    }
+
     /** 渲染子菜单项（双列模式） */
     function renderDualSubMenuItem(menu: BackendMenu, basePath: string) {
       const fullPath = getFullPath(menu.path, basePath)
@@ -319,20 +330,22 @@ export default defineComponent({
 
     function renderSingleColumnLayout() {
       return (
-        <ElScrollbar>
-          <ElMenu
-            showTimeout={50}
-            hideTimeout={50}
-            defaultActive={activeMenuPath.value}
-            collapse={isCollapsed.value}
-            uniqueOpened={isAccordionMode.value}
-            popperClass="fd-vertical-menu__popper"
-            onSelect={handleMenuSelect}
-          >
-            {menuList.value.map((menu) => renderMenuItem(menu, ""))}
-          </ElMenu>
-        </ElScrollbar>
-
+        <>
+          {renderHeader()}
+          <ElScrollbar>
+            <ElMenu
+              showTimeout={50}
+              hideTimeout={50}
+              defaultActive={activeMenuPath.value}
+              collapse={isCollapsed.value}
+              uniqueOpened={isAccordionMode.value}
+              popperClass="fd-vertical-menu__popper"
+              onSelect={handleMenuSelect}
+            >
+              {menuList.value.map((menu) => renderMenuItem(menu, ""))}
+            </ElMenu>
+          </ElScrollbar>
+        </>
       )
     }
 
