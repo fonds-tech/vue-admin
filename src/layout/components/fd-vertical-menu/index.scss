@@ -107,8 +107,20 @@ $mobile-breakpoint: 800px;
 .fd-vertical-menu {
   height: 100vh;
   display: flex;
+  position: relative;
   overflow-x: hidden;
   flex-direction: column;
+
+  &::before {
+    top: 0;
+    right: 0;
+    width: 1px;
+    bottom: 0;
+    content: "";
+    z-index: 1;
+    position: absolute;
+    background-color: var(--el-border-color-extra-light);
+  }
 
   // 头部区域样式
   &__header {

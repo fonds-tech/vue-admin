@@ -110,9 +110,20 @@ onUnmounted(() => {
   height: 50px;
   display: flex;
   padding: 0 12px;
+  position: relative;
   align-items: center;
   flex-shrink: 0;
   justify-content: space-between;
+
+  &::before {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    content: "";
+    position: absolute;
+    background-color: var(--el-border-color-extra-light);
+  }
 
   &__left {
     gap: 12px;
