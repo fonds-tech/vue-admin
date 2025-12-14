@@ -1,5 +1,7 @@
 // UnoCSS
 import "virtual:uno.css"
+// SVG Icons
+import "virtual:svg-icons-register"
 
 import ElementPlus from "element-plus"
 import { createApp } from "vue"

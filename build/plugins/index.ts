@@ -1,6 +1,7 @@
 import type { PluginOption } from "vite"
 import { createUnoCSS } from "./unocss"
 import { createDevTools } from "./devtools"
+import { createSvgIcons } from "./svg-icons"
 import { createBuildInfo } from "./build-info"
 import { createVuePlugin } from "./vue"
 import { createAutoImport } from "./auto-import"
@@ -35,6 +36,8 @@ export function createVitePlugins(options: PluginOptions): PluginOption[] {
     createAutoImport(),
     // 组件自动注册
     createComponents(),
+    // SVG Icons 自动加载
+    createSvgIcons(),
   ].filter(Boolean) as PluginOption[]
 }
 
@@ -42,6 +45,7 @@ export { createAutoImport } from "./auto-import"
 export { createBuildInfo } from "./build-info"
 export { createComponents } from "./components"
 export { createDevTools } from "./devtools"
+export { createSvgIcons } from "./svg-icons"
 export { createUnoCSS } from "./unocss"
 // 导出各个插件创建函数，方便单独使用
 export { createVuePlugin } from "./vue"

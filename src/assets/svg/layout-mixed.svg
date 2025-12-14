@@ -1,19 +1,28 @@
-<svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <!-- 混合布局：顶部导航 + 左侧菜单，形块简化 -->
-  <rect width="160" height="90" rx="0" fill="#F6F7FB"/>
+<svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Window Frame -->
+  <rect x="0" y="0" width="160" height="90" rx="8" fill="#F8FAFC"/>
+  <rect x="0.5" y="0.5" width="159" height="89" rx="7.5" stroke="#E2E8F0"/>
 
-  <!-- 顶部导航 -->
-  <rect x="10" y="12" width="140" height="12" rx="6" fill="#EAF1FF" stroke="#D7DDE6" stroke-width="2"/>
-  <rect x="18" y="15" width="22" height="6" rx="3" fill="#409EFF" fill-opacity="0.85"/>
-  <rect x="44" y="15" width="18" height="6" rx="3" fill="#D7DDE6"/>
+  <!-- Top Header Bar -->
+  <rect x="12" y="12" width="136" height="12" rx="6" fill="#1E293B"/>
+  
+  <!-- Logo/Brand Section in Header -->
+  <rect x="20" y="15" width="6" height="6" rx="3" fill="#4F46E5"/>
+  <rect x="32" y="16" width="20" height="4" rx="2" fill="#334155"/>
 
-  <!-- 左侧菜单 -->
-  <rect x="10" y="28" width="32" height="50" rx="7" fill="#EAF1FF" stroke="#D7DDE6" stroke-width="2"/>
-  <rect x="16" y="36" width="20" height="8" rx="3" fill="#409EFF" fill-opacity="0.85"/>
-  <rect x="16" y="50" width="20" height="8" rx="3" fill="#D7DDE6"/>
+  <!-- Left Sidebar -->
+  <rect x="12" y="30" width="30" height="48" rx="4" fill="#FFFFFF"/>
+  <rect x="12.5" y="30.5" width="29.5" height="47.5" rx="3.5" stroke="#E2E8F0"/>
+  
+  <rect x="20" y="38" width="14" height="4" rx="2" fill="#E2E8F0"/>
+  <rect x="20" y="48" width="14" height="4" rx="2" fill="#F1F5F9"/>
+  <rect x="20" y="58" width="14" height="4" rx="2" fill="#F1F5F9"/>
 
-  <!-- 右侧内容 -->
-  <rect x="48" y="28" width="102" height="50" rx="10" fill="#FFFFFF" stroke="#D7DDE6" stroke-width="2"/>
-  <rect x="60" y="38" width="46" height="8" rx="4" fill="#EAF1FF"/>
-  <rect x="60" y="52" width="72" height="6" rx="3" fill="#E1E5ED"/>
+  <!-- Content Area -->
+  <rect x="50" y="30" width="98" height="48" rx="4" fill="#FFFFFF"/>
+  <rect x="50.5" y="30.5" width="97.5" height="47.5" rx="3.5" stroke="#E2E8F0"/>
+  
+  <rect x="58" y="38" width="30" height="4" rx="2" fill="#F1F5F9"/>
+  <rect x="58" y="48" width="82" height="22" rx="2" fill="#F1F5F9"/>
+
 </svg>

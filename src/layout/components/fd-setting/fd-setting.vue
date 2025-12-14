@@ -312,7 +312,6 @@ function changeLanguage() {
   &__preview {
     width: 100%;
     border: 2px solid var(--el-border-color-dark);
-    height: 52px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
