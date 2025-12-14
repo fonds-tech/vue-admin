@@ -1,20 +1,20 @@
 <template>
-  <div class="process">
+  <div class="fd-process">
     <!-- 导航操作区 -->
-    <div class="process__nav">
-      <div class="nav-item" title="返回" @click="onClickBack">
+    <div class="fd-process__nav">
+      <div class="fd-process__nav-item" title="返回" @click="onClickBack">
         <fd-icon icon="ri:arrow-left-line" :size="14" />
       </div>
-      <div class="nav-item" title="刷新" @click="onClickRefresh">
+      <div class="fd-process__nav-item" title="刷新" @click="onClickRefresh">
         <fd-icon icon="ri:refresh-line" :size="14" />
       </div>
-      <div class="nav-item" title="首页" @click="onClickHome">
+      <div class="fd-process__nav-item" title="首页" @click="onClickHome">
         <fd-icon icon="ri:home-4-line" :size="14" />
       </div>
     </div>
 
     <!-- 标签列表区 -->
-    <div ref="scrollContainer" class="process__list" @wheel="onWheel">
+    <div ref="scrollContainer" class="fd-process__list" @wheel="onWheel">
       <div class="process__scroll">
         <el-dropdown v-for="(item, index) in processStore.list" :key="item.path" trigger="contextmenu" @command="(cmd: string) => onContextMenuCommand(cmd, item, index)">
           <div class="process-item" :class="{ 'is-active': item.path === route.path }" @click="onClickItem(item)">
@@ -159,12 +159,23 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.process {
+.fd-process {
   gap: 6px;
   display: flex;
   padding: $spacing-xs $spacing-md;
+  position: relative;
   align-items: center;
   background-color: var(--el-bg-color);
+
+  &::before {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    content: "";
+    position: absolute;
+    background-color: var(--el-border-color-extra-light);
+  }
 
   // 导航操作区
   &__nav {
@@ -174,7 +185,8 @@ onMounted(() => {
     align-items: center;
     flex-shrink: 0;
 
-    .nav-item {
+    // 导航按钮项
+    &-item {
       width: 30px;
       border: 1px solid var(--el-fill-color-dark);
       cursor: pointer;
@@ -208,7 +220,8 @@ onMounted(() => {
     }
   }
 
-  &__scroll {
+  // 滚动容器
+  .process__scroll {
     gap: 6px;
     height: 100%;
     display: flex;

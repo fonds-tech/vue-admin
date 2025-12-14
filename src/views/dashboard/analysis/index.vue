@@ -167,7 +167,7 @@ function getStatusText(status: number) {
 
 <style scoped lang="scss">
 .analysis-container {
-  padding: 20px;
+  padding: 12px;
   .mb-4 {
     margin-bottom: 20px;
   }

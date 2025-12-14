@@ -37,7 +37,7 @@ const settingsStore = useSettingsStore()
   .app-main {
     flex: 1;
     display: flex;
-    overflow-x: hidden;
+    overflow: hidden;
     flex-direction: column;
   }
 }

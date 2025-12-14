@@ -1,28 +1,29 @@
 <template>
-  <main class="fd-view">
-    <router-view v-slot="{ Component, route }">
-      <transition :name="transitionName" mode="out-in">
-        <keep-alive :include="cacheList">
-          <component :is="Component" v-if="!isRefreshing" :key="route.path" />
-        </keep-alive>
-      </transition>
-    </router-view>
-  </main>
+  <div class="fd-view">
+    <el-scrollbar>
+      <router-view v-slot="{ Component, route }">
+        <transition :name="transitionName" mode="out-in">
+          <keep-alive :key="key" :include="cacheList">
+            <component :is="Component" :key="route.path" />
+          </keep-alive>
+        </transition>
+      </router-view>
+    </el-scrollbar>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { emitter } from "@/utils/mitt"
 import { useProcessStore } from "@/stores"
 import { useSettingsStore } from "@/stores/settings"
-import { ref, computed, nextTick, onMounted, onUnmounted } from "vue"
+import { ref, computed, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-view" })
 
 const processStore = useProcessStore()
 const settingsStore = useSettingsStore()
 
-/** 是否正在刷新（用于 keep-alive 刷新） */
-const isRefreshing = ref(false)
+const key = ref(1)
 
 /** 缓存列表 */
 const cacheList = computed(() => processStore.cacheList)
@@ -39,10 +40,7 @@ const transitionName = computed(() => {
  * 通过临时移除组件实现刷新效果
  */
 function handleRefresh() {
-  isRefreshing.value = true
-  nextTick(() => {
-    isRefreshing.value = false
-  })
+  key.value += 1
 }
 
 onMounted(() => {
@@ -54,11 +52,17 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .fd-view {
   flex: 1;
-  padding: 12px;
+  overflow: hidden;
   background-color: var(--el-fill-color-lighter);
+
+  .el-scrollbar__view {
+    display: flex;
+    overflow-x: hidden;
+    flex-direction: column;
+  }
 }
 
 // 淡入淡出过渡
