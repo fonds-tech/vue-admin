@@ -6,8 +6,6 @@
         <fd-icon :icon="collapseIcon" :size="20" />
       </div>
       <fd-breadcrumb />
-      <!-- 水平布局显示水平菜单 -->
-      <!-- <fd-horizontal-menu /> -->
     </div>
     <div class="fd-header-bar__right">
       <!-- 全屏按钮 -->
@@ -36,7 +34,6 @@
 
 <script setup lang="ts">
 import type { LanguageType } from "@/stores/settings/types"
-import FdHorizontalMenu from "../fd-horizontal-menu"
 import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { useSettingsStore } from "@/stores/settings"
 import { Breadcrumb as FdBreadcrumb } from "../fd-breadcrumb"
@@ -159,8 +156,7 @@ function handleOpenSettings() {
     justify-content: center;
 
     &:hover {
-      border-color: var(--el-color-primary);
-      background-color: transparent;
+      background-color: var(--el-fill-color-dark);
     }
   }
 }

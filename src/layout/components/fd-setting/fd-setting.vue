@@ -6,42 +6,15 @@
         <div class="fd-setting__title">主题风格</div>
         <div class="fd-setting__options">
           <div class="fd-setting__card" :class="{ 'is-active': theme === 'light' }" @click="setTheme('light', $event)">
-            <div class="fd-setting__preview fd-setting__preview--light">
-              <div class="preview-header"></div>
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-main">
-                  <div class="preview-content-p"></div>
-                  <div class="preview-content-p"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="themeLightSvg"></div>
             <span>浅色</span>
           </div>
           <div class="fd-setting__card" :class="{ 'is-active': theme === 'dark' }" @click="setTheme('dark', $event)">
-            <div class="fd-setting__preview fd-setting__preview--dark">
-              <div class="preview-header"></div>
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-main">
-                  <div class="preview-content-p"></div>
-                  <div class="preview-content-p"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="themeDarkSvg"></div>
             <span>深色</span>
           </div>
           <div class="fd-setting__card" :class="{ 'is-active': theme === 'auto' }" @click="setTheme('auto', $event)">
-            <div class="fd-setting__preview fd-setting__preview--system">
-              <div class="preview-header"></div>
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-main">
-                  <div class="preview-content-p"></div>
-                  <div class="preview-content-p"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="themeSystemSvg"></div>
             <span>系统</span>
           </div>
         </div>
@@ -52,45 +25,19 @@
         <div class="fd-setting__title">菜单布局</div>
         <div class="fd-setting__options">
           <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'vertical' }" @click="menuLayout = 'vertical'">
-            <div class="fd-setting__preview fd-setting__preview--vertical">
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-wrapper">
-                  <div class="preview-header"></div>
-                  <div class="preview-main"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="layoutVerticalSvg"></div>
             <span>垂直</span>
           </div>
           <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'horizontal' }" @click="menuLayout = 'horizontal'">
-            <div class="fd-setting__preview fd-setting__preview--horizontal">
-              <div class="preview-header"></div>
-              <div class="preview-main"></div>
-            </div>
+            <div class="fd-setting__preview" v-html="layoutHorizontalSvg"></div>
             <span>水平</span>
           </div>
           <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'mixed' }" @click="menuLayout = 'mixed'">
-            <div class="fd-setting__preview fd-setting__preview--mixed">
-              <div class="preview-header"></div>
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-main"></div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="layoutMixedSvg"></div>
             <span>混合</span>
           </div>
           <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'dual' }" @click="menuLayout = 'dual'">
-            <div class="fd-setting__preview fd-setting__preview--dual">
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-aside-sub"></div>
-                <div class="preview-wrapper">
-                  <div class="preview-header"></div>
-                  <div class="preview-main"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="layoutDualSvg"></div>
             <span>双列</span>
           </div>
         </div>
@@ -101,37 +48,13 @@
         <div class="fd-setting__title">菜单风格</div>
         <div class="fd-setting__options">
           <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'light' }" @click="menuStyle = 'light'">
-            <div class="fd-setting__preview fd-setting__preview--vertical preview-light">
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-wrapper">
-                  <div class="preview-header"></div>
-                  <div class="preview-main"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="menuLightSvg"></div>
           </div>
           <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'dark' }" @click="menuStyle = 'dark'">
-            <div class="fd-setting__preview fd-setting__preview--vertical preview-dark">
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-wrapper">
-                  <div class="preview-header"></div>
-                  <div class="preview-main"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="menuDarkSvg"></div>
           </div>
           <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'transparent' }" @click="menuStyle = 'transparent'">
-            <div class="fd-setting__preview fd-setting__preview--vertical preview-transparent">
-              <div class="preview-container">
-                <div class="preview-aside"></div>
-                <div class="preview-wrapper">
-                  <div class="preview-header"></div>
-                  <div class="preview-main"></div>
-                </div>
-              </div>
-            </div>
+            <div class="fd-setting__preview" v-html="menuTransparentSvg"></div>
           </div>
         </div>
       </div>
@@ -204,6 +127,22 @@
 
 <script setup lang="ts">
 import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, LanguageType, TransitionName } from "@/stores/settings/types"
+import menuDarkSvg from "@/assets/svg/menu-dark.svg?raw"
+
+// 导入菜单风格 SVG 图标
+import menuLightSvg from "@/assets/svg/menu-light.svg?raw"
+import themeDarkSvg from "@/assets/svg/theme-dark.svg?raw"
+import layoutDualSvg from "@/assets/svg/layout-dual.svg?raw"
+
+// 导入主题风格 SVG 图标
+import themeLightSvg from "@/assets/svg/theme-light.svg?raw"
+import layoutMixedSvg from "@/assets/svg/layout-mixed.svg?raw"
+import themeSystemSvg from "@/assets/svg/theme-system.svg?raw"
+
+// 导入菜单布局 SVG 图标
+import layoutVerticalSvg from "@/assets/svg/layout-vertical.svg?raw"
+import menuTransparentSvg from "@/assets/svg/menu-transparent.svg?raw"
+import layoutHorizontalSvg from "@/assets/svg/layout-horizontal.svg?raw"
 import { Check } from "@element-plus/icons-vue"
 import { computed } from "vue"
 import { useSettingsStore } from "@/stores/settings"
@@ -339,10 +278,10 @@ function changeLanguage() {
   }
 
   &__options {
-    gap: 12px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 8px;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   &__card {
@@ -368,159 +307,24 @@ function changeLanguage() {
   }
 
   &__preview {
-    width: 52px;
+    width: 100%;
     border: 2px solid transparent;
-    height: 36px;
-    padding: 4px;
+    height: 52px;
     overflow: hidden;
     position: relative;
-    background: #f0f2f5;
     box-shadow: 0 1px 2.5px rgba(0, 0, 0, 0.18);
     transition: all 0.3s;
     border-radius: 4px;
 
     &:hover {
-      background-color: #e6e6e6;
+      opacity: 0.85;
     }
 
-    .preview-container {
-      gap: 2px;
+    // SVG 图标样式
+    :deep(svg) {
       width: 100%;
       height: 100%;
-      display: flex;
-    }
-    .preview-wrapper {
-      gap: 2px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .preview-header {
-      width: 100%;
-      height: 6px;
-      background: #fff;
-      border-radius: 2px;
-    }
-    .preview-aside {
-      width: 10px;
-      height: 100%;
-      background: #fff;
-      border-radius: 2px;
-    }
-    .preview-aside-sub {
-      width: 6px;
-      height: 100%;
-      background: #fff;
-      border-radius: 2px;
-    }
-    .preview-main {
-      gap: 2px;
-      flex: 1;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      padding: 2px;
-      background: #fff;
-      border-radius: 2px;
-      flex-direction: column;
-    }
-    .preview-content-p {
-      width: 100%;
-      height: 3px;
-      background: rgba(0, 0, 0, 0.06);
-      border-radius: 1px;
-    }
-
-    // --- Variations ---
-    &--dark {
-      background: #2b2b2b;
-      .preview-header {
-        background: #454545;
-      }
-      .preview-aside {
-        background: #454545;
-      }
-      .preview-main {
-        background: #1f1f1f;
-      }
-      .preview-content-p {
-        background: rgba(255, 255, 255, 0.1);
-      }
-    }
-    &--system {
-      background: linear-gradient(90deg, #f0f2f5 50%, #2b2b2b 50%);
-      .preview-header {
-        background: linear-gradient(90deg, #fff 50%, #454545 50%);
-      }
-      .preview-aside {
-        background: linear-gradient(90deg, #fff 50%, #454545 50%);
-      }
-      .preview-main {
-        background: linear-gradient(90deg, #fff 50%, #1f1f1f 50%);
-      }
-    }
-
-    &--vertical {
-      .preview-header {
-        display: none;
-      }
-      .preview-wrapper {
-        .preview-header {
-          display: block;
-        }
-      }
-    }
-    &--horizontal {
-      gap: 2px;
-      display: flex;
-      flex-direction: column;
-      .preview-aside {
-        display: none;
-      }
-    }
-    &--mixed {
-      gap: 2px;
-      display: flex;
-      flex-direction: column;
-      .preview-container {
-        height: calc(100% - 8px);
-      }
-    }
-    &--dual {
-      .preview-header {
-        display: none;
-      }
-    }
-
-    // Menu Styles
-    &.preview-light {
-      // Default
-    }
-
-    &.preview-dark {
-      .preview-aside {
-        background: #2b2b2b;
-      }
-    }
-
-    &.preview-transparent {
-      background-size: 8px 8px;
-      background-image:
-        linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
-        linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-      background-position:
-        0 0,
-        4px 4px;
-
-      .preview-aside {
-        opacity: 0.8;
-      }
-      .preview-header {
-        opacity: 0.8;
-      }
-      .preview-main {
-        opacity: 0.8;
-      }
+      display: block;
     }
   }
 

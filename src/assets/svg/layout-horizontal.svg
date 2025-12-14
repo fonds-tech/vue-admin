@@ -1,0 +1,22 @@
+<svg width="100%" height="100%" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <!-- 背景 -->
+  <rect width="100" height="60" rx="4" fill="#F7F8FA"/>
+  
+  <!-- 窗口背景 -->
+  <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" fill="white"/>
+  
+  <!-- 顶栏 (深色但调淡) -->
+  <path d="M9.5 6H90.5C92.433 6 94 7.567 94 9.5V18H6V9.5C6 7.567 7.567 6 9.5 6Z" fill="#272E3B"/>
+  
+  <!-- 顶栏内容 -->
+  <!-- Logo -->
+  <rect x="11" y="10" width="6" height="4" rx="1" fill="#409EFF"/>
+  
+  <!-- Menu Items -->
+  <rect x="23" y="10" width="13" height="4" rx="1" fill="white" fill-opacity="0.9"/>
+  <rect x="40" y="10" width="13" height="4" rx="1" fill="white" fill-opacity="0.3"/>
+  <rect x="57" y="10" width="13" height="4" rx="1" fill="white" fill-opacity="0.3"/>
+  
+  <!-- 窗口描边 -->
+  <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" stroke="#DEE0E3" fill="none"/>
+</svg>

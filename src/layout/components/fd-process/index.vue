@@ -186,12 +186,8 @@ onMounted(() => {
       justify-content: center;
 
       &:hover {
-        border-color: var(--el-color-primary);
-        background-color: transparent;
-      }
-
-      &:last-child {
-        margin-right: 0;
+        color: var(--el-color-primary);
+        background-color: var(--el-fill-color-dark);
       }
     }
   }
@@ -213,7 +209,7 @@ onMounted(() => {
   }
 
   &__scroll {
-    gap: $spacing-xs;
+    gap: 6px;
     height: 100%;
     display: flex;
     padding: 4px 0;
@@ -257,8 +253,7 @@ onMounted(() => {
     // hover 状态
     &:hover:not(.is-active) {
       color: var(--el-color-primary);
-      border-color: var(--el-color-primary);
-      background-color: var(--el-color-primary-light-9);
+      background-color: var(--el-fill-color-dark);
     }
 
     // 激活状态

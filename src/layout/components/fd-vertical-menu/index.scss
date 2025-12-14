@@ -5,10 +5,6 @@ $menu-item-radius: 6px;
 $mobile-breakpoint: 768px;
 $popup-menu-radius: 6px;
 
-// 暗黑模式颜色
-$dark-hover-bg: #0f1015;
-$dark-active-bg: #27282d;
-
 // ==================== Mixin 定义 ====================
 
 // 菜单项基础布局（宽度、高度、边距、圆角）
@@ -36,7 +32,7 @@ $dark-active-bg: #27282d;
 // 菜单项 hover/active 交互状态
 @mixin menu-item-states($hover-bg: var(--el-color-primary-light-9), $active-color: var(--el-color-primary), $active-bg: var(--el-color-primary-light-9)) {
   &:hover {
-    background-color: $hover-bg;
+    background-color: var(--el-fill-color-light);
   }
 
   &.is-active {
@@ -121,7 +117,7 @@ $dark-active-bg: #27282d;
         @include menu-item-base;
 
         &:hover {
-          background-color: var(--el-color-primary-light-9);
+          background-color: var(--el-fill-color-light);
         }
 
         .fd-menu__icon {
@@ -264,7 +260,7 @@ $dark-active-bg: #27282d;
         @include menu-item-base;
 
         &:hover {
-          background-color: var(--el-color-primary-light-9);
+          background-color: var(--el-fill-color-light);
         }
 
         .fd-menu__icon {
@@ -314,59 +310,6 @@ $dark-active-bg: #27282d;
   .fd-vertical-menu {
     &__left {
       display: none;
-    }
-  }
-}
-
-// ==================== 暗黑模式 ====================
-
-.dark {
-  // 弹窗菜单暗黑模式
-  .el-menu--popup-container {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-    .el-menu--popup {
-      .el-menu-item,
-      .el-sub-menu__title {
-        @include menu-item-states($dark-hover-bg, #fff, $dark-active-bg);
-      }
-    }
-  }
-
-  // 侧边栏菜单暗黑模式
-  .fd-menu {
-    .el-menu-item,
-    .el-sub-menu__title {
-      .iconify {
-        color: var(--el-text-color-regular);
-      }
-    }
-
-    .el-menu-item.is-active,
-    .el-sub-menu.is-active > .el-sub-menu__title {
-      .iconify {
-        color: var(--el-color-primary) !important;
-      }
-    }
-
-    .el-sub-menu__icon-arrow {
-      color: var(--el-text-color-secondary);
-    }
-  }
-
-  // 双列菜单暗黑模式
-  .fd-vertical-menu {
-    &__left {
-      border-right-color: var(--el-border-color);
-    }
-
-    &__left-item {
-      @include menu-item-states($dark-hover-bg, var(--el-color-primary), $dark-active-bg);
-    }
-
-    &__right-item,
-    &__right-submenu > .el-sub-menu__title {
-      @include menu-item-states($dark-hover-bg, var(--el-color-primary), $dark-active-bg);
     }
   }
 }
