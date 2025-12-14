@@ -1,24 +1,27 @@
 <svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Window Frame -->
-  <rect x="0" y="0" width="160" height="90" rx="8" fill="#F8FAFC"/>
-  <rect x="0.5" y="0.5" width="159" height="89" rx="7.5" stroke="#E2E8F0"/>
-
-  <!-- Top Navigation Bar -->
-  <rect x="12" y="12" width="136" height="16" rx="6" fill="#1E293B"/>
+  <!-- Background -->
+  <rect width="160" height="90" rx="8" fill="#F3F4F6"/>
+  <!-- Card Base -->
+  <rect x="6" y="6" width="148" height="78" rx="8" fill="#FFFFFF"/>
   
-  <!-- Nav Menu Items -->
-  <rect x="22" y="17" width="20" height="6" rx="3" fill="#4F46E5"/>
-  <rect x="50" y="18" width="16" height="4" rx="2" fill="#334155"/>
-  <rect x="74" y="18" width="16" height="4" rx="2" fill="#334155"/>
-  <rect x="98" y="18" width="16" height="4" rx="2" fill="#334155"/>
-
-  <!-- Content Area -->
-  <rect x="12" y="36" width="136" height="42" rx="4" fill="#FFFFFF"/>
-  <rect x="12.5" y="36.5" width="135" height="41.5" rx="3.5" stroke="#E2E8F0"/>
+  <!-- === Layout: Horizontal (Emphasis: Top Menu - Medium Grey) === -->
   
-  <!-- Content Elements -->
-  <rect x="20" y="44" width="30" height="4" rx="2" fill="#F1F5F9"/>
-  <rect x="20" y="54" width="60" height="16" rx="2" fill="#F1F5F9"/>
-  <rect x="88" y="54" width="50" height="16" rx="2" fill="#F1F5F9"/>
+  <!-- Top Menu Area (Medium Grey). x=6 to 154. y=6 to 26 (h20). -->
+  <path d="M6 14C6 9.58172 9.58172 6 14 6H146C150.418 6 154 9.58172 154 14V26H6V14Z" fill="#94A3B8"/>
+
+  <!-- Menu Items (White/Light Grey Bars) -->
+  <rect x="14" y="14" width="24" height="4" rx="2" fill="#F1F5F9"/>
+  <rect x="46" y="14" width="24" height="4" rx="2" fill="#F1F5F9"/>
+  <rect x="78" y="14" width="24" height="4" rx="2" fill="#E2E8F0"/>
+  <rect x="110" y="14" width="24" height="4" rx="2" fill="#E2E8F0"/>
+
+  <!-- Content Area (Light). y=26 to 84. -->
+  <path d="M6 26H154V76C154 80.4183 150.418 84 146 84H14C9.58172 84 6 80.4183 6 76V26Z" fill="#F8FAFC"/>
+
+  <!-- Content Bars -->
+  <rect x="14" y="34" width="132" height="6" rx="3" fill="#FFFFFF"/>
+  <rect x="14" y="46" width="80" height="6" rx="3" fill="#FFFFFF"/>
+  <rect x="14" y="58" width="110" height="6" rx="3" fill="#FFFFFF"/>
+  <rect x="14" y="70" width="50" height="6" rx="3" fill="#FFFFFF"/>
 
 </svg>

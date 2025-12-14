@@ -1,27 +1,32 @@
 <svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Window Frame -->
-  <rect x="0" y="0" width="160" height="90" rx="8" fill="#F8FAFC"/>
-  <rect x="0.5" y="0.5" width="159" height="89" rx="7.5" stroke="#E2E8F0"/>
+  <!-- Background -->
+  <rect width="160" height="90" rx="8" fill="#F3F4F6"/>
+  <!-- Card Base -->
+  <rect x="6" y="6" width="148" height="78" rx="8" fill="#FFFFFF"/>
   
-  <!-- Content Area Shadow -->
-  <rect x="65" y="24" width="83" height="54" rx="4" fill="#FFFFFF"/>
-  <rect x="65.5" y="24.5" width="82" height="53" rx="3.5" stroke="#E2E8F0"/>
-
-  <!-- Vertical Sidebar -->
-  <rect x="12" y="12" width="40" height="66" rx="6" fill="#1E293B"/>
+  <!-- === Layout: Vertical (Uniform Spacing) === -->
   
-  <!-- Sidebar Menu Items -->
-  <rect x="20" y="24" width="24" height="6" rx="3" fill="#4F46E5"/>
-  <rect x="20" y="36" width="18" height="4" rx="2" fill="#334155"/>
-  <rect x="20" y="46" width="22" height="4" rx="2" fill="#334155"/>
-  <rect x="20" y="56" width="16" height="4" rx="2" fill="#334155"/>
-  <rect x="20" y="66" width="20" height="4" rx="2" fill="#334155"/>
+  <!-- Sidebar (Left): Medium Grey (#94A3B8). x=6 to 46. -->
+  <path d="M6 14C6 9.58172 9.58172 6 14 6H46V84H14C9.58172 84 6 80.4183 6 76V14Z" fill="#94A3B8"/>
 
-  <!-- Top Header -->
-  <rect x="64" y="12" width="84" height="8" rx="4" fill="#E2E8F0"/>
+  <!-- Sidebar Menu Items (Uniform 8px Gap) -->
+  <!-- Height=4. Pitch=12. Start y=22. -->
+  <rect x="14" y="22" width="24" height="4" rx="2" fill="#F1F5F9"/>
+  <rect x="14" y="34" width="24" height="4" rx="2" fill="#F1F5F9"/>
+  <rect x="14" y="46" width="24" height="4" rx="2" fill="#E2E8F0"/>
+  <rect x="14" y="58" width="24" height="4" rx="2" fill="#E2E8F0"/>
+  <rect x="14" y="70" width="16" height="4" rx="2" fill="#E2E8F0"/>
 
-  <!-- Content Elements -->
-  <rect x="70" y="32" width="30" height="4" rx="2" fill="#F1F5F9"/>
-  <rect x="70" y="42" width="70" height="28" rx="2" fill="#F1F5F9"/>
+  <!-- Content Area (Right): Light. -->
+  <path d="M46 6H146C150.418 6 154 9.58172 154 14V76C154 80.4183 150.418 84 146 84H46V6Z" fill="#F8FAFC"/>
+
+  <!-- App Header Bar (White) -->
+  <path d="M46 6H146C150.418 6 154 9.58172 154 14V18H46V6Z" fill="#FFFFFF"/>
+
+  <!-- Content Bars -->
+  <rect x="54" y="28" width="80" height="6" rx="3" fill="#FFFFFF"/>
+  <rect x="54" y="40" width="92" height="6" rx="3" fill="#FFFFFF"/>
+  <rect x="54" y="52" width="60" height="6" rx="3" fill="#FFFFFF"/>
+  <rect x="54" y="64" width="80" height="6" rx="3" fill="#FFFFFF"/>
 
 </svg>
