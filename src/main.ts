@@ -15,6 +15,7 @@ import { useSettingsStore } from "./stores/settings"
 import i18n, { elementPlusLocales } from "./locales"
 
 import "./styles/index.scss"
+import "@fonds/vue-crud/index.css"
 
 const app = createApp(App)
 

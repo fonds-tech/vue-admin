@@ -1,96 +1,58 @@
-<svg width="100%" height="100%" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-  <!-- 统一预览卡片：主题样式（跟随系统：浅/深分屏） -->
-  <rect width="100" height="60" rx="4" fill="#F7F8FA"/>
-
-  <!-- 左半部分：浅色主题 -->
-  <g clip-path="url(#fd-theme-system__clip-left)">
-    <!-- 窗口容器 -->
-    <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" fill="#FFFFFF"/>
-
-    <!-- 侧边栏（浅色） -->
-    <path d="M9.5 6H28V54H9.5C7.567 54 6 52.433 6 50.5V9.5C6 7.567 7.567 6 9.5 6Z" fill="#F2F3F5"/>
-    <rect x="28" y="6" width="1" height="48" fill="#EBEDF0"/>
-
-    <!-- 顶栏（浅色） -->
-    <path d="M28 6H90.5C92.433 6 94 7.567 94 9.5V18H28V6Z" fill="#FFFFFF"/>
-    <rect x="28" y="17" width="66" height="1" fill="#EBEDF0"/>
-
-    <!-- 顶栏内容 -->
-    <rect x="32" y="10.5" width="18" height="3.5" rx="1.75" fill="#F2F3F5"/>
-    <rect x="78.5" y="10.5" width="8" height="3.5" rx="1.75" fill="#F2F3F5"/>
-    <circle cx="90" cy="12.25" r="2" fill="#C9CDD4"/>
-
-    <!-- 侧栏菜单 -->
-    <rect x="8.5" y="10.5" width="17.5" height="6" rx="2" fill="#409EFF" fill-opacity="0.14"/>
-    <rect x="10.5" y="12.5" width="2.5" height="2.5" rx="0.8" fill="#409EFF"/>
-    <rect x="14" y="12.5" width="10" height="2.5" rx="1.25" fill="#409EFF" fill-opacity="0.55"/>
-
-    <rect x="10.5" y="20.5" width="2.5" height="2.5" rx="0.8" fill="#C9CDD4"/>
-    <rect x="14" y="20.5" width="10" height="2.5" rx="1.25" fill="#C9CDD4" fill-opacity="0.75"/>
-    <rect x="10.5" y="28.5" width="2.5" height="2.5" rx="0.8" fill="#C9CDD4"/>
-    <rect x="14" y="28.5" width="10" height="2.5" rx="1.25" fill="#C9CDD4" fill-opacity="0.75"/>
-
-    <!-- 内容区 -->
-    <rect x="29" y="18" width="65" height="36" fill="#F7F8FA"/>
-    <rect x="32" y="22" width="26" height="10" rx="2" fill="#FFFFFF" stroke="#EBEDF0"/>
-    <rect x="34" y="24" width="12" height="2" rx="1" fill="#C9CDD4" fill-opacity="0.75"/>
-    <rect x="32" y="36" width="56" height="14" rx="2" fill="#FFFFFF" stroke="#EBEDF0"/>
-    <rect x="34" y="38.5" width="14" height="2" rx="1" fill="#C9CDD4" fill-opacity="0.7"/>
-    <path d="M34 47 L40 41 L48 44 L56 39 L64 43 L72 40 L86 43" stroke="#409EFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- 描边 -->
-    <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" stroke="#DEE0E3"/>
-  </g>
-
-  <!-- 右半部分：深色主题 -->
-  <g clip-path="url(#fd-theme-system__clip-right)">
-    <!-- 窗口容器 -->
-    <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" fill="#232731"/>
-
-    <!-- 侧边栏（深色） -->
-    <path d="M9.5 6H28V54H9.5C7.567 54 6 52.433 6 50.5V9.5C6 7.567 7.567 6 9.5 6Z" fill="#272E3B"/>
-    <rect x="28" y="6" width="1" height="48" fill="#3D4350"/>
-
-    <!-- 顶栏（深色） -->
-    <path d="M28 6H90.5C92.433 6 94 7.567 94 9.5V18H28V6Z" fill="#272E3B"/>
-    <rect x="28" y="17" width="66" height="1" fill="#3D4350"/>
-
-    <!-- 顶栏内容 -->
-    <rect x="32" y="10.5" width="18" height="3.5" rx="1.75" fill="white" fill-opacity="0.18"/>
-    <rect x="78.5" y="10.5" width="8" height="3.5" rx="1.75" fill="white" fill-opacity="0.18"/>
-    <circle cx="90" cy="12.25" r="2" fill="white" fill-opacity="0.35"/>
-
-    <!-- 侧栏菜单 -->
-    <rect x="8.5" y="10.5" width="17.5" height="6" rx="2" fill="#409EFF" fill-opacity="0.22"/>
-    <rect x="10.5" y="12.5" width="2.5" height="2.5" rx="0.8" fill="#409EFF"/>
-    <rect x="14" y="12.5" width="10" height="2.5" rx="1.25" fill="#409EFF" fill-opacity="0.7"/>
-
-    <rect x="10.5" y="20.5" width="2.5" height="2.5" rx="0.8" fill="white" fill-opacity="0.35"/>
-    <rect x="14" y="20.5" width="10" height="2.5" rx="1.25" fill="white" fill-opacity="0.35"/>
-    <rect x="10.5" y="28.5" width="2.5" height="2.5" rx="0.8" fill="white" fill-opacity="0.35"/>
-    <rect x="14" y="28.5" width="10" height="2.5" rx="1.25" fill="white" fill-opacity="0.35"/>
-
-    <!-- 内容区 -->
-    <rect x="29" y="18" width="65" height="36" fill="#1D2129"/>
-    <rect x="32" y="22" width="26" height="10" rx="2" fill="#232731" stroke="#3D4350"/>
-    <rect x="34" y="24" width="12" height="2" rx="1" fill="white" fill-opacity="0.22"/>
-    <rect x="32" y="36" width="56" height="14" rx="2" fill="#232731" stroke="#3D4350"/>
-    <rect x="34" y="38.5" width="14" height="2" rx="1" fill="white" fill-opacity="0.22"/>
-    <path d="M34 47 L40 41 L48 44 L56 39 L64 43 L72 40 L86 43" stroke="#409EFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- 描边 -->
-    <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" stroke="#4C5261"/>
-  </g>
-
-  <!-- 分屏分割线（避免完全依赖 clip 边界，增强识别） -->
-  <rect x="49.5" y="6.5" width="1" height="47" fill="#DEE0E3" fill-opacity="0.9"/>
-
+<svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <!-- 主题样式：跟随系统（缩略图友好：浅/深对比分屏） -->
   <defs>
-    <clipPath id="fd-theme-system__clip-left">
-      <rect x="0" y="0" width="50" height="60"/>
-    </clipPath>
-    <clipPath id="fd-theme-system__clip-right">
-      <rect x="50" y="0" width="50" height="60"/>
+    <clipPath id="theme-system-clip">
+      <rect width="160" height="90" rx="10"/>
     </clipPath>
   </defs>
+
+  <rect width="160" height="90" rx="10" fill="#F7F8FA"/>
+  <g clip-path="url(#theme-system-clip)">
+    <rect x="80" y="0" width="80" height="90" fill="#1D2129"/>
+  </g>
+  <line x1="80" y1="0" x2="80" y2="90" stroke="#DEE0E3" stroke-opacity="0.9" stroke-width="2" vector-effect="non-scaling-stroke"/>
+
+  <!-- 左：浅色 -->
+  <rect x="0" y="0" width="24" height="90" fill="#FFFFFF"/>
+  <line x1="24" y1="0" x2="24" y2="90" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <line x1="0" y1="16" x2="24" y2="16" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="4" y="5" width="6" height="6" rx="1.5" fill="#409EFF"/>
+  <rect x="11" y="7" width="10" height="2.8" rx="1.4" fill="#C9CDD4" fill-opacity="0.85"/>
+  <rect x="3" y="22" width="18" height="8" rx="3" fill="#409EFF" fill-opacity="0.14"/>
+
+  <rect x="24" y="0" width="56" height="16" fill="#FFFFFF"/>
+  <line x1="24" y1="16" x2="80" y2="16" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="28" y="6" width="22" height="4" rx="2" fill="#F2F3F5"/>
+  <circle cx="76" cy="8" r="2.2" fill="#C9CDD4" fill-opacity="0.6"/>
+
+  <rect x="24" y="16" width="56" height="12" fill="#FFFFFF"/>
+  <line x1="24" y1="28" x2="80" y2="28" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="28" y="19" width="20" height="6" rx="3" fill="#409EFF" fill-opacity="0.12"/>
+  <rect x="28" y="24.8" width="20" height="2" rx="1" fill="#409EFF"/>
+
+  <rect x="24" y="28" width="56" height="62" fill="#F7F8FA"/>
+  <rect x="28" y="34" width="48" height="32" rx="4" fill="#FFFFFF" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="32" y="38" width="18" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
+
+  <!-- 右：深色 -->
+  <rect x="80" y="0" width="24" height="90" fill="#232731"/>
+  <line x1="104" y1="0" x2="104" y2="90" stroke="#3D4350" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <line x1="80" y1="16" x2="104" y2="16" stroke="#3D4350" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="84" y="5" width="6" height="6" rx="1.5" fill="#409EFF"/>
+  <rect x="91" y="7" width="10" height="2.8" rx="1.4" fill="white" fill-opacity="0.28"/>
+  <rect x="83" y="22" width="18" height="8" rx="3" fill="#409EFF" fill-opacity="0.22"/>
+
+  <rect x="104" y="0" width="56" height="16" fill="#232731"/>
+  <line x1="104" y1="16" x2="160" y2="16" stroke="#3D4350" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="108" y="6" width="22" height="4" rx="2" fill="white" fill-opacity="0.16"/>
+  <circle cx="156" cy="8" r="2.2" fill="white" fill-opacity="0.25"/>
+
+  <rect x="104" y="16" width="56" height="12" fill="#232731"/>
+  <line x1="104" y1="28" x2="160" y2="28" stroke="#3D4350" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="108" y="19" width="20" height="6" rx="3" fill="#409EFF" fill-opacity="0.22"/>
+  <rect x="108" y="24.8" width="20" height="2" rx="1" fill="#409EFF"/>
+
+  <rect x="104" y="28" width="56" height="62" fill="#1D2129"/>
+  <rect x="108" y="34" width="48" height="32" rx="4" fill="#232731" stroke="#3D4350" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="112" y="38" width="18" height="3" rx="1.5" fill="white" fill-opacity="0.22"/>
 </svg>

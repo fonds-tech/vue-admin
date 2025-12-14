@@ -12,9 +12,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -33,6 +35,7 @@ declare module 'vue' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElProgress: typeof import('element-plus/es')['ElProgress']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
@@ -54,9 +57,11 @@ declare module 'vue' {
 
 // For TSX support
 declare global {
+  const ElAvatar: typeof import('element-plus/es')['ElAvatar']
   const ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
   const ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
   const ElCard: typeof import('element-plus/es')['ElCard']
   const ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
   const ElCol: typeof import('element-plus/es')['ElCol']
@@ -75,6 +80,7 @@ declare global {
   const ElInput: typeof import('element-plus/es')['ElInput']
   const ElOption: typeof import('element-plus/es')['ElOption']
   const ElPagination: typeof import('element-plus/es')['ElPagination']
+  const ElProgress: typeof import('element-plus/es')['ElProgress']
   const ElRow: typeof import('element-plus/es')['ElRow']
   const ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
   const ElSelect: typeof import('element-plus/es')['ElSelect']

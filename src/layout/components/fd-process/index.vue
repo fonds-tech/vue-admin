@@ -16,19 +16,17 @@
     <!-- 标签列表区 -->
     <div ref="scrollContainer" class="fd-process__list" @wheel="onWheel">
       <div class="process__scroll">
-        <el-dropdown v-for="(item, index) in processStore.list" :key="item.path" trigger="contextmenu" @command="(cmd: string) => onContextMenuCommand(cmd, item, index)">
-          <div class="process-item" :class="{ 'is-active': item.path === route.path }" @click="onClickItem(item)">
-            <span class="process-item__title">{{ item.title }}</span>
-            <fd-icon v-if="!item.affix" icon="ri:close-line" :size="14" class="process-item__close" @click.stop="onClickClose(index)" />
-          </div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item command="close" :disabled="item.affix"> 关闭当前 </el-dropdown-item>
-              <el-dropdown-item command="closeOther"> 关闭其他 </el-dropdown-item>
-              <el-dropdown-item command="closeAll"> 关闭所有 </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+        <div
+          v-for="(item, index) in processStore.list"
+          :key="item.path"
+          class="process-item"
+          :class="{ 'is-active': item.path === route.path }"
+          @click="onClickItem(item)"
+          @contextmenu="(e: MouseEvent) => onContextMenu(e, item, index)"
+        >
+          <span class="process-item__title">{{ item.title }}</span>
+          <fd-icon v-if="!item.affix" icon="ri:close-line" :size="14" class="process-item__close" @click.stop="onClickClose(index)" />
+        </div>
       </div>
     </div>
   </div>
@@ -37,6 +35,7 @@
 <script setup lang="ts">
 import type { ProcessItem } from "@/stores/process/types"
 import { emitter } from "@/utils/mitt"
+import { contextMenu } from "@fonds/vue-crud"
 import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { useProcessStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
@@ -104,22 +103,42 @@ function onClickClose(index: number) {
 }
 
 /**
- * 右键菜单命令处理
+ * 关闭其他标签
  */
-function onContextMenuCommand(command: string, item: ProcessItem, index: number) {
-  switch (command) {
-    case "close":
-      onClickClose(index)
-      break
-    case "closeOther":
-      processStore.removeOther(item)
-      router.push(item.fullPath)
-      break
-    case "closeAll":
-      processStore.clear()
-      router.push("/")
-      break
-  }
+function closeOther(item: ProcessItem) {
+  processStore.removeOther(item)
+  router.push(item.fullPath)
+}
+
+/**
+ * 关闭所有标签
+ */
+function closeAll() {
+  processStore.clear()
+  router.push("/")
+}
+
+/**
+ * 右键菜单处理
+ */
+function onContextMenu(event: MouseEvent, item: ProcessItem, index: number) {
+  contextMenu.open(event, {
+    list: [
+      {
+        label: "关闭当前",
+        disabled: item.affix,
+        onClick: () => onClickClose(index),
+      },
+      {
+        label: "关闭其他",
+        onClick: () => closeOther(item),
+      },
+      {
+        label: "关闭所有",
+        onClick: () => closeAll(),
+      },
+    ],
+  })
 }
 
 /**

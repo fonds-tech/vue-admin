@@ -1,7 +1,7 @@
 <template>
   <div class="analysis-container">
     <!-- 统计卡片 -->
-    <el-row :gutter="20" class="mb-4">
+    <el-row :gutter="12">
       <el-col v-for="(item, index) in statisticsData" :key="index" :xs="24" :sm="12" :md="6">
         <analysis-card
           :title="item.title"
@@ -16,7 +16,7 @@
     </el-row>
 
     <!-- 图表区域 -->
-    <el-row :gutter="20" class="mb-4">
+    <el-row :gutter="12">
       <el-col :xs="24" :lg="16">
         <analysis-line-chart />
       </el-col>
@@ -167,15 +167,51 @@ function getStatusText(status: number) {
 
 <style scoped lang="scss">
 .analysis-container {
+  flex: 1;
   padding: 12px;
-  .mb-4 {
-    margin-bottom: 20px;
-  }
   .table-card {
+    border: 1px solid var(--el-border-color-light);
+    transition: all 0.3s;
+    border-radius: 4px;
+    margin-bottom: 12px;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    :deep(.el-card__header) {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--el-border-color-lighter);
+    }
+
+    :deep(.el-card__body) {
+      padding: 0;
+    }
+
     .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      span {
+        color: var(--el-text-color-primary);
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+
+    :deep(.el-table) {
+      border-radius: 0 0 4px 4px;
+
+      th.el-table__cell {
+        color: var(--el-text-color-regular);
+        font-weight: 500;
+        background-color: var(--el-fill-color-light);
+      }
+
+      .el-table__cell {
+        padding: 12px 0;
+      }
     }
   }
 }

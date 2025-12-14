@@ -18,8 +18,8 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8
       '@fonds/vue-crud':
-        specifier: ^1.0.7
-        version: 1.0.7(typescript@5.9.3)
+        specifier: ^1.0.10
+        version: 1.0.10(typescript@5.9.3)
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.25(typescript@5.9.3))
@@ -703,8 +703,8 @@ packages:
   '@fonds/utils@1.0.8':
     resolution: {integrity: sha512-+nJLztHpemBifhsO69YvmSLMzdmko9wwlr1w8/mSHvsH+CL3PsUUU9nVMVzhtOmQIFU6bScliABsa/CmiN4sIg==}
 
-  '@fonds/vue-crud@1.0.7':
-    resolution: {integrity: sha512-JWKVU5SUB3B70Grx1gqu2mDUQk+G76GAl2LI+bZiCA5pM98hzNDk/c4wzEu1LGHcKOj92d2cNPl1/DSJ1xi5hg==}
+  '@fonds/vue-crud@1.0.10':
+    resolution: {integrity: sha512-iwdeEgyB9QiZEcNek6XE/zxlycAvWG3bbiXoXv2jtiWfYU/MAUCnDrAUt/pQH39u4y2WAVUPk9CKm/4N7P30qQ==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -4445,7 +4445,7 @@ snapshots:
     dependencies:
       lodash-es: 4.17.21
 
-  '@fonds/vue-crud@1.0.7(typescript@5.9.3)':
+  '@fonds/vue-crud@1.0.10(typescript@5.9.3)':
     dependencies:
       '@element-plus/icons-vue': 2.3.2(vue@3.5.25(typescript@5.9.3))
       '@fonds/utils': 1.0.8

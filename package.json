@@ -18,7 +18,7 @@
     "@alova/adapter-axios": "^2.0.16",
     "@element-plus/icons-vue": "^2.3.2",
     "@fonds/utils": "^1.0.8",
-    "@fonds/vue-crud": "^1.0.7",
+    "@fonds/vue-crud": "^1.0.10",
     "@iconify/vue": "^5.0.0",
     "@vueuse/core": "^14.1.0",
     "alova": "^3.4.0",

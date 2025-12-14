@@ -1,8 +1,10 @@
 <template>
-  <el-card shadow="hover" class="analysis-card">
+  <el-card shadow="hover" class="workbench-card">
     <div class="card-header">
       <span class="card-title">{{ title }}</span>
-      <el-tag :type="tagType" size="small">{{ tagText }}</el-tag>
+      <el-tag v-if="tagText" :type="tagType" effect="dark">
+        <el-icon v-if="icon"><component :is="icon" /></el-icon>
+      </el-tag>
     </div>
     <div class="card-content">
       <div class="card-number">{{ number }}</div>
@@ -10,7 +12,6 @@
         <span>{{ desc }}</span>
         <span class="trend" :class="[trend === 'up' ? 'up' : 'down']">
           {{ trendValue }}
-          <el-icon><component :is="trend === 'up' ? 'Top' : 'Bottom'" /></el-icon>
         </span>
       </div>
     </div>
@@ -23,26 +24,26 @@ interface Props {
   number: string
   tagText?: string
   tagType?: "primary" | "success" | "warning" | "info" | "danger"
+  icon?: string
   desc?: string
   trend?: "up" | "down"
   trendValue?: string
 }
 
 withDefaults(defineProps<Props>(), {
-  tagText: "日",
-  tagType: "success",
-  desc: "较昨日",
+  tagType: "primary",
+  desc: "较上周",
   trend: "up",
-  trendValue: "0%",
 })
 </script>
 
 <style scoped lang="scss">
-.analysis-card {
+.workbench-card {
   border: 1px solid var(--el-border-color-light);
   transition: all 0.3s;
   border-radius: 4px;
   margin-bottom: 12px;
+  background-color: var(--el-bg-color-overlay);
 
   &:hover {
     transform: translateY(-2px);
@@ -94,10 +95,6 @@ withDefaults(defineProps<Props>(), {
 
         &.down {
           color: var(--el-color-danger);
-        }
-
-        .el-icon {
-          font-size: 14px;
         }
       }
     }

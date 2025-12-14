@@ -156,6 +156,7 @@ function handleOpenSettings() {
     justify-content: center;
 
     &:hover {
+      color: var(--el-color-primary);
       background-color: var(--el-fill-color-dark);
     }
   }

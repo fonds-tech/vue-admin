@@ -338,7 +338,7 @@ export default defineComponent({
           <ElScrollbar>
             <ElMenu
               showTimeout={50}
-              hideTimeout={50}
+              hideTimeout={50000}
               defaultActive={activeMenuPath.value}
               collapse={isCollapsed.value}
               uniqueOpened={isAccordionMode.value}

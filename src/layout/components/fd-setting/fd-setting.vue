@@ -316,6 +316,12 @@ function changeLanguage() {
     transition: all 0.3s;
     border-radius: 4px;
 
+    // 让预览卡片按 16:9 显示（与 1920×1080 比例一致），避免 SVG 被拉伸变形
+    @supports (aspect-ratio: 16 / 9) {
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+
     &:hover {
       opacity: 0.85;
     }

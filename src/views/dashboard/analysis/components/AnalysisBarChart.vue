@@ -78,8 +78,37 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .chart-card {
-  margin-bottom: 20px;
+  border: 1px solid var(--el-border-color-light);
+  transition: all 0.3s;
+  border-radius: 4px;
+  margin-bottom: 12px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  :deep(.el-card__header) {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+  }
+
+  :deep(.el-card__body) {
+    padding: 24px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      color: var(--el-text-color-primary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
 }
 </style>

@@ -1,46 +1,43 @@
-<svg width="100%" height="100%" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-  <!-- 统一预览卡片：菜单布局（混合：顶栏 + 侧栏） -->
-  <rect width="100" height="60" rx="4" fill="#F7F8FA"/>
+<svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <!-- 菜单布局：混合（缩略图友好：顶部全宽 + 左侧菜单 + 内容区） -->
+  <rect width="160" height="90" rx="10" fill="#F7F8FA"/>
 
-  <!-- 窗口容器 -->
-  <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" fill="#FFFFFF"/>
+  <!-- 顶部栏（全宽） -->
+  <rect x="0" y="0" width="160" height="16" fill="#FFFFFF"/>
+  <line x1="0" y1="16" x2="160" y2="16" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="6" y="4" width="8" height="8" rx="2" fill="#409EFF"/>
+  <rect x="16" y="6" width="28" height="4" rx="2" fill="#C9CDD4" fill-opacity="0.85"/>
+  <rect x="52" y="5" width="20" height="6" rx="3" fill="#409EFF" fill-opacity="0.12"/>
+  <circle cx="154" cy="8" r="2.5" fill="#C9CDD4" fill-opacity="0.6"/>
+  <circle cx="147" cy="8" r="2.5" fill="#C9CDD4" fill-opacity="0.6"/>
+  <circle cx="140" cy="8" r="2.5" fill="#C9CDD4" fill-opacity="0.6"/>
 
-  <!-- 内容区背景 -->
-  <rect x="6.5" y="18" width="87" height="36" fill="#F7F8FA"/>
+  <!-- 侧边栏（从顶部栏下方开始） -->
+  <rect x="0" y="16" width="50" height="74" fill="#FFFFFF"/>
+  <line x1="50" y1="16" x2="50" y2="90" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
 
-  <!-- 顶栏（全宽：使用浅色体系，避免误解为“黑色菜单”） -->
-  <path d="M9.5 6H90.5C92.433 6 94 7.567 94 9.5V18H6V9.5C6 7.567 7.567 6 9.5 6Z" fill="#FFFFFF"/>
-  <rect x="6.5" y="17" width="87" height="1" fill="#EBEDF0"/>
+  <!-- 侧栏菜单项（占位） -->
+  <rect x="6" y="22" width="38" height="10" rx="4" fill="#409EFF" fill-opacity="0.14"/>
+  <rect x="10" y="25" width="4" height="4" rx="1.2" fill="#409EFF"/>
+  <rect x="16" y="26" width="24" height="3" rx="1.5" fill="#409EFF" fill-opacity="0.65"/>
+  <rect x="10" y="36" width="4" height="4" rx="1.2" fill="#C9CDD4" fill-opacity="0.9"/>
+  <rect x="16" y="37" width="24" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
+  <rect x="10" y="48" width="4" height="4" rx="1.2" fill="#C9CDD4" fill-opacity="0.9"/>
+  <rect x="16" y="49" width="22" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
 
-  <!-- 顶栏内容 -->
-  <rect x="11" y="10.5" width="5" height="3.5" rx="1.2" fill="#409EFF"/>
-  <rect x="20" y="10.5" width="12" height="3.5" rx="1.75" fill="#409EFF" fill-opacity="0.14"/>
-  <rect x="35" y="10.5" width="12" height="3.5" rx="1.75" fill="#EBEDF0"/>
-  <circle cx="90" cy="12.25" r="2" fill="#C9CDD4"/>
+  <!-- 进程栏（主内容区） -->
+  <rect x="50" y="16" width="110" height="12" fill="#FFFFFF"/>
+  <line x1="50" y1="28" x2="160" y2="28" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="56" y="19" width="30" height="6" rx="3" fill="#409EFF" fill-opacity="0.12"/>
+  <rect x="56" y="24.8" width="30" height="2" rx="1" fill="#409EFF"/>
+  <rect x="88" y="19" width="28" height="6" rx="3" fill="#F2F3F5"/>
 
-  <!-- 侧边栏（位于内容区内） -->
-  <path d="M6 18H28V54H9.5C7.567 54 6 52.433 6 50.5V18Z" fill="#FFFFFF"/>
-  <rect x="28" y="18" width="1" height="36" fill="#EBEDF0"/>
-
-  <!-- 侧栏菜单 -->
-  <rect x="8.5" y="22.5" width="17.5" height="6" rx="2" fill="#409EFF" fill-opacity="0.14"/>
-  <rect x="10.5" y="24.5" width="2.5" height="2.5" rx="0.8" fill="#409EFF"/>
-  <rect x="14" y="24.5" width="10" height="2.5" rx="1.25" fill="#409EFF" fill-opacity="0.55"/>
-  <rect x="10.5" y="32.5" width="2.5" height="2.5" rx="0.8" fill="#C9CDD4"/>
-  <rect x="14" y="32.5" width="10" height="2.5" rx="1.25" fill="#C9CDD4" fill-opacity="0.75"/>
-  <rect x="10.5" y="40.5" width="2.5" height="2.5" rx="0.8" fill="#C9CDD4"/>
-  <rect x="14" y="40.5" width="10" height="2.5" rx="1.25" fill="#C9CDD4" fill-opacity="0.75"/>
-
-  <!-- 内容卡片（主内容区） -->
-  <rect x="32" y="22" width="26" height="10" rx="2" fill="#FFFFFF" stroke="#EBEDF0"/>
-  <rect x="34" y="24" width="12" height="2" rx="1" fill="#C9CDD4" fill-opacity="0.75"/>
-  <rect x="62" y="22" width="26" height="10" rx="2" fill="#FFFFFF" stroke="#EBEDF0"/>
-  <rect x="64" y="24" width="12" height="2" rx="1" fill="#C9CDD4" fill-opacity="0.75"/>
-
-  <rect x="32" y="36" width="56" height="14" rx="2" fill="#FFFFFF" stroke="#EBEDF0"/>
-  <rect x="34" y="38.5" width="14" height="2" rx="1" fill="#C9CDD4" fill-opacity="0.7"/>
-  <path d="M34 47 L40 41 L48 44 L56 39 L64 43 L72 40 L86 43" stroke="#409EFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- 窗口描边 -->
-  <rect x="6.5" y="6.5" width="87" height="47" rx="3.5" stroke="#DEE0E3"/>
+  <!-- 内容区 -->
+  <rect x="50" y="28" width="110" height="62" fill="#F7F8FA"/>
+  <rect x="56" y="34" width="48" height="18" rx="4" fill="#FFFFFF" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="60" y="38" width="22" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
+  <rect x="108" y="34" width="46" height="18" rx="4" fill="#FFFFFF" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <rect x="112" y="38" width="22" height="3" rx="1.5" fill="#C9CDD4" fill-opacity="0.75"/>
+  <rect x="56" y="56" width="98" height="28" rx="4" fill="#FFFFFF" stroke="#EBEDF0" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <path d="M60 78 L74 66 L88 70 L102 62 L116 72 L130 68 L144 74" stroke="#409EFF" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
