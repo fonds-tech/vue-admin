@@ -15,8 +15,6 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<IconProps>(), {
-  size: "1em",
-  color: "currentColor",
   hFlip: false,
   vFlip: false,
   rotate: 0,
@@ -27,21 +25,29 @@ const isIconify = computed<boolean>(() => {
   return typeof props.icon === "string" && props.icon.includes(":")
 })
 
-/** 计算图标样式 */
+/** 计算图标样式（只在用户传入自定义值时才设置，避免覆盖外部样式） */
 const iconStyle = computed<CSSProperties>(() => {
+  const style: CSSProperties = {}
   const size = typeof props.size === "number" ? `${props.size}px` : props.size
-  return {
-    fontSize: size,
-    width: size,
-    height: size,
-    color: props.color,
+
+  if (size) {
+    style.fontSize = size
   }
+  if (props.color) {
+    style.color = props.color
+  }
+
+  return style
 })
 </script>
 
 <style lang="scss">
 .fd-icon {
+  color: currentColor;
+  width: 1em;
+  height: 1em;
   display: inline-block;
+  font-size: inherit;
   flex-shrink: 0;
   vertical-align: middle;
 }

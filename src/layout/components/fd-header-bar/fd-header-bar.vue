@@ -12,6 +12,10 @@
       <fd-horizontal-menu v-else />
     </div>
     <div class="fd-header-bar__right">
+      <!-- 全屏按钮 -->
+      <div class="fd-header-bar__action-btn" @click="handleToggleFullscreen">
+        <fd-icon :icon="fullscreenIcon" :size="20" />
+      </div>
       <!-- 多语言切换 -->
       <el-dropdown trigger="hover" @command="handleChangeLanguage">
         <div class="fd-header-bar__action-btn">
@@ -24,10 +28,6 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <!-- 全屏按钮 -->
-      <div class="fd-header-bar__action-btn" @click="handleToggleFullscreen">
-        <fd-icon :icon="fullscreenIcon" :size="20" />
-      </div>
     </div>
   </div>
 </template>

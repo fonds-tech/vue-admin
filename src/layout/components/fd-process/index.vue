@@ -3,13 +3,13 @@
     <!-- 导航操作区 -->
     <div class="process__nav">
       <div class="nav-item" title="返回" @click="onClickBack">
-        <icon icon="ri:arrow-left-line" :size="14" />
+        <fd-icon icon="ri:arrow-left-line" :size="14" />
       </div>
       <div class="nav-item" title="刷新" @click="onClickRefresh">
-        <icon icon="ri:refresh-line" :size="14" />
+        <fd-icon icon="ri:refresh-line" :size="14" />
       </div>
       <div class="nav-item" title="首页" @click="onClickHome">
-        <icon icon="ri:home-4-line" :size="14" />
+        <fd-icon icon="ri:home-4-line" :size="14" />
       </div>
     </div>
 
@@ -19,7 +19,7 @@
         <el-dropdown v-for="(item, index) in processStore.list" :key="item.path" trigger="contextmenu" @command="(cmd: string) => onContextMenuCommand(cmd, item, index)">
           <div class="process-item" :class="{ 'is-active': item.path === route.path }" @click="onClickItem(item)">
             <span class="process-item__title">{{ item.title }}</span>
-            <icon v-if="!item.affix" icon="ri:close-line" :size="14" class="process-item__close" @click.stop="onClickClose(index)" />
+            <fd-icon v-if="!item.affix" icon="ri:close-line" :size="14" class="process-item__close" @click.stop="onClickClose(index)" />
           </div>
           <template #dropdown>
             <el-dropdown-menu>
@@ -35,13 +35,14 @@
 </template>
 
 <script setup lang="ts">
-import type { ProcessItem } from "@/stores/process/interface"
+import type { ProcessItem } from "@/stores/process/types"
 import { emitter } from "@/utils/mitt"
+import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { useProcessStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 import { ref, watch, nextTick, onMounted } from "vue"
 
-defineOptions({ name: "layout-process" })
+defineOptions({ name: "fd-process" })
 
 const route = useRoute()
 const router = useRouter()
@@ -159,6 +160,7 @@ onMounted(() => {
 
 <style lang="scss">
 .process {
+  gap: 6px;
   display: flex;
   padding: $spacing-xs $spacing-md;
   align-items: center;
@@ -166,11 +168,11 @@ onMounted(() => {
 
   // 导航操作区
   &__nav {
+    gap: 6px;
     height: 100%;
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    margin-right: $spacing-md;
 
     .nav-item {
       width: 30px;
@@ -180,7 +182,6 @@ onMounted(() => {
       display: flex;
       transition: all 0.2s ease-in-out;
       align-items: center;
-      margin-right: $spacing-xs;
       border-radius: 6px;
       justify-content: center;
 
@@ -221,13 +222,12 @@ onMounted(() => {
 
   // 标签项
   .process-item {
-    gap: $spacing-xs;
     color: $text-regular;
     border: 1px solid var(--el-fill-color-dark);
     cursor: pointer;
     height: 30px;
     display: flex;
-    padding: 0 12px;
+    padding: 0 8px;
     position: relative;
     font-size: 12px;
     transition: all 0.2s ease-in-out;
@@ -237,49 +237,28 @@ onMounted(() => {
 
     &__title {
       overflow: hidden;
-      max-width: 120px;
-      transition: margin-right 0.2s ease-in-out;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
 
     &__close {
       width: 0;
-      height: 14px;
-      display: flex;
       opacity: 0;
       overflow: hidden;
       font-size: 10px;
       transition: all 0.2s ease-in-out;
-      align-items: center;
-      flex-shrink: 0;
-      border-radius: 50%;
-      pointer-events: none;
-      justify-content: center;
+      border-radius: 4px;
 
       &:hover {
-        color: var(--el-color-primary);
-        background-color: var(--el-color-primary-light-7);
+        background-color: rgba(0, 0, 0, 0.1);
       }
     }
 
     // hover 状态
-    &:hover {
+    &:hover:not(.is-active) {
       color: var(--el-color-primary);
       border-color: var(--el-color-primary);
       background-color: var(--el-color-primary-light-9);
-
-      .process-item__close {
-        color: var(--el-text-color-secondary);
-        width: 14px;
-        opacity: 1;
-        pointer-events: auto;
-
-        &:hover {
-          color: var(--el-color-primary);
-          background-color: var(--el-color-primary-light-7);
-        }
-      }
     }
 
     // 激活状态
@@ -289,16 +268,18 @@ onMounted(() => {
       border-color: var(--el-color-primary);
       background-color: var(--el-color-primary);
 
+      .process-item__close:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    // hover 或 激活状态 - 显示关闭按钮
+    &:hover,
+    &.is-active {
       .process-item__close {
-        color: #fff;
         width: 14px;
         opacity: 1;
-        pointer-events: auto;
-
-        &:hover {
-          color: #fff;
-          background-color: rgba(255, 255, 255, 0.2);
-        }
+        margin-left: 6px;
       }
     }
   }

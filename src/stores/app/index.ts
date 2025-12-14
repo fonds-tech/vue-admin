@@ -32,10 +32,9 @@ export const useAppStore = defineStore("app", {
       this.language = lang
     },
 
-    /** 切换主题 */
-    toggleTheme(event?: MouseEvent) {
+    /** 切换主题（简单切换，不带动画，动画请使用 utils/theme 中的方法） */
+    toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light"
-      this.applyThemeToDOM(this.theme, event)
     },
 
     /** 切换进程标签栏显示状态 */
@@ -49,9 +48,8 @@ export const useAppStore = defineStore("app", {
     },
 
     /** 设置主题 */
-    setTheme(mode: "light" | "dark", event?: MouseEvent) {
+    setTheme(mode: "light" | "dark") {
       this.theme = mode
-      this.applyThemeToDOM(mode, event)
     },
 
     /** 初始化主题（应用启动时调用，不触发动画） */
@@ -59,58 +57,6 @@ export const useAppStore = defineStore("app", {
       const html = document.documentElement
       html.classList.toggle("dark", this.theme === "dark")
       html.setAttribute("data-theme", this.theme)
-    },
-
-    /**
-     * 将主题应用到 DOM（支持圆形扩散动画）
-     * 使用 View Transitions API 实现 Element Plus 官网风格的主题切换效果
-     */
-    applyThemeToDOM(mode: "light" | "dark", event?: MouseEvent) {
-      const html = document.documentElement
-      const isDark = mode === "dark"
-
-      // 如果浏览器不支持 View Transitions API，直接切换
-      if (!document.startViewTransition) {
-        html.classList.toggle("dark", isDark)
-        html.setAttribute("data-theme", mode)
-        return
-      }
-
-      // 获取点击位置，作为动画的圆心
-      const x = event?.clientX ?? window.innerWidth / 2
-      const y = event?.clientY ?? window.innerHeight / 2
-
-      // 计算到最远角落的距离，作为动画的最终半径
-      const endRadius = Math.hypot(
-        Math.max(x, window.innerWidth - x),
-        Math.max(y, window.innerHeight - y),
-      )
-
-      // 启动 View Transition
-      const transition = document.startViewTransition(() => {
-        html.classList.toggle("dark", isDark)
-        html.setAttribute("data-theme", mode)
-      })
-
-      // 等待动画就绪后执行
-      transition.ready.then(() => {
-        // 始终使用新视图进行动画，避免层级切换导致的闪烁
-        // 切换到暗色：新视图从点击处扩散
-        // 切换到亮色：新视图从点击处扩散（像打开手电筒一样）
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `circle(0px at ${x}px ${y}px)`,
-              `circle(${endRadius}px at ${x}px ${y}px)`,
-            ],
-          },
-          {
-            duration: 400,
-            easing: "ease-in-out",
-            pseudoElement: "::view-transition-new(root)",
-          },
-        )
-      })
     },
 
     /** 设置水印显示状态 */

@@ -22,7 +22,7 @@ const show = computed(() => true)
   flex-direction: column;
   &::before {
     top: 0;
-    left: 0;
+    right: 0;
     width: 1px;
     height: 100%;
     content: "";

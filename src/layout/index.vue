@@ -5,14 +5,14 @@
     </aside>
     <main class="app-main">
       <fd-header-bar />
-      <process v-if="appStore.showProcess" />
+      <fd-process v-if="appStore.showProcess" />
       <layout-view />
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import Process from "./components/process/index.vue"
+import FdProcess from "./components/fd-process/index.vue"
 import FdSidebar from "./components/fd-sidebar/index.vue"
 import LayoutView from "./components/view/index.vue"
 import FdHeaderBar from "./components/fd-header-bar"
