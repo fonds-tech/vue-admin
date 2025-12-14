@@ -1,6 +1,6 @@
 <template>
-  <icon v-if="isIconify" :icon="icon as string" :style="iconStyle" :horizontal-flip="hFlip" :vertical-flip="vFlip" :rotate="rotate" v-bind="$attrs" />
-  <component :is="icon" v-else :style="iconStyle" v-bind="$attrs" />
+  <icon v-if="isIconify" class="fd-icon" :icon="icon as string" :style="iconStyle" :horizontal-flip="hFlip" :vertical-flip="vFlip" :rotate="rotate" v-bind="$attrs" />
+  <component :is="icon" v-else class="fd-icon" :style="iconStyle" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">
@@ -11,6 +11,7 @@ import { computed } from "vue"
 
 defineOptions({
   name: "fd-icon",
+  inheritAttrs: false,
 })
 
 const props = withDefaults(defineProps<IconProps>(), {
@@ -38,9 +39,10 @@ const iconStyle = computed<CSSProperties>(() => {
 })
 </script>
 
-<style scoped>
-svg {
+<style lang="scss">
+.fd-icon {
   display: inline-block;
+  flex-shrink: 0;
   vertical-align: middle;
 }
 </style>

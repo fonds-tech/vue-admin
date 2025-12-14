@@ -1,7 +1,7 @@
 import type { BackendMenu } from "./types"
 import type { CSSProperties } from "vue"
 import FdLogo from "../fd-logo/index.vue"
-import { Icon } from "@/components/core/fd-icon"
+import FdIcon from "@/components/core/fd-icon"
 import { useAppStore } from "@/stores/app"
 import { useMenuStore } from "@/stores/menu"
 import { useSettingsStore } from "@/stores/settings"
@@ -9,18 +9,6 @@ import { useRoute, useRouter } from "vue-router"
 import { ref, watch, computed, defineComponent } from "vue"
 import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
 import "./index.scss"
-
-/** 菜单配置常量 */
-const MENU_CONFIG = {
-  /** 一级菜单图标大小 */
-  FIRST_LEVEL_ICON_SIZE: 20,
-  /** 子菜单图标大小 */
-  SUB_MENU_ICON_SIZE: 18,
-  /** 一级菜单宽度（仅图标） */
-  FIRST_LEVEL_WIDTH: 62,
-} as const
-
-// ==================== 组件定义 ====================
 
 export default defineComponent({
   name: "fd-vertical-menu",
@@ -31,12 +19,8 @@ export default defineComponent({
     const menuStore = useMenuStore()
     const settingsStore = useSettingsStore()
 
-    // ==================== 响应式状态 ====================
-
     /** 当前选中的一级菜单路径（双列模式使用） */
     const activeFirstLevelPath = ref<string>("")
-
-    // ==================== 计算属性 ====================
 
     /** 是否为双列布局模式 */
     const isDualMode = computed<boolean>(() => settingsStore.isDualLayout)
@@ -64,8 +48,6 @@ export default defineComponent({
       "--menu-collapse-width": `${settingsStore.menuCollapseWidth}px`,
     }))
 
-    // ========== 双列模式专用计算属性 ==========
-
     /** 一级菜单列表（双列模式） */
     const firstLevelMenus = computed<BackendMenu[]>(() => menuList.value)
 
@@ -81,7 +63,7 @@ export default defineComponent({
 
     /** 一级菜单容器样式 */
     const firstLevelStyle = computed<CSSProperties>(() => ({
-      width: `${MENU_CONFIG.FIRST_LEVEL_WIDTH}px`,
+      width: "62px",
       flexShrink: 0,
     }))
 
@@ -90,8 +72,6 @@ export default defineComponent({
       width: `${settingsStore.menuExpandWidth}px`,
       flexShrink: 0,
     }))
-
-    // ==================== 工具函数 ====================
 
     /** 判断是否为外链 */
     function isExternalLink(path: string): boolean {
@@ -118,8 +98,6 @@ export default defineComponent({
       }
       return menu.path === activeFirstLevelPath.value
     }
-
-    // ==================== 初始化（双列模式） ====================
 
     /** 根据当前路由初始化一级菜单选中状态 */
     function initActiveFirstLevel(): void {
@@ -148,8 +126,6 @@ export default defineComponent({
       { immediate: true },
     )
 
-    // ==================== 事件处理 ====================
-
     /** 菜单选择处理（单列模式） */
     function handleMenuSelect(path: string): void {
       if (isExternalLink(path)) {
@@ -173,12 +149,10 @@ export default defineComponent({
       handleMenuSelect(path)
     }
 
-    // ==================== 渲染函数 ====================
-
     /** 渲染菜单图标 */
-    function renderIcon(icon?: string, size: number = MENU_CONFIG.SUB_MENU_ICON_SIZE) {
+    function renderIcon(icon?: string, size: number = 18) {
       if (!icon) return null
-      return <Icon icon={icon} size={size} />
+      return <FdIcon icon={icon} size={size} class="fd-menu__icon" />
     }
 
     /** 渲染菜单标题 */
@@ -235,15 +209,13 @@ export default defineComponent({
       return renderSubMenu(menu, fullPath)
     }
 
-    // ========== 双列模式渲染函数 ==========
-
     /** 渲染一级菜单项（双列模式） */
     function renderFirstLevelItem(menu: BackendMenu) {
       const isActive = isFirstLevelActive(menu)
 
       const itemContent = (
         <div class={["fd-menu-dual__first-item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
-          {renderIcon(menu.meta?.icon, MENU_CONFIG.FIRST_LEVEL_ICON_SIZE)}
+          {renderIcon(menu.meta?.icon, 20)}
         </div>
       )
 
@@ -338,36 +310,32 @@ export default defineComponent({
     /** 渲染双列布局 */
     function renderDualColumnLayout() {
       return (
-        <div class="fd-vertical-menu fd-menu-dual" style={style.value}>
+        <>
           {renderFirstLevelMenu()}
           {renderSubMenuList()}
-        </div>
+        </>
       )
     }
 
     function renderSingleColumnLayout() {
       return (
-        <div class="fd-vertical-menu" style={style.value}>
-          <ElScrollbar class="fd-menu">
-            <ElMenu
-              class="fd-menu__container"
-              showTimeout={50}
-              hideTimeout={50}
-              defaultActive={activeMenuPath.value}
-              collapse={isCollapsed.value}
-              uniqueOpened={isAccordionMode.value}
-              backgroundColor="transparent"
-              textColor="#303133"
-              onSelect={handleMenuSelect}
-            >
-              {menuList.value.map((menu) => renderMenuItem(menu, ""))}
-            </ElMenu>
-          </ElScrollbar>
-        </div>
+        <ElScrollbar>
+          <ElMenu
+            showTimeout={50}
+            hideTimeout={50}
+            defaultActive={activeMenuPath.value}
+            collapse={isCollapsed.value}
+            uniqueOpened={isAccordionMode.value}
+            popperClass="fd-vertical-menu__popper"
+            onSelect={handleMenuSelect}
+          >
+            {menuList.value.map((menu) => renderMenuItem(menu, ""))}
+          </ElMenu>
+        </ElScrollbar>
 
       )
     }
 
-    return () => (isDualMode.value ? renderDualColumnLayout() : renderSingleColumnLayout())
+    return () => <div class="fd-vertical-menu" style={style.value}>{isDualMode.value ? renderDualColumnLayout() : renderSingleColumnLayout()}</div>
   },
 })

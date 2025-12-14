@@ -6,10 +6,10 @@ export const SETTING_CONFIG = {
   menuExpandWidth: 250,
 
   /** 菜单折叠宽度（px） */
-  menuCollapseWidth: 62,
+  menuCollapseWidth: 60,
 
   /** 菜单布局模式 */
-  menuLayout: "horizontal",
+  menuLayout: "vertical",
 
   /** 菜单风格 */
   menuStyle: "light",
