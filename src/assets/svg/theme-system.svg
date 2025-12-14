@@ -1,6 +1,6 @@
 <svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
   <!-- 主题：跟随系统，左右各半明暗 -->
-  <rect width="160" height="90" rx="12" fill="#F6F7FA"/>
+  <rect width="160" height="90" rx="0" fill="#F6F7FA"/>
 
   <!-- 窗口框（与其他主题一致的描边） -->
   <rect x="18" y="12" width="124" height="66" rx="12" fill="#FFFFFF" stroke="#D9DEE8" stroke-width="2"/>

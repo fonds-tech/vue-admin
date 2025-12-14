@@ -1,6 +1,6 @@
 <svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
   <!-- 水平布局：顶部导航 + 下方内容，线条简洁 -->
-  <rect width="160" height="90" rx="12" fill="#F6F7FB"/>
+  <rect width="160" height="90" rx="0" fill="#F6F7FB"/>
 
   <!-- 顶部导航 -->
   <rect x="10" y="12" width="140" height="14" rx="7" fill="#EAF1FF" stroke="#D7DDE6" stroke-width="2"/>

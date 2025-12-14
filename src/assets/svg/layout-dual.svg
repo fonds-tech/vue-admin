@@ -1,6 +1,6 @@
 <svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
   <!-- 双列布局：窄图标栏 + 宽菜单栏，右侧内容 -->
-  <rect width="160" height="90" rx="12" fill="#F6F7FB"/>
+  <rect width="160" height="90" rx="0" fill="#F6F7FB"/>
 
   <!-- 左侧双列 -->
   <rect x="10" y="12" width="12" height="66" rx="4" fill="#409EFF" fill-opacity="0.35"/>

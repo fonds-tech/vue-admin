@@ -311,19 +311,13 @@ function changeLanguage() {
 
   &__preview {
     width: 100%;
-    border: 2px solid transparent;
+    border: 2px solid var(--el-border-color-dark);
     height: 52px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 1px 2.5px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
-    border-radius: 4px;
-
-    // 让预览卡片按 16:9 显示（与 1920×1080 比例一致），避免 SVG 被拉伸变形
-    @supports (aspect-ratio: 16 / 9) {
-      height: auto;
-      aspect-ratio: 16 / 9;
-    }
+    border-radius: 8px;
 
     &:hover {
       opacity: 0.85;

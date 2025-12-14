@@ -1,6 +1,6 @@
 <svg width="100%" height="100%" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
   <!-- 菜单风格：透明（与浅色一致，仅激活项左侧加边线） -->
-  <rect width="160" height="90" rx="12" fill="#F6F7FB"/>
+  <rect width="160" height="90" rx="0" fill="#F6F7FB"/>
 
   <!-- 侧边栏 -->
   <rect x="18" y="16" width="32" height="58" rx="8" fill="#FFFFFF" stroke="#D7DDE6" stroke-width="2"/>
