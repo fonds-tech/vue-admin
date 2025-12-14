@@ -112,16 +112,21 @@ $mobile-breakpoint: 800px;
 
   // 头部区域样式
   &__header {
-    gap: 12px;
     width: 100%;
     cursor: pointer;
     height: 50px;
     display: flex;
-    padding: 0 16px;
-    overflow: hidden;
-    align-items: center;
-    flex-shrink: 0;
-    justify-content: center;
+    position: relative;
+
+    &__inner {
+      gap: 12px;
+      top: 50%;
+      left: 50%;
+      display: flex;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      align-items: center;
+    }
   }
 
   .el-menu {
@@ -135,6 +140,7 @@ $mobile-breakpoint: 800px;
 
     .el-menu-item {
       width: calc(100% - 8px * 2);
+      cursor: pointer;
       height: 44px;
       margin-left: 8px;
       border-radius: 6px;

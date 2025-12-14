@@ -243,8 +243,10 @@ export default defineComponent({
     function renderHeader() {
       return (
         <div class="fd-vertical-menu__header">
-          <FdLogo />
-          {isCollapsed.value ? null : <FdName />}
+          <div class="fd-vertical-menu__header__inner">
+            <FdLogo />
+            {isCollapsed.value ? null : <FdName />}
+          </div>
         </div>
       )
     }

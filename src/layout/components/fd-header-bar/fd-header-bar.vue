@@ -111,6 +111,7 @@ onUnmounted(() => {
   display: flex;
   padding: 0 12px;
   align-items: center;
+  flex-shrink: 0;
   justify-content: space-between;
 
   &__left {
@@ -143,11 +144,5 @@ onUnmounted(() => {
       background-color: transparent;
     }
   }
-}
-
-// 语言下拉菜单激活状态
-.el-dropdown-menu__item.is-active {
-  color: var(--el-color-primary);
-  font-weight: 500;
 }
 </style>
