@@ -1,8 +1,8 @@
 import type { BackendMenu } from "@/stores/permission/types"
 import type { PropType, CSSProperties } from "vue"
 import { Icon } from "@/components/core/fd-icon"
-import { useAppStore } from "@/stores/app"
 import { useMenuStore } from "@/stores/menu"
+import { useSettingsStore } from "@/stores/settings"
 import { useRoute, useRouter } from "vue-router"
 import { ref, watch, computed, defineComponent } from "vue"
 import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
@@ -94,7 +94,7 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
     const menuStore = useMenuStore()
-    const appStore = useAppStore()
+    const settingsStore = useSettingsStore()
 
     // ==================== 响应式状态 ====================
 
@@ -126,7 +126,7 @@ export default defineComponent({
     /**
      * 菜单是否使用手风琴模式
      */
-    const isAccordionMode = computed<boolean>(() => appStore.menuMode === "accordion")
+    const isAccordionMode = computed<boolean>(() => settingsStore.menuMode === "accordion")
 
     /**
      * 当前激活的菜单路径（用于二级菜单高亮）
@@ -213,9 +213,10 @@ export default defineComponent({
       })
       if (matchedMenu) {
         activeFirstLevelPath.value = matchedMenu.path
-      } else if (firstLevelMenus.value.length > 0) {
+      }
+      else if (firstLevelMenus.value.length > 0) {
         // 默认选中第一个
-        activeFirstLevelPath.value = firstLevelMenus.value[0].path
+        activeFirstLevelPath.value = firstLevelMenus.value[0]?.path || ""
       }
     }
 

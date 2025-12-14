@@ -3,7 +3,7 @@ import type { CSSProperties } from "vue"
 import FdLogo from "../fd-logo/index.vue"
 import FdName from "../fd-name/index.vue"
 import FdIcon from "@/components/core/fd-icon"
-import { useAppStore } from "@/stores/app"
+
 import { useMenuStore } from "@/stores/menu"
 import { useSettingsStore } from "@/stores/settings"
 import { useRoute, useRouter } from "vue-router"
@@ -16,7 +16,7 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const router = useRouter()
-    const appStore = useAppStore()
+
     const menuStore = useMenuStore()
     const settingsStore = useSettingsStore()
 
@@ -33,7 +33,7 @@ export default defineComponent({
     const isCollapsed = computed<boolean>(() => settingsStore.isMenuCollapsed)
 
     /** 菜单是否使用手风琴模式 */
-    const isAccordionMode = computed<boolean>(() => appStore.menuMode === "accordion")
+    const isAccordionMode = computed<boolean>(() => settingsStore.menuMode === "accordion")
 
     /** 当前激活的菜单路径 */
     const activeMenuPath = computed<string>(() => {

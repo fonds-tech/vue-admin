@@ -11,18 +11,15 @@
 </template>
 
 <script setup lang="ts">
-/**
- * 视图出口组件
- * 封装 router-view + keep-alive + transition
- */
 import { emitter } from "@/utils/mitt"
-import { useAppStore, useProcessStore } from "@/stores"
+import { useProcessStore } from "@/stores"
+import { useSettingsStore } from "@/stores/settings"
 import { ref, computed, nextTick, onMounted, onUnmounted } from "vue"
 
-defineOptions({ name: "layout-view" })
+defineOptions({ name: "fd-view" })
 
 const processStore = useProcessStore()
-const appStore = useAppStore()
+const settingsStore = useSettingsStore()
 
 /** 是否正在刷新（用于 keep-alive 刷新） */
 const isRefreshing = ref(false)
@@ -33,8 +30,8 @@ const cacheList = computed(() => processStore.cacheList)
 /** 过渡动画名称 */
 const transitionName = computed(() => {
   // 如果设置为 none，则不使用过渡动画
-  if (appStore.transition === "none") return ""
-  return appStore.transition
+  if (settingsStore.transition === "none") return ""
+  return settingsStore.transition
 })
 
 /**

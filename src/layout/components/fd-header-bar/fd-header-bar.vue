@@ -28,13 +28,17 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <!-- 设置按钮 -->
+      <div class="fd-header-bar__action-btn" @click="handleOpenSettings">
+        <fd-icon icon="ri:settings-3-line" :size="20" />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { LanguageType } from "@/stores/settings/types"
 import FdHorizontalMenu from "../fd-horizontal-menu"
-import { useAppStore } from "@/stores/app"
 import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { useSettingsStore } from "@/stores/settings"
 import { Breadcrumb as FdBreadcrumb } from "../fd-breadcrumb"
@@ -42,7 +46,6 @@ import { ref, computed, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-header-bar" })
 
-const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 
 // ===================== 布局判断 =====================
@@ -62,12 +65,12 @@ function handleToggleCollapse() {
 
 // ===================== 多语言功能 =====================
 /** 当前语言 */
-const currentLang = computed(() => appStore.language)
+const currentLang = computed(() => settingsStore.language)
 
 /** 切换语言 */
 function handleChangeLanguage(lang: string) {
   if (lang !== currentLang.value) {
-    appStore.setLanguage(lang)
+    settingsStore.setLanguage(lang as LanguageType)
     window.location.reload()
   }
 }
@@ -103,6 +106,12 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener("fullscreenchange", handleFullscreenChange)
 })
+
+// ===================== 设置功能 =====================
+/** 打开设置面板 */
+function handleOpenSettings() {
+  settingsStore.openSettingsDrawer()
+}
 </script>
 
 <style lang="scss">

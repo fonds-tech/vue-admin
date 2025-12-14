@@ -11,7 +11,7 @@ import App from "./App.vue"
 import pinia from "./stores"
 import router from "./router"
 import { Crud } from "@fonds/vue-crud"
-import { useAppStore } from "./stores/app"
+import { useSettingsStore } from "./stores/settings"
 import i18n, { elementPlusLocales } from "./locales"
 
 import "./styles/index.scss"
@@ -30,11 +30,11 @@ app.use(router)
 app.use(i18n)
 
 // 获取当前语言并配置 Element Plus
-const appStore = useAppStore()
-const locale = elementPlusLocales[appStore.language as keyof typeof elementPlusLocales]
+const settingsStore = useSettingsStore()
+const locale = elementPlusLocales[settingsStore.language as keyof typeof elementPlusLocales]
 app.use(ElementPlus, { locale })
 
-// 初始化主题
-appStore.initTheme()
+// 初始化设置（主题、主题色等）
+settingsStore.initSettings()
 
 app.mount("#app")

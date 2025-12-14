@@ -10,10 +10,21 @@ export type MenuLayout = "vertical" | "horizontal" | "mixed" | "dual"
 /** 菜单风格 */
 export type MenuStyle = "light" | "dark" | "transparent"
 
+/** 菜单显示模式 */
+export type MenuMode = "accordion" | "expand" | "collapse"
+
 // ==================== 主题相关类型 ====================
 
 /** 主题风格 */
 export type ThemeStyle = "light" | "dark" | "auto"
+
+/** 过渡动画类型 */
+export type TransitionName = "fade" | "slide" | "zoom" | "none"
+
+// ==================== 语言相关类型 ====================
+
+/** 语言类型 */
+export type LanguageType = "zh-CN" | "en-US"
 
 // ==================== 状态接口 ====================
 
@@ -31,6 +42,8 @@ export interface SettingsState {
   menuStyle: MenuStyle
   /** 菜单是否折叠 */
   menuCollapsed: boolean
+  /** 菜单显示模式 */
+  menuMode: MenuMode
 
   // ========== 主题设置 ==========
 
@@ -38,4 +51,20 @@ export interface SettingsState {
   themeStyle: ThemeStyle
   /** 主题色（十六进制） */
   primaryColor: string
+
+  // ========== 界面设置 ==========
+
+  /** 是否显示进程标签栏 */
+  showProcess: boolean
+  /** 是否显示水印 */
+  showWatermark: boolean
+  /** 是否固定顶栏 */
+  fixedHeader: boolean
+  /** 过渡动画 */
+  transition: TransitionName
+
+  // ========== 语言设置 ==========
+
+  /** 当前语言 */
+  language: LanguageType
 }

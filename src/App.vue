@@ -8,12 +8,12 @@
 /**
  * 根组件
  */
-import { useAppStore } from "./stores/app"
+import { useSettingsStore } from "./stores/settings"
 import { ElConfigProvider } from "element-plus"
 import { elementPlusLocales } from "./locales"
 
-const appStore = useAppStore()
-const locale = elementPlusLocales[appStore.language as keyof typeof elementPlusLocales]
+const settingsStore = useSettingsStore()
+const locale = elementPlusLocales[settingsStore.language as keyof typeof elementPlusLocales]
 </script>
 
 <style>

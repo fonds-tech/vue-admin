@@ -5,20 +5,22 @@
     </aside>
     <main class="app-main">
       <fd-header-bar />
-      <fd-process v-if="appStore.showProcess" />
-      <layout-view />
+      <fd-process v-if="settingsStore.showProcess" />
+      <fd-view />
     </main>
+    <fd-setting />
   </div>
 </template>
 
 <script setup lang="ts">
+import FdView from "./components/fd-view/index.vue"
 import FdProcess from "./components/fd-process/index.vue"
+import FdSetting from "./components/fd-setting"
 import FdSidebar from "./components/fd-sidebar/index.vue"
-import LayoutView from "./components/view/index.vue"
 import FdHeaderBar from "./components/fd-header-bar"
-import { useAppStore } from "@/stores"
+import { useSettingsStore } from "@/stores/settings"
 
-const appStore = useAppStore()
+const settingsStore = useSettingsStore()
 </script>
 
 <style lang="scss" scoped>
