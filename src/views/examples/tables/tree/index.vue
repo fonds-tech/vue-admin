@@ -1,15 +1,7 @@
 <template>
-  <div class="page-content">{{ title }}</div>
+  <page-placeholder title="左右布局表格" description="表格综合示例，包含树表与基础表。" />
 </template>
 
 <script setup lang="ts">
-const title = '左右布局表格';
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style scoped>
-.page-content {
-  padding: 16px;
-  font-size: 18px;
-  line-height: 1.6;
-}
-</style>

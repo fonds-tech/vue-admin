@@ -1,15 +1,7 @@
 <template>
-  <div class="page-content">{{ title }}</div>
+  <page-placeholder title="工作台" description="工作台首页，可放置个人数据、待办与快捷入口。" />
 </template>
 
 <script setup lang="ts">
-const title = '工作台';
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style scoped>
-.page-content {
-  padding: 16px;
-  font-size: 18px;
-  line-height: 1.6;
-}
-</style>

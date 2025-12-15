@@ -1,28 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card shadow="never">
-      <template #header>
-        <div class="card-header">
-          <span>修改密码</span>
-        </div>
-      </template>
-      <el-empty description="修改密码页面开发中..." />
-    </el-card>
-  </div>
+  <page-placeholder title="修改密码" description="密码修改场景，需联动二次验证与强度校验。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 修改密码页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  padding: $spacing-base;
-}
-
-.card-header {
-  font-weight: 600;
-}
-</style>

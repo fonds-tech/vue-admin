@@ -1,28 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card shadow="never">
-      <template #header>
-        <div class="card-header">
-          <span>表格组件</span>
-        </div>
-      </template>
-      <el-empty description="表格组件示例开发中..." />
-    </el-card>
-  </div>
+  <page-placeholder title="表格组件" description="表格组件示例，支持筛选、分页与批量操作。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 表格组件示例页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  padding: $spacing-base;
-}
-
-.card-header {
-  font-weight: 600;
-}
-</style>

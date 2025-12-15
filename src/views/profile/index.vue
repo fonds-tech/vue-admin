@@ -1,28 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card shadow="never">
-      <template #header>
-        <div class="card-header">
-          <span>个人信息</span>
-        </div>
-      </template>
-      <el-empty description="个人信息页面开发中..." />
-    </el-card>
-  </div>
+  <page-placeholder title="个人信息" description="个人信息概览，可展示头像、联系方式与偏好。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 个人信息页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  padding: $spacing-base;
-}
-
-.card-header {
-  font-weight: 600;
-}
-</style>

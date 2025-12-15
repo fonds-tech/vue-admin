@@ -1,15 +1,7 @@
 <template>
-  <div class="page-content">{{ title }}</div>
+  <page-placeholder title="更新日志" description="展示发布记录、版本差异或审计备注。" />
 </template>
 
 <script setup lang="ts">
-const title = '更新日志';
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style scoped>
-.page-content {
-  padding: 16px;
-  font-size: 18px;
-  line-height: 1.6;
-}
-</style>

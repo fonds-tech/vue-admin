@@ -1,15 +1,7 @@
 <template>
-  <div class="page-content">{{ title }}</div>
+  <page-placeholder title="标签页" description="多标签页切换示例，支持增删与缓存。" />
 </template>
 
 <script setup lang="ts">
-const title = '标签页';
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style scoped>
-.page-content {
-  padding: 16px;
-  font-size: 18px;
-  line-height: 1.6;
-}
-</style>

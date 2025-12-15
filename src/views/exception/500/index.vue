@@ -1,15 +1,7 @@
 <template>
-  <div class="page-content">{{ title }}</div>
+  <page-placeholder title="500" description="服务器异常占位，适合展示错误码与上报渠道。" status="error" />
 </template>
 
 <script setup lang="ts">
-const title = '500';
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style scoped>
-.page-content {
-  padding: 16px;
-  font-size: 18px;
-  line-height: 1.6;
-}
-</style>

@@ -1,28 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card shadow="never">
-      <template #header>
-        <div class="card-header">
-          <span>操作日志</span>
-        </div>
-      </template>
-      <el-empty description="操作日志开发中..." />
-    </el-card>
-  </div>
+  <page-placeholder title="操作日志" description="展示操作日志并支持筛选导出。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 操作日志页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  padding: $spacing-base;
-}
-
-.card-header {
-  font-weight: 600;
-}
-</style>

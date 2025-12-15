@@ -1,22 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card>
-      <template #header>角色管理</template>
-      <el-empty description="功能开发中..." />
-    </el-card>
-  </div>
+  <page-placeholder title="角色管理" description="配置角色权限、菜单范围与数据范围。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 角色管理页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  gap: $spacing-base;
-  display: flex;
-  flex-direction: column;
-}
-</style>

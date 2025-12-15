@@ -147,7 +147,7 @@ export const mockMenus: Menu[] = [
   },
   // 模板中心
   {
-    id: 100,
+    id: 3,
     parentId: 0,
     path: "/template",
     name: "Template",
@@ -160,8 +160,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:apps-2-line",
     children: [
       {
-        id: 101,
-        parentId: 100,
+        id: 31,
+        parentId: 3,
         path: "cards",
         name: "TemplateCards",
         component: "template/cards/index",
@@ -172,8 +172,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:wallet-line",
       },
       {
-        id: 102,
-        parentId: 100,
+        id: 32,
+        parentId: 3,
         path: "banners",
         name: "TemplateBanners",
         component: "template/banners/index",
@@ -184,8 +184,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:rectangle-line",
       },
       {
-        id: 103,
-        parentId: 100,
+        id: 33,
+        parentId: 3,
         path: "charts",
         name: "TemplateCharts",
         component: "template/charts/index",
@@ -196,8 +196,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:bar-chart-box-line",
       },
       {
-        id: 104,
-        parentId: 100,
+        id: 34,
+        parentId: 3,
         path: "map",
         name: "TemplateMap",
         component: "template/map/index",
@@ -209,8 +209,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 105,
-        parentId: 100,
+        id: 35,
+        parentId: 3,
         path: "chat",
         name: "TemplateChat",
         component: "template/chat/index",
@@ -222,8 +222,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 106,
-        parentId: 100,
+        id: 36,
+        parentId: 3,
         path: "calendar",
         name: "TemplateCalendar",
         component: "template/calendar/index",
@@ -235,8 +235,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 107,
-        parentId: 100,
+        id: 37,
+        parentId: 3,
         path: "pricing",
         name: "TemplatePricing",
         component: "template/pricing/index",
@@ -251,7 +251,7 @@ export const mockMenus: Menu[] = [
   },
   // 组件中心
   {
-    id: 110,
+    id: 4,
     parentId: 0,
     path: "/widgets",
     name: "Widgets",
@@ -264,8 +264,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:apps-2-add-line",
     children: [
       {
-        id: 111,
-        parentId: 110,
+        id: 41,
+        parentId: 4,
         path: "icon",
         name: "WidgetsIcon",
         component: "widgets/icon/index",
@@ -277,8 +277,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 112,
-        parentId: 110,
+        id: 42,
+        parentId: 4,
         path: "image-crop",
         name: "WidgetsImageCrop",
         component: "widgets/image-crop/index",
@@ -290,8 +290,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 113,
-        parentId: 110,
+        id: 43,
+        parentId: 4,
         path: "excel",
         name: "WidgetsExcel",
         component: "widgets/excel/index",
@@ -303,8 +303,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 114,
-        parentId: 110,
+        id: 44,
+        parentId: 4,
         path: "video",
         name: "WidgetsVideo",
         component: "widgets/video/index",
@@ -316,8 +316,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 115,
-        parentId: 110,
+        id: 45,
+        parentId: 4,
         path: "count-to",
         name: "WidgetsCountTo",
         component: "widgets/count-to/index",
@@ -329,8 +329,8 @@ export const mockMenus: Menu[] = [
         keepAlive: false,
       },
       {
-        id: 116,
-        parentId: 110,
+        id: 46,
+        parentId: 4,
         path: "wang-editor",
         name: "WidgetsWangEditor",
         component: "widgets/wang-editor/index",
@@ -342,8 +342,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 117,
-        parentId: 110,
+        id: 47,
+        parentId: 4,
         path: "watermark",
         name: "WidgetsWatermark",
         component: "widgets/watermark/index",
@@ -355,8 +355,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 118,
-        parentId: 110,
+        id: 48,
+        parentId: 4,
         path: "context-menu",
         name: "WidgetsContextMenu",
         component: "widgets/context-menu/index",
@@ -368,8 +368,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 119,
-        parentId: 110,
+        id: 49,
+        parentId: 4,
         path: "qrcode",
         name: "WidgetsQrcode",
         component: "widgets/qrcode/index",
@@ -381,8 +381,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 120,
-        parentId: 110,
+        id: 50,
+        parentId: 4,
         path: "drag",
         name: "WidgetsDrag",
         component: "widgets/drag/index",
@@ -394,8 +394,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 121,
-        parentId: 110,
+        id: 51,
+        parentId: 4,
         path: "text-scroll",
         name: "WidgetsTextScroll",
         component: "widgets/text-scroll/index",
@@ -407,8 +407,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 122,
-        parentId: 110,
+        id: 52,
+        parentId: 4,
         path: "fireworks",
         name: "WidgetsFireworks",
         component: "widgets/fireworks/index",
@@ -423,7 +423,7 @@ export const mockMenus: Menu[] = [
   },
   // 功能示例
   {
-    id: 200,
+    id: 5,
     parentId: 0,
     path: "/examples",
     name: "Examples",
@@ -436,8 +436,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:sparkling-line",
     children: [
       {
-        id: 201,
-        parentId: 200,
+        id: 51,
+        parentId: 5,
         path: "permission",
         name: "ExamplesPermission",
         component: "examples/permission/index",
@@ -448,8 +448,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:fingerprint-line",
         children: [
           {
-            id: 2011,
-            parentId: 201,
+            id: 511,
+            parentId: 51,
             path: "switch-role",
             name: "ExamplesPermissionSwitchRole",
             component: "examples/permission/switch-role/index",
@@ -461,8 +461,8 @@ export const mockMenus: Menu[] = [
             keepAlive: true,
           },
           {
-            id: 2012,
-            parentId: 201,
+            id: 512,
+            parentId: 51,
             path: "button-auth",
             name: "ExamplesPermissionButtonAuth",
             component: "examples/permission/button-auth/index",
@@ -474,8 +474,8 @@ export const mockMenus: Menu[] = [
             keepAlive: true,
           },
           {
-            id: 2013,
-            parentId: 201,
+            id: 513,
+            parentId: 51,
             path: "page-visibility",
             name: "ExamplesPermissionPageVisibility",
             component: "examples/permission/page-visibility/index",
@@ -489,8 +489,8 @@ export const mockMenus: Menu[] = [
         ],
       },
       {
-        id: 202,
-        parentId: 200,
+        id: 52,
+        parentId: 5,
         path: "tabs",
         name: "ExamplesTabs",
         component: "examples/tabs/index",
@@ -501,8 +501,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:price-tag-line",
       },
       {
-        id: 203,
-        parentId: 200,
+        id: 53,
+        parentId: 5,
         path: "tables/basic",
         name: "ExamplesTablesBasic",
         component: "examples/tables/basic/index",
@@ -514,8 +514,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 204,
-        parentId: 200,
+        id: 54,
+        parentId: 5,
         path: "tables",
         name: "ExamplesTables",
         component: "examples/tables/index",
@@ -527,8 +527,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 205,
-        parentId: 200,
+        id: 55,
+        parentId: 5,
         path: "forms",
         name: "ExamplesForms",
         component: "examples/forms/index",
@@ -540,8 +540,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 206,
-        parentId: 200,
+        id: 56,
+        parentId: 5,
         path: "form/search-bar",
         name: "ExamplesSearchBar",
         component: "examples/forms/search-bar/index",
@@ -553,8 +553,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 207,
-        parentId: 200,
+        id: 57,
+        parentId: 5,
         path: "tables/tree",
         name: "ExamplesTablesTree",
         component: "examples/tables/tree/index",
@@ -566,8 +566,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 208,
-        parentId: 200,
+        id: 58,
+        parentId: 5,
         path: "socket-chat",
         name: "ExamplesSocketChat",
         component: "examples/socket-chat/index",
@@ -582,7 +582,7 @@ export const mockMenus: Menu[] = [
   },
   // 文章管理
   {
-    id: 130,
+    id: 6,
     parentId: 0,
     path: "/article",
     name: "Article",
@@ -595,8 +595,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:book-2-line",
     children: [
       {
-        id: 131,
-        parentId: 130,
+        id: 61,
+        parentId: 6,
         path: "article-list",
         name: "ArticleList",
         component: "article/list/index",
@@ -608,8 +608,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 132,
-        parentId: 130,
+        id: 62,
+        parentId: 6,
         path: "detail/:id",
         name: "ArticleDetail",
         component: "article/detail/index",
@@ -621,8 +621,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 133,
-        parentId: 130,
+        id: 63,
+        parentId: 6,
         path: "comment",
         name: "ArticleComment",
         component: "article/comment/index",
@@ -634,8 +634,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 134,
-        parentId: 130,
+        id: 64,
+        parentId: 6,
         path: "publish",
         name: "ArticlePublish",
         component: "article/publish/index",
@@ -650,7 +650,7 @@ export const mockMenus: Menu[] = [
   },
   // 结果页面
   {
-    id: 140,
+    id: 7,
     parentId: 0,
     path: "/result",
     name: "Result",
@@ -663,8 +663,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:checkbox-circle-line",
     children: [
       {
-        id: 141,
-        parentId: 140,
+        id: 71,
+        parentId: 7,
         path: "success",
         name: "ResultSuccess",
         component: "result/success/index",
@@ -676,8 +676,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 142,
-        parentId: 140,
+        id: 72,
+        parentId: 7,
         path: "fail",
         name: "ResultFail",
         component: "result/fail/index",
@@ -692,7 +692,7 @@ export const mockMenus: Menu[] = [
   },
   // 异常页面
   {
-    id: 150,
+    id: 8,
     parentId: 0,
     path: "/exception",
     name: "Exception",
@@ -705,8 +705,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:error-warning-line",
     children: [
       {
-        id: 151,
-        parentId: 150,
+        id: 81,
+        parentId: 8,
         path: "403",
         name: "Exception403",
         component: "exception/403/index",
@@ -717,8 +717,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 152,
-        parentId: 150,
+        id: 82,
+        parentId: 8,
         path: "404",
         name: "Exception404",
         component: "exception/404/index",
@@ -729,8 +729,8 @@ export const mockMenus: Menu[] = [
         keepAlive: true,
       },
       {
-        id: 153,
-        parentId: 150,
+        id: 83,
+        parentId: 8,
         path: "500",
         name: "Exception500",
         component: "exception/500/index",
@@ -744,7 +744,7 @@ export const mockMenus: Menu[] = [
   },
   // 帮助中心
   {
-    id: 170,
+    id: 9,
     parentId: 0,
     path: "/help",
     name: "Help",
@@ -757,8 +757,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:bill-line",
     children: [
       {
-        id: 171,
-        parentId: 170,
+        id: 91,
+        parentId: 9,
         path: "document",
         name: "HelpDocument",
         component: "help/document/index",
@@ -769,8 +769,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:bill-line",
       },
       {
-        id: 172,
-        parentId: 170,
+        id: 92,
+        parentId: 9,
         path: "lite-version",
         name: "HelpLiteVersion",
         component: "help/lite-version/index",
@@ -781,8 +781,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:bus-2-line",
       },
       {
-        id: 173,
-        parentId: 170,
+        id: 93,
+        parentId: 9,
         path: "old-version",
         name: "HelpOldVersion",
         component: "help/old-version/index",
@@ -793,8 +793,8 @@ export const mockMenus: Menu[] = [
         icon: "ri:subway-line",
       },
       {
-        id: 174,
-        parentId: 170,
+        id: 94,
+        parentId: 9,
         path: "change-log",
         name: "ChangeLog",
         component: "change/log/index",
@@ -808,7 +808,7 @@ export const mockMenus: Menu[] = [
   },
   // 运维管理
   {
-    id: 160,
+    id: 10,
     parentId: 0,
     path: "/safeguard",
     name: "Safeguard",
@@ -821,8 +821,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:shield-check-line",
     children: [
       {
-        id: 161,
-        parentId: 160,
+        id: 101,
+        parentId: 10,
         path: "server",
         name: "SafeguardServer",
         component: "safeguard/server/index",
@@ -837,7 +837,7 @@ export const mockMenus: Menu[] = [
   },
   // 系统监控
   {
-    id: 3,
+    id: 11,
     parentId: 0,
     path: "/monitor",
     name: "Monitor",
@@ -850,8 +850,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:pulse-line",
     children: [
       {
-        id: 31,
-        parentId: 3,
+        id: 111,
+        parentId: 11,
         path: "online",
         name: "MonitorOnline",
         component: "monitor/online/index",
@@ -866,7 +866,7 @@ export const mockMenus: Menu[] = [
   },
   // 个人中心
   {
-    id: 5,
+    id: 12,
     parentId: 0,
     path: "/profile",
     name: "Profile",
@@ -879,8 +879,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:account-circle-line",
     children: [
       {
-        id: 51,
-        parentId: 5,
+        id: 121,
+        parentId: 12,
         path: "index",
         name: "ProfileIndex",
         component: "profile/index",
@@ -895,7 +895,7 @@ export const mockMenus: Menu[] = [
   },
   // 组件示例
   {
-    id: 4,
+    id: 13,
     parentId: 0,
     path: "/components",
     name: "Components",
@@ -908,8 +908,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:apps-2-line",
     children: [
       {
-        id: 41,
-        parentId: 4,
+        id: 131,
+        parentId: 13,
         path: "table",
         name: "ComponentsTable",
         component: "components/table/index",
@@ -924,7 +924,7 @@ export const mockMenus: Menu[] = [
   },
   // 关于
   {
-    id: 6,
+    id: 14,
     parentId: 0,
     path: "/about",
     name: "About",
@@ -937,8 +937,8 @@ export const mockMenus: Menu[] = [
     icon: "ri:information-line",
     children: [
       {
-        id: 61,
-        parentId: 6,
+        id: 141,
+        parentId: 14,
         path: "index",
         name: "AboutIndex",
         component: "about/index",

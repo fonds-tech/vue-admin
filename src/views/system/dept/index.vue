@@ -1,28 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card shadow="never">
-      <template #header>
-        <div class="card-header">
-          <span>部门管理</span>
-        </div>
-      </template>
-      <el-empty description="部门管理开发中..." />
-    </el-card>
-  </div>
+  <page-placeholder title="部门管理" description="管理部门或组织结构，支持层级调整。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 部门管理页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  padding: $spacing-base;
-}
-
-.card-header {
-  font-weight: 600;
-}
-</style>

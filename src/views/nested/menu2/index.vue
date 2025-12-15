@@ -1,28 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card shadow="never">
-      <template #header>
-        <div class="card-header">
-          <span>菜单2</span>
-        </div>
-      </template>
-      <el-empty description="多级菜单示例 - 菜单2" />
-    </el-card>
-  </div>
+  <page-placeholder title="菜单2" description="二级菜单示例，用于演示路由嵌套。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 多级菜单2页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  padding: $spacing-base;
-}
-
-.card-header {
-  font-weight: 600;
-}
-</style>

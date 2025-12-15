@@ -1,22 +1,7 @@
 <template>
-  <div class="page-container">
-    <el-card>
-      <template #header>菜单管理</template>
-      <el-empty description="功能开发中..." />
-    </el-card>
-  </div>
+  <page-placeholder title="菜单管理" description="维护菜单树与路由元信息，关联权限点。" />
 </template>
 
 <script setup lang="ts">
-/**
- * 菜单管理页面
- */
+import PagePlaceholder from "@/components/PagePlaceholder.vue"
 </script>
-
-<style lang="scss" scoped>
-.page-container {
-  gap: $spacing-base;
-  display: flex;
-  flex-direction: column;
-}
-</style>
