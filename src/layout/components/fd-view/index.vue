@@ -1,14 +1,14 @@
 <template>
   <div class="fd-view">
-    <el-scrollbar>
-      <router-view v-slot="{ Component, route }">
-        <transition :name="transitionName" mode="out-in">
-          <keep-alive :key="key" :include="cacheList">
+    <router-view v-slot="{ Component, route }">
+      <transition :name="transitionName" mode="out-in">
+        <keep-alive :key="key" :include="cacheList">
+          <el-scrollbar>
             <component :is="Component" :key="route.path" />
-          </keep-alive>
-        </transition>
-      </router-view>
-    </el-scrollbar>
+          </el-scrollbar>
+        </keep-alive>
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -60,6 +60,7 @@ onUnmounted(() => {
 
   .el-scrollbar__view {
     display: flex;
+    padding: 12px;
     overflow-x: hidden;
     flex-direction: column;
   }

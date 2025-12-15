@@ -10,6 +10,10 @@ import { computed } from "vue"
 
 defineOptions({ name: "svg-icon" })
 
+const props = withDefaults(defineProps<Props>(), {
+  prefix: "icon",
+})
+
 interface Props {
   /** 图标名称（对应 src/assets/svg 下的文件名，不含 .svg 后缀） */
   name: string
@@ -22,10 +26,6 @@ interface Props {
   /** 额外的 CSS 类名 */
   className?: string
 }
-
-const props = withDefaults(defineProps<Props>(), {
-  prefix: "icon",
-})
 
 /** 组合的 symbol id */
 const symbolId = computed(() => `#${props.prefix}-${props.name}`)
@@ -54,10 +54,10 @@ const iconStyle = computed<CSSProperties>(() => {
 
 <style lang="scss">
 .svg-icon {
+  fill: currentColor;
   width: 1em;
   height: 1em;
   overflow: hidden;
-  fill: currentColor;
   vertical-align: -0.15em;
 }
 </style>
