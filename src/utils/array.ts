@@ -1,17 +1,26 @@
+/** listToTree 配置选项 */
+export interface ListToTreeOptions<T> {
+  /** 父级ID的字段名，默认为 'parentId' */
+  parentKey?: keyof T
+  /** ID字段名，默认为 'id' */
+  idKey?: keyof T
+  /** 根节点的父级ID值，默认为 0 */
+  rootValue?: T[keyof T]
+  /** 排序字段名 */
+  sortKey?: keyof T
+  /** 排序方向，默认为 'asc' */
+  sortOrder?: "asc" | "desc"
+}
+
 /**
  * 将扁平列表转换为树形结构
  * @param list 扁平数据列表
- * @param parentKey 父级ID的字段名，默认为 'parentId'
- * @param idKey ID字段名，默认为 'id'
- * @param rootValue 根节点的父级ID值，默认为 0
+ * @param options 配置选项
  * @returns 树形结构数据
  */
-export function listToTree<T extends Record<string, any>>(
-  list: T[],
-  parentKey: keyof T = "parentId" as keyof T,
-  idKey: keyof T = "id" as keyof T,
-  rootValue: T[keyof T] = 0 as T[keyof T],
-): (T & { children?: T[] })[] {
+export function listToTree<T extends Record<string, any>>(list: T[], options: ListToTreeOptions<T> = {}): (T & { children?: T[] })[] {
+  const { parentKey = "parentId" as keyof T, idKey = "id" as keyof T, rootValue = 0 as T[keyof T], sortKey = "sort" as keyof T, sortOrder = "asc" } = options
+
   // 创建id到节点的映射
   const map = new Map<T[keyof T], T & { children?: T[] }>()
 
@@ -44,6 +53,29 @@ export function listToTree<T extends Record<string, any>>(
       }
     }
   })
+
+  // 排序函数
+  const sortNodes = (nodes: (T & { children?: T[] })[]) => {
+    if (!sortKey) return
+
+    nodes.sort((a, b) => {
+      const aVal = a[sortKey]
+      const bVal = b[sortKey]
+      if (aVal === bVal) return 0
+      const result = aVal < bVal ? -1 : 1
+      return sortOrder === "asc" ? result : -result
+    })
+
+    // 递归排序子节点
+    nodes.forEach((node) => {
+      if (node.children?.length) {
+        sortNodes(node.children)
+      }
+    })
+  }
+
+  // 执行排序
+  sortNodes(tree)
 
   return tree
 }
