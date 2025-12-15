@@ -2,8 +2,8 @@
  * Vue Router 配置入口
  * 扩展 router 实例，支持动态路由懒注册
  */
+import type { Menu } from "@/stores/menu/types"
 import type { Router } from "vue-router"
-import type { BackendMenu } from "@/stores/permission/interface"
 import { constantRoutes } from "./constant"
 import { setupRouterGuard } from "./guard"
 import { transformMenuToRoute } from "./helper"
@@ -12,7 +12,7 @@ import { createRouter, createWebHistory } from "vue-router"
 /** 扩展的 Router 类型 */
 export interface AppRouter extends Router {
   /** 添加动态路由 */
-  add: (menu: BackendMenu | BackendMenu[]) => void
+  add: (menu: Menu | Menu[]) => void
   /** 删除指定路由 */
   del: (name: string) => void
   /** 清除所有动态路由 */
@@ -35,7 +35,7 @@ const router = baseRouter as AppRouter
  * 添加动态路由
  * @param menu 菜单数据（单个或数组）
  */
-router.add = (menu: BackendMenu | BackendMenu[]) => {
+router.add = (menu: Menu | Menu[]) => {
   const list = Array.isArray(menu) ? menu : [menu]
 
   list.forEach((item) => {
@@ -60,7 +60,7 @@ router.add = (menu: BackendMenu | BackendMenu[]) => {
  * @param menu 菜单项
  * @param parentPath 父级路径
  */
-function registerRoute(menu: BackendMenu, parentPath: string) {
+function registerRoute(menu: Menu, parentPath: string) {
   // 已注册则跳过
   if (router.hasRoute(menu.name)) {
     return

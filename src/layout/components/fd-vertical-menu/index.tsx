@@ -1,4 +1,4 @@
-import type { BackendMenu } from "./types"
+import type { Menu } from "@/stores/menu/types"
 import type { CSSProperties } from "vue"
 import FdLogo from "../fd-logo/index.vue"
 import FdName from "../fd-name/index.vue"
@@ -27,7 +27,7 @@ export default defineComponent({
     const isDualMode = computed<boolean>(() => settingsStore.isDualLayout)
 
     /** 可见菜单列表 */
-    const menuList = computed<BackendMenu[]>(() => menuStore.visibleMenus)
+    const menuList = computed<Menu[]>(() => menuStore.menus)
 
     /** 菜单是否折叠（优先使用 prop，否则使用 store） */
     const isCollapsed = computed<boolean>(() => settingsStore.isMenuCollapsed)
@@ -50,10 +50,10 @@ export default defineComponent({
     }))
 
     /** 一级菜单列表（双列模式） */
-    const firstLevelMenus = computed<BackendMenu[]>(() => menuList.value)
+    const firstLevelMenus = computed<Menu[]>(() => menuList.value)
 
     /** 当前一级菜单对应的子菜单 */
-    const currentSubMenus = computed<BackendMenu[]>(() => {
+    const currentSubMenus = computed<Menu[]>(() => {
       if (!activeFirstLevelPath.value) return []
       const currentMenu = firstLevelMenus.value.find((menu) => menu.path === activeFirstLevelPath.value)
       return currentMenu?.children || []
@@ -87,13 +87,13 @@ export default defineComponent({
     }
 
     /** 判断菜单是否只有单个可提升的子项 */
-    function isSinglePromotableChild(menu: BackendMenu): boolean {
+    function isSinglePromotableChild(menu: Menu): boolean {
       if (!menu.children || menu.children.length !== 1) return false
       return !menu.children[0]?.children?.length
     }
 
     /** 判断一级菜单是否激活（双列模式） */
-    function isFirstLevelActive(menu: BackendMenu): boolean {
+    function isFirstLevelActive(menu: Menu): boolean {
       if (!menu.children?.length) {
         return menu.path === route.path
       }
@@ -137,7 +137,7 @@ export default defineComponent({
     }
 
     /** 一级菜单点击处理（双列模式） */
-    function handleFirstLevelClick(menu: BackendMenu): void {
+    function handleFirstLevelClick(menu: Menu): void {
       if (!menu.children?.length) {
         handleMenuSelect(menu.path)
         return
@@ -162,34 +162,34 @@ export default defineComponent({
     }
 
     /** 渲染叶子菜单项（无子菜单） */
-    function renderLeafMenuItem(menu: BackendMenu, fullPath: string) {
+    function renderLeafMenuItem(menu: Menu, fullPath: string) {
       return (
         <ElMenuItem key={menu.path} index={fullPath} class="fd-menu__item">
-          {renderIcon(menu.meta?.icon)}
-          {renderTitle(menu.meta?.title)}
+          {renderIcon(menu.icon)}
+          {renderTitle(menu.title)}
         </ElMenuItem>
       )
     }
 
     /** 渲染子菜单（有子菜单项） */
-    function renderSubMenu(menu: BackendMenu, fullPath: string) {
+    function renderSubMenu(menu: Menu, fullPath: string) {
       return (
         <ElSubMenu key={menu.path} index={fullPath} class="fd-menu__submenu">
           {{
             title: () => (
               <>
-                {renderIcon(menu.meta?.icon)}
-                {renderTitle(menu.meta?.title)}
+                {renderIcon(menu.icon)}
+                {renderTitle(menu.title)}
               </>
             ),
-            default: () => menu.children?.map((child: BackendMenu) => renderMenuItem(child, fullPath)),
+            default: () => menu.children?.map((child: Menu) => renderMenuItem(child, fullPath)),
           }}
         </ElSubMenu>
       )
     }
 
     /** 递归渲染菜单项 */
-    function renderMenuItem(menu: BackendMenu, basePath: string) {
+    function renderMenuItem(menu: Menu, basePath: string) {
       const fullPath = getFullPath(menu.path, basePath)
 
       if (!menu.children || menu.children.length === 0) {
@@ -201,8 +201,8 @@ export default defineComponent({
         const childFullPath = getFullPath(firstChild.path, fullPath)
         return (
           <ElMenuItem key={childFullPath} index={childFullPath} class="fd-menu__item">
-            {renderIcon(firstChild.meta?.icon || menu.meta?.icon)}
-            {renderTitle(firstChild.meta?.title || menu.meta?.title)}
+            {renderIcon(firstChild.meta?.icon || menu.icon)}
+            {renderTitle(firstChild.meta?.title || menu.title)}
           </ElMenuItem>
         )
       }
@@ -211,17 +211,17 @@ export default defineComponent({
     }
 
     /** 渲染左侧菜单项（双列模式） */
-    function renderDualLeftItem(menu: BackendMenu) {
+    function renderDualLeftItem(menu: Menu) {
       const isActive = isFirstLevelActive(menu)
 
       const itemContent = (
         <div class={["fd-vertical-menu__left-item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
-          {renderIcon(menu.meta?.icon, 20)}
+          {renderIcon(menu.icon, 20)}
         </div>
       )
 
       return (
-        <ElTooltip key={menu.path} content={menu.meta?.title} placement="right" offset={12} hideAfter={0}>
+        <ElTooltip key={menu.path} content={menu.title} placement="right" offset={12} hideAfter={0}>
           {itemContent}
         </ElTooltip>
       )
@@ -254,14 +254,14 @@ export default defineComponent({
     }
 
     /** 渲染右侧菜单项（双列模式） */
-    function renderDualRightItem(menu: BackendMenu, basePath: string) {
+    function renderDualRightItem(menu: Menu, basePath: string) {
       const fullPath = getFullPath(menu.path, basePath)
 
       if (!menu.children || menu.children.length === 0) {
         return (
           <ElMenuItem key={menu.path} index={fullPath} class="fd-vertical-menu__right-item">
-            {renderIcon(menu.meta?.icon)}
-            <span>{menu.meta?.title}</span>
+            {renderIcon(menu.icon)}
+            <span>{menu.title}</span>
           </ElMenuItem>
         )
       }
@@ -271,8 +271,8 @@ export default defineComponent({
         const childFullPath = getFullPath(firstChild.path, fullPath)
         return (
           <ElMenuItem key={childFullPath} index={childFullPath} class="fd-vertical-menu__right-item">
-            {renderIcon(firstChild.meta?.icon || menu.meta?.icon)}
-            <span>{firstChild.meta?.title || menu.meta?.title}</span>
+            {renderIcon(firstChild.meta?.icon || menu.icon)}
+            <span>{firstChild.meta?.title || menu.title}</span>
           </ElMenuItem>
         )
       }
@@ -282,11 +282,11 @@ export default defineComponent({
           {{
             title: () => (
               <>
-                {renderIcon(menu.meta?.icon)}
-                <span>{menu.meta?.title}</span>
+                {renderIcon(menu.icon)}
+                <span>{menu.title}</span>
               </>
             ),
-            default: () => menu.children?.map((child: BackendMenu) => renderDualRightItem(child, fullPath)),
+            default: () => menu.children?.map((child: Menu) => renderDualRightItem(child, fullPath)),
           }}
         </ElSubMenu>
       )

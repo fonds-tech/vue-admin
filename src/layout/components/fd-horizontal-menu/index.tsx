@@ -1,4 +1,4 @@
-import type { BackendMenu } from "@/stores/permission/types"
+import type { Menu } from "@/stores/menu/types"
 import { Icon } from "@/components/core/fd-icon"
 import { useMenuStore } from "@/stores/menu"
 import { useSettingsStore } from "@/stores/settings"
@@ -28,7 +28,7 @@ export default defineComponent({
     // ==================== 计算属性 ====================
 
     /** 可见菜单列表 */
-    const menuList = computed<BackendMenu[]>(() => menuStore.visibleMenus)
+    const menuList = computed<Menu[]>(() => menuStore.menus)
 
     /** 菜单是否使用手风琴模式 */
     const isAccordionMode = computed<boolean>(() => settingsStore.menuMode === "accordion")
@@ -56,7 +56,7 @@ export default defineComponent({
     }
 
     /** 判断菜单是否只有单个可提升的子项 */
-    function isSinglePromotableChild(menu: BackendMenu): boolean {
+    function isSinglePromotableChild(menu: Menu): boolean {
       if (!menu.children || menu.children.length !== 1) return false
       return !menu.children[0]?.children?.length
     }
@@ -65,7 +65,7 @@ export default defineComponent({
      * 递归过滤菜单项，移除隐藏的菜单
      * 如果一个父菜单的所有子菜单都被隐藏，则父菜单也会被隐藏
      */
-    function filterMenuItems(items: BackendMenu[]): BackendMenu[] {
+    function filterMenuItems(items: Menu[]): Menu[] {
       return items
         .filter((item) => {
           if (item.meta?.hidden) return false
@@ -109,17 +109,17 @@ export default defineComponent({
     }
 
     /** 渲染叶子菜单项（无子菜单） */
-    function renderLeafMenuItem(menu: BackendMenu, fullPath: string) {
+    function renderLeafMenuItem(menu: Menu, fullPath: string) {
       return (
         <ElMenuItem key={menu.path} index={fullPath} class="fd-horizontal-menu__item">
-          {renderIcon(menu.meta?.icon, MENU_CONFIG.ICON_SIZE)}
-          {renderTitle(menu.meta?.title)}
+          {renderIcon(menu.icon, MENU_CONFIG.ICON_SIZE)}
+          {renderTitle(menu.title)}
         </ElMenuItem>
       )
     }
 
     /** 渲染子菜单（有子菜单项） */
-    function renderSubMenu(menu: BackendMenu, fullPath: string, level: number = 0) {
+    function renderSubMenu(menu: Menu, fullPath: string, level: number = 0) {
       const popperClass = level === 0 ? "fd-horizontal-menu__popper" : "fd-horizontal-menu__popper--nested"
 
       return (
@@ -127,22 +127,22 @@ export default defineComponent({
           {{
             title: () => (
               <>
-                {renderIcon(menu.meta?.icon, MENU_CONFIG.ICON_SIZE)}
-                {renderTitle(menu.meta?.title)}
+                {renderIcon(menu.icon, MENU_CONFIG.ICON_SIZE)}
+                {renderTitle(menu.title)}
               </>
             ),
-            default: () => menu.children?.map((child: BackendMenu) => renderMenuItem(child, fullPath, level + 1)),
+            default: () => menu.children?.map((child: Menu) => renderMenuItem(child, fullPath, level + 1)),
           }}
         </ElSubMenu>
       )
     }
 
     /** 递归渲染菜单项 */
-    function renderMenuItem(menu: BackendMenu, basePath: string, level: number = 0) {
+    function renderMenuItem(menu: Menu, basePath: string, level: number = 0) {
       const fullPath = getFullPath(menu.path, basePath)
 
       // 过滤隐藏的菜单
-      if (menu.meta?.hidden) return null
+      if (menu.hidden) return null
 
       // 无子菜单，渲染叶子节点
       if (!menu.children || menu.children.length === 0) {
@@ -155,8 +155,8 @@ export default defineComponent({
         const childFullPath = getFullPath(firstChild.path, fullPath)
         return (
           <ElMenuItem key={childFullPath} index={childFullPath} class="fd-horizontal-menu__item">
-            {renderIcon(firstChild.meta?.icon || menu.meta?.icon, MENU_CONFIG.ICON_SIZE)}
-            {renderTitle(firstChild.meta?.title || menu.meta?.title)}
+            {renderIcon(firstChild.meta?.icon || menu.icon, MENU_CONFIG.ICON_SIZE)}
+            {renderTitle(firstChild.meta?.title || menu.title)}
           </ElMenuItem>
         )
       }

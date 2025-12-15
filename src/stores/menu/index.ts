@@ -1,94 +1,77 @@
-/**
- * 菜单状态管理
- * 统一管理菜单数据、扁平化菜单、路由注册状态
- */
-import type { MenuState } from "./types"
-import type { BackendMenu } from "../permission/interface"
+import type { Menu, MenuState } from "./types"
+import { isEmpty } from "@fonds/utils"
+import { mockMenus } from "@/mock/menu"
+import { listToTree } from "@/utils/array"
 import { defineStore } from "pinia"
-import { useUserStore } from "../user"
-import { getMenusByUsername } from "../mock/menu"
-import { flattenMenus, getVisibleMenus } from "@/router/helper"
+import { menuToRoute, extractPermissions } from "@/utils/menu"
 
 export const useMenuStore = defineStore("menu", {
   state: (): MenuState => ({
-    initialized: false,
+    list: [],
     menus: [],
-    flatMenus: [],
-    registeredRoutes: new Set(),
+    routes: [],
+    permissions: [],
+    initialized: false,
   }),
-
-  getters: {
-    /** 可见菜单（用于侧边栏渲染） */
-    visibleMenus: (state) => {
-      return getVisibleMenus(state.menus)
-    },
-  },
-
   actions: {
     /**
+     * 初始化菜单
+     */
+    async init() {
+      await this.fetchMenus()
+    },
+
+    /**
      * 获取菜单数据
-     * 根据当前登录用户获取对应的菜单
+     * 实际项目中应调用后端接口
+     * @returns 菜单树
      */
     async fetchMenus() {
-      const userStore = useUserStore()
+      // 原始数据
+      this.list = mockMenus
 
-      // 确保用户信息已获取
-      if (!userStore.userInfo.id) {
-        await userStore.getUserInfo()
-      }
+      // 过滤后的菜单树（排除隐藏和权限类型）
+      const menus = this.list.filter((menu) => isEmpty(menu.hidden) && [0, 1].includes(menu.type))
 
-      // 获取菜单数据（实际项目中应调用后端接口）
-      const menus = getMenusByUsername(userStore.lastLoginUsername)
+      this.menus = listToTree(menus)
 
-      // 存储菜单
-      this.menus = menus
-      // 扁平化菜单（用于快速查找）
-      this.flatMenus = flattenMenus(menus)
+      // 路由格式菜单（用于动态路由注册）
+      this.routes = this.menus.map(menuToRoute)
+
+      // 权限标识集合（用于按钮权限判断）
+      this.permissions = extractPermissions(this.list)
+
       // 标记已初始化
       this.initialized = true
 
-      return menus
+      return this.menus
     },
 
     /**
      * 根据路径查找菜单
      * @param path 路由路径
      */
-    findMenu(path: string): BackendMenu | undefined {
-      return this.flatMenus.find(menu => menu.path === path)
+    findMenu(path: string): Menu | undefined {
+      return this.list.find((menu) => menu.path === path)
     },
 
     /**
-     * 标记路由已注册
-     * @param name 路由名称
+     * 检查是否有指定权限
+     * @param permission 权限标识
      */
-    markRouteRegistered(name: string) {
-      this.registeredRoutes.add(name)
-    },
-
-    /**
-     * 检查路由是否已注册
-     * @param name 路由名称
-     */
-    isRouteRegistered(name: string): boolean {
-      return this.registeredRoutes.has(name)
-    },
-
-    /**
-     * 清除所有动态路由记录
-     */
-    clearRegisteredRoutes() {
-      this.registeredRoutes.clear()
+    hasPermission(permission: string): boolean {
+      return this.permissions.includes(permission)
     },
 
     /**
      * 重置菜单状态
      */
     reset() {
-      this.initialized = false
+      this.list = []
       this.menus = []
-      this.flatMenus = []
-      this.registeredRoutes.clear()
+      this.routes = []
+      this.permissions = []
+      this.initialized = false
     },
   },
 })

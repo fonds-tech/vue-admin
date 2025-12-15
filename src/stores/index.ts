@@ -13,8 +13,6 @@ export default pinia
 
 export { useAppStore } from "./app"
 export { useMenuStore } from "./menu"
-export { usePermissionStore } from "./permission"
 export { useProcessStore } from "./process"
 export { useSettingsStore } from "./settings"
-// 导出所有 Store
 export { useUserStore } from "./user"

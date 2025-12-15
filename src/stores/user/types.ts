@@ -26,8 +26,6 @@ export interface UserState {
   token: string
   /** 用户信息 */
   userInfo: UserInfo
-  /** 最后登录的用户名（用于获取用户信息时确定身份） */
-  lastLoginUsername: string
 }
 
 /** 默认用户信息 */

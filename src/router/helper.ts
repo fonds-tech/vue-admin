@@ -2,7 +2,7 @@
  * 路由工具函数
  * 提供菜单转换、路径匹配等功能
  */
-import type { BackendMenu } from "@/stores/permission/interface"
+import type { Menu } from "@/stores/menu/types"
 import type { RouteRecordRaw } from "vue-router"
 
 // 视图模块映射（用于动态导入）
@@ -13,7 +13,7 @@ const viewModules = import.meta.glob("/src/views/**/*.vue")
  * @param menu 后端菜单数据
  * @param parentPath 父级路径
  */
-export function transformMenuToRoute(menu: BackendMenu, parentPath = ""): RouteRecordRaw | null {
+export function transformMenuToRoute(menu: Menu, parentPath = ""): RouteRecordRaw | null {
   // 布局组件跳过（布局已在 constantRoutes 中）
   if (menu.component === "Layout") {
     return null
@@ -56,7 +56,7 @@ export function transformMenuToRoute(menu: BackendMenu, parentPath = ""): RouteR
  * @param componentPath 组件路径
  * @param meta 路由元信息
  */
-function getComponent(componentPath: string, meta?: BackendMenu["meta"]): (() => Promise<unknown>) | null {
+function getComponent(componentPath: string, meta?: Menu["meta"]): (() => Promise<unknown>) | null {
   // 空组件路径
   if (!componentPath) {
     return null
@@ -86,8 +86,8 @@ function getComponent(componentPath: string, meta?: BackendMenu["meta"]): (() =>
  * @param menus 菜单树
  * @param parentPath 父级路径
  */
-export function flattenMenus(menus: BackendMenu[], parentPath = ""): BackendMenu[] {
-  const result: BackendMenu[] = []
+export function flattenMenus(menus: Menu[], parentPath = ""): Menu[] {
+  const result: Menu[] = []
 
   menus.forEach((menu) => {
     // 计算完整路径
@@ -117,7 +117,7 @@ export function flattenMenus(menus: BackendMenu[], parentPath = ""): BackendMenu
  * @param flatMenus 扁平化菜单列表
  * @param path 路径
  */
-export function findMenuByPath(flatMenus: BackendMenu[], path: string): BackendMenu | undefined {
+export function findMenuByPath(flatMenus: Menu[], path: string): Menu | undefined {
   // 精确匹配
   return flatMenus.find(menu => menu.path === path)
 }
@@ -126,7 +126,7 @@ export function findMenuByPath(flatMenus: BackendMenu[], path: string): BackendM
  * 获取菜单树（用于侧边栏渲染）
  * 过滤隐藏菜单
  */
-export function getVisibleMenus(menus: BackendMenu[]): BackendMenu[] {
+export function getVisibleMenus(menus: Menu[]): Menu[] {
   return menus
     .filter(menu => !menu.meta.hidden)
     .map((menu) => {
