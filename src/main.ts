@@ -11,8 +11,8 @@ import "element-plus/theme-chalk/dark/css-vars.css"
 
 import App from "./App.vue"
 import pinia from "./stores"
-import router from "./router"
 import { Crud } from "@fonds/vue-crud"
+import { setupRouter } from "@/router"
 import { useSettingsStore } from "./stores/settings"
 import i18n, { elementPlusLocales } from "./locales"
 
@@ -29,7 +29,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 // 安装插件
 app.use(Crud)
 app.use(pinia)
-app.use(router)
 app.use(i18n)
 
 // 获取当前语言并配置 Element Plus
@@ -39,5 +38,7 @@ app.use(ElementPlus, { locale })
 
 // 初始化设置（主题、主题色等）
 settingsStore.initSettings()
+
+setupRouter(app)
 
 app.mount("#app")
