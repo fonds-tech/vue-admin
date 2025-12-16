@@ -53,6 +53,7 @@
  */
 import { useI18n } from "vue-i18n"
 import { ElMessage } from "element-plus"
+import { useAppStore } from "@/stores/app"
 import { useUserStore } from "@/stores/user"
 import { ref, reactive } from "vue"
 import { useRoute, useRouter } from "vue-router"
@@ -60,6 +61,7 @@ import { useRoute, useRouter } from "vue-router"
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
+const appStore = useAppStore()
 const userStore = useUserStore()
 
 const loading = ref(false)
@@ -83,6 +85,8 @@ async function handleLogin() {
   loading.value = true
   try {
     await userStore.login(form.username, form.password)
+    appStore.setToken("123456")
+    appStore.setRefreshToken("123456")
     ElMessage.success(t("common.success"))
 
     // 跳转到来源页面或首页

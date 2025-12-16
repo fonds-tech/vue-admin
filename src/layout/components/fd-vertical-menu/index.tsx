@@ -86,12 +86,6 @@ export default defineComponent({
       return basePath ? `${basePath}/${path}`.replace(/\/+/g, "/") : `/${path}`
     }
 
-    /** 判断菜单是否只有单个可提升的子项 */
-    function isSinglePromotableChild(menu: Menu): boolean {
-      if (!menu.children || menu.children.length !== 1) return false
-      return !menu.children[0]?.children?.length
-    }
-
     /** 判断一级菜单是否激活（双列模式） */
     function isFirstLevelActive(menu: Menu): boolean {
       if (!menu.children?.length) {
@@ -192,21 +186,12 @@ export default defineComponent({
     function renderMenuItem(menu: Menu, basePath: string) {
       const fullPath = getFullPath(menu.path, basePath)
 
+      // 没有子菜单，渲染为叶子菜单项
       if (!menu.children || menu.children.length === 0) {
         return renderLeafMenuItem(menu, fullPath)
       }
 
-      if (isSinglePromotableChild(menu)) {
-        const firstChild = menu.children[0]!
-        const childFullPath = getFullPath(firstChild.path, fullPath)
-        return (
-          <ElMenuItem key={childFullPath} index={childFullPath} class="fd-menu__item">
-            {renderIcon(firstChild.meta?.icon || menu.icon)}
-            {renderTitle(firstChild.meta?.title || menu.title)}
-          </ElMenuItem>
-        )
-      }
-
+      // 有子菜单，渲染为可展开的子菜单
       return renderSubMenu(menu, fullPath)
     }
 
@@ -257,6 +242,7 @@ export default defineComponent({
     function renderDualRightItem(menu: Menu, basePath: string) {
       const fullPath = getFullPath(menu.path, basePath)
 
+      // 没有子菜单，渲染为叶子菜单项
       if (!menu.children || menu.children.length === 0) {
         return (
           <ElMenuItem key={menu.path} index={fullPath} class="fd-vertical-menu__right-item">
@@ -266,17 +252,7 @@ export default defineComponent({
         )
       }
 
-      if (isSinglePromotableChild(menu)) {
-        const firstChild = menu.children[0]!
-        const childFullPath = getFullPath(firstChild.path, fullPath)
-        return (
-          <ElMenuItem key={childFullPath} index={childFullPath} class="fd-vertical-menu__right-item">
-            {renderIcon(firstChild.meta?.icon || menu.icon)}
-            <span>{firstChild.meta?.title || menu.title}</span>
-          </ElMenuItem>
-        )
-      }
-
+      // 有子菜单，渲染为可展开的子菜单
       return (
         <ElSubMenu key={menu.path} index={fullPath} class="fd-vertical-menu__right-submenu">
           {{

@@ -1,3 +1,5 @@
+import type { RouteRecordRaw } from "vue-router"
+
 /** 菜单状态 */
 export interface MenuState {
   /** 原始菜单列表（服务端返回） */
@@ -5,7 +7,7 @@ export interface MenuState {
   /** 过滤后的菜单树（侧边栏渲染用） */
   menus: Menu[]
   /** 路由格式菜单（动态路由注册用） */
-  routes: MenuRoute[]
+  routes: RouteRecordRaw[]
   /** 权限标识集合（按钮权限判断用） */
   permissions: string[]
   /** 是否已初始化 */
@@ -25,10 +27,10 @@ export interface Menu {
   path: string
   /** 路由名称 */
   name: string
-  /** 组件路径 */
-  component: string
+  /** 组件路径（目录/权限可为空） */
+  component?: string
   /** 重定向路径 */
-  redirect?: string
+  redirect?: never
   /** 菜单类型：0-目录 1-菜单 2-权限 */
   type: MenuType
   /** 排序 */
@@ -45,16 +47,24 @@ export interface Menu {
   keepAlive?: boolean
   /** 权限标识 */
   permission?: string
+  /** 路由元信息（可选，用于扩展配置） */
+  meta?: MenuMeta
   /** 子菜单 */
   children?: Menu[]
 }
 
 /** 路由元信息 */
 export interface MenuMeta {
-  /** 菜单标题 */
-  title: string
+  /** 是否使用 */
+  use?: boolean
   /** 菜单图标 */
   icon?: string
+  /** 是否需要认证 */
+  auth?: boolean
+  /** 是否首页 */
+  index?: boolean
+  /** 菜单标题 */
+  title?: string
   /** 是否隐藏菜单 */
   hidden?: boolean
   /** 是否缓存页面（用于 keep-alive） */
@@ -63,6 +73,12 @@ export interface MenuMeta {
   permission?: string
   /** 激活菜单（用于详情页高亮父级菜单） */
   activeMenu?: string
+  /** iframe 内嵌地址 */
+  frameSrc?: string
+  /** 外链地址（新窗口打开） */
+  link?: string
+  /** 组件路径（目录/权限可为空） */
+  component?: string
 }
 
 /** 符合 Vue Router 的菜单路由结构 */
@@ -71,8 +87,6 @@ export interface MenuRoute {
   path: string
   /** 路由名称 */
   name: string
-  /** 组件路径或组件 */
-  component: string | (() => Promise<unknown>)
   /** 重定向路径 */
   redirect?: string
   /** 路由元信息 */

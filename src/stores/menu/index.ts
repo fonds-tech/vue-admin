@@ -1,8 +1,9 @@
+import type { RouteRecordRaw } from "vue-router"
 import type { Menu, MenuState } from "./types"
 import { isEmpty } from "@fonds/utils"
 import { mockMenus } from "@/mock/menu"
-import { listToTree } from "@/utils/array"
 import { defineStore } from "pinia"
+import { listToTree, treeToList } from "@/utils/array"
 import { menuToRoute, extractPermissions } from "@/utils/menu"
 
 export const useMenuStore = defineStore("menu", {
@@ -27,21 +28,17 @@ export const useMenuStore = defineStore("menu", {
      * @returns 菜单树
      */
     async fetchMenus() {
-      // 原始数据
-      this.list = mockMenus
+      this.list = treeToList(mockMenus)
 
-      // 过滤后的菜单树（排除隐藏和权限类型）
       const menus = this.list.filter((menu) => isEmpty(menu.hidden) && [0, 1].includes(menu.type))
+      const routes = this.list.filter((menu) => isEmpty(menu.hidden) && [1].includes(menu.type))
 
       this.menus = listToTree(menus)
 
-      // 路由格式菜单（用于动态路由注册）
-      this.routes = this.menus.map(menuToRoute)
+      this.routes = routes.map(menuToRoute)
 
-      // 权限标识集合（用于按钮权限判断）
       this.permissions = extractPermissions(this.list)
 
-      // 标记已初始化
       this.initialized = true
 
       return this.menus

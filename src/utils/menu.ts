@@ -1,25 +1,35 @@
+import type { RouteRecordRaw } from "vue-router"
 import type { Menu, MenuRoute } from "@/stores/menu/types"
 
 /**
- * 将 Menu 转换为 MenuRoute 格式
+ * 将 Menu 转换为 RouteRecordRaw 格式
  * @param menu 菜单数据
  * @returns 路由格式菜单
  */
-export function menuToRoute(menu: Menu): MenuRoute {
-  return {
+export function menuToRoute(menu: Menu): RouteRecordRaw {
+  const route: RouteRecordRaw = {
     path: menu.path,
     name: menu.name,
-    component: menu.component,
-    redirect: menu.redirect,
     meta: {
       title: menu.title,
       icon: menu.icon,
       hidden: menu.hidden,
       keepAlive: menu.keepAlive,
       permission: menu.permission,
+      component: menu.component,
     },
-    children: menu.children?.map(menuToRoute),
   }
+
+  // 只有存在时才添加，避免 undefined 导致类型问题
+  if (menu.redirect) {
+    route.redirect = menu.redirect
+  }
+
+  if (menu.children?.length) {
+    route.children = menu.children.map(menuToRoute)
+  }
+
+  return route
 }
 
 /**

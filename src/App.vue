@@ -5,9 +5,6 @@
 </template>
 
 <script setup lang="ts">
-/**
- * 根组件
- */
 import { useSettingsStore } from "./stores/settings"
 import { ElConfigProvider } from "element-plus"
 import { elementPlusLocales } from "./locales"
