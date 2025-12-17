@@ -1,87 +1,139 @@
 <template>
   <el-breadcrumb class="fd-breadcrumb" :separator-icon="ArrowRight">
-    <transition-group name="breadcrumb-fade">
-      <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="item.path">
-        <span v-if="index < breadcrumbs.length - 1" class="fd-breadcrumb__link" @click="handleClick(item)">
-          {{ item.title }}
-        </span>
-        <span v-else class="fd-breadcrumb__current">
-          {{ item.title }}
-        </span>
-      </el-breadcrumb-item>
-    </transition-group>
+    <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="item.path">
+      <span v-if="index < breadcrumbs.length - 1" class="fd-breadcrumb__link" @click="handleClick(item)">
+        {{ item.title }}
+      </span>
+      <span v-else class="fd-breadcrumb__current">
+        {{ item.title }}
+      </span>
+    </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
 <script setup lang="ts">
+import type { BreadcrumbItem } from "./types"
 import { computed } from "vue"
 import { ArrowRight } from "@element-plus/icons-vue"
+import { useMenuStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 
 defineOptions({ name: "fd-breadcrumb" })
 
-// ===================== 常量 =====================
 /** 首页路径 */
 const HOME_PATH = "/dashboard"
 /** 首页标题 */
 const HOME_TITLE = "首页"
+/** 首页面包屑项 */
+const HOME_ITEM: BreadcrumbItem = { path: HOME_PATH, title: HOME_TITLE }
 
-// ===================== 路由相关 =====================
 const route = useRoute()
 const router = useRouter()
-
-/** 面包屑项类型 */
-interface BreadcrumbItem {
-  path: string
-  title: string
-}
+const menuStore = useMenuStore()
 
 /**
  * 计算面包屑数据
- * 从 route.matched 中提取非隐藏的路由记录
+ * 从菜单 store 中通过 parentId 递归构建完整的菜单层级
  */
 const breadcrumbs = computed<BreadcrumbItem[]>(() => {
-  const matched = route.matched
+  // 菜单未初始化时，只显示首页
+  if (!menuStore.initialized) return [HOME_ITEM]
 
-  // 过滤并映射路由记录
-  const items = matched
-    .filter((record) => {
-      // 过滤掉隐藏的路由和 Layout 根路由
-      return !record.meta?.hidden && record.meta?.title
-    })
-    .map((record) => ({
-      path: record.path,
-      title: record.meta?.title as string,
-    }))
+  // 优先使用路由名称查找菜单（避免动态路由参数匹配失败）
+  const routeName = route.name as string
+  const currentMenu = routeName
+    ? menuStore.list.find((m) => m.name === routeName)
+    : menuStore.findMenu(route.path)
 
-  // 如果第一项不是首页，则在开头添加首页
+  // 如果找不到菜单，只显示首页
+  if (!currentMenu) return [HOME_ITEM]
+
+  // 从当前菜单向上递归查找所有父级
+  const items = getMenuChain(currentMenu.id)
+
+  // 如果第一项不是首页，在开头添加首页
   if (items.length > 0 && items[0]?.path !== HOME_PATH) {
-    items.unshift({
-      path: HOME_PATH,
-      title: HOME_TITLE,
-    })
+    items.unshift(HOME_ITEM)
   }
 
   // 如果没有任何项，至少显示首页
-  if (items.length === 0) {
-    return [
-      {
-        path: HOME_PATH,
-        title: HOME_TITLE,
-      },
-    ]
-  }
-
-  return items
+  return items.length > 0 ? items : [HOME_ITEM]
 })
 
 /**
+ * 根据菜单 ID 递归向上查找所有父级菜单
+ * @param menuId 当前菜单 ID
+ * @param result 结果数组（从子到父累积）
+ */
+function getMenuChain(menuId: number, result: BreadcrumbItem[] = []): BreadcrumbItem[] {
+  const menu = menuStore.list.find((m) => m.id === menuId)
+  if (!menu) return result
+
+  // 添加当前菜单到结果（只添加非隐藏且有标题的）
+  if (!menu.hidden && menu.title) {
+    result.unshift({ path: menu.path, title: menu.title })
+  }
+
+  // 如果有父级，继续向上查找
+  if (menu.parentId && menu.parentId !== 0) {
+    return getMenuChain(menu.parentId, result)
+  }
+
+  return result
+}
+
+/**
+ * 递归查找目录下第一个可跳转的子菜单路径
+ * @param parentId 父级菜单 ID
+ */
+function findFirstChildMenuPath(parentId: number): string | undefined {
+  const children = menuStore.list
+    .filter((m) => m.parentId === parentId && !m.hidden && m.status === 1)
+    .sort((a, b) => a.sort - b.sort)
+
+  for (const child of children) {
+    // 页面类型（type=1），直接返回路径
+    if (child.type === 1) return child.path
+    // 目录类型（type=0），递归查找
+    if (child.type === 0) {
+      const result = findFirstChildMenuPath(child.id)
+      if (result) return result
+    }
+  }
+
+  return undefined
+}
+
+/**
+ * 根据路径查找菜单（支持精确匹配和名称匹配）
+ * @param path 路由路径
+ */
+function findMenuByPath(path: string) {
+  return menuStore.list.find((m) => m.path === path)
+}
+
+/**
  * 处理面包屑点击
+ * - 目录类型：跳转到第一个可访问的子菜单
+ * - 页面类型：直接跳转
  */
 function handleClick(item: BreadcrumbItem) {
-  if (item.path && item.path !== route.path) {
-    router.push(item.path)
+  if (!item.path || item.path === route.path) return
+
+  // 查找点击项对应的菜单
+  const menu = findMenuByPath(item.path)
+
+  // 如果是目录类型，查找其第一个可访问的子菜单
+  if (menu?.type === 0) {
+    const firstChildPath = findFirstChildMenuPath(menu.id)
+    if (firstChildPath) {
+      router.push(firstChildPath)
+      return
+    }
   }
+
+  // 否则直接跳转
+  router.push(item.path)
 }
 </script>
 
@@ -112,21 +164,5 @@ function handleClick(item: BreadcrumbItem) {
     color: var(--el-text-color-primary);
     font-weight: 500;
   }
-}
-
-// 过渡动画
-.breadcrumb-fade-enter-active,
-.breadcrumb-fade-leave-active {
-  transition: all 0.3s ease;
-}
-
-.breadcrumb-fade-enter-from,
-.breadcrumb-fade-leave-to {
-  opacity: 0;
-  transform: translateX(-10px);
-}
-
-.breadcrumb-fade-move {
-  transition: transform 0.3s ease;
 }
 </style>
