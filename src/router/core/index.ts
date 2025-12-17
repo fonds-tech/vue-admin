@@ -1,3 +1,8 @@
-// core 模块已迁移至 guard/before.ts
-// 此文件保留用于向后兼容，但实际功能已不再使用
-export {}
+export * from "./auth"
+export * from "./dynamic"
+export * from "./fallback"
+export * from "./menus"
+export * from "./registered"
+export * from "./utils"
+export * from "./whitelist"
+export * from "../types"

@@ -1,4 +1,3 @@
-import type { RouteRecordRaw } from "vue-router"
 import type { Menu, MenuState } from "./types"
 import { isEmpty } from "@fonds/utils"
 import { mockMenus } from "@/mock/menu"

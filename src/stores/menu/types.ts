@@ -30,7 +30,7 @@ export interface Menu {
   /** 组件路径（目录/权限可为空） */
   component?: string
   /** 重定向路径 */
-  redirect?: never
+  redirect?: string
   /** 菜单类型：0-目录 1-菜单 2-权限 */
   type: MenuType
   /** 排序 */
@@ -55,29 +55,19 @@ export interface Menu {
 
 /** 路由元信息 */
 export interface MenuMeta {
-  /** 是否使用 */
-  use?: boolean
+  /** 是否公开路由（白名单） */
+  public?: boolean
   /** 菜单图标 */
   icon?: string
-  /** 是否需要认证 */
-  auth?: boolean
-  /** 是否首页 */
-  index?: boolean
   /** 菜单标题 */
   title?: string
   /** 是否隐藏菜单 */
   hidden?: boolean
   /** 是否缓存页面（用于 keep-alive） */
-  keepAlive?: boolean
-  /** 权限标识 */
-  permission?: string
-  /** 激活菜单（用于详情页高亮父级菜单） */
-  activeMenu?: string
-  /** iframe 内嵌地址 */
-  frameSrc?: string
-  /** 外链地址（新窗口打开） */
-  link?: string
-  /** 组件路径（目录/权限可为空） */
+  cache?: boolean
+  /** 内嵌 iframe */
+  iframe?: boolean
+  /** 组件路径 */
   component?: string
 }
 
