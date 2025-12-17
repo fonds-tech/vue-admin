@@ -125,59 +125,59 @@ const todos = ref([
     justify-content: space-between;
 
     .title {
-      color: var(--el-text-color-primary);
       font-size: 16px;
       font-weight: 600;
+      color: var(--el-text-color-primary);
     }
   }
 }
 
 .shortcuts {
-  gap: 12px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 
   .shortcut-item {
-    gap: 12px;
-    color: var(--el-text-color-regular);
-    border: 1px solid transparent;
     display: flex;
-    padding: 16px;
-    background: var(--el-bg-color-page);
-    transition: all 0.3s;
+    gap: 12px;
     align-items: center;
-    border-radius: 8px;
+    padding: 16px;
+    color: var(--el-text-color-regular);
     text-decoration: none;
+    background: var(--el-bg-color-page);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: all 0.3s;
 
     &:hover {
-      transform: translateY(-2px);
       background: var(--el-bg-color);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       border-color: var(--el-border-color-lighter);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
+      transform: translateY(-2px);
     }
 
     .icon-box {
-      width: 40px;
-      height: 40px;
       display: flex;
       align-items: center;
-      border-radius: 10px;
       justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
     }
   }
 }
 
 .todo-list {
-  gap: 12px;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 
   .todo-item {
     display: flex;
-    padding: 8px 0;
     align-items: center;
-    border-bottom: 1px dashed var(--el-border-color-lighter);
     justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--el-border-color-lighter);
 
     &:last-child {
       border-bottom: none;
@@ -186,8 +186,8 @@ const todos = ref([
 }
 
 .right-panel {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 </style>

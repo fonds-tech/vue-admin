@@ -92,14 +92,14 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .chart-card {
-  border: 1px solid var(--el-border-color-light);
   height: 100%;
-  transition: all 0.3s;
-  border-radius: 4px;
   margin-bottom: 12px;
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 4px;
+  transition: all 0.3s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
   }
 
   :deep(.el-card__header) {
@@ -114,18 +114,21 @@ onUnmounted(() => {
   .card-header {
     display: flex;
     flex-direction: column;
+
     .title {
-      color: var(--el-text-color-primary);
+      margin-bottom: 4px;
       font-size: 16px;
       font-weight: 600;
-      margin-bottom: 4px;
+      color: var(--el-text-color-primary);
     }
+
     .subtitle {
-      color: var(--el-text-color-secondary);
       font-size: 13px;
+      color: var(--el-text-color-secondary);
+
       .highlight {
-        color: var(--el-color-success);
         font-weight: 500;
+        color: var(--el-color-success);
       }
     }
   }

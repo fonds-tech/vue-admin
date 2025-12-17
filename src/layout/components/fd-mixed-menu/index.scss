@@ -13,7 +13,6 @@ $menu-transition: all 0.3s ease;
 $menu-item-height: 44px;
 $menu-item-radius: 8px;
 $second-level-width: 200px;
-
 $first-level-width-icon: 64px;
 $first-level-width-text: 80px;
 $second-level-collapsed-width: 0px;
@@ -21,18 +20,18 @@ $second-level-collapsed-width: 0px;
 // ==================== 主容器 ====================
 
 .fd-mixed-menu {
-  height: 100%;
   display: flex;
+  height: 100%;
   overflow: hidden;
 
   // ==================== 一级菜单（左侧） ====================
 
   &__first {
-    height: 100%;
     display: flex;
-    transition: width 0.3s ease;
     flex-shrink: 0;
     flex-direction: column;
+    height: 100%;
+    transition: width 0.3s ease;
   }
 
   &__first-scroll {
@@ -41,15 +40,15 @@ $second-level-collapsed-width: 0px;
   }
 
   &__first-item {
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    margin: 4px 8px;
     display: flex;
-    transition: $menu-transition;
-    align-items: center;
-    border-radius: $menu-item-radius;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    margin: 4px 8px;
+    color: rgb(255 255 255 / 70%);
+    cursor: pointer;
+    border-radius: $menu-item-radius;
+    transition: $menu-transition;
 
     // 图标样式
     .iconify,
@@ -60,43 +59,43 @@ $second-level-collapsed-width: 0px;
 
     // 悬浮状态
     &:hover {
-      color: #ffffff;
-      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      background-color: rgb(255 255 255 / 10%);
     }
 
     // 激活状态
     &.is-active {
-      color: #ffffff;
+      color: #fff;
       background-color: var(--el-color-primary);
 
       .iconify,
       svg {
-        color: #ffffff;
+        color: #fff;
       }
     }
   }
 
   &__first-text {
-    overflow: hidden;
-    font-size: 12px;
     max-width: 100%;
     margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
     text-align: center;
     white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   // ==================== 二级菜单（右侧） ====================
 
   &__second {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: $second-level-width;
     height: 100%;
-    display: flex;
     overflow: hidden;
-    position: relative;
-    transition: width 0.3s ease;
     border-left: 1px solid var(--el-border-color-lighter);
-    flex-direction: column;
+    transition: width 0.3s ease;
 
     // 折叠状态
     &.is-collapsed {
@@ -123,21 +122,21 @@ $second-level-collapsed-width: 0px;
   &__sub-item,
   .el-sub-menu__title {
     height: $menu-item-height;
-    margin: 4px 12px;
     padding: 0 16px !important;
+    margin: 4px 12px;
     font-size: 14px;
-    transition: $menu-transition;
     font-weight: 500;
     line-height: $menu-item-height;
     border-radius: $menu-item-radius;
+    transition: $menu-transition;
 
     // 图标
     .iconify,
     svg,
     .el-icon {
-      font-size: 18px;
       flex-shrink: 0;
       margin-right: 12px;
+      font-size: 18px;
     }
 
     // 悬浮状态
@@ -167,29 +166,29 @@ $second-level-collapsed-width: 0px;
 
     .fd-mixed-menu__sub-item,
     .el-sub-menu__title {
-      margin-left: 20px;
       margin-right: 12px;
+      margin-left: 20px;
     }
   }
 
   // ==================== 折叠按钮 ====================
 
   &__collapse-btn {
-    color: var(--el-text-color-secondary);
-    right: 0;
-    width: 24px;
-    border: 1px solid var(--el-border-color-lighter);
-    bottom: 20px;
-    cursor: pointer;
-    height: 48px;
-    display: flex;
     position: absolute;
-    transition: $menu-transition;
+    right: 0;
+    bottom: 20px;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 48px;
+    color: var(--el-text-color-secondary);
+    cursor: pointer;
+    background-color: var(--el-bg-color);
+    border: 1px solid var(--el-border-color-lighter);
     border-right: none;
     border-radius: 8px 0 0 8px;
-    justify-content: center;
-    background-color: var(--el-bg-color);
+    transition: $menu-transition;
 
     &:hover {
       color: var(--el-color-primary);
@@ -204,7 +203,7 @@ $second-level-collapsed-width: 0px;
   .fd-mixed-menu {
     &__first-item {
       &:hover {
-        background-color: rgba(255, 255, 255, 0.15);
+        background-color: rgb(255 255 255 / 15%);
       }
     }
 

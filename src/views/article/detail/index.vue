@@ -212,15 +212,19 @@ const commentContent = ref("")
 .prose h2 {
   @apply text-xl font-bold text-gray-800 mt-8 mb-4;
 }
+
 .prose h3 {
   @apply text-lg font-bold text-gray-700 mt-6 mb-3;
 }
+
 .prose p {
   @apply text-gray-600 leading-7 mb-4;
 }
+
 .prose ul {
   @apply list-disc list-inside mb-4 text-gray-600;
 }
+
 .prose blockquote {
   @apply border-l-4 border-primary bg-primary/10 p-4 rounded-r mb-6 italic text-gray-700;
 }

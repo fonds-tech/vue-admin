@@ -159,35 +159,35 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .chart-card {
-  border: 1px solid var(--el-border-color-lighter);
   height: 100%;
   padding: 24px;
   background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
   box-shadow: var(--el-box-shadow-light);
   transition: all 0.3s ease;
-  border-radius: 12px;
 
   &:hover {
-    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 24px -8px rgb(0 0 0 / 8%);
   }
 
   .card-header {
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
     justify-content: space-between;
+    margin-bottom: 24px;
 
     .title {
-      color: var(--el-text-color-primary);
       margin: 0 0 4px;
       font-size: 18px;
       font-weight: 600;
+      color: var(--el-text-color-primary);
     }
 
     .subtitle {
-      color: var(--el-text-color-secondary);
       margin: 0;
       font-size: 13px;
+      color: var(--el-text-color-secondary);
     }
   }
 

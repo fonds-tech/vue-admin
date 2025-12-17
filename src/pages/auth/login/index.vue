@@ -105,53 +105,53 @@ async function handleLogin() {
 <style lang="scss" scoped>
 .login-page {
   display: flex;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .login-container {
-  width: 900px;
   display: flex;
+  width: 900px;
   overflow: hidden;
   background: $bg-white;
-  box-shadow: $shadow-lg;
   border-radius: $border-radius-xl;
+  box-shadow: $shadow-lg;
 }
 
 .login-banner {
-  flex: 1;
-  color: #fff;
   display: flex;
-  padding: $spacing-2xl;
-  background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+  flex: 1;
   align-items: center;
   justify-content: center;
+  padding: $spacing-2xl;
+  color: #fff;
+  background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
 
   .banner-content {
     text-align: center;
 
     h1 {
+      margin-bottom: $spacing-base;
       font-size: 32px;
       font-weight: 700;
-      margin-bottom: $spacing-base;
     }
 
     p {
-      opacity: 0.9;
       font-size: 14px;
       line-height: 1.6;
+      opacity: 0.9;
     }
   }
 }
 
 .login-form-wrapper {
-  flex: 1;
   display: flex;
-  padding: $spacing-2xl;
+  flex: 1;
   align-items: center;
   justify-content: center;
+  padding: $spacing-2xl;
 }
 
 .login-form {
@@ -159,22 +159,22 @@ async function handleLogin() {
   max-width: 320px;
 
   .login-title {
-    color: $text-primary;
-    font-size: 24px;
-    text-align: center;
-    font-weight: 600;
     margin-bottom: $spacing-xl;
+    font-size: 24px;
+    font-weight: 600;
+    color: $text-primary;
+    text-align: center;
   }
 
   .form-options {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
 
   .forgot-link {
-    color: $primary-color;
     font-size: 13px;
+    color: $primary-color;
   }
 
   .login-btn {
@@ -182,18 +182,18 @@ async function handleLogin() {
   }
 
   .login-tips {
-    color: $text-secondary;
-    font-size: 12px;
-    text-align: center;
     padding-top: $spacing-base;
+    font-size: 12px;
+    color: $text-secondary;
+    text-align: center;
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .login-container {
+    flex-direction: column;
     width: 90%;
     max-width: 400px;
-    flex-direction: column;
   }
 
   .login-banner {

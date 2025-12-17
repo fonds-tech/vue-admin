@@ -7,10 +7,25 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+.pnpm-store
+
+# Build output
 dist
 dist-ssr
 *.local
+
+# Coverage & reports
+coverage
+.nyc_output
+test-results
+
+# Cache & temporary
+.turbo
+.cache
+.tmp
+*.temp
 
 # Editor directories and files
 .idea
@@ -21,3 +36,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Oxlint/TypeScript cache
+.oxlint-cache
+*.tsbuildinfo
+
+# VSCode history
+.vscode-test
+.history
+
+# OS specific
+Thumbs.db
+Desktop.ini

@@ -15,18 +15,19 @@ const show = computed(() => true)
 
 <style lang="scss">
 .fd-sidebar {
-  height: 100vh;
   display: flex;
   flex-shrink: 0;
-  user-select: none;
   flex-direction: column;
+  height: 100vh;
+  user-select: none;
+
   &::before {
+    position: absolute;
     top: 0;
     right: 0;
     width: 1px;
     height: 100%;
     content: "";
-    position: absolute;
     background-color: var(--el-border-color);
   }
 }

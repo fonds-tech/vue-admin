@@ -17,16 +17,16 @@ $popup-menu-radius: 6px;
 
 // 菜单图标样式
 @mixin menu-icon($ml: -7px, $mr: 8px) {
-  margin-left: $ml;
   margin-right: $mr;
+  margin-left: $ml;
 }
 
 // 菜单标题省略样式
 @mixin menu-title-ellipsis {
   flex: 1;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 // 菜单项 hover/active 交互状态
@@ -44,26 +44,26 @@ $popup-menu-radius: 6px;
 
 // 菜单容器 flex 布局
 @mixin menu-flex-column($gap: 6px) {
-  gap: $gap;
   display: flex;
   flex-direction: column;
+  gap: $gap;
 }
 
 // ==================== 单列菜单 ====================
 .fd-vertical-menu {
-  height: 100vh;
-  display: flex;
   position: relative;
+  display: flex;
+  height: 100vh;
   overflow-x: hidden;
 
   &::before {
+    position: absolute;
     top: 0;
     right: 0;
-    width: 1px;
     bottom: 0;
-    content: "";
     z-index: 1;
-    position: absolute;
+    width: 1px;
+    content: "";
     background-color: var(--el-border-color-extra-light);
   }
 
@@ -73,25 +73,26 @@ $popup-menu-radius: 6px;
 
   // 头部区域样式
   &__header {
-    width: 100%;
-    cursor: pointer;
-    height: 50px;
-    display: flex;
     position: relative;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
 
     &__inner {
-      gap: 12px;
+      position: absolute;
       top: 50%;
       left: 50%;
       display: flex;
-      position: absolute;
-      transform: translate(-50%, -50%);
+      gap: 12px;
       align-items: center;
+      transform: translate(-50%, -50%);
     }
   }
 
   .el-menu {
     @include menu-flex-column;
+
     border-right: none;
 
     &:not(.el-menu--collapse) {
@@ -101,6 +102,7 @@ $popup-menu-radius: 6px;
     .el-menu-item {
       @include menu-item-base;
       @include menu-item-states;
+
       cursor: pointer;
 
       .fd-menu__icon {
@@ -111,6 +113,7 @@ $popup-menu-radius: 6px;
         @include menu-title-ellipsis;
       }
     }
+
     .el-sub-menu {
       @include menu-flex-column;
 
@@ -142,8 +145,8 @@ $popup-menu-radius: 6px;
       .el-sub-menu__title {
         .fd-menu__title {
           width: 0;
-          opacity: 0;
           overflow: hidden;
+          opacity: 0;
         }
 
         .fd-menu__icon {
@@ -158,35 +161,35 @@ $popup-menu-radius: 6px;
   // 左侧一级菜单
   &__left {
     display: flex;
+    flex-direction: column;
     overflow: hidden;
     border-right: 1px solid var(--el-border-color-lighter);
-    flex-direction: column;
   }
 
   &__left-header {
-    height: 50px;
     display: flex;
-    align-items: center;
     flex-shrink: 0;
+    align-items: center;
     justify-content: center;
+    height: 50px;
   }
 
   &__left-menu {
-    gap: 6px;
     display: flex;
     flex-direction: column;
+    gap: 6px;
   }
 
   &__left-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 46px;
-    cursor: pointer;
     height: 46px;
     margin: 0 auto;
-    display: flex;
-    transition: all 0.2s ease;
-    align-items: center;
+    cursor: pointer;
     border-radius: $menu-item-radius;
-    justify-content: center;
+    transition: all 0.2s ease;
 
     .iconify,
     svg {
@@ -198,29 +201,29 @@ $popup-menu-radius: 6px;
 
   // 右侧子菜单
   &__right {
-    flex: 1;
     display: flex;
-    overflow: hidden;
+    flex: 1;
     flex-direction: column;
+    overflow: hidden;
     background-color: var(--el-bg-color);
   }
 
   &__right-header {
-    height: 50px;
     display: flex;
-    padding: 0 20px;
-    align-items: center;
     flex-shrink: 0;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
   }
 
   &__right-title {
-    color: var(--el-text-color-primary);
     margin: 0;
     overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 18px;
     font-weight: 600;
+    color: var(--el-text-color-primary);
     white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   &__right-menu {
@@ -236,9 +239,9 @@ $popup-menu-radius: 6px;
     .iconify,
     svg,
     .el-icon {
-      font-size: $menu-icon-size;
       flex-shrink: 0;
       margin-right: 12px;
+      font-size: $menu-icon-size;
     }
 
     @include menu-item-states;
@@ -255,6 +258,7 @@ $popup-menu-radius: 6px;
 .fd-vertical-menu__popper {
   .el-menu {
     @include menu-flex-column;
+
     border-radius: 6px;
 
     .el-sub-menu {
@@ -299,18 +303,16 @@ $popup-menu-radius: 6px;
 
 @media only screen and (width <= $mobile-breakpoint) {
   .fd-vertical-menu {
-    width: 0;
-    z-index: 1000;
     position: fixed;
+    z-index: 1000;
+    width: 0;
+
+    &__left {
+      display: none;
+    }
 
     .el-menu--collapse {
       width: 0;
-    }
-  }
-
-  .fd-vertical-menu {
-    &__left {
-      display: none;
     }
   }
 }

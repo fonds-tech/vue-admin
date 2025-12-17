@@ -52,36 +52,36 @@ defineProps({
 
 <style lang="scss" scoped>
 .stat-card {
-  gap: 16px;
-  border: 1px solid var(--el-border-color-lighter);
-  cursor: pointer;
-  height: 100%;
+  position: relative;
   display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  height: 100%;
   padding: 20px;
   overflow: hidden;
-  position: relative;
+  cursor: pointer;
   background: var(--el-bg-color);
-  transition: all 0.3s ease;
-  align-items: flex-start;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
+  transition: all 0.3s ease;
 
   &::after {
+    position: absolute;
     top: 0;
     right: 0;
     width: 100px;
     height: 100px;
-    content: "";
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.4) 100%);
-    transition: opacity 0.3s;
     pointer-events: none;
+    content: "";
+    background: linear-gradient(135deg, transparent 0%, rgb(255 255 255 / 40%) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.08);
     border-color: transparent;
+    box-shadow: 0 12px 24px -8px rgb(0 0 0 / 8%);
+    transform: translateY(-4px);
 
     &::after {
       opacity: 1;
@@ -89,14 +89,14 @@ defineProps({
   }
 
   .stat-icon-wrapper {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
     width: 56px;
     height: 56px;
-    display: flex;
-    transition: transform 0.3s;
-    align-items: center;
-    flex-shrink: 0;
     border-radius: 16px;
-    justify-content: center;
+    transition: transform 0.3s;
   }
 
   &:hover .stat-icon-wrapper {
@@ -104,30 +104,30 @@ defineProps({
   }
 
   .stat-info {
-    flex: 1;
-    height: 56px;
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: space-between;
+    height: 56px;
   }
 
   .stat-header {
     display: flex;
     align-items: center;
-    margin-bottom: 4px;
     justify-content: space-between;
+    margin-bottom: 4px;
 
     .stat-title {
-      color: var(--el-text-color-secondary);
       font-size: 14px;
       font-weight: 500;
+      color: var(--el-text-color-secondary);
     }
 
     .stat-trend {
-      gap: 2px;
       display: flex;
-      font-size: 12px;
+      gap: 2px;
       align-items: center;
+      font-size: 12px;
       font-weight: 600;
 
       &.is-up {
@@ -146,11 +146,11 @@ defineProps({
     justify-content: space-between;
 
     .stat-value {
-      color: var(--el-text-color-primary);
       margin: 0;
       font-size: 24px;
       font-weight: 700;
       line-height: 1.2;
+      color: var(--el-text-color-primary);
     }
 
     .stat-badge {

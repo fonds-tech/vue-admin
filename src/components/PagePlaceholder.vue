@@ -96,15 +96,15 @@ const timelineType = computed(() =>
 
 <style scoped lang="scss">
 .placeholder-page {
-  gap: 12px;
   display: flex;
-  padding: 12px;
   flex-direction: column;
+  gap: 12px;
+  padding: 12px;
 }
 
 .placeholder-result {
-  border: 1px dashed var(--el-border-color);
   background: var(--el-fill-color-lighter);
+  border: 1px dashed var(--el-border-color);
   border-radius: 8px;
 }
 
@@ -114,22 +114,22 @@ const timelineType = computed(() =>
     border-radius: 8px;
 
     .action-index {
-      color: var(--el-text-color-secondary);
-      font-size: 12px;
       margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--el-text-color-secondary);
     }
 
     .action-title {
-      color: var(--el-text-color-primary);
+      margin-bottom: 6px;
       font-size: 16px;
       font-weight: 600;
-      margin-bottom: 6px;
+      color: var(--el-text-color-primary);
     }
 
     .action-desc {
-      color: var(--el-text-color-regular);
       margin: 0;
       line-height: 1.6;
+      color: var(--el-text-color-regular);
     }
   }
 }

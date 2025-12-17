@@ -186,7 +186,6 @@ function handlePublish() {
 
 <style scoped>
 :deep(.el-textarea__inner) {
-  box-shadow: none !important;
   font-family:
     ui-sans-serif,
     system-ui,
@@ -197,7 +196,9 @@ function handlePublish() {
     "Helvetica Neue",
     Arial,
     sans-serif;
+  box-shadow: none !important;
 }
+
 .title-input :deep(.el-input__inner) {
   height: 2.5rem;
 }

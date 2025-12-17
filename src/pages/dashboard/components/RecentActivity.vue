@@ -80,24 +80,24 @@ const activities = ref<ActivityItem[]>([
 
 <style lang="scss" scoped>
 .activity-card {
-  border: 1px solid var(--el-border-color-lighter);
   height: 100%;
   padding: 24px;
   background: var(--el-bg-color);
-  box-shadow: var(--el-box-shadow-light);
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
+  box-shadow: var(--el-box-shadow-light);
 
   .card-header {
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
     justify-content: space-between;
+    margin-bottom: 24px;
 
     .title {
-      color: var(--el-text-color-primary);
       margin: 0;
       font-size: 18px;
       font-weight: 600;
+      color: var(--el-text-color-primary);
     }
   }
 
@@ -106,15 +106,15 @@ const activities = ref<ActivityItem[]>([
 
     .activity-content {
       .activity-title {
-        color: var(--el-text-color-primary);
         font-size: 14px;
         font-weight: 500;
+        color: var(--el-text-color-primary);
       }
 
       .activity-desc {
-        color: var(--el-text-color-secondary);
         margin: 4px 0 0;
         font-size: 13px;
+        color: var(--el-text-color-secondary);
       }
     }
   }

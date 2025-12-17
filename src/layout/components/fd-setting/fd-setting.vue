@@ -261,48 +261,49 @@ function changeLanguage() {
 <style lang="scss" scoped>
 .fd-setting {
   &__content {
-    gap: 20px;
     display: flex;
     flex-direction: column;
+    gap: 20px;
     padding-bottom: 20px;
   }
 
   &__section {
-    gap: 12px;
     display: flex;
     flex-direction: column;
+    gap: 12px;
   }
 
   &__title {
-    color: var(--el-text-color-primary);
-    font-size: 14px;
-    text-align: center;
     margin-bottom: 5px;
+    font-size: 14px;
+    color: var(--el-text-color-primary);
+    text-align: center;
   }
 
   &__options {
-    gap: 8px;
     display: grid;
-    justify-items: center;
     grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    justify-items: center;
   }
 
   &__card {
-    gap: 8px;
-    cursor: pointer;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
 
     span {
-      color: var(--el-text-color-regular);
       font-size: 12px;
+      color: var(--el-text-color-regular);
     }
 
     &.is-active {
       .fd-setting__preview {
         border-color: var(--el-color-primary);
       }
+
       span {
         color: var(--el-color-primary);
       }
@@ -310,13 +311,13 @@ function changeLanguage() {
   }
 
   &__preview {
-    width: 100%;
-    border: 2px solid var(--el-border-color-dark);
-    overflow: hidden;
     position: relative;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
+    width: 100%;
+    overflow: hidden;
+    border: 2px solid var(--el-border-color-dark);
     border-radius: 8px;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 10%);
+    transition: all 0.3s;
 
     &:hover {
       opacity: 0.85;
@@ -324,29 +325,29 @@ function changeLanguage() {
 
     // SVG 图标样式
     :deep(svg) {
+      display: block;
       width: 100%;
       height: 100%;
-      display: block;
     }
   }
 
   &__colors {
-    gap: 12px;
     display: flex;
-    padding: 0 10px;
     flex-wrap: wrap;
+    gap: 12px;
     justify-content: center;
+    padding: 0 10px;
   }
 
   &__color-option {
-    width: 24px;
-    cursor: pointer;
-    height: 24px;
     display: flex;
-    transition: all 0.2s;
     align-items: center;
-    border-radius: 50%;
     justify-content: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s;
 
     &:hover {
       transform: scale(1.1);
@@ -359,17 +360,17 @@ function changeLanguage() {
 
   &__items {
     display: flex;
-    padding: 0 10px;
     flex-direction: column;
+    padding: 0 10px;
   }
 
   &__item {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 10px 0;
     font-size: 14px;
-    align-items: center;
     border-bottom: 1px solid var(--el-border-color-lighter);
-    justify-content: space-between;
 
     &:last-child {
       border-bottom: none;

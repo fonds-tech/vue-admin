@@ -43,12 +43,12 @@ const iconStyle = computed<CSSProperties>(() => {
 
 <style lang="scss">
 .fd-icon {
-  color: currentColor;
+  display: inline-block;
+  flex-shrink: 0;
   width: 1em;
   height: 1em;
-  display: inline-block;
   font-size: inherit;
-  flex-shrink: 0;
   vertical-align: middle;
+  color: currentcolor;
 }
 </style>

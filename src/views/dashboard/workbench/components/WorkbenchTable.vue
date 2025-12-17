@@ -89,14 +89,14 @@ const tableData = [
 
 <style scoped lang="scss">
 .list-card {
-  border: 1px solid var(--el-border-color-light);
   height: 100%;
-  transition: all 0.3s;
-  border-radius: 4px;
   margin-bottom: 12px;
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 4px;
+  transition: all 0.3s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
   }
 
   :deep(.el-card__header) {
@@ -105,18 +105,19 @@ const tableData = [
   }
 
   .card-header {
-    color: var(--el-text-color-primary);
     display: flex;
-    font-size: 16px;
     align-items: center;
-    font-weight: 500;
     justify-content: space-between;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--el-text-color-primary);
   }
 
   .sub-header {
-    color: var(--el-text-color-secondary);
-    font-size: 13px;
     margin-top: 8px;
+    font-size: 13px;
+    color: var(--el-text-color-secondary);
+
     .highlight {
       color: var(--el-color-success);
     }

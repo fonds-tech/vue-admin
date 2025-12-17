@@ -200,9 +200,9 @@ async function handleSubmit() {
 
 <style lang="scss" scoped>
 .page-container {
-  gap: $spacing-base;
   display: flex;
   flex-direction: column;
+  gap: $spacing-base;
 }
 
 .search-card {
@@ -220,8 +220,8 @@ async function handleSubmit() {
 
   .pagination {
     display: flex;
-    margin-top: $spacing-base;
     justify-content: flex-end;
+    margin-top: $spacing-base;
   }
 }
 </style>

@@ -42,19 +42,19 @@
   text-align: center;
 
   h2 {
-    color: $primary-color;
-    font-size: 24px;
     margin-bottom: $spacing-sm;
+    font-size: 24px;
+    color: $primary-color;
   }
 
   p {
-    color: $text-secondary;
     margin-bottom: $spacing-base;
+    color: $text-secondary;
   }
 
   .el-descriptions {
-    margin: 0 auto;
     max-width: 400px;
+    margin: 0 auto;
   }
 }
 </style>

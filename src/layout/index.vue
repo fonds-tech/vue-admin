@@ -25,8 +25,8 @@ const settingsStore = useSettingsStore()
 
 <style lang="scss" scoped>
 .app-layout {
-  height: 100vh;
   display: flex;
+  height: 100vh;
   overflow: hidden;
   background-color: var(--el-bg-color);
 
@@ -35,10 +35,10 @@ const settingsStore = useSettingsStore()
   }
 
   .app-main {
-    flex: 1;
     display: flex;
-    overflow: hidden;
+    flex: 1;
     flex-direction: column;
+    overflow: hidden;
   }
 }
 </style>

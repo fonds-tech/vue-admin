@@ -34,14 +34,14 @@ const todos = reactive([
 
 <style scoped lang="scss">
 .list-card {
-  border: 1px solid var(--el-border-color-light);
   height: 100%;
-  transition: all 0.3s;
-  border-radius: 4px;
   margin-bottom: 12px;
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 4px;
+  transition: all 0.3s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
   }
 
   :deep(.el-card__header) {
@@ -50,31 +50,33 @@ const todos = reactive([
   }
 
   .card-header {
-    color: var(--el-text-color-primary);
     display: flex;
-    font-size: 16px;
     align-items: center;
-    font-weight: 500;
     justify-content: space-between;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--el-text-color-primary);
 
     .count {
-      color: var(--el-text-color-secondary);
       font-size: 13px;
+      color: var(--el-text-color-secondary);
+
       .num {
-        color: var(--el-color-danger);
         font-weight: 600;
+        color: var(--el-color-danger);
       }
     }
   }
 
   .todo-list {
     padding: 0 12px;
+
     .todo-item {
       display: flex;
-      padding: 16px 0;
       align-items: center;
-      border-bottom: 1px solid var(--el-border-color-lighter);
       justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--el-border-color-lighter);
 
       &:last-child {
         border-bottom: none;
@@ -82,13 +84,14 @@ const todos = reactive([
 
       .content {
         .title {
-          color: var(--el-text-color-primary);
-          font-size: 14px;
           margin-bottom: 4px;
+          font-size: 14px;
+          color: var(--el-text-color-primary);
         }
+
         .time {
-          color: var(--el-text-color-placeholder);
           font-size: 12px;
+          color: var(--el-text-color-placeholder);
         }
       }
     }

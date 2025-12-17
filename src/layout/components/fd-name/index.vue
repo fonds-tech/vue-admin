@@ -10,10 +10,10 @@ const appTitle = import.meta.env.VITE_APP_TITLE
 
 <style lang="scss" scoped>
 .fd-name {
-  color: var(--el-text-color-primary);
   margin: 0;
   font-size: 16px;
   font-weight: 600;
+  color: var(--el-text-color-primary);
   white-space: nowrap;
 }
 </style>

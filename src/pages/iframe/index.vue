@@ -68,25 +68,25 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .frame-container {
+  position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  position: relative;
   min-height: calc(100vh - 120px);
+  overflow: hidden;
 }
 
 .frame-loading {
-  gap: $spacing-sm;
-  color: $text-secondary;
-  inset: 0;
-  display: flex;
-  z-index: 10;
   position: absolute;
-  font-size: 14px;
-  background: $bg-page;
-  align-items: center;
+  inset: 0;
+  z-index: 10;
+  display: flex;
   flex-direction: column;
+  gap: $spacing-sm;
+  align-items: center;
   justify-content: center;
+  font-size: 14px;
+  color: $text-secondary;
+  background: $bg-page;
 
   .loading-icon {
     color: $primary-color;
@@ -95,17 +95,17 @@ onMounted(() => {
 }
 
 .frame-empty {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
 .frame-iframe {
   width: 100%;
-  border: none;
   height: 100%;
   min-height: calc(100vh - 120px);
+  border: none;
 }
 
 @keyframes rotate {

@@ -39,15 +39,15 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .workbench-card {
-  border: 1px solid var(--el-border-color-light);
-  transition: all 0.3s;
-  border-radius: 4px;
   margin-bottom: 12px;
   background-color: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 4px;
+  transition: all 0.3s;
 
   &:hover {
+    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
 
   :deep(.el-card__body) {
@@ -57,36 +57,36 @@ withDefaults(defineProps<Props>(), {
   .card-header {
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
     justify-content: space-between;
+    margin-bottom: 24px;
 
     .card-title {
-      color: var(--el-text-color-regular);
       font-size: 14px;
       font-weight: 500;
+      color: var(--el-text-color-regular);
     }
   }
 
   .card-content {
     .card-number {
-      color: var(--el-text-color-primary);
+      margin-bottom: 16px;
+      font-family: "DIN Alternate", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 32px;
-      font-family: "DIN Alternate", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 700;
       line-height: 1.2;
-      margin-bottom: 16px;
+      color: var(--el-text-color-primary);
     }
 
     .card-desc {
-      color: var(--el-text-color-secondary);
       display: flex;
-      font-size: 13px;
       align-items: center;
       justify-content: space-between;
+      font-size: 13px;
+      color: var(--el-text-color-secondary);
 
       .trend {
-        gap: 4px;
         display: flex;
+        gap: 4px;
         align-items: center;
 
         &.up {

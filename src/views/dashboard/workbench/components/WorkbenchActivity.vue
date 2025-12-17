@@ -33,14 +33,14 @@ const activities = [
 
 <style scoped lang="scss">
 .list-card {
-  border: 1px solid var(--el-border-color-light);
   height: 100%;
-  transition: all 0.3s;
-  border-radius: 4px;
   margin-bottom: 12px;
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 4px;
+  transition: all 0.3s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
   }
 
   :deep(.el-card__header) {
@@ -49,46 +49,50 @@ const activities = [
   }
 
   .card-header {
-    color: var(--el-text-color-primary);
     display: flex;
-    font-size: 16px;
     align-items: center;
-    font-weight: 500;
     justify-content: space-between;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--el-text-color-primary);
 
     .highlight {
-      color: var(--el-color-success);
       padding: 2px 8px;
       font-size: 13px;
-      border-radius: 4px;
+      color: var(--el-color-success);
       background-color: var(--el-color-success-light-9);
+      border-radius: 4px;
     }
   }
 
   .activity-list {
     padding: 0 12px;
+
     .activity-item {
       display: flex;
-      padding: 16px 0;
       align-items: center;
-      border-bottom: 1px solid var(--el-border-color-lighter);
       justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--el-border-color-lighter);
 
       &:last-child {
         border-bottom: none;
       }
 
       .content {
-        color: var(--el-text-color-secondary);
         font-size: 14px;
+        color: var(--el-text-color-secondary);
+
         .user {
-          color: var(--el-text-color-primary);
-          font-weight: 500;
           margin-right: 4px;
+          font-weight: 500;
+          color: var(--el-text-color-primary);
         }
+
         .action {
           margin-right: 4px;
         }
+
         .target {
           color: var(--el-color-primary);
           cursor: pointer;
@@ -96,8 +100,8 @@ const activities = [
       }
 
       .time {
-        color: var(--el-text-color-placeholder);
         font-size: 12px;
+        color: var(--el-text-color-placeholder);
       }
     }
   }

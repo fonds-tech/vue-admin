@@ -60,9 +60,9 @@ onUnmounted(() => {
 
   .el-scrollbar__view {
     display: flex;
+    flex-direction: column;
     padding: 12px;
     overflow-x: hidden;
-    flex-direction: column;
   }
 }
 

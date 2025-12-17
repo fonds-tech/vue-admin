@@ -42,13 +42,13 @@
 <style scoped lang="scss">
 .project-card {
   color: #fff;
-  border: 1px solid var(--el-border-color-light);
   background: #1d1e1f;
-  transition: all 0.3s;
+  border: 1px solid var(--el-border-color-light);
   border-radius: 4px;
+  transition: all 0.3s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   }
 
   :deep(.el-card__body) {
@@ -56,49 +56,54 @@
   }
 
   .project-content {
-    height: 300px;
-    display: flex;
-    padding: 30px;
-    overflow: hidden;
     position: relative;
+    display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 300px;
+    padding: 30px;
+    overflow: hidden;
 
     .info-section {
       z-index: 1;
+
       .title {
+        margin-bottom: 16px;
         font-size: 24px;
         font-weight: 600;
-        margin-bottom: 16px;
       }
+
       .desc {
-        color: #909399;
+        margin-bottom: 30px;
         font-size: 14px;
         line-height: 1.6;
-        margin-bottom: 30px;
+        color: #909399;
       }
+
       .links {
-        gap: 20px;
         display: flex;
+        gap: 20px;
+
         .link-group {
-          gap: 12px;
           display: flex;
           flex-direction: column;
+          gap: 12px;
+
           .link-item {
-            color: #e5eaf3;
-            width: 160px;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 160px;
             padding: 10px 16px;
             font-size: 14px;
-            background: rgba(255, 255, 255, 0.05);
-            transition: background 0.3s;
-            align-items: center;
-            border-radius: 4px;
-            justify-content: space-between;
+            color: #e5eaf3;
             text-decoration: none;
+            background: rgb(255 255 255 / 5%);
+            border-radius: 4px;
+            transition: background 0.3s;
 
             &:hover {
-              background: rgba(255, 255, 255, 0.1);
+              background: rgb(255 255 255 / 10%);
             }
           }
         }
@@ -106,17 +111,17 @@
     }
 
     .image-section {
-      right: 0;
-      width: 50%;
-      bottom: 0;
-      height: 100%;
       position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      height: 100%;
 
       .illustration-placeholder {
         // Placeholder graphic simulation using CSS gradient if image is missing
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle at bottom right, rgba(64, 158, 255, 0.2), transparent 70%);
+        background: radial-gradient(circle at bottom right, rgb(64 158 255 / 20%), transparent 70%);
       }
     }
   }
