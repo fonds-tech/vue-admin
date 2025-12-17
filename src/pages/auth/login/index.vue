@@ -92,11 +92,9 @@ async function handleLogin() {
     // 跳转到来源页面或首页
     const redirect = (route.query.redirect as string) || "/"
     router.push(redirect)
-  }
-  catch {
+  } catch {
     ElMessage.error(t("common.failed"))
-  }
-  finally {
+  } finally {
     loading.value = false
   }
 }

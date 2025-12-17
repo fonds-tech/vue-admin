@@ -11,9 +11,7 @@
           </el-button-group>
         </div>
       </div>
-      <div class="sub-header">
-        这个月增长 <span class="highlight">+20%</span>
-      </div>
+      <div class="sub-header">这个月增长 <span class="highlight">+20%</span></div>
     </template>
 
     <el-table :data="tableData" style="width: 100%" :show-header="true">

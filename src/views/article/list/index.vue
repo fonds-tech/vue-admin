@@ -11,12 +11,7 @@
               <el-tab-pane label="本周最火" name="weekly" />
             </el-tabs>
             <div class="w-64">
-              <el-input
-                v-model="searchQuery"
-                placeholder="搜索文章..."
-                prefix-icon="Search"
-                clearable
-              />
+              <el-input v-model="searchQuery" placeholder="搜索文章..." prefix-icon="Search" clearable />
             </div>
           </div>
 
@@ -30,11 +25,7 @@
               <div class="flex gap-4">
                 <!-- Cover Image -->
                 <div class="w-48 h-32 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
-                  <img
-                    :src="item.cover"
-                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    alt="cover"
-                  />
+                  <img :src="item.cover" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" alt="cover" />
                 </div>
 
                 <!-- Content -->
@@ -56,13 +47,7 @@
                       </div>
                       <span>{{ item.publishTime }}</span>
                       <div class="flex gap-1">
-                        <el-tag
-                          v-for="tag in item.tags"
-                          :key="tag"
-                          size="small"
-                          type="info"
-                          effect="plain"
-                        >
+                        <el-tag v-for="tag in item.tags" :key="tag" size="small" type="info" effect="plain">
                           {{ tag }}
                         </el-tag>
                       </div>
@@ -86,11 +71,7 @@
           </div>
 
           <div class="flex justify-center mt-6">
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="100"
-            />
+            <el-pagination background layout="prev, pager, next" :total="100" />
           </div>
         </el-card>
       </el-col>
@@ -101,9 +82,7 @@
         <el-card shadow="hover" class="mb-4 text-center">
           <div class="py-4">
             <div class="text-gray-500 mb-4">分享你的知识与见解</div>
-            <el-button type="primary" class="w-full" icon="Edit" @click="router.push('/article/publish')">
-              发布文章
-            </el-button>
+            <el-button type="primary" class="w-full" icon="Edit" @click="router.push('/article/publish')"> 发布文章 </el-button>
           </div>
         </el-card>
 
@@ -132,13 +111,7 @@
             <span>热门标签</span>
           </template>
           <div class="flex flex-wrap gap-2">
-            <el-tag
-              v-for="tag in tags"
-              :key="tag"
-              class="cursor-pointer hover:opacity-80"
-              :type="getRandomType()"
-              effect="light"
-            >
+            <el-tag v-for="tag in tags" :key="tag" class="cursor-pointer hover:opacity-80" :type="getRandomType()" effect="light">
               {{ tag }}
             </el-tag>
           </div>
@@ -151,10 +124,7 @@
           </template>
           <div class="flex flex-col gap-4">
             <div v-for="(article, index) in trendingArticles" :key="article.id" class="flex gap-3 cursor-pointer group">
-              <span
-                class="w-5 h-5 flex items-center justify-center rounded text-xs font-bold"
-                :class="index < 3 ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600'"
-              >
+              <span class="w-5 h-5 flex items-center justify-center rounded text-xs font-bold" :class="index < 3 ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600'">
                 {{ index + 1 }}
               </span>
               <div class="flex-1">

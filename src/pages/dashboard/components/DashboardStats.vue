@@ -10,10 +10,7 @@
         <div class="stat-info">
           <div class="stat-header">
             <span class="stat-title">{{ stat.title }}</span>
-            <span
-              class="stat-trend"
-              :class="{ 'is-up': stat.change.startsWith('+'), 'is-down': stat.change.startsWith('-') }"
-            >
+            <span class="stat-trend" :class="{ 'is-up': stat.change.startsWith('+'), 'is-down': stat.change.startsWith('-') }">
               {{ stat.change }}
               <el-icon>
                 <component :is="stat.change.startsWith('+') ? 'Top' : 'Bottom'" />
@@ -37,14 +34,16 @@ import type { PropType } from "vue"
 
 defineProps({
   stats: {
-    type: Array as PropType<Array<{
-      title: string
-      value: string
-      icon: string
-      color: string
-      change: string
-      badge: string
-    }>>,
+    type: Array as PropType<
+      Array<{
+        title: string
+        value: string
+        icon: string
+        color: string
+        change: string
+        badge: string
+      }>
+    >,
     default: () => [],
   },
 })

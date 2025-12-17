@@ -1,11 +1,6 @@
 <template>
   <div class="placeholder-page">
-    <el-result
-      class="placeholder-result"
-      :icon="iconType"
-      :title="title"
-      :sub-title="descriptionText"
-    />
+    <el-result class="placeholder-result" :icon="iconType" :title="title" :sub-title="descriptionText" />
 
     <el-row :gutter="12" class="placeholder-actions">
       <el-col v-for="(action, index) in actionList" :key="action" :xs="24" :sm="8">
@@ -20,12 +15,7 @@
     <el-card v-if="tipList.length" shadow="never" class="tips-card">
       <template #header>快速提示</template>
       <el-timeline>
-        <el-timeline-item
-          v-for="(tip, index) in tipList"
-          :key="tip"
-          :type="timelineType"
-          :timestamp="`提示 ${index + 1}`"
-        >
+        <el-timeline-item v-for="(tip, index) in tipList" :key="tip" :type="timelineType" :timestamp="`提示 ${index + 1}`">
           {{ tip }}
         </el-timeline-item>
       </el-timeline>
@@ -52,17 +42,9 @@ const props = withDefaults(
   },
 )
 
-const defaultActions = [
-  "梳理业务字段与接口",
-  "补充页面布局（表格、卡片或表单）",
-  "配置权限、校验与加载状态",
-]
+const defaultActions = ["梳理业务字段与接口", "补充页面布局（表格、卡片或表单）", "配置权限、校验与加载状态"]
 
-const defaultTips = [
-  "当前为占位内容，可替换为真实接口数据",
-  "保持组件拆分，方便复用与维护",
-  "完善异常兜底与空状态，提升可用性",
-]
+const defaultTips = ["当前为占位内容，可替换为真实接口数据", "保持组件拆分，方便复用与维护", "完善异常兜底与空状态，提升可用性"]
 
 const iconType = computed(() => {
   switch (props.status) {
@@ -77,21 +59,13 @@ const iconType = computed(() => {
   }
 })
 
-const descriptionText = computed(() =>
-  props.description
-    ? props.description
-    : `「${props.title}」页面正在建设中，可在此补充业务模块、数据统计或操作入口。`,
-)
+const descriptionText = computed(() => (props.description ? props.description : `「${props.title}」页面正在建设中，可在此补充业务模块、数据统计或操作入口。`))
 
-const actionList = computed(() =>
-  props.actions.length ? props.actions : defaultActions,
-)
+const actionList = computed(() => (props.actions.length ? props.actions : defaultActions))
 
 const tipList = computed(() => (props.tips.length ? props.tips : defaultTips))
 
-const timelineType = computed(() =>
-  props.status === "error" ? "danger" : props.status,
-)
+const timelineType = computed(() => (props.status === "error" ? "danger" : props.status))
 </script>
 
 <style scoped lang="scss">

@@ -42,15 +42,11 @@ html.dark .el-card {
 
 // 修改 el-pagination 大小
 .el-pagination--default {
-  & {
-    --el-pagination-button-width: 32px !important;
-    --el-pagination-button-height: var(--el-pagination-button-width) !important;
-  }
+  --el-pagination-button-width: 32px !important;
+  --el-pagination-button-height: var(--el-pagination-button-width) !important;
 
   @media (width <= 1180px) {
-    & {
-      --el-pagination-button-width: 28px !important;
-    }
+    --el-pagination-button-width: 28px !important;
   }
 
   .el-select--default .el-select__wrapper {

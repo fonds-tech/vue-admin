@@ -6,7 +6,7 @@
         <span class="subtitle">今年增长 <span class="highlight">+15%</span></span>
       </div>
     </template>
-    <div ref="chartRef" style="width: 100%; height: 350px;"></div>
+    <div ref="chartRef" style="width: 100%; height: 350px"></div>
   </el-card>
 </template>
 

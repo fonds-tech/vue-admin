@@ -37,9 +37,7 @@
         <el-table-column prop="orderNo" label="订单编号" width="180" />
         <el-table-column prop="user" label="用户" width="120" />
         <el-table-column prop="amount" label="金额">
-          <template #default="scope">
-            ¥{{ scope.row.amount }}
-          </template>
+          <template #default="scope"> ¥{{ scope.row.amount }} </template>
         </el-table-column>
         <el-table-column prop="status" label="状态">
           <template #default="scope">

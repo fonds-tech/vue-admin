@@ -52,7 +52,7 @@ const scrollContainer = ref<HTMLElement | null>(null)
  * 跳转到最后一个标签或首页
  */
 function toLastOrHome() {
-  const activeItem = processStore.list.find(e => e.active)
+  const activeItem = processStore.list.find((e) => e.active)
   if (!activeItem) {
     const last = processStore.list[processStore.list.length - 1]
     router.push(last ? last.fullPath : "/")

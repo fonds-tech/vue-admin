@@ -105,8 +105,7 @@ const fullscreenIcon = computed(() => {
 function handleToggleFullscreen() {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen()
-  }
-  else {
+  } else {
     document.exitFullscreen()
   }
 }

@@ -28,12 +28,7 @@
               </div>
             </template>
             <div class="shortcuts">
-              <router-link
-                v-for="item in shortcuts"
-                :key="item.path"
-                :to="item.path"
-                class="shortcut-item"
-              >
+              <router-link v-for="item in shortcuts" :key="item.path" :to="item.path" class="shortcut-item">
                 <div class="icon-box" :style="{ color: item.color, backgroundColor: item.bg }">
                   <el-icon :size="20">
                     <component :is="item.icon" />

@@ -63,13 +63,7 @@
       <div class="fd-setting__section">
         <div class="fd-setting__title">系统主题色</div>
         <div class="fd-setting__colors">
-          <div
-            v-for="color in themeColors"
-            :key="color"
-            class="fd-setting__color-option"
-            :style="{ backgroundColor: color }"
-            @click="setPrimaryColor(color)"
-          >
+          <div v-for="color in themeColors" :key="color" class="fd-setting__color-option" :style="{ backgroundColor: color }" @click="setPrimaryColor(color)">
             <el-icon v-if="primaryColor === color" :size="14"><check /></el-icon>
           </div>
         </div>
@@ -239,8 +233,7 @@ function setTheme(mode: ThemeStyle, event: MouseEvent) {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     settingsStore.setThemeStyle("auto")
     settingsStore.setTheme(isDark ? "dark" : "light", animationOptions)
-  }
-  else {
+  } else {
     // 手动指定 light 或 dark
     settingsStore.setThemeStyle(mode)
     settingsStore.setTheme(mode as "light" | "dark", animationOptions)

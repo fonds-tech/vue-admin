@@ -139,10 +139,7 @@ watch(timeRange, () => {
   // Just animate to new random data for demo
   const r = () => Math.floor(Math.random() * 300) + 50
   chartInstance.setOption({
-    series: [
-      { data: Array.from({ length: 12 }, r) },
-      { data: Array.from({ length: 12 }, r) },
-    ],
+    series: [{ data: Array.from({ length: 12 }, r) }, { data: Array.from({ length: 12 }, r) }],
   })
 })
 

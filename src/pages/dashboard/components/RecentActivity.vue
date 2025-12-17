@@ -48,7 +48,7 @@ const activities = ref<ActivityItem[]>([
   },
   {
     title: "新用户注册",
-    description: "欢迎新用户 \"Alex Dr.\"",
+    description: '欢迎新用户 "Alex Dr."',
     timestamp: "25分钟前",
     color: "#4f46e5",
     hollow: true,

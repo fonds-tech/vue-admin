@@ -10,7 +10,9 @@
           :input-style="{ border: 'none', boxShadow: 'none', fontSize: '1.25rem', fontWeight: 600 }"
         />
         <span class="text-xs text-gray-400">
-          <span v-if="saving" class="flex items-center gap-1"><el-icon class="is-loading"><loading /></el-icon> 保存中...</span>
+          <span v-if="saving" class="flex items-center gap-1"
+            ><el-icon class="is-loading"><loading /></el-icon> 保存中...</span
+          >
           <span v-else>已保存至草稿箱</span>
         </span>
       </div>
@@ -72,13 +74,12 @@
             <!-- Cover Image -->
             <div>
               <div class="text-sm font-medium text-gray-600 mb-2">文章封面</div>
-              <el-upload
-                class="avatar-uploader"
-                action="#"
-                :show-file-list="false"
-              >
+              <el-upload class="avatar-uploader" action="#" :show-file-list="false">
                 <div v-if="coverUrl" class="w-full h-40 rounded-lg bg-cover bg-center border border-gray-200" :style="{ backgroundImage: `url(${coverUrl})` }"></div>
-                <div v-else class="w-full h-40 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors cursor-pointer bg-gray-50">
+                <div
+                  v-else
+                  class="w-full h-40 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors cursor-pointer bg-gray-50"
+                >
                   <el-icon class="text-2xl mb-1"><plus /></el-icon>
                   <span class="text-xs">点击上传封面</span>
                 </div>
@@ -99,15 +100,7 @@
             <!-- Tags -->
             <div>
               <div class="text-sm font-medium text-gray-600 mb-2">文章标签</div>
-              <el-select
-                v-model="tags"
-                multiple
-                filterable
-                allow-create
-                default-first-option
-                placeholder="选择或输入标签"
-                class="w-full"
-              >
+              <el-select v-model="tags" multiple filterable allow-create default-first-option placeholder="选择或输入标签" class="w-full">
                 <el-option label="Vue3" value="Vue3" />
                 <el-option label="React" value="React" />
                 <el-option label="TypeScript" value="TypeScript" />
@@ -117,14 +110,7 @@
             <!-- Summary -->
             <div>
               <div class="text-sm font-medium text-gray-600 mb-2">文章摘要</div>
-              <el-input
-                v-model="summary"
-                type="textarea"
-                :rows="4"
-                maxlength="200"
-                show-word-limit
-                placeholder="请输入文章摘要（默认截取正文前200字）"
-              />
+              <el-input v-model="summary" type="textarea" :rows="4" maxlength="200" show-word-limit placeholder="请输入文章摘要（默认截取正文前200字）" />
             </div>
 
             <!-- Visibility -->
@@ -152,7 +138,8 @@ import { Plus, Loading } from "@element-plus/icons-vue"
 const router = useRouter()
 
 const articleTitle = ref("Vue3 + TypeScript + Vite 现代化前端工程最佳实践探索")
-const content = ref(`随着前端工程化的快速发展，如何构建一个高效、可维护且具备良好开发体验的项目脚手架成为了每个团队需要面对的挑战。本文将结合实际项目经验，分享一套基于 Vue3 生态的现代化工程搭建方案。
+const content =
+  ref(`随着前端工程化的快速发展，如何构建一个高效、可维护且具备良好开发体验的项目脚手架成为了每个团队需要面对的挑战。本文将结合实际项目经验，分享一套基于 Vue3 生态的现代化工程搭建方案。
 
 # 1. 技术选型思考
 

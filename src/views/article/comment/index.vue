@@ -12,12 +12,7 @@
               <el-radio-button label="spam">垃圾评论</el-radio-button>
             </el-radio-group>
 
-            <el-input
-              v-model="searchQuery"
-              placeholder="搜索评论内容/作者..."
-              style="width: 200px"
-              prefix-icon="Search"
-            />
+            <el-input v-model="searchQuery" placeholder="搜索评论内容/作者..." style="width: 200px" prefix-icon="Search" />
           </div>
         </div>
       </template>
@@ -115,14 +110,12 @@ const comments = Array.from({ length: 10 }).map((_, i) => ({
   author: ["Alice", "Bob", "Charlie", "David", "Eva"][i % 5],
   email: `user${i}@example.com`,
   avatar: `https://i.pravatar.cc/150?u=${i + 20}`,
-  content: i % 2 === 0
-    ? "这篇文章写得非常好，对我帮助很大！特别是其中关于架构设计的部分，给了我很多启发。"
-    : "请问作者，文中的代码示例在哪里可以下载？遇到了一些运行报错的问题，希望能得到解答。",
+  content:
+    i % 2 === 0
+      ? "这篇文章写得非常好，对我帮助很大！特别是其中关于架构设计的部分，给了我很多启发。"
+      : "请问作者，文中的代码示例在哪里可以下载？遇到了一些运行报错的问题，希望能得到解答。",
   articleTitle: i % 3 === 0 ? "Vue3 最佳实践" : "React Hooks 详解",
   status: ["approved", "pending", "approved", "spam", "pending"][i % 5],
   time: "2024-03-21 15:30:22",
 }))
 </script>
-
-<style scoped>
-</style>
