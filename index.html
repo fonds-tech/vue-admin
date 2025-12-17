@@ -4,10 +4,160 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vite-project</title>
+    <title>Vue Admin</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      #app-loading {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #1a1a1a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Inter, -apple-system, system-ui, sans-serif;
+        transition: opacity 0.5s ease;
+      }
+
+      #app-loading.hide { opacity: 0; pointer-events: none; }
+
+      /* 优雅的中心动画 */
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top: 3px solid #60a5fa;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        position: relative;
+        box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+      }
+
+      .spinner::after {
+        content: '';
+        position: absolute;
+        inset: 8px;
+        border: 2px solid transparent;
+        border-top: 2px solid #a78bfa;
+        border-radius: 50%;
+        animation: spin 1.5s linear infinite reverse;
+      }
+
+      /* 文字动画 */
+      .loading-text {
+        margin-top: 20px;
+        font-size: 14px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: #888;
+        font-weight: 300;
+        animation: breathe 2s ease-in-out infinite;
+      }
+
+      /* 底部微光 */
+      .glow {
+        position: absolute;
+        bottom: 20%;
+        width: 80px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+        animation: glowWidth 2s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes breathe {
+        0%, 100% { opacity: 0.4; letter-spacing: 5px; }
+        50% { opacity: 1; letter-spacing: 8px; }
+      }
+
+      @keyframes glowWidth {
+        0%, 100% { width: 40px; opacity: 0.3; }
+        50% { width: 120px; opacity: 0.8; }
+      }
+
+      /* 背景微粒子 */
+      .bg-dot {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: floatUp 8s linear infinite;
+      }
+
+      .bg-dot:nth-child(1) { left: 20%; animation-delay: 0s; }
+      .bg-dot:nth-child(2) { left: 40%; animation-delay: 2s; }
+      .bg-dot:nth-child(3) { left: 60%; animation-delay: 4s; }
+      .bg-dot:nth-child(4) { left: 80%; animation-delay: 6s; }
+
+      @keyframes floatUp {
+        from { bottom: -10px; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        to { bottom: 100%; opacity: 0; }
+      }
+
+      /* 隐藏动画 */
+      .fade-out {
+        animation: finalFade 0.4s ease forwards;
+      }
+
+      @keyframes finalFade {
+        to { opacity: 0; visibility: hidden; }
+      }
+    </style>
   </head>
   <body>
+    <!-- 简洁加载器 -->
+    <div id="app-loading">
+      <!-- 微光背景粒子 -->
+      <div class="bg-dot"></div>
+      <div class="bg-dot"></div>
+      <div class="bg-dot"></div>
+      <div class="bg-dot"></div>
+
+      <!-- 核心动画 -->
+      <div class="spinner"></div>
+
+      <!-- 加载文字 -->
+      <div class="loading-text">LOADING</div>
+
+      <!-- 底部光效 -->
+      <div class="glow"></div>
+    </div>
+
+    <!-- 应用挂载点 -->
     <div id="app"></div>
+
+    <!-- 控制脚本 -->
+    <script>
+      // 页面加载完成后优雅隐藏
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loader = document.getElementById('app-loading');
+          if (loader) {
+            loader.classList.add('fade-out');
+            setTimeout(() => loader.remove(), 400);
+          }
+        }, 800);
+      });
+
+      // 安全机制
+      setTimeout(() => {
+        const loader = document.getElementById('app-loading');
+        if (loader && document.body.contains(loader)) {
+          loader.classList.add('fade-out');
+          setTimeout(() => loader.remove(), 400);
+        }
+      }, 2000);
+    </script>
+
+    <!-- Vue应用 -->
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

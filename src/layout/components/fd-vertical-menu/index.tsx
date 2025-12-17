@@ -284,8 +284,6 @@ export default defineComponent({
                 collapseTransition={false}
                 uniqueOpened={isAccordionMode.value}
                 backgroundColor="transparent"
-                textColor="#303133"
-                activeTextColor="var(--el-color-primary)"
                 onSelect={handleSubMenuSelect}
               >
                 {currentSubMenus.value.map((menu) => renderDualRightItem(menu, activeFirstLevelPath.value))}
