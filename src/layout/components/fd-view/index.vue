@@ -13,13 +13,14 @@
 </template>
 
 <script setup lang="ts">
-import { emitter } from "@/utils/mitt"
+import { useMitt } from "@/hooks"
 import { useProcessStore } from "@/stores"
 import { useSettingsStore } from "@/stores"
-import { ref, computed, onMounted, onUnmounted } from "vue"
+import { ref, computed, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-view" })
 
+const mitt = useMitt("layout")
 const processStore = useProcessStore()
 const settingsStore = useSettingsStore()
 
@@ -43,12 +44,12 @@ function handleRefresh() {
   key.value += 1
 }
 
-onMounted(() => {
-  emitter.on("process:refresh", handleRefresh)
+onBeforeMount(() => {
+  mitt.on("process:refresh", handleRefresh)
 })
 
 onUnmounted(() => {
-  emitter.off("process:refresh", handleRefresh)
+  mitt.off("process:refresh", handleRefresh)
 })
 </script>
 

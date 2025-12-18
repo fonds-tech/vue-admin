@@ -1,8 +1,12 @@
 <template>
   <div class="fd-header-bar">
     <div class="fd-header-bar__left">
-      <!-- 非水平布局显示折叠按钮和面包屑 -->
-      <div v-if="isVerticalLayout" class="fd-header-bar__action-btn" @click="handleToggleCollapse">
+      <!-- 移动端显示菜单按钮 -->
+      <div v-if="isMobile" class="fd-header-bar__action-btn" @click="handleOpenMobileMenu">
+        <fd-icon icon="ri:menu-line" :size="20" />
+      </div>
+      <!-- 非移动端且非水平布局显示折叠按钮 -->
+      <div v-else-if="showCollapse" class="fd-header-bar__action-btn" @click="handleToggleCollapse">
         <fd-icon :icon="collapseIcon" :size="20" />
       </div>
       <fd-breadcrumb />
@@ -42,17 +46,33 @@
 
 <script setup lang="ts">
 import type { LanguageType } from "@/stores"
-import { useSettingsStore } from "@/stores"
-import { ref, computed, onMounted, onUnmounted } from "vue"
+import { useSettingsStore, useDeviceStore } from "@/stores"
+import { ref, inject, computed, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-header-bar" })
 
 const settingsStore = useSettingsStore()
+const deviceStore = useDeviceStore()
+
+// ===================== 移动端菜单 =====================
+/** 打开移动端菜单（由父组件注入） */
+const openMobileMenu = inject<() => void>("openMobileMenu")
+
+/** 打开移动端菜单 */
+function handleOpenMobileMenu() {
+  openMobileMenu?.()
+}
 
 // ===================== 布局判断 =====================
 
+/** 是否为移动端 */
+const isMobile = computed(() => deviceStore.isMobile)
+
 /** 是否为垂直布局 */
 const isVerticalLayout = computed(() => settingsStore.isVerticalLayout)
+
+/** 是否显示折叠按钮（非移动端且垂直布局） */
+const showCollapse = computed(() => !isMobile.value && isVerticalLayout.value)
 
 // ===================== 折叠功能 =====================
 /** 折叠图标 */

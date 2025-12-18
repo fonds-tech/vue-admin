@@ -25,7 +25,13 @@
           @contextmenu="(e: MouseEvent) => onContextMenu(e, item, index)"
         >
           <span class="process-item__title">{{ item.title }}</span>
-          <fd-icon v-if="!item.affix" icon="ri:close-line" :size="14" class="process-item__close" @click.stop="onClickClose(index)" />
+          <fd-icon
+            v-if="!item.affix"
+            icon="ri:close-line"
+            :size="14"
+            class="process-item__close"
+            @click.stop="onClickClose(index)"
+          />
         </div>
       </div>
     </div>
@@ -33,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ProcessItem } from "@/stores/process/types"
-import { emitter } from "@/utils/mitt"
+import type { ProcessItem } from "@/stores"
+import { useMitt } from "@/hooks"
 import { contextMenu } from "@fonds/vue-crud"
 import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { useProcessStore } from "@/stores"
@@ -43,6 +49,7 @@ import { ref, watch, nextTick, onMounted } from "vue"
 
 defineOptions({ name: "fd-process" })
 
+const mitt = useMitt("layout")
 const route = useRoute()
 const router = useRouter()
 const processStore = useProcessStore()
@@ -70,7 +77,7 @@ function onClickBack() {
  * 点击刷新按钮
  */
 function onClickRefresh() {
-  emitter.emit("process:refresh")
+  mitt.emit("process:refresh")
 }
 
 /**
