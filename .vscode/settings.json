@@ -1,7 +1,7 @@
 {
   // 禁用 Prettier，使用 ESLint 作为格式化工具
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
+  "prettier.enable": true,
+  "editor.formatOnSave": true,
   // 启用 ESLint 扁平配置模式（ESLint v9+）
   "eslint.useFlatConfig": true,
   // 保存时自动修复

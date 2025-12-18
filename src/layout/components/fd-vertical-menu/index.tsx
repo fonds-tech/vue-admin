@@ -3,10 +3,11 @@ import type { CSSProperties } from "vue"
 import FdLogo from "../fd-logo/index.vue"
 import FdName from "../fd-name/index.vue"
 import FdIcon from "@/components/core/fd-icon"
+import { useMitt } from "@/hooks"
 import { useRoute, useRouter } from "vue-router"
-
-import { ref, watch, inject, computed, defineComponent } from "vue"
 import { useMenuStore, useDeviceStore, useSettingsStore } from "@/stores"
+
+import { ref, watch, computed, onMounted, onUnmounted, defineComponent } from "vue"
 import { ElMenu, ElDrawer, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
 import "./index.scss"
 
@@ -19,6 +20,27 @@ export default defineComponent({
     const menuStore = useMenuStore()
     const deviceStore = useDeviceStore()
     const settingsStore = useSettingsStore()
+
+    const mitt = useMitt("layout")
+
+    /** mobile drawer visibility */
+    const mobileMenuOpen = ref<boolean>(false)
+
+    function handleOpenMobileMenu() {
+      mobileMenuOpen.value = true
+    }
+
+    function handleClose() {
+      mobileMenuOpen.value = false
+    }
+
+    onMounted(() => {
+      mitt.on("mobile-menu:open", handleOpenMobileMenu)
+    })
+
+    onUnmounted(() => {
+      mitt.off("mobile-menu:open", handleOpenMobileMenu)
+    })
 
     /** 是否为移动端设备 */
     const isMobile = computed<boolean>(() => deviceStore.isMobile)
@@ -388,17 +410,6 @@ export default defineComponent({
           {renderDualRight()}
         </>
       )
-    }
-
-    // ==================== 移动端相关 ====================
-
-    /** 移动端菜单状态（由父组件注入） */
-    const mobileMenuOpen = inject("mobileMenuOpen", ref(false))
-    const closeMobileMenu = inject<() => void>("closeMobileMenu")
-
-    /** 关闭移动端菜单 */
-    function handleClose() {
-      closeMobileMenu?.()
     }
 
     /** 渲染移动端抽屉菜单 */
