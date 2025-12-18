@@ -86,12 +86,15 @@
 
 <script setup lang="ts">
 import type { Menu } from "@/stores"
+import { useMitt } from "@/hooks"
 import { useRouter } from "vue-router"
 import { treeToList } from "@/utils/array"
 import { useMenuStore } from "@/stores"
 import { ref, watch, computed, nextTick } from "vue"
 
 defineOptions({ name: "fd-search" })
+
+const mitt = useMitt("layout")
 
 // ===================== 类型定义 =====================
 
@@ -246,6 +249,13 @@ function close() {
   searchQuery.value = ""
   activeIndex.value = -1
 }
+
+onBeforeMount(() => {
+  mitt.on("search:open", () => {
+    console.log(333)
+    open()
+  })
+})
 
 // ===================== 暴露 API =====================
 

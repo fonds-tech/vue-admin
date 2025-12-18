@@ -41,6 +41,7 @@
     "@vue/tsconfig": "^0.8.1",
     "boxen": "^8.0.1",
     "dayjs": "^1.11.19",
+    "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.1.0",
     "gradient-string": "^3.0.0",
     "jsdom": "^27.3.0",

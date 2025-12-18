@@ -1,28 +1,32 @@
 <template>
-  <div class="fd-header-bar">
-    <div class="fd-header-bar__left">
+  <div class="fd-header">
+    <div class="fd-header__left">
       <!-- 移动端显示菜单按钮 -->
-      <div v-if="isMobile" class="fd-header-bar__action-btn" @click="handleOpenMobileMenu">
+      <div v-if="isMobile" class="fd-header__action-btn" @click="handleOpenMobileMenu">
         <fd-icon icon="ri:menu-line" :size="20" />
       </div>
       <!-- 非移动端且非水平布局显示折叠按钮 -->
-      <div v-else-if="showCollapse" class="fd-header-bar__action-btn" @click="handleToggleCollapse">
+      <div v-else-if="showCollapse" class="fd-header__action-btn" @click="handleToggleCollapse">
         <fd-icon :icon="collapseIcon" :size="20" />
       </div>
       <fd-breadcrumb />
     </div>
-    <div class="fd-header-bar__right">
+    <div class="fd-header__right">
+      <!-- 搜索按钮 -->
+      <div class="fd-header__action-btn" @click="handleOpenSearch">
+        <fd-icon icon="ri:search-line" :size="20" />
+      </div>
       <!-- 主题切换按钮 -->
-      <div class="fd-header-bar__action-btn" @click="handleToggleTheme">
+      <div class="fd-header__action-btn" @click="handleToggleTheme">
         <fd-icon :icon="themeIcon" :size="20" />
       </div>
       <!-- 全屏按钮 -->
-      <div class="fd-header-bar__action-btn" @click="handleToggleFullscreen">
+      <div class="fd-header__action-btn" @click="handleToggleFullscreen">
         <fd-icon :icon="fullscreenIcon" :size="20" />
       </div>
       <!-- 多语言切换 -->
       <el-dropdown trigger="hover" @command="handleChangeLanguage">
-        <div class="fd-header-bar__action-btn">
+        <div class="fd-header__action-btn">
           <fd-icon icon="ri:translate-2" :size="20" />
         </div>
         <template #dropdown>
@@ -37,7 +41,7 @@
         </template>
       </el-dropdown>
       <!-- 设置按钮 -->
-      <div class="fd-header-bar__action-btn" @click="handleOpenSettings">
+      <div class="fd-header__action-btn" @click="handleOpenSettings">
         <fd-icon icon="ri:settings-3-line" :size="20" />
       </div>
     </div>
@@ -47,13 +51,16 @@
 <script setup lang="ts">
 import type { LanguageType } from "@/stores"
 import fdBreadcrumb from "../fd-breadcrumb"
+import { useMitt } from "@/hooks"
 import { useDeviceStore, useSettingsStore } from "@/stores"
 import { ref, inject, computed, onMounted, onUnmounted } from "vue"
 
-defineOptions({ name: "fd-header-bar" })
+defineOptions({ name: "fd-header" })
 
-const settingsStore = useSettingsStore()
+const mitt = useMitt("layout")
+
 const deviceStore = useDeviceStore()
+const settingsStore = useSettingsStore()
 
 // ===================== 移动端菜单 =====================
 /** 打开移动端菜单（由父组件注入） */
@@ -63,8 +70,6 @@ const openMobileMenu = inject<() => void>("openMobileMenu")
 function handleOpenMobileMenu() {
   openMobileMenu?.()
 }
-
-// ===================== 布局判断 =====================
 
 /** 是否为移动端 */
 const isMobile = computed(() => deviceStore.isMobile)
@@ -139,6 +144,11 @@ function handleFullscreenChange() {
   isFullscreen.value = !!document.fullscreenElement
 }
 
+/** 打开搜索面板 */
+function handleOpenSearch() {
+  mitt.emit("search:open")
+}
+
 onMounted(() => {
   document.addEventListener("fullscreenchange", handleFullscreenChange)
 })
@@ -155,7 +165,7 @@ function handleOpenSettings() {
 </script>
 
 <style lang="scss">
-.fd-header-bar {
+.fd-header {
   height: 50px;
   display: flex;
   padding: 0 12px;

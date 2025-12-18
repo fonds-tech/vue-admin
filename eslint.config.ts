@@ -4,7 +4,7 @@ export default eslint(
   {
     vue: true,
     jsx: true,
-    markdown: true,
+    markdown: false,
     typescript: true,
     formatters: true,
   },
