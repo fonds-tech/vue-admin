@@ -3,6 +3,23 @@
  * 使用 Element Plus CSS 变量 + 自定义布局变量
  */
 
+// ==================== 响应式断点 ====================
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+
+// ==================== 响应式 Mixins ====================
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
 // ==================== 布局尺寸（Element Plus 没有提供） ====================
 $header-height: 50px;
 $sidebar-width: 250px;

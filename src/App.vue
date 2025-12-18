@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from "./stores/settings"
+import { useSettingsStore } from "@/stores"
 import { ElConfigProvider } from "element-plus"
-import { elementPlusLocales } from "./locales"
+import { elementPlusLocales } from "@/locales"
 
 const settingsStore = useSettingsStore()
 const locale = elementPlusLocales[settingsStore.language as keyof typeof elementPlusLocales]

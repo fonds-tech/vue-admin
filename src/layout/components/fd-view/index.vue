@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { emitter } from "@/utils/mitt"
 import { useProcessStore } from "@/stores"
-import { useSettingsStore } from "@/stores/settings"
+import { useSettingsStore } from "@/stores"
 import { ref, computed, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-view" })

@@ -1,8 +1,8 @@
 import type { Plugin } from "vite"
-import { getPackageSize } from "../utils"
-import dayjs, { type Dayjs } from "dayjs"
 import duration from "dayjs/plugin/duration"
 import gradientString from "gradient-string"
+import { getPackageSize } from "../utils"
+import dayjs, { type Dayjs } from "dayjs"
 import boxen, { type Options as BoxenOptions } from "boxen"
 
 dayjs.extend(duration)

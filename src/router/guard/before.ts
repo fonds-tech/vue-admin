@@ -1,7 +1,7 @@
 import type { Router } from "vue-router"
 import type { GuardCtx, GuardStep, GuardResult } from "../core"
-import { auth, menus, dynamic, fallback, whitelist, registered } from "../core"
 import { useAppStore, useMenuStore } from "@/stores"
+import { auth, menus, dynamic, fallback, whitelist, registered } from "../core"
 
 const steps: GuardStep[] = [whitelist, auth, menus, registered, dynamic, fallback]
 

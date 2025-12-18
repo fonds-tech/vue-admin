@@ -8,7 +8,7 @@ import VueHook from "alova/vue"
 import { ElMessage } from "element-plus"
 import { createAlova } from "alova"
 import { ResponseCode } from "./types"
-import { useUserStore } from "@/stores/user"
+import { useUserStore } from "@/stores"
 import { axiosRequestAdapter } from "@alova/adapter-axios"
 
 /** 创建 Alova 实例 */

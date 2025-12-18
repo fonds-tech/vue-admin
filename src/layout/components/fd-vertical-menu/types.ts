@@ -1,4 +1,4 @@
-import type { Menu } from "@/stores/menu/types"
+import type { Menu } from "@/stores"
 
 // ==================== 扩展类型 ====================
 

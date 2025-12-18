@@ -1,4 +1,4 @@
-import type { Menu } from "@/stores/menu/types"
+import type { Menu } from "@/stores"
 
 /**
  * 菜单数据（已扁平化，路径为父子路径拼接且以 / 开头）

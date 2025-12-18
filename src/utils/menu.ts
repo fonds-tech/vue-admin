@@ -1,4 +1,4 @@
-import type { Menu } from "@/stores/menu/types"
+import type { Menu } from "@/stores"
 import type { RouteRecordRaw } from "vue-router"
 
 /**

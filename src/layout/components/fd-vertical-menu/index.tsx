@@ -1,11 +1,11 @@
-import type { Menu } from "@/stores/menu/types"
+import type { Menu } from "@/stores"
 import type { CSSProperties } from "vue"
 import FdLogo from "../fd-logo/index.vue"
 import FdName from "../fd-name/index.vue"
 import FdIcon from "@/components/core/fd-icon"
 
-import { useMenuStore } from "@/stores/menu"
-import { useSettingsStore } from "@/stores/settings"
+import { useMenuStore } from "@/stores"
+import { useSettingsStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 import { ref, watch, computed, defineComponent } from "vue"
 import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
@@ -326,9 +326,27 @@ export default defineComponent({
       )
     }
 
-    /** 菜单容器类名（根据布局模式添加修饰符） */
-    const containerClass = computed(() => ["fd-vertical-menu", `fd-vertical-menu--${settingsStore.menuLayout}`])
+    /** 移动端菜单状态（由父组件注入） */
+    const mobileMenuOpen = inject("mobileMenuOpen", ref(false))
+    const closeMobileMenu = inject<() => void>("closeMobileMenu")
 
-    return () => <div class={containerClass.value} style={style.value}>{isDualMode.value ? renderDualLayout() : renderSingleLayout()}</div>
+    /** 关闭移动端菜单 */
+    function handleClose() {
+      closeMobileMenu?.()
+    }
+
+    /** 菜单容器类名（根据布局模式添加修饰符） */
+    const containerClass = computed(() => [
+      "fd-vertical-menu",
+      `fd-vertical-menu--${settingsStore.menuLayout}`,
+      { "is-open": mobileMenuOpen.value },
+    ])
+
+    return () => (
+      <div class={containerClass.value} style={style.value}>
+        {isDualMode.value ? renderDualLayout() : renderSingleLayout()}
+        <div class="menu-model" onClick={handleClose} />
+      </div>
+    )
   },
 })

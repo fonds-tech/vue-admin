@@ -1,18 +1,12 @@
-/**
- * Pinia 状态管理入口
- */
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate"
 import { createPinia } from "pinia"
+import { initializePlugin } from "./plugins/initialize"
 
 const pinia = createPinia()
 
-// 注册持久化插件
+pinia.use(initializePlugin)
 pinia.use(piniaPluginPersistedstate)
 
 export default pinia
 
-export { useAppStore } from "./app"
-export { useMenuStore } from "./menu"
-export { useProcessStore } from "./process"
-export { useSettingsStore } from "./settings"
-export { useUserStore } from "./user"
+export * from "./modules"
