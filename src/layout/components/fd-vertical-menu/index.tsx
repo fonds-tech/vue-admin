@@ -7,7 +7,7 @@ import FdIcon from "@/components/core/fd-icon"
 import { useMenuStore, useDeviceStore } from "@/stores"
 import { useSettingsStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
-import { ref, watch, computed, defineComponent } from "vue"
+import { ref, watch, computed, defineComponent, inject } from "vue"
 import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar, ElDrawer } from "element-plus"
 import "./index.scss"
 
@@ -125,6 +125,16 @@ export default defineComponent({
       { immediate: true },
     )
 
+    // 监听布局模式变化，切换到双列模式时初始化一级菜单
+    watch(
+      isDualMode,
+      (val) => {
+        if (val) {
+          initActiveFirstLevel()
+        }
+      },
+    )
+
     /** 菜单选择处理（单列模式） */
     function handleMenuSelect(path: string): void {
       if (isExternalLink(path)) {
@@ -156,7 +166,7 @@ export default defineComponent({
 
     /** 渲染菜单标题 */
     function renderTitle(title?: string) {
-      return <span class="fd-menu__title">{title || "未命名菜单"}</span>
+      return <span class="fd-menu__title">{title}</span>
     }
 
     /** 渲染叶子菜单项（无子菜单） */
@@ -321,7 +331,7 @@ export default defineComponent({
         return (
           <ElMenuItem key={menu.path} index={fullPath} class="fd-vertical-menu__right-item">
             {renderIcon(menu.icon)}
-            <span>{menu.title}</span>
+            {renderTitle(menu.title)}
           </ElMenuItem>
         )
       }
@@ -333,7 +343,7 @@ export default defineComponent({
             title: () => (
               <>
                 {renderIcon(menu.icon)}
-                <span>{menu.title}</span>
+                {renderTitle(menu.title)}
               </>
             ),
             default: () => menu.children?.map((child: Menu) => renderDualRightItem(child, fullPath)),

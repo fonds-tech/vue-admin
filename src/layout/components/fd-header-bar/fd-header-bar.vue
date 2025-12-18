@@ -46,6 +46,7 @@
 
 <script setup lang="ts">
 import type { LanguageType } from "@/stores"
+import fdBreadcrumb from "../fd-breadcrumb"
 import { useSettingsStore, useDeviceStore } from "@/stores"
 import { ref, inject, computed, onMounted, onUnmounted } from "vue"
 
