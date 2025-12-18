@@ -4,11 +4,11 @@ import FdLogo from "../fd-logo/index.vue"
 import FdName from "../fd-name/index.vue"
 import FdIcon from "@/components/core/fd-icon"
 
-import { useMenuStore } from "@/stores"
+import { useMenuStore, useDeviceStore } from "@/stores"
 import { useSettingsStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 import { ref, watch, computed, defineComponent } from "vue"
-import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
+import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar, ElDrawer } from "element-plus"
 import "./index.scss"
 
 export default defineComponent({
@@ -18,7 +18,11 @@ export default defineComponent({
     const router = useRouter()
 
     const menuStore = useMenuStore()
+    const deviceStore = useDeviceStore()
     const settingsStore = useSettingsStore()
+
+    /** 是否为移动端设备 */
+    const isMobile = computed<boolean>(() => deviceStore.isMobile)
 
     /** 当前选中的一级菜单路径（双列模式使用） */
     const activeFirstLevelPath = ref<string>("")
@@ -212,28 +216,98 @@ export default defineComponent({
       )
     }
 
-    /** 渲染左侧区域（双列模式） */
-    function renderDualLeft() {
-      return (
-        <div class="fd-vertical-menu__left" style={leftColumnStyle.value}>
-          <div class="fd-vertical-menu__left-header">
-            <FdLogo />
-          </div>
-          <ElScrollbar>
-            <div class="fd-vertical-menu__left-menu">{firstLevelMenus.value.map((menu) => renderDualLeftItem(menu))}</div>
-          </ElScrollbar>
-        </div>
-      )
+    // ==================== 基础元素渲染函数 ====================
+
+    /** 渲染 Logo 组件 */
+    function renderLogo() {
+      return <FdLogo />
     }
 
-    /** 渲染头部区域（单列模式） */
+    /** 渲染系统名称组件 */
+    function renderName() {
+      return <FdName />
+    }
+
+    // ==================== 单列模式渲染函数 ====================
+
+    /** 渲染单列模式头部（Logo + Name） */
     function renderSingleHeader() {
       return (
         <div class="fd-vertical-menu__header">
           <div class="fd-vertical-menu__header__inner">
-            <FdLogo />
-            {isCollapsed.value ? null : <FdName />}
+            {renderLogo()}
+            {isCollapsed.value ? null : renderName()}
           </div>
+        </div>
+      )
+    }
+
+    /** 渲染单列模式菜单（含滚动容器） */
+    function renderSingleMenu() {
+      return (
+        <ElScrollbar>
+          <ElMenu
+            showTimeout={50}
+            hideTimeout={50000}
+            defaultActive={activeMenuPath.value}
+            collapse={isCollapsed.value}
+            uniqueOpened={isAccordionMode.value}
+            popperClass="fd-vertical-menu__popper"
+            onSelect={handleMenuSelect}
+          >
+            {menuList.value.map((menu) => renderMenuItem(menu, ""))}
+          </ElMenu>
+        </ElScrollbar>
+      )
+    }
+
+    /** 渲染单列布局 */
+    function renderSingleLayout() {
+      return (
+        <>
+          {renderSingleHeader()}
+          {renderSingleMenu()}
+        </>
+      )
+    }
+
+    // ==================== 双列模式渲染函数 ====================
+
+    /** 渲染双列左侧头部（仅 Logo） */
+    function renderDualLeftHeader() {
+      return (
+        <div class="fd-vertical-menu__left-header">
+          {renderLogo()}
+        </div>
+      )
+    }
+
+    /** 渲染双列左侧菜单列表 */
+    function renderDualLeftMenu() {
+      return (
+        <ElScrollbar>
+          <div class="fd-vertical-menu__left-menu">
+            {firstLevelMenus.value.map((menu) => renderDualLeftItem(menu))}
+          </div>
+        </ElScrollbar>
+      )
+    }
+
+    /** 渲染左侧区域（双列模式） */
+    function renderDualLeft() {
+      return (
+        <div class="fd-vertical-menu__left" style={leftColumnStyle.value}>
+          {renderDualLeftHeader()}
+          {renderDualLeftMenu()}
+        </div>
+      )
+    }
+
+    /** 渲染双列右侧头部（仅 Name） */
+    function renderDualRightHeader() {
+      return (
+        <div class="fd-vertical-menu__right-header">
+          {renderName()}
         </div>
       )
     }
@@ -268,28 +342,31 @@ export default defineComponent({
       )
     }
 
+    /** 渲染双列右侧菜单（含滚动容器） */
+    function renderDualRightMenu() {
+      if (!hasSubMenus.value) return null
+      return (
+        <ElScrollbar class="fd-vertical-menu__right-scroll">
+          <ElMenu
+            class="fd-vertical-menu__right-menu"
+            defaultActive={activeMenuPath.value}
+            collapseTransition={false}
+            uniqueOpened={isAccordionMode.value}
+            backgroundColor="transparent"
+            onSelect={handleSubMenuSelect}
+          >
+            {currentSubMenus.value.map((menu) => renderDualRightItem(menu, activeFirstLevelPath.value))}
+          </ElMenu>
+        </ElScrollbar>
+      )
+    }
+
     /** 渲染右侧区域（双列模式） */
     function renderDualRight() {
       return (
         <div class="fd-vertical-menu__right" style={rightColumnStyle.value}>
-          {/* 右侧头部 */}
-          <div class="fd-vertical-menu__right-header">
-            <FdName />
-          </div>
-          {hasSubMenus.value && (
-            <ElScrollbar class="fd-vertical-menu__right-scroll">
-              <ElMenu
-                class="fd-vertical-menu__right-menu"
-                defaultActive={activeMenuPath.value}
-                collapseTransition={false}
-                uniqueOpened={isAccordionMode.value}
-                backgroundColor="transparent"
-                onSelect={handleSubMenuSelect}
-              >
-                {currentSubMenus.value.map((menu) => renderDualRightItem(menu, activeFirstLevelPath.value))}
-              </ElMenu>
-            </ElScrollbar>
-          )}
+          {renderDualRightHeader()}
+          {renderDualRightMenu()}
         </div>
       )
     }
@@ -304,27 +381,7 @@ export default defineComponent({
       )
     }
 
-    /** 渲染单列布局 */
-    function renderSingleLayout() {
-      return (
-        <>
-          {renderSingleHeader()}
-          <ElScrollbar>
-            <ElMenu
-              showTimeout={50}
-              hideTimeout={50000}
-              defaultActive={activeMenuPath.value}
-              collapse={isCollapsed.value}
-              uniqueOpened={isAccordionMode.value}
-              popperClass="fd-vertical-menu__popper"
-              onSelect={handleMenuSelect}
-            >
-              {menuList.value.map((menu) => renderMenuItem(menu, ""))}
-            </ElMenu>
-          </ElScrollbar>
-        </>
-      )
-    }
+    // ==================== 移动端相关 ====================
 
     /** 移动端菜单状态（由父组件注入） */
     const mobileMenuOpen = inject("mobileMenuOpen", ref(false))
@@ -335,18 +392,44 @@ export default defineComponent({
       closeMobileMenu?.()
     }
 
+    /** 渲染移动端抽屉菜单 */
+    function renderMobileDrawer() {
+      return (
+        <ElDrawer
+          modelValue={mobileMenuOpen.value}
+          direction="ltr"
+          size="auto"
+          withHeader={false}
+          showClose={false}
+          modal={true}
+          modalClass="fd-vertical-menu__drawer-modal"
+          class="fd-vertical-menu__drawer"
+          onClose={handleClose}
+        >
+          <div class={containerClass.value} style={style.value}>
+            {isDualMode.value ? renderDualLayout() : renderSingleLayout()}
+          </div>
+        </ElDrawer>
+      )
+    }
+
+    // ==================== 主渲染函数 ====================
+
     /** 菜单容器类名（根据布局模式添加修饰符） */
     const containerClass = computed(() => [
       "fd-vertical-menu",
       `fd-vertical-menu--${settingsStore.menuLayout}`,
-      { "is-open": mobileMenuOpen.value },
     ])
 
-    return () => (
-      <div class={containerClass.value} style={style.value}>
-        {isDualMode.value ? renderDualLayout() : renderSingleLayout()}
-        <div class="menu-model" onClick={handleClose} />
-      </div>
-    )
+    /** 渲染桌面端菜单 */
+    function renderDesktopMenu() {
+      return (
+        <div class={containerClass.value} style={style.value}>
+          {isDualMode.value ? renderDualLayout() : renderSingleLayout()}
+        </div>
+      )
+    }
+
+    return () => (isMobile.value ? renderMobileDrawer() : renderDesktopMenu())
   },
 })

@@ -301,56 +301,30 @@ $popup-menu-radius: 6px;
   }
 }
 
-// ==================== 移动端遮罩层 ====================
-.menu-model {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  display: none;
-  background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  pointer-events: none;
-}
+// ==================== 移动端抽屉菜单样式 ====================
 
-// ==================== 响应式适配 ====================
+.fd-vertical-menu__drawer {
+  // 移除抽屉内边距
+  .el-drawer__body {
+    padding: 0;
+  }
 
-@media only screen and (max-width: $mobile-breakpoint) {
+  // 确保菜单填满抽屉
   .fd-vertical-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2000;
-    width: 0;
-    height: 100vh;
-    transition: width 0.3s;
+    width: var(--menu-expand-width);
+    height: 100%;
 
-    &__left {
-      display: none;
-    }
-
-    .el-menu:not(.el-menu--collapse) {
-      width: 0;
-      transition: width 0.3s;
-    }
-
-    &.is-open {
-      width: var(--menu-expand-width);
-
-      .el-menu:not(.el-menu--collapse) {
-        width: var(--menu-expand-width);
+    // 移动端双列模式只显示单列
+    &--dual {
+      .fd-vertical-menu__left {
+        display: none;
       }
 
-      .menu-model {
-        display: block;
-        opacity: 1;
-        pointer-events: auto;
+      .fd-vertical-menu__right {
+        width: 100%;
       }
-    }
-
-    // 移动端下的菜单容器需要特殊处理
-    .el-scrollbar {
-      background-color: var(--el-bg-color);
     }
   }
 }
+
+
