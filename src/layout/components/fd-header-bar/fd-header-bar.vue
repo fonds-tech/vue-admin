@@ -23,8 +23,12 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item command="zh-CN" :class="{ 'is-active': currentLang === 'zh-CN' }"> 简体中文 </el-dropdown-item>
-            <el-dropdown-item command="en-US" :class="{ 'is-active': currentLang === 'en-US' }"> English </el-dropdown-item>
+            <el-dropdown-item command="zh-CN" :class="{ 'is-active': currentLang === 'zh-CN' }">
+              简体中文
+            </el-dropdown-item>
+            <el-dropdown-item command="en-US" :class="{ 'is-active': currentLang === 'en-US' }">
+              English
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -38,9 +42,7 @@
 
 <script setup lang="ts">
 import type { LanguageType } from "@/stores"
-import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { useSettingsStore } from "@/stores"
-import { Breadcrumb as FdBreadcrumb } from "../fd-breadcrumb"
 import { ref, computed, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-header-bar" })

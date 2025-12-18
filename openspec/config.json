@@ -1,0 +1,17 @@
+{
+  "language": "zh-CN",
+  "docFormat": "markdown",
+  "packageManager": "pnpm",
+  "node": ">=18",
+  "testing": {
+    "unit": "vitest",
+    "lint": "stylelint",
+    "typecheck": "vue-tsc"
+  },
+  "specWorkflow": {
+    "proposal": "openspec/changes/<change-id>/proposal.md",
+    "tasks": "openspec/changes/<change-id>/tasks.md",
+    "spec": "openspec/changes/<change-id>/spec.md",
+    "archive": "openspec/changes/archive/"
+  }
+}
