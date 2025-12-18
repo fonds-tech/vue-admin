@@ -104,11 +104,11 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .chart-card {
-  height: 100%;
-  margin-bottom: 12px;
   border: 1px solid var(--el-border-color-light);
-  border-radius: 4px;
+  height: 100%;
   transition: all 0.3s;
+  border-radius: 4px;
+  margin-bottom: 12px;
 
   &:hover {
     box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
@@ -128,15 +128,15 @@ onUnmounted(() => {
       margin-bottom: 8px;
 
       .title {
-        margin-right: 12px;
+        color: var(--el-text-color-primary);
         font-size: 18px;
         font-weight: 600;
-        color: var(--el-text-color-primary);
+        margin-right: 12px;
       }
 
       .subtitle {
-        font-size: 14px;
         color: var(--el-text-color-secondary);
+        font-size: 14px;
 
         .highlight {
           color: var(--el-color-success);
@@ -145,10 +145,10 @@ onUnmounted(() => {
     }
 
     .desc {
-      margin-bottom: 24px;
+      color: var(--el-text-color-secondary);
       font-size: 13px;
       line-height: 1.5;
-      color: var(--el-text-color-secondary);
+      margin-bottom: 24px;
     }
 
     .stats-row {
@@ -157,16 +157,16 @@ onUnmounted(() => {
 
       .stat-item {
         .num {
-          margin-bottom: 4px;
-          font-family: "DIN Alternate", sans-serif;
-          font-size: 20px;
-          font-weight: 600;
           color: var(--el-text-color-primary);
+          font-size: 20px;
+          font-family: "DIN Alternate", sans-serif;
+          font-weight: 600;
+          margin-bottom: 4px;
         }
 
         .label {
-          font-size: 12px;
           color: var(--el-text-color-secondary);
+          font-size: 12px;
         }
       }
     }

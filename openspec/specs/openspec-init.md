@@ -1,4 +1,5 @@
 # OpenSpec 初始化（变更 0001）
+
 - 目录结构
   - `openspec/project.md`：项目概述、技术栈、功能域、质量基线、OpenSpec 使用提示。
   - `openspec/config.json`：语言/文档格式、工具链、变更路径约定。

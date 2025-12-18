@@ -88,7 +88,8 @@ export const useSettingsStore = defineStore("settings", {
               this.lastMenuLayout = this.menuLayout
               this.menuLayout = "vertical"
             }
-          } else if (!isMobile && wasMobile) {
+          }
+          else if (!isMobile && wasMobile) {
             if (this.lastMenuLayout) {
               this.menuLayout = this.lastMenuLayout
             }

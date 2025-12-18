@@ -1,5 +1,14 @@
 <template>
-  <el-dialog v-model="visible" :show-close="false" :close-on-click-modal="true" :close-on-press-escape="true" width="50vw" class="fd-search" @close="close" @keydown.stop>
+  <el-dialog
+    v-model="visible"
+    :show-close="false"
+    :close-on-click-modal="true"
+    :close-on-press-escape="true"
+    width="50vw"
+    class="fd-search"
+    @close="close"
+    @keydown.stop
+  >
     <div class="flex flex-col">
       <!-- 搜索输入框 -->
       <div class="fd-search__input-wrapper">
@@ -76,12 +85,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, watch } from "vue"
+import type { Menu } from "@/stores"
 import { useRouter } from "vue-router"
-import { useMenuStore } from "@/stores/menu"
-import type { Menu } from "@/stores/menu/types"
-import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { treeToList } from "@/utils/array"
+import { useMenuStore } from "@/stores"
+import { ref, watch, computed, nextTick } from "vue"
 
 defineOptions({ name: "fd-search" })
 
@@ -120,14 +128,14 @@ const flatMenuList = computed<Menu[]>(() => {
 function getMenuChain(menu: Menu): string[] {
   const chain: string[] = [menu.title]
   let current = menu
-  let parent = flatMenuList.value.find((m) => m.id === current.parentId)
+  let parent = flatMenuList.value.find(m => m.id === current.parentId)
 
   // 向上查找父级（最多3级）
   let depth = 0
   while (parent && parent.parentId > 0 && depth < 3) {
     chain.unshift(parent.title)
     current = parent
-    parent = flatMenuList.value.find((m) => m.id === current.parentId)
+    parent = flatMenuList.value.find(m => m.id === current.parentId)
     depth++
   }
 
@@ -145,7 +153,7 @@ const filteredResults = computed<SearchResult[]>(() => {
   const query = searchQuery.value.toLowerCase().trim()
 
   const results = flatMenuList.value
-    .filter((menu) => menu.type === 1 && menu.status === 1) // 只返回页面类型
+    .filter(menu => menu.type === 1 && menu.status === 1) // 只返回页面类型
     .filter((menu) => {
       const title = menu.title?.toLowerCase() || ""
       const name = menu.name?.toLowerCase() || ""
@@ -170,7 +178,8 @@ const filteredResults = computed<SearchResult[]>(() => {
   // 重置激活索引当搜索结果变化
   if (results.length > 0) {
     activeIndex.value = 0
-  } else {
+  }
+  else {
     activeIndex.value = -1
   }
 
@@ -187,7 +196,8 @@ function navigateList(direction: number) {
   // 循环导航
   if (newIndex < 0) {
     newIndex = filteredResults.value.length - 1
-  } else if (newIndex >= filteredResults.value.length) {
+  }
+  else if (newIndex >= filteredResults.value.length) {
     newIndex = 0
   }
 
@@ -259,8 +269,8 @@ watch(searchQuery, (newVal) => {
 /* 全局样式 - 用于覆盖 el-dialog 样式，因为 dialog 被插入到 body */
 .fd-search.el-dialog {
   background: var(--bg-color-container);
-  border-radius: 12px;
   box-shadow: 0 20px 48px rgb(0 0 0 / 15%);
+  border-radius: 12px;
 
   .el-dialog__header {
     display: none;
@@ -268,10 +278,10 @@ watch(searchQuery, (newVal) => {
 
   .el-dialog__body {
     display: flex;
-    flex-direction: column;
-    max-height: 420px;
     padding: 0;
     overflow: hidden;
+    max-height: 420px;
+    flex-direction: column;
   }
 
   .el-dialog__footer {
@@ -306,33 +316,33 @@ watch(searchQuery, (newVal) => {
   }
 
   &__input-inner {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: var(--el-fill-color-blank);
     border: 1px solid var(--el-border-color);
-    border-radius: 8px;
+    display: flex;
+    position: relative;
+    background: var(--el-fill-color-blank);
     transition: all 0.2s ease;
+    align-items: center;
+    border-radius: 8px;
 
     &:hover {
       border-color: var(--el-border-color-hover);
     }
 
     &:focus-within {
-      border-color: var(--el-color-primary);
       box-shadow: 0 0 0 2px rgb(59 130 246 / 10%);
+      border-color: var(--el-color-primary);
     }
   }
 
   &__input {
     flex: 1;
+    color: var(--el-text-color-primary);
+    border: none;
     height: 40px;
+    outline: none;
     padding: 0 12px;
     font-size: 14px;
-    color: var(--el-text-color-primary);
-    outline: none;
     background: transparent;
-    border: none;
 
     &::placeholder {
       color: var(--el-text-color-placeholder);
@@ -340,19 +350,19 @@ watch(searchQuery, (newVal) => {
   }
 
   &__icon {
+    color: var(--el-text-color-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--el-text-color-secondary);
 
     &--start {
       padding-left: 12px;
     }
 
     &--end {
-      padding-right: 12px;
       opacity: 0;
       transition: opacity 0.2s;
+      padding-right: 12px;
 
       &.is-visible {
         color: var(--el-color-primary);
@@ -364,8 +374,8 @@ watch(searchQuery, (newVal) => {
   /* 搜索结果区域 */
   &__results {
     flex: 1;
-    min-height: 120px;
     max-height: 320px;
+    min-height: 120px;
     overflow-y: auto;
 
     // 滚动条样式
@@ -389,12 +399,12 @@ watch(searchQuery, (newVal) => {
 
   /* 空状态 */
   &__empty {
-    display: flex;
-    flex-direction: column;
     gap: 8px;
-    align-items: center;
-    padding: 40px 20px;
     color: var(--el-text-color-placeholder);
+    display: flex;
+    padding: 40px 20px;
+    align-items: center;
+    flex-direction: column;
 
     span {
       font-size: 14px;
@@ -404,14 +414,14 @@ watch(searchQuery, (newVal) => {
 
   /* 搜索项 */
   &__item {
+    cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 12px 20px;
     font-size: 13px;
-    cursor: pointer;
-    border-bottom: 1px solid var(--el-border-color-lighter);
     transition: all 0.15s ease;
+    align-items: center;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    justify-content: space-between;
 
     &:last-child {
       border-bottom: none;
@@ -438,28 +448,28 @@ watch(searchQuery, (newVal) => {
   }
 
   &__item-left {
-    display: flex;
-    flex: 1;
     gap: 8px;
-    align-items: center;
+    flex: 1;
+    display: flex;
     overflow: hidden;
+    align-items: center;
   }
 
   &__item-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 500;
     color: var(--el-text-color-regular);
+    overflow: hidden;
+    font-weight: 500;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__item-path {
-    padding-left: 4px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 12px;
     color: var(--el-text-color-placeholder);
+    overflow: hidden;
+    font-size: 12px;
     white-space: nowrap;
+    padding-left: 4px;
+    text-overflow: ellipsis;
 
     &::before {
       margin: 0 4px;
@@ -468,25 +478,25 @@ watch(searchQuery, (newVal) => {
   }
 
   &__item-right {
+    color: var(--el-text-color-placeholder);
     display: flex;
     align-items: center;
-    color: var(--el-text-color-placeholder);
   }
 
   /* 快捷键提示 */
   &__shortcuts {
-    display: flex;
     gap: 20px;
-    justify-content: center;
+    display: flex;
     padding-top: 8px;
+    justify-content: center;
   }
 
   &__shortcut-item {
-    display: flex;
     gap: 6px;
-    align-items: center;
-    font-size: 12px;
     color: var(--el-text-color-secondary);
+    display: flex;
+    font-size: 12px;
+    align-items: center;
 
     span {
       font-size: 12px;
@@ -494,17 +504,17 @@ watch(searchQuery, (newVal) => {
   }
 
   &__key {
-    display: flex;
     gap: 2px;
-    align-items: center;
-    justify-content: center;
-    min-width: 24px;
+    border: 1px solid var(--el-border-color-light);
+    display: flex;
     padding: 3px 6px;
+    min-width: 24px;
+    background: var(--el-fill-color-lighter);
+    align-items: center;
     font-family: monospace;
     font-weight: 500;
-    background: var(--el-fill-color-lighter);
-    border: 1px solid var(--el-border-color-light);
     border-radius: 4px;
+    justify-content: center;
 
     :deep(svg) {
       width: 12px;

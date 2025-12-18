@@ -1,5 +1,5 @@
-import fs from "fs"
-import path from "path"
+import fs from "node:fs"
+import path from "node:path"
 
 interface PackageSizeOptions {
   folder: string
@@ -18,7 +18,7 @@ function formatBytes(bytes: number, decimals = 2): string {
 
   const i = Math.floor(Math.log(bytes) / Math.log(k))
 
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+  return `${Number.parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`
 }
 
 /**
@@ -39,7 +39,8 @@ function getFolderSize(folderPath: string): number {
 
     if (stats.isDirectory()) {
       totalSize += getFolderSize(filePath)
-    } else {
+    }
+    else {
       totalSize += stats.size
     }
   }

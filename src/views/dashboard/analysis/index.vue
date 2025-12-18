@@ -169,10 +169,10 @@ function getStatusText(status: number) {
   padding: 12px;
 
   .table-card {
-    margin-bottom: 12px;
     border: 1px solid var(--el-border-color-light);
-    border-radius: 4px;
     transition: all 0.3s;
+    border-radius: 4px;
+    margin-bottom: 12px;
 
     &:hover {
       box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
@@ -193,9 +193,9 @@ function getStatusText(status: number) {
       justify-content: space-between;
 
       span {
+        color: var(--el-text-color-primary);
         font-size: 16px;
         font-weight: 500;
-        color: var(--el-text-color-primary);
       }
     }
 
@@ -203,8 +203,8 @@ function getStatusText(status: number) {
       border-radius: 0 0 4px 4px;
 
       th.el-table__cell {
-        font-weight: 500;
         color: var(--el-text-color-regular);
+        font-weight: 500;
         background-color: var(--el-fill-color-light);
       }
 

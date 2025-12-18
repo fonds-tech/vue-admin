@@ -1,10 +1,9 @@
 import type { Menu } from "@/stores"
 import { Icon } from "@/components/core/fd-icon"
-import { useMenuStore } from "@/stores"
-import { useSettingsStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 import { computed, defineComponent } from "vue"
 import { ElMenu, ElSubMenu, ElMenuItem } from "element-plus"
+import { useMenuStore, useSettingsStore } from "@/stores"
 import "./index.scss"
 
 /** 菜单配置常量 */
@@ -75,7 +74,7 @@ export default defineComponent({
           }
           return true
         })
-        .map((item) => ({
+        .map(item => ({
           ...item,
           children: item.children ? filterMenuItems(item.children) : undefined,
         }))
@@ -184,7 +183,7 @@ export default defineComponent({
             popperClass="fd-horizontal-menu__popper"
             onSelect={handleMenuSelect}
           >
-            {filteredMenus.value.map((menu) => renderMenuItem(menu, "", 0))}
+            {filteredMenus.value.map(menu => renderMenuItem(menu, "", 0))}
           </ElMenu>
         </div>
       )

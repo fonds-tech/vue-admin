@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import type { LanguageType } from "@/stores"
 import fdBreadcrumb from "../fd-breadcrumb"
-import { useSettingsStore, useDeviceStore } from "@/stores"
+import { useDeviceStore, useSettingsStore } from "@/stores"
 import { ref, inject, computed, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-header-bar" })
@@ -128,7 +128,8 @@ const fullscreenIcon = computed(() => {
 function handleToggleFullscreen() {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen()
-  } else {
+  }
+  else {
     document.exitFullscreen()
   }
 }
@@ -155,48 +156,48 @@ function handleOpenSettings() {
 
 <style lang="scss">
 .fd-header-bar {
-  position: relative;
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: space-between;
   height: 50px;
+  display: flex;
   padding: 0 12px;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: space-between;
 
   &::before {
-    position: absolute;
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
     height: 1px;
     content: "";
+    position: absolute;
     background-color: var(--el-border-color-extra-light);
   }
 
   &__left {
-    display: flex;
-    flex: 1;
     gap: 12px;
-    align-items: center;
+    flex: 1;
+    display: flex;
     overflow: hidden;
+    align-items: center;
   }
 
   &__right {
-    display: flex;
     gap: 12px;
+    display: flex;
     align-items: center;
   }
 
   &__action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 30px;
-    height: 30px;
-    cursor: pointer;
     border: 1px solid var(--el-fill-color-dark);
-    border-radius: 6px;
+    cursor: pointer;
+    height: 30px;
+    display: flex;
     transition: all 0.2s ease-in-out;
+    align-items: center;
+    border-radius: 6px;
+    justify-content: center;
 
     &:hover {
       color: var(--el-color-primary);

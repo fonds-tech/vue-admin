@@ -136,11 +136,11 @@ html.dark .el-card {
     &::before,
     // 下边框
     &::after {
-      position: absolute;
       left: -16px;
       width: calc(100% + 32px);
       height: 1px;
       content: "";
+      position: absolute;
       background-color: var(--art-gray-300);
     }
 
@@ -156,12 +156,12 @@ html.dark .el-card {
 
 // el-message 样式优化
 .el-message {
-  background-color: var(--default-box-color) !important;
   border: 0 !important;
   box-shadow:
     0 6px 16px 0 rgb(0 0 0 / 8%),
     0 3px 6px -4px rgb(0 0 0 / 12%),
     0 9px 28px 8px rgb(0 0 0 / 5%) !important;
+  background-color: var(--default-box-color) !important;
 
   p {
     font-size: 13px;
@@ -170,8 +170,8 @@ html.dark .el-card {
 
 // 修改 el-dropdown 样式
 .el-dropdown-menu {
-  padding: 6px !important;
   border: none !important;
+  padding: 6px !important;
   border-radius: 10px !important;
 
   .el-dropdown-menu__item {
@@ -241,8 +241,8 @@ html.dark .el-card {
 
 // 修改el-tag样式
 .el-tag {
-  font-weight: 500;
   transition: all 0s !important;
+  font-weight: 500;
 
   &.el-tag--default {
     height: 26px !important;
@@ -291,8 +291,8 @@ html.dark .el-card {
       top: 5px !important;
       height: 4px !important;
       content: "";
-      background-color: #fff !important;
       transform: scale(0.6) !important;
+      background-color: #fff !important;
     }
   }
 
@@ -300,12 +300,12 @@ html.dark .el-card {
     .el-checkbox__inner {
       &::after {
         width: 3px;
+        border: 2px solid var(--el-checkbox-checked-icon-color);
         height: 8px;
         margin: auto;
-        border: 2px solid var(--el-checkbox-checked-icon-color);
+        transform: translate(-45%, -60%) rotate(45deg) scale(0.86) !important;
         border-top: 0;
         border-left: 0;
-        transform: translate(-45%, -60%) rotate(45deg) scale(0.86) !important;
         transform-origin: center;
       }
     }
@@ -323,8 +323,8 @@ html.dark .el-card {
   right: 7px;
   width: 30px;
   height: 30px;
-  border-radius: 5px;
   transition: all 0.3s;
+  border-radius: 5px;
 
   &:hover {
     color: var(--art-gray-900) !important;
@@ -341,8 +341,8 @@ html.dark .el-card {
 }
 
 .el-table__column-filter-trigger i {
-  margin: -3px 0 0 2px;
   color: var(--theme-color) !important;
+  margin: -3px 0 0 2px;
 }
 
 // 去除 el-dropdown 鼠标放上去出现的边框
@@ -428,9 +428,9 @@ html.dark .el-card {
       border-radius: 6px !important;
 
       &.is-selected {
-        margin-bottom: 4px !important;
-        font-weight: 400 !important;
         color: var(--art-gray-900) !important;
+        font-weight: 400 !important;
+        margin-bottom: 4px !important;
         background-color: var(--art-el-active-color) !important;
       }
 
@@ -466,8 +466,8 @@ html.dark .el-card {
 
 // 实现水波纹在文字下面效果
 .el-button > span {
-  position: relative;
   z-index: 10;
+  position: relative;
 }
 
 // 优化颜色选择器圆角
@@ -485,8 +485,8 @@ html.dark .el-card {
 // 优化树型菜单样式
 .el-tree-node__content {
   padding: 1px 0;
-  margin-bottom: 4px;
   border-radius: 4px;
+  margin-bottom: 4px;
 
   &:hover {
     background-color: var(--art-hover-color) !important;

@@ -1,4 +1,5 @@
 # 任务清单
+
 - [x] 创建 openspec 目录结构（specs/、changes/、archive/）。
 - [x] 补充项目上下文说明 `openspec/project.md` 与配置 `openspec/config.json`。
 - [x] 添加 AGENT 行为摘要 `openspec/AGENTS.md`。

@@ -41,7 +41,7 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
 
   // 优先使用路由名称查找菜单（避免动态路由参数匹配失败）
   const routeName = route.name as string
-  const currentMenu = routeName ? menuStore.list.find((m) => m.name === routeName) : menuStore.findMenu(route.path)
+  const currentMenu = routeName ? menuStore.list.find(m => m.name === routeName) : menuStore.findMenu(route.path)
 
   // 如果找不到菜单，只显示首页
   if (!currentMenu) return [HOME_ITEM]
@@ -64,7 +64,7 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
  * @param result 结果数组（从子到父累积）
  */
 function getMenuChain(menuId: number, result: BreadcrumbItem[] = []): BreadcrumbItem[] {
-  const menu = menuStore.list.find((m) => m.id === menuId)
+  const menu = menuStore.list.find(m => m.id === menuId)
   if (!menu) return result
 
   // 添加当前菜单到结果（只添加非隐藏且有标题的）
@@ -85,7 +85,7 @@ function getMenuChain(menuId: number, result: BreadcrumbItem[] = []): Breadcrumb
  * @param parentId 父级菜单 ID
  */
 function findFirstChildMenuPath(parentId: number): string | undefined {
-  const children = menuStore.list.filter((m) => m.parentId === parentId && !m.hidden && m.status === 1).sort((a, b) => a.sort - b.sort)
+  const children = menuStore.list.filter(m => m.parentId === parentId && !m.hidden && m.status === 1).sort((a, b) => a.sort - b.sort)
 
   for (const child of children) {
     // 页面类型（type=1），直接返回路径
@@ -105,7 +105,7 @@ function findFirstChildMenuPath(parentId: number): string | undefined {
  * @param path 路由路径
  */
 function findMenuByPath(path: string) {
-  return menuStore.list.find((m) => m.path === path)
+  return menuStore.list.find(m => m.path === path)
 }
 
 /**
@@ -157,8 +157,8 @@ function handleClick(item: BreadcrumbItem) {
 
   // 当前页面（不可点击）
   &__current {
-    font-weight: 500;
     color: var(--el-text-color-primary);
+    font-weight: 500;
   }
 }
 </style>

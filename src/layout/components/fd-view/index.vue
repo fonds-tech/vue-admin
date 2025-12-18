@@ -14,9 +14,8 @@
 
 <script setup lang="ts">
 import { useMitt } from "@/hooks"
-import { useProcessStore } from "@/stores"
-import { useSettingsStore } from "@/stores"
 import { ref, computed, onUnmounted } from "vue"
+import { useProcessStore, useSettingsStore } from "@/stores"
 
 defineOptions({ name: "fd-view" })
 
@@ -61,9 +60,9 @@ onUnmounted(() => {
 
   .el-scrollbar__view {
     display: flex;
-    flex-direction: column;
     padding: 12px;
     overflow-x: hidden;
+    flex-direction: column;
   }
 }
 

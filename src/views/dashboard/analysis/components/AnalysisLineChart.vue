@@ -94,14 +94,14 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .chart-card {
-  margin-bottom: 12px;
   border: 1px solid var(--el-border-color-light);
-  border-radius: 4px;
   transition: all 0.3s;
+  border-radius: 4px;
+  margin-bottom: 12px;
 
   &:hover {
-    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
   }
 
   :deep(.el-card__header) {
@@ -119,9 +119,9 @@ onUnmounted(() => {
     justify-content: space-between;
 
     span {
+      color: var(--el-text-color-primary);
       font-size: 16px;
       font-weight: 500;
-      color: var(--el-text-color-primary);
     }
   }
 }

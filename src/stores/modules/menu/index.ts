@@ -29,8 +29,8 @@ export const useMenuStore = defineStore("menu", {
     async fetchMenus() {
       this.list = treeToList(mockMenus)
 
-      const menus = this.list.filter((menu) => isEmpty(menu.hidden) && [0, 1].includes(menu.type))
-      const routes = this.list.filter((menu) => isEmpty(menu.hidden) && [1].includes(menu.type))
+      const menus = this.list.filter(menu => isEmpty(menu.hidden) && [0, 1].includes(menu.type))
+      const routes = this.list.filter(menu => isEmpty(menu.hidden) && [1].includes(menu.type))
 
       this.menus = listToTree(menus)
 
@@ -48,7 +48,7 @@ export const useMenuStore = defineStore("menu", {
      * @param path 路由路径
      */
     findMenu(path: string): Menu | undefined {
-      return this.list.find((menu) => menu.path === path)
+      return this.list.find(menu => menu.path === path)
     },
 
     /**

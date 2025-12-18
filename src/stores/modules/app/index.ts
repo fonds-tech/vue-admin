@@ -1,5 +1,5 @@
-import type { AppState } from "./types";
-import { defineStore } from "pinia";
+import type { AppState } from "./types"
+import { defineStore } from "pinia"
 
 export const useAppStore = defineStore("app", {
   state: (): AppState => ({
@@ -13,10 +13,10 @@ export const useAppStore = defineStore("app", {
     initialize() {},
 
     setToken(token: string) {
-      this.token = token;
+      this.token = token
     },
     setRefreshToken(refreshToken: string) {
-      this.refreshToken = refreshToken;
+      this.refreshToken = refreshToken
     },
   },
 
@@ -24,4 +24,4 @@ export const useAppStore = defineStore("app", {
     key: "app",
     pick: ["token", "refreshToken"],
   },
-});
+})

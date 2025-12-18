@@ -2,7 +2,7 @@ type EventMap = Record<string, unknown[]>
 type Handler<Args extends unknown[] = unknown[]> = (...args: Args) => void
 type AnyHandler = Handler<unknown[]>
 type EventName<M extends EventMap> = Extract<keyof M, string>
-type EventNameWithStar<M extends EventMap> = EventName<M> | '*'
+type EventNameWithStar<M extends EventMap> = EventName<M> | "*"
 type EventArgs<M extends EventMap, K extends EventName<M>> = M[K] extends unknown[] ? M[K] : [M[K]]
 
 const events = new Map<string, AnyHandler[]>()
@@ -10,7 +10,7 @@ const events = new Map<string, AnyHandler[]>()
 export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
   private namespace: string | number
 
-  constructor(name: string | number = 'global') {
+  constructor(name: string | number = "global") {
     this.namespace = name
   }
 
@@ -19,8 +19,8 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
    * @param name 事件名称
    */
   private name(name: string): string {
-    if (name === '*') {
-      return '*'
+    if (name === "*") {
+      return "*"
     }
     return `${this.namespace}:${name}`
   }
@@ -45,7 +45,7 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
    * @param name 事件名称
    * @param handler 事件处理函数
    */
-  on(name: '*', handler: Handler<[string, ...any[]]>): void
+  on(name: "*", handler: Handler<[string, ...any[]]>): void
   on<K extends EventName<Events>>(name: K, handler: Handler<EventArgs<Events, K>>): void
   on(
     name: EventNameWithStar<Events>,
@@ -64,7 +64,7 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
    * @param name 事件名称
    * @param handler 事件处理函数
    */
-  once(name: '*', handler: Handler<[string, ...any[]]>): void
+  once(name: "*", handler: Handler<[string, ...any[]]>): void
   once<K extends EventName<Events>>(name: K, handler: Handler<EventArgs<Events, K>>): void
   once(
     name: EventNameWithStar<Events>,
@@ -114,7 +114,7 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
       handler(...args as unknown[])
     })
 
-    const anyHandlers = events.get('*')
+    const anyHandlers = events.get("*")
     anyHandlers?.slice().forEach((handler) => {
       handler(key, ...args as unknown[])
     })

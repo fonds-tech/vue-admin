@@ -2,13 +2,13 @@
  * 移动端设备检测 Hook
  * 提供响应式的设备类型检测能力
  */
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from "vue"
 
 /** 移动端断点 */
 const BREAKPOINT_MOBILE = 768
 
 /** 全局共享的窗口宽度状态（单例模式） */
-const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1200)
+const windowWidth = ref(typeof window !== "undefined" ? window.innerWidth : 1200)
 
 /** 是否已初始化监听器 */
 let isListenerInitialized = false
@@ -30,7 +30,7 @@ export function useMobile() {
     // 确保只初始化一次监听器
     if (!isListenerInitialized) {
       windowWidth.value = window.innerWidth
-      window.addEventListener('resize', handleResize)
+      window.addEventListener("resize", handleResize)
       isListenerInitialized = true
     }
   })

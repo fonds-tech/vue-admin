@@ -1,9 +1,8 @@
 import type { Menu } from "@/stores"
 import type { PropType, CSSProperties } from "vue"
 import { Icon } from "@/components/core/fd-icon"
-import { useMenuStore } from "@/stores"
-import { useSettingsStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
+import { useMenuStore, useSettingsStore } from "@/stores"
 import { ref, watch, computed, defineComponent } from "vue"
 import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
 import "./index.scss"
@@ -114,7 +113,7 @@ export default defineComponent({
      */
     const currentSubMenus = computed<Menu[]>(() => {
       if (!activeFirstLevelPath.value) return []
-      const currentMenu = firstLevelMenus.value.find((menu) => menu.path === activeFirstLevelPath.value)
+      const currentMenu = firstLevelMenus.value.find(menu => menu.path === activeFirstLevelPath.value)
       return currentMenu?.children || []
     })
 
@@ -329,7 +328,7 @@ export default defineComponent({
                 <span>{menu.title}</span>
               </>
             ),
-            default: () => menu.children?.map((child) => renderSubMenuItem(child, fullPath)),
+            default: () => menu.children?.map(child => renderSubMenuItem(child, fullPath)),
           }}
         </ElSubMenu>
       )
@@ -364,7 +363,7 @@ export default defineComponent({
      */
     const renderFirstLevelMenu = () => (
       <div class="fd-mixed-menu__first" style={firstLevelStyle.value}>
-        <ElScrollbar class="fd-mixed-menu__first-scroll">{firstLevelMenus.value.map((menu) => renderFirstLevelItem(menu))}</ElScrollbar>
+        <ElScrollbar class="fd-mixed-menu__first-scroll">{firstLevelMenus.value.map(menu => renderFirstLevelItem(menu))}</ElScrollbar>
       </div>
     )
 
@@ -388,7 +387,7 @@ export default defineComponent({
               activeTextColor={props.activeTextColor}
               onSelect={handleSubMenuSelect}
             >
-              {currentSubMenus.value.map((menu) => renderSubMenuItem(menu, activeFirstLevelPath.value))}
+              {currentSubMenus.value.map(menu => renderSubMenuItem(menu, activeFirstLevelPath.value))}
             </ElMenu>
           </ElScrollbar>
 

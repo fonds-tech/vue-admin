@@ -59,7 +59,7 @@ const scrollContainer = ref<HTMLElement | null>(null)
  * 跳转到最后一个标签或首页
  */
 function toLastOrHome() {
-  const activeItem = processStore.list.find((e) => e.active)
+  const activeItem = processStore.list.find(e => e.active)
   if (!activeItem) {
     const last = processStore.list[processStore.list.length - 1]
     router.push(last ? last.fullPath : "/")
@@ -186,42 +186,42 @@ onMounted(() => {
 
 <style lang="scss">
 .fd-process {
-  position: relative;
-  display: flex;
   gap: 6px;
-  align-items: center;
+  display: flex;
   padding: $spacing-xs $spacing-md;
+  position: relative;
+  align-items: center;
   background-color: var(--el-bg-color);
 
   &::before {
-    position: absolute;
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
     height: 1px;
     content: "";
+    position: absolute;
     background-color: var(--el-border-color-extra-light);
   }
 
   // 导航操作区
   &__nav {
-    display: flex;
-    flex-shrink: 0;
     gap: 6px;
-    align-items: center;
     height: 100%;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 
     // 导航按钮项
     &-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       width: 30px;
-      height: 30px;
-      cursor: pointer;
       border: 1px solid var(--el-fill-color-dark);
-      border-radius: 6px;
+      cursor: pointer;
+      height: 30px;
+      display: flex;
       transition: all 0.2s ease-in-out;
+      align-items: center;
+      border-radius: 6px;
+      justify-content: center;
 
       &:hover {
         color: var(--el-color-primary);
@@ -232,57 +232,57 @@ onMounted(() => {
 
   // 标签列表区
   &__list {
-    position: relative;
     flex: 1;
-    min-width: 0;
     height: 100%;
     overflow: hidden;
+    position: relative;
+    min-width: 0;
     overflow-x: auto;
 
     // 隐藏滚动条
     &::-webkit-scrollbar {
-      display: none;
       height: 0;
+      display: none;
     }
   }
 
   // 滚动容器
   .process__scroll {
-    display: flex;
     gap: 6px;
-    align-items: center;
     height: 100%;
+    display: flex;
     padding: 4px 0;
+    align-items: center;
   }
 
   // 标签项
   .process-item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 30px;
-    padding: 0 8px;
-    font-size: 12px;
     color: $text-regular;
-    cursor: pointer;
-    background-color: transparent;
     border: 1px solid var(--el-fill-color-dark);
-    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    display: flex;
+    padding: 0 8px;
+    position: relative;
+    font-size: 12px;
     transition: all 0.2s ease-in-out;
+    align-items: center;
+    border-radius: 4px;
+    background-color: transparent;
 
     &__title {
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     &__close {
       width: 0;
+      opacity: 0;
       overflow: hidden;
       font-size: 10px;
-      border-radius: 4px;
-      opacity: 0;
       transition: all 0.2s ease-in-out;
+      border-radius: 4px;
 
       &:hover {
         background-color: rgb(0 0 0 / 10%);
@@ -297,10 +297,10 @@ onMounted(() => {
 
     // 激活状态
     &.is-active {
-      font-weight: 500;
       color: #fff;
-      background-color: var(--el-color-primary);
+      font-weight: 500;
       border-color: var(--el-color-primary);
+      background-color: var(--el-color-primary);
 
       .process-item__close:hover {
         background-color: rgb(255 255 255 / 20%);
@@ -312,8 +312,8 @@ onMounted(() => {
     &.is-active {
       .process-item__close {
         width: 14px;
-        margin-left: 6px;
         opacity: 1;
+        margin-left: 6px;
       }
     }
   }

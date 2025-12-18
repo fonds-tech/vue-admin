@@ -3,12 +3,11 @@ import type { CSSProperties } from "vue"
 import FdLogo from "../fd-logo/index.vue"
 import FdName from "../fd-name/index.vue"
 import FdIcon from "@/components/core/fd-icon"
-
-import { useMenuStore, useDeviceStore } from "@/stores"
-import { useSettingsStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
-import { ref, watch, computed, defineComponent, inject } from "vue"
-import { ElMenu, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar, ElDrawer } from "element-plus"
+
+import { ref, watch, inject, computed, defineComponent } from "vue"
+import { useMenuStore, useDeviceStore, useSettingsStore } from "@/stores"
+import { ElMenu, ElDrawer, ElSubMenu, ElTooltip, ElMenuItem, ElScrollbar } from "element-plus"
 import "./index.scss"
 
 export default defineComponent({
@@ -59,7 +58,7 @@ export default defineComponent({
     /** 当前一级菜单对应的子菜单 */
     const currentSubMenus = computed<Menu[]>(() => {
       if (!activeFirstLevelPath.value) return []
-      const currentMenu = firstLevelMenus.value.find((menu) => menu.path === activeFirstLevelPath.value)
+      const currentMenu = firstLevelMenus.value.find(menu => menu.path === activeFirstLevelPath.value)
       return currentMenu?.children || []
     })
 
@@ -265,7 +264,7 @@ export default defineComponent({
             popperClass="fd-vertical-menu__popper"
             onSelect={handleMenuSelect}
           >
-            {menuList.value.map((menu) => renderMenuItem(menu, ""))}
+            {menuList.value.map(menu => renderMenuItem(menu, ""))}
           </ElMenu>
         </ElScrollbar>
       )
@@ -297,7 +296,7 @@ export default defineComponent({
       return (
         <ElScrollbar>
           <div class="fd-vertical-menu__left-menu">
-            {firstLevelMenus.value.map((menu) => renderDualLeftItem(menu))}
+            {firstLevelMenus.value.map(menu => renderDualLeftItem(menu))}
           </div>
         </ElScrollbar>
       )
@@ -365,7 +364,7 @@ export default defineComponent({
             backgroundColor="transparent"
             onSelect={handleSubMenuSelect}
           >
-            {currentSubMenus.value.map((menu) => renderDualRightItem(menu, activeFirstLevelPath.value))}
+            {currentSubMenus.value.map(menu => renderDualRightItem(menu, activeFirstLevelPath.value))}
           </ElMenu>
         </ElScrollbar>
       )

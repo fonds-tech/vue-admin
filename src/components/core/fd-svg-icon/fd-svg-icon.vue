@@ -54,10 +54,10 @@ const iconStyle = computed<CSSProperties>(() => {
 
 <style lang="scss">
 .svg-icon {
+  fill: currentcolor;
   width: 1em;
   height: 1em;
   overflow: hidden;
   vertical-align: -0.15em;
-  fill: currentcolor;
 }
 </style>

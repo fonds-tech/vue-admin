@@ -6,6 +6,7 @@ import { createBuildInfo } from "./build-info"
 import { createVuePlugin } from "./vue"
 import { createAutoImport } from "./auto-import"
 import { createComponents } from "./components"
+import { createElementPlus } from "./element-plus"
 
 /**
  * 插件配置选项
@@ -38,6 +39,8 @@ export function createVitePlugins(options: PluginOptions): PluginOption[] {
     createComponents(),
     // SVG Icons 自动加载
     createSvgIcons(),
+    // Element Plus
+    createElementPlus(),
   ].filter(Boolean) as PluginOption[]
 }
 
@@ -47,5 +50,4 @@ export { createComponents } from "./components"
 export { createDevTools } from "./devtools"
 export { createSvgIcons } from "./svg-icons"
 export { createUnoCSS } from "./unocss"
-// 导出各个插件创建函数，方便单独使用
 export { createVuePlugin } from "./vue"

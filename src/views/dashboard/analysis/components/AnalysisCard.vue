@@ -39,14 +39,14 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .analysis-card {
-  margin-bottom: 12px;
   border: 1px solid var(--el-border-color-light);
-  border-radius: 4px;
   transition: all 0.3s;
+  border-radius: 4px;
+  margin-bottom: 12px;
 
   &:hover {
-    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
   }
 
   :deep(.el-card__body) {
@@ -56,36 +56,36 @@ withDefaults(defineProps<Props>(), {
   .card-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 24px;
+    justify-content: space-between;
 
     .card-title {
+      color: var(--el-text-color-regular);
       font-size: 14px;
       font-weight: 500;
-      color: var(--el-text-color-regular);
     }
   }
 
   .card-content {
     .card-number {
-      margin-bottom: 16px;
-      font-family: "DIN Alternate", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--el-text-color-primary);
       font-size: 32px;
+      font-family: "DIN Alternate", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 700;
       line-height: 1.2;
-      color: var(--el-text-color-primary);
+      margin-bottom: 16px;
     }
 
     .card-desc {
+      color: var(--el-text-color-secondary);
       display: flex;
+      font-size: 13px;
       align-items: center;
       justify-content: space-between;
-      font-size: 13px;
-      color: var(--el-text-color-secondary);
 
       .trend {
-        display: flex;
         gap: 4px;
+        display: flex;
         align-items: center;
 
         &.up {

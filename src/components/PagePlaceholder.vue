@@ -70,15 +70,15 @@ const timelineType = computed(() => (props.status === "error" ? "danger" : props
 
 <style scoped lang="scss">
 .placeholder-page {
-  display: flex;
-  flex-direction: column;
   gap: 12px;
+  display: flex;
   padding: 12px;
+  flex-direction: column;
 }
 
 .placeholder-result {
-  background: var(--el-fill-color-lighter);
   border: 1px dashed var(--el-border-color);
+  background: var(--el-fill-color-lighter);
   border-radius: 8px;
 }
 
@@ -88,22 +88,22 @@ const timelineType = computed(() => (props.status === "error" ? "danger" : props
     border-radius: 8px;
 
     .action-index {
-      margin-bottom: 4px;
-      font-size: 12px;
       color: var(--el-text-color-secondary);
+      font-size: 12px;
+      margin-bottom: 4px;
     }
 
     .action-title {
-      margin-bottom: 6px;
+      color: var(--el-text-color-primary);
       font-size: 16px;
       font-weight: 600;
-      color: var(--el-text-color-primary);
+      margin-bottom: 6px;
     }
 
     .action-desc {
+      color: var(--el-text-color-regular);
       margin: 0;
       line-height: 1.6;
-      color: var(--el-text-color-regular);
     }
   }
 }

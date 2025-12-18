@@ -42,10 +42,10 @@
 <style scoped lang="scss">
 .project-card {
   color: #fff;
-  background: #1d1e1f;
   border: 1px solid var(--el-border-color-light);
-  border-radius: 4px;
+  background: #1d1e1f;
   transition: all 0.3s;
+  border-radius: 4px;
 
   &:hover {
     box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
@@ -56,51 +56,51 @@
   }
 
   .project-content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     height: 300px;
+    display: flex;
     padding: 30px;
     overflow: hidden;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
 
     .info-section {
       z-index: 1;
 
       .title {
-        margin-bottom: 16px;
         font-size: 24px;
         font-weight: 600;
+        margin-bottom: 16px;
       }
 
       .desc {
-        margin-bottom: 30px;
+        color: #909399;
         font-size: 14px;
         line-height: 1.6;
-        color: #909399;
+        margin-bottom: 30px;
       }
 
       .links {
-        display: flex;
         gap: 20px;
+        display: flex;
 
         .link-group {
+          gap: 12px;
           display: flex;
           flex-direction: column;
-          gap: 12px;
 
           .link-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            color: #e5eaf3;
             width: 160px;
+            display: flex;
             padding: 10px 16px;
             font-size: 14px;
-            color: #e5eaf3;
-            text-decoration: none;
             background: rgb(255 255 255 / 5%);
-            border-radius: 4px;
             transition: background 0.3s;
+            align-items: center;
+            border-radius: 4px;
+            justify-content: space-between;
+            text-decoration: none;
 
             &:hover {
               background: rgb(255 255 255 / 10%);
@@ -111,11 +111,11 @@
     }
 
     .image-section {
-      position: absolute;
       right: 0;
-      bottom: 0;
       width: 50%;
+      bottom: 0;
       height: 100%;
+      position: absolute;
 
       .illustration-placeholder {
         // Placeholder graphic simulation using CSS gradient if image is missing

@@ -42,8 +42,8 @@ provide("closeMobileMenu", closeMobileMenu)
 
 <style lang="scss" scoped>
 .app-layout {
-  display: flex;
   height: 100vh;
+  display: flex;
   overflow: hidden;
   background-color: var(--el-bg-color);
 
@@ -52,10 +52,10 @@ provide("closeMobileMenu", closeMobileMenu)
   }
 
   .app-main {
-    display: flex;
     flex: 1;
-    flex-direction: column;
+    display: flex;
     overflow: hidden;
+    flex-direction: column;
   }
 }
 </style>

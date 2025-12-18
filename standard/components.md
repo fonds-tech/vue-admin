@@ -21,14 +21,14 @@ src/components/
 
 ### 文件命名规则
 
-| 文件类型 | 命名规范 | 示例 |
-|---------|---------|------|
-| 组件目录 | kebab-case（带 fd- 前缀） | `fd-icon/`、`fd-button/` |
+| 文件类型 | 命名规范                      | 示例                           |
+| -------- | ----------------------------- | ------------------------------ |
+| 组件目录 | kebab-case（带 fd- 前缀）     | `fd-icon/`、`fd-button/`       |
 | Vue 组件 | kebab-case.vue（带 fd- 前缀） | `fd-icon.vue`、`fd-button.vue` |
-| TSX 组件 | kebab-case.tsx 或 index.tsx | `fd-menu.tsx`、`index.tsx` |
-| 类型文件 | types.ts | `types.ts` |
-| 样式文件 | index.scss | `index.scss` |
-| 入口文件 | index.ts | `index.ts` |
+| TSX 组件 | kebab-case.tsx 或 index.tsx   | `fd-menu.tsx`、`index.tsx`     |
+| 类型文件 | types.ts                      | `types.ts`                     |
+| 样式文件 | index.scss                    | `index.scss`                   |
+| 入口文件 | index.ts                      | `index.ts`                     |
 
 > **注意**：`fd-` 前缀仅用于**文件/目录名**、**组件 name 属性**和 **CSS class 名**，类型接口名称不加前缀。
 
@@ -86,12 +86,12 @@ export interface ButtonSlots {
 
 ### 类型命名规范
 
-| 类型 | 命名格式 | 示例 |
-|------|---------|------|
-| Props | `{ComponentName}Props` | `IconProps`、`ButtonProps` |
-| Emits | `{ComponentName}Emits` | `ButtonEmits`、`MenuEmits` |
-| Slots | `{ComponentName}Slots` | `CardSlots`、`DialogSlots` |
-| 联合类型 | 语义化名称 | `ButtonSize`、`MenuLayout` |
+| 类型     | 命名格式               | 示例                       |
+| -------- | ---------------------- | -------------------------- |
+| Props    | `{ComponentName}Props` | `IconProps`、`ButtonProps` |
+| Emits    | `{ComponentName}Emits` | `ButtonEmits`、`MenuEmits` |
+| Slots    | `{ComponentName}Slots` | `CardSlots`、`DialogSlots` |
+| 联合类型 | 语义化名称             | `ButtonSize`、`MenuLayout` |
 
 > **重点**：类型接口名称使用组件语义名称，不加 `Fd` 前缀。
 
@@ -106,7 +106,7 @@ export interface ButtonSlots {
   <!-- class 使用 fd- 前缀 -->
   <div class="fd-button" :class="buttonClasses" @click="handleClick">
     <slot name="icon">
-      <Icon v-if="icon" :icon="icon" />
+      <icon v-if="icon" :icon="icon" />
     </slot>
     <span class="fd-button__text">
       <slot />
@@ -116,14 +116,14 @@ export interface ButtonSlots {
 
 <script setup lang="ts">
 import type { CSSProperties } from "vue"
-import type { ButtonProps, ButtonEmits } from "./types"  // 类型不加 fd 前缀
+import type { ButtonEmits, ButtonProps } from "./types" // 类型不加 fd 前缀
 import { Icon } from "@/components/core/fd-icon"
 import { computed } from "vue"
 
 // ==================== 组件选项 ====================
 
 defineOptions({
-  name: "fd-button",  // name 属性使用 fd- 前缀
+  name: "fd-button", // name 属性使用 fd- 前缀
 })
 
 // ==================== Props ====================
@@ -143,7 +143,7 @@ const emit = defineEmits<ButtonEmits>()
 
 /** 按钮样式类 */
 const buttonClasses = computed(() => ({
-  [`fd-button--${props.type}`]: props.type,  // class 使用 fd- 前缀
+  [`fd-button--${props.type}`]: props.type, // class 使用 fd- 前缀
   [`fd-button--${props.size}`]: props.size,
   "is-disabled": props.disabled,
   "is-loading": props.loading,
@@ -222,18 +222,17 @@ defineExpose({ focus, blur })
 
 ```typescript
 // 1. 外部类型导入
-import type { CSSProperties, PropType } from "vue"
-
 // 2. 内部类型导入（相对路径）
 import type { ButtonProps } from "./types"
-
-// 3. 外部模块导入
-import { ElButton } from "element-plus"
-import { computed, ref } from "vue"
+import type { PropType, CSSProperties } from "vue"
 
 // 4. 内部模块导入（别名路径）
 import { Icon } from "@/components/core/fd-icon"
+
+// 3. 外部模块导入
+import { ElButton } from "element-plus"
 import { useAppStore } from "@/stores/app"
+import { ref, computed } from "vue"
 
 // 5. 相对路径导入
 import "./index.scss"
@@ -247,16 +246,16 @@ import "./index.scss"
 
 ```tsx
 import type { BackendMenu } from "./types"
-import type { CSSProperties, PropType } from "vue"
+import type { PropType, CSSProperties } from "vue"
 import { Icon } from "@/components/core/fd-icon"
 import { useAppStore } from "@/stores/app"
-import { computed, defineComponent, ref } from "vue"
+import { ref, computed, defineComponent } from "vue"
 import "./index.scss"
 
 // ==================== 组件定义 ====================
 
 export default defineComponent({
-  name: "fd-menu",  // name 属性使用 fd- 前缀
+  name: "fd-menu", // name 属性使用 fd- 前缀
 
   props: {
     /** 菜单数据 */
@@ -330,7 +329,7 @@ export default defineComponent({
 
     return () => (
       <div class="fd-menu" style={menuStyle.value}>
-        {props.menus.map((menu) => renderMenuItem(menu))}
+        {props.menus.map(menu => renderMenuItem(menu))}
         {slots.default?.()}
       </div>
     )
@@ -340,14 +339,14 @@ export default defineComponent({
 
 ### TSX 与 Vue SFC 选择指南
 
-| 场景 | 推荐格式 | 原因 |
-|------|---------|------|
-| 简单 UI 组件 | `.vue` | 模板语法更直观，样式隔离方便 |
-| 复杂逻辑组件 | `.tsx` | 更好的 TypeScript 支持，逻辑复用 |
-| 递归渲染 | `.tsx` | 渲染函数更灵活 |
-| 动态组件 | `.tsx` | 更容易处理动态渲染逻辑 |
-| 菜单/树形组件 | `.tsx` | 递归渲染更便捷 |
-| 表单组件 | `.vue` | v-model 语法更简洁 |
+| 场景          | 推荐格式 | 原因                             |
+| ------------- | -------- | -------------------------------- |
+| 简单 UI 组件  | `.vue`   | 模板语法更直观，样式隔离方便     |
+| 复杂逻辑组件  | `.tsx`   | 更好的 TypeScript 支持，逻辑复用 |
+| 递归渲染      | `.tsx`   | 渲染函数更灵活                   |
+| 动态组件      | `.tsx`   | 更容易处理动态渲染逻辑           |
+| 菜单/树形组件 | `.tsx`   | 递归渲染更便捷                   |
+| 表单组件      | `.vue`   | v-model 语法更简洁               |
 
 ---
 
@@ -376,14 +375,13 @@ export default Icon
 
 ```typescript
 // 命名导入（推荐，不带 fd 前缀）
-import { Icon } from "@/components/core/fd-icon"
-import { Button } from "@/components/core/fd-button"
-
 // 导入类型（不带 fd 前缀）
 import type { IconProps, ButtonProps } from "@/components/core/fd-icon"
 
 // 默认导入
 import Icon from "@/components/core/fd-icon"
+import { Icon } from "@/components/core/fd-icon"
+import { Button } from "@/components/core/fd-button"
 ```
 
 ---
@@ -419,8 +417,8 @@ import Icon from "@/components/core/fd-icon"
 
   // State: 状态类，使用 is- 前缀
   &.is-disabled {
-    opacity: 0.6;
     cursor: not-allowed;
+    opacity: 0.6;
   }
 
   &.is-loading {
@@ -438,8 +436,8 @@ import Icon from "@/components/core/fd-icon"
   // 使用 Element Plus 变量
   color: var(--el-text-color-primary);
   background: var(--el-bg-color);
-  border-radius: var(--el-border-radius-base);
   box-shadow: var(--el-box-shadow-light);
+  border-radius: var(--el-border-radius-base);
 
   // 使用项目自定义变量
   padding: var(--fd-spacing-md);
@@ -452,26 +450,26 @@ import Icon from "@/components/core/fd-icon"
 
 ### fd- 前缀使用范围
 
-| 场景 | 是否使用 fd- 前缀 | 示例 |
-|------|------------------|------|
-| 文件/目录名 | ✅ 是 | `fd-icon/`、`fd-button.vue` |
-| 组件 name 属性 | ✅ 是 | `name: "fd-icon"` |
-| CSS class 名 | ✅ 是 | `.fd-button`、`.fd-menu__item` |
-| 类型接口名 | ❌ 否 | `IconProps`、`ButtonEmits` |
-| 导出变量名 | ❌ 否 | `export { Icon }` |
-| 导入变量名 | ❌ 否 | `import { Icon }` |
+| 场景           | 是否使用 fd- 前缀 | 示例                           |
+| -------------- | ----------------- | ------------------------------ |
+| 文件/目录名    | ✅ 是             | `fd-icon/`、`fd-button.vue`    |
+| 组件 name 属性 | ✅ 是             | `name: "fd-icon"`              |
+| CSS class 名   | ✅ 是             | `.fd-button`、`.fd-menu__item` |
+| 类型接口名     | ❌ 否             | `IconProps`、`ButtonEmits`     |
+| 导出变量名     | ❌ 否             | `export { Icon }`              |
+| 导入变量名     | ❌ 否             | `import { Icon }`              |
 
 ### defineOptions 规范
 
 ```typescript
 // Vue SFC
 defineOptions({
-  name: "fd-button",  // 使用 fd- 前缀 + kebab-case
+  name: "fd-button", // 使用 fd- 前缀 + kebab-case
 })
 
 // TSX
 export default defineComponent({
-  name: "fd-menu",    // 使用 fd- 前缀 + kebab-case
+  name: "fd-menu", // 使用 fd- 前缀 + kebab-case
   // ...
 })
 ```

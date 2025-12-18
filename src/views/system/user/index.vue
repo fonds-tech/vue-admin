@@ -164,7 +164,7 @@ function handleEdit(row: (typeof tableData.value)[0]) {
 
 async function handleDelete(row: (typeof tableData.value)[0]) {
   await ElMessageBox.confirm("确定删除该用户吗？", "提示", { type: "warning" })
-  tableData.value = tableData.value.filter((item) => item.id !== row.id)
+  tableData.value = tableData.value.filter(item => item.id !== row.id)
   ElMessage.success("删除成功")
 }
 
@@ -173,7 +173,7 @@ async function handleSubmit() {
   if (!valid) return
 
   if (form.id) {
-    const row = tableData.value.find((item) => item.id === form.id)
+    const row = tableData.value.find(item => item.id === form.id)
     if (row) {
       // 只更新表单中存在的字段
       row.username = form.username
@@ -181,7 +181,8 @@ async function handleSubmit() {
       row.email = form.email
       row.status = form.status
     }
-  } else {
+  }
+  else {
     tableData.value.push({
       id: Date.now(),
       username: form.username,
@@ -199,9 +200,9 @@ async function handleSubmit() {
 
 <style lang="scss" scoped>
 .page-container {
+  gap: $spacing-base;
   display: flex;
   flex-direction: column;
-  gap: $spacing-base;
 }
 
 .search-card {
@@ -219,8 +220,8 @@ async function handleSubmit() {
 
   .pagination {
     display: flex;
-    justify-content: flex-end;
     margin-top: $spacing-base;
+    justify-content: flex-end;
   }
 }
 </style>

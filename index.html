@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Admin</title>
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
       #app-loading {
         position: fixed;
@@ -17,11 +21,18 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-family: Inter, -apple-system, system-ui, sans-serif;
+        font-family:
+          Inter,
+          -apple-system,
+          system-ui,
+          sans-serif;
         transition: opacity 0.5s ease;
       }
 
-      #app-loading.hide { opacity: 0; pointer-events: none; }
+      #app-loading.hide {
+        opacity: 0;
+        pointer-events: none;
+      }
 
       /* 优雅的中心动画 */
       .spinner {
@@ -36,7 +47,7 @@
       }
 
       .spinner::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 8px;
         border: 2px solid transparent;
@@ -67,17 +78,33 @@
       }
 
       @keyframes spin {
-        to { transform: rotate(360deg); }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       @keyframes breathe {
-        0%, 100% { opacity: 0.4; letter-spacing: 5px; }
-        50% { opacity: 1; letter-spacing: 8px; }
+        0%,
+        100% {
+          opacity: 0.4;
+          letter-spacing: 5px;
+        }
+        50% {
+          opacity: 1;
+          letter-spacing: 8px;
+        }
       }
 
       @keyframes glowWidth {
-        0%, 100% { width: 40px; opacity: 0.3; }
-        50% { width: 120px; opacity: 0.8; }
+        0%,
+        100% {
+          width: 40px;
+          opacity: 0.3;
+        }
+        50% {
+          width: 120px;
+          opacity: 0.8;
+        }
       }
 
       /* 背景微粒子 */
@@ -90,16 +117,38 @@
         animation: floatUp 8s linear infinite;
       }
 
-      .bg-dot:nth-child(1) { left: 20%; animation-delay: 0s; }
-      .bg-dot:nth-child(2) { left: 40%; animation-delay: 2s; }
-      .bg-dot:nth-child(3) { left: 60%; animation-delay: 4s; }
-      .bg-dot:nth-child(4) { left: 80%; animation-delay: 6s; }
+      .bg-dot:nth-child(1) {
+        left: 20%;
+        animation-delay: 0s;
+      }
+      .bg-dot:nth-child(2) {
+        left: 40%;
+        animation-delay: 2s;
+      }
+      .bg-dot:nth-child(3) {
+        left: 60%;
+        animation-delay: 4s;
+      }
+      .bg-dot:nth-child(4) {
+        left: 80%;
+        animation-delay: 6s;
+      }
 
       @keyframes floatUp {
-        from { bottom: -10px; opacity: 0; }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        to { bottom: 100%; opacity: 0; }
+        from {
+          bottom: -10px;
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        to {
+          bottom: 100%;
+          opacity: 0;
+        }
       }
 
       /* 隐藏动画 */
@@ -108,7 +157,10 @@
       }
 
       @keyframes finalFade {
-        to { opacity: 0; visibility: hidden; }
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
       }
     </style>
   </head>
@@ -137,24 +189,24 @@
     <!-- 控制脚本 -->
     <script>
       // 页面加载完成后优雅隐藏
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          const loader = document.getElementById('app-loading');
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          const loader = document.getElementById("app-loading")
           if (loader) {
-            loader.classList.add('fade-out');
-            setTimeout(() => loader.remove(), 400);
+            loader.classList.add("fade-out")
+            setTimeout(() => loader.remove(), 400)
           }
-        }, 800);
-      });
+        }, 800)
+      })
 
       // 安全机制
       setTimeout(() => {
-        const loader = document.getElementById('app-loading');
+        const loader = document.getElementById("app-loading")
         if (loader && document.body.contains(loader)) {
-          loader.classList.add('fade-out');
-          setTimeout(() => loader.remove(), 400);
+          loader.classList.add("fade-out")
+          setTimeout(() => loader.remove(), 400)
         }
-      }, 2000);
+      }, 2000)
     </script>
 
     <!-- Vue应用 -->

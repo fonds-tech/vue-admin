@@ -33,11 +33,11 @@ const activities = [
 
 <style scoped lang="scss">
 .list-card {
-  height: 100%;
-  margin-bottom: 12px;
   border: 1px solid var(--el-border-color-light);
-  border-radius: 4px;
+  height: 100%;
   transition: all 0.3s;
+  border-radius: 4px;
+  margin-bottom: 12px;
 
   &:hover {
     box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
@@ -49,19 +49,19 @@ const activities = [
   }
 
   .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 16px;
-    font-weight: 500;
     color: var(--el-text-color-primary);
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    font-weight: 500;
+    justify-content: space-between;
 
     .highlight {
+      color: var(--el-color-success);
       padding: 2px 8px;
       font-size: 13px;
-      color: var(--el-color-success);
-      background-color: var(--el-color-success-light-9);
       border-radius: 4px;
+      background-color: var(--el-color-success-light-9);
     }
   }
 
@@ -70,23 +70,23 @@ const activities = [
 
     .activity-item {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       padding: 16px 0;
+      align-items: center;
       border-bottom: 1px solid var(--el-border-color-lighter);
+      justify-content: space-between;
 
       &:last-child {
         border-bottom: none;
       }
 
       .content {
-        font-size: 14px;
         color: var(--el-text-color-secondary);
+        font-size: 14px;
 
         .user {
-          margin-right: 4px;
-          font-weight: 500;
           color: var(--el-text-color-primary);
+          font-weight: 500;
+          margin-right: 4px;
         }
 
         .action {
@@ -100,8 +100,8 @@ const activities = [
       }
 
       .time {
-        font-size: 12px;
         color: var(--el-text-color-placeholder);
+        font-size: 12px;
       }
     }
   }

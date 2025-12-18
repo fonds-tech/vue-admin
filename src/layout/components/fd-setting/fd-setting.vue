@@ -148,7 +148,7 @@ const settingsStore = useSettingsStore()
 /** 抽屉可见状态 - 与 store 同步 */
 const visible = computed({
   get: () => settingsStore.settingsDrawerOpened,
-  set: (val) => (val ? settingsStore.openSettingsDrawer() : settingsStore.closeSettingsDrawer()),
+  set: val => (val ? settingsStore.openSettingsDrawer() : settingsStore.closeSettingsDrawer()),
 })
 
 /** 预设主题色列表 */
@@ -168,55 +168,55 @@ const theme = computed(() => settingsStore.themeStyle)
 /** 当前主题色 */
 const primaryColor = computed({
   get: () => settingsStore.primaryColor,
-  set: (val) => settingsStore.setPrimaryColor(val),
+  set: val => settingsStore.setPrimaryColor(val),
 })
 
 /** 显示标签栏 */
 const showProcess = computed({
   get: () => settingsStore.showProcess,
-  set: (val) => settingsStore.setShowProcess(val),
+  set: val => settingsStore.setShowProcess(val),
 })
 
 /** 固定顶栏 */
 const fixedHeader = computed({
   get: () => settingsStore.fixedHeader,
-  set: (val) => settingsStore.setFixedHeader(val),
+  set: val => settingsStore.setFixedHeader(val),
 })
 
 /** 显示水印 */
 const showWatermark = computed({
   get: () => settingsStore.showWatermark,
-  set: (val) => settingsStore.setShowWatermark(val),
+  set: val => settingsStore.setShowWatermark(val),
 })
 
 /** 菜单布局 */
 const menuLayout = computed({
   get: () => settingsStore.menuLayout,
-  set: (val) => settingsStore.setMenuLayout(val as MenuLayout),
+  set: val => settingsStore.setMenuLayout(val as MenuLayout),
 })
 
 /** 菜单风格 */
 const menuStyle = computed({
   get: () => settingsStore.menuStyle,
-  set: (val) => settingsStore.setMenuStyle(val as MenuStyle),
+  set: val => settingsStore.setMenuStyle(val as MenuStyle),
 })
 
 /** 菜单模式 */
 const menuMode = computed({
   get: () => settingsStore.menuMode,
-  set: (val) => settingsStore.setMenuMode(val as MenuMode),
+  set: val => settingsStore.setMenuMode(val as MenuMode),
 })
 
 /** 过渡动画 */
 const transition = computed({
   get: () => settingsStore.transition,
-  set: (val) => settingsStore.setTransition(val as TransitionName),
+  set: val => settingsStore.setTransition(val as TransitionName),
 })
 
 /** 当前语言 */
 const language = computed({
   get: () => settingsStore.language,
-  set: (val) => settingsStore.setLanguage(val as LanguageType),
+  set: val => settingsStore.setLanguage(val as LanguageType),
 })
 
 /** 设置主题（从点击位置开始圆形扩散动画） */
@@ -233,7 +233,8 @@ function setTheme(mode: ThemeStyle, event: MouseEvent) {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     settingsStore.setThemeStyle("auto")
     settingsStore.setTheme(isDark ? "dark" : "light", animationOptions)
-  } else {
+  }
+  else {
     // 手动指定 light 或 dark
     settingsStore.setThemeStyle(mode)
     settingsStore.setTheme(mode as "light" | "dark", animationOptions)
@@ -254,42 +255,42 @@ function changeLanguage() {
 <style lang="scss" scoped>
 .fd-setting {
   &__content {
+    gap: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     padding-bottom: 20px;
   }
 
   &__section {
+    gap: 12px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
   }
 
   &__title {
-    margin-bottom: 5px;
-    font-size: 14px;
     color: var(--el-text-color-primary);
+    font-size: 14px;
     text-align: center;
+    margin-bottom: 5px;
   }
 
   &__options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
+    display: grid;
     justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   &__card {
-    display: flex;
-    flex-direction: column;
     gap: 8px;
-    align-items: center;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     span {
-      font-size: 12px;
       color: var(--el-text-color-regular);
+      font-size: 12px;
     }
 
     &.is-active {
@@ -304,13 +305,13 @@ function changeLanguage() {
   }
 
   &__preview {
-    position: relative;
     width: 100%;
-    overflow: hidden;
     border: 2px solid var(--el-border-color-dark);
-    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
     box-shadow: 0 0 8px 0 rgb(0 0 0 / 10%);
     transition: all 0.3s;
+    border-radius: 8px;
 
     &:hover {
       opacity: 0.85;
@@ -318,29 +319,29 @@ function changeLanguage() {
 
     // SVG 图标样式
     :deep(svg) {
-      display: block;
       width: 100%;
       height: 100%;
+      display: block;
     }
   }
 
   &__colors {
-    display: flex;
-    flex-wrap: wrap;
     gap: 12px;
-    justify-content: center;
+    display: flex;
     padding: 0 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   &__color-option {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 24px;
-    height: 24px;
     cursor: pointer;
-    border-radius: 50%;
+    height: 24px;
+    display: flex;
     transition: all 0.2s;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
 
     &:hover {
       transform: scale(1.1);
@@ -353,17 +354,17 @@ function changeLanguage() {
 
   &__items {
     display: flex;
-    flex-direction: column;
     padding: 0 10px;
+    flex-direction: column;
   }
 
   &__item {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 10px 0;
     font-size: 14px;
+    align-items: center;
     border-bottom: 1px solid var(--el-border-color-lighter);
+    justify-content: space-between;
 
     &:last-child {
       border-bottom: none;

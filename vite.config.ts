@@ -1,6 +1,7 @@
-import { defineConfig, loadEnv } from "vite"
-import { resolve } from "path"
+import process from "node:process"
+import { resolve } from "node:path"
 import { createVitePlugins } from "./build/plugins"
+import { loadEnv, defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -29,7 +30,7 @@ export default defineConfig(({ mode }) => {
         "/api": {
           target: env.VITE_API_BASE_URL || "http://localhost:3000",
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
+          rewrite: path => path.replace(/^\/api/, ""),
         },
       },
     },
