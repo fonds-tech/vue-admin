@@ -9,19 +9,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-
-    "lint": "pnpm lint:oxlint && pnpm lint:style",
-    "lint:oxlint": "oxlint --deny-warnings",
-    "lint:oxlint:fix": "oxlint --fix",
+    "lint": "pnpm lint:style",
     "lint:style": "stylelint \"src/**/*.{css,scss,vue}\" --fix",
-
-    "format": "pnpm format:oxfmt && pnpm format:vue && pnpm format:pref",
-    "format:oxfmt": "oxfmt --no-error-on-unmatched-pattern \"src/**/*.{js,jsx,ts,tsx}\"",
-    "format:oxfmt:check": "oxfmt --check --no-error-on-unmatched-pattern \"src/**/*.{js,jsx,ts,tsx}\"",
-    "format:vue": "prettier --write \"src/**/*.vue\"",
-    "format:vue:check": "prettier --check \"src/**/*.vue\"",
-    "format:pref": "prettier --write \"src/**/*.{scss,css,json}\"",
-
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
@@ -54,9 +43,6 @@
     "dayjs": "^1.11.19",
     "gradient-string": "^3.0.0",
     "jsdom": "^27.3.0",
-    "oxfmt": "^0.18.0",
-    "oxlint": "^1.33.0",
-    "prettier": "^3.7.4",
     "sass": "^1.96.0",
     "sass-embedded": "^1.96.0",
     "stylelint": "^16.26.1",

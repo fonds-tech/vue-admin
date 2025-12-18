@@ -37,9 +37,9 @@
 </template>
 
 <script setup lang="ts">
-import type { LanguageType } from "@/stores/settings/types"
+import type { LanguageType } from "@/stores"
 import { Icon as FdIcon } from "@/components/core/fd-icon"
-import { useSettingsStore } from "@/stores/settings"
+import { useSettingsStore } from "@/stores"
 import { Breadcrumb as FdBreadcrumb } from "../fd-breadcrumb"
 import { ref, computed, onMounted, onUnmounted } from "vue"
 

@@ -13,7 +13,7 @@
 - 多语言：`zh-CN` / `en-US`，切换后刷新并同步 Element Plus locale
 - 示例页面：仪表盘、系统管理（用户/角色/菜单/部门/字典）、系统监控、组件示例、嵌套菜单、个人中心、关于等
 - Iframe/外链支持：菜单 `meta.frameSrc` / `meta.link`
-- 工程化：自动导入 API/组件、ESLint/Stylelint/Prettier、Vitest 单测、构建信息输出
+- 工程化：自动导入 API/组件、Stylelint 检查、Vitest 单测、构建信息输出
 
 ## 技术栈
 
@@ -23,7 +23,7 @@
 - 路由：Vue Router 动态注册与守卫
 - 多语言：vue-i18n，Element Plus 语言包联动
 - 请求：alova + axios
-- 样式与规范：SCSS、ESLint、Stylelint、Prettier
+- 样式与规范：SCSS、Stylelint
 - 测试：Vitest + @vue/test-utils + jsdom
 
 ## 环境要求
@@ -42,8 +42,7 @@ pnpm preview      # 预览构建结果
 
 ## 开发与质量脚本
 
-- `pnpm lint` / `pnpm lint:style`：ESLint、Stylelint 检查（含自动修复）
-- `pnpm format`：Prettier 格式化
+- `pnpm lint` / `pnpm lint:style`：Stylelint 检查（含自动修复）
 - `pnpm type-check`：类型检查
 - `pnpm test` / `pnpm test:coverage`：单测与覆盖率
 

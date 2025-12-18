@@ -18,7 +18,7 @@ import FdProcess from "./components/fd-process/index.vue"
 import FdSetting from "./components/fd-setting"
 import FdSidebar from "./components/fd-sidebar/index.vue"
 import FdHeaderBar from "./components/fd-header-bar"
-import { useSettingsStore } from "@/stores/settings"
+import { useSettingsStore } from "@/stores"
 
 const settingsStore = useSettingsStore()
 </script>

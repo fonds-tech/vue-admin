@@ -139,7 +139,7 @@ import menuTransparentSvg from "@/assets/svg/menu-transparent.svg?raw"
 import layoutHorizontalSvg from "@/assets/svg/layout-horizontal.svg?raw"
 import { Check } from "@element-plus/icons-vue"
 import { computed } from "vue"
-import { useSettingsStore } from "@/stores/settings"
+import { useSettingsStore } from "@/stores"
 
 defineOptions({ name: "fd-setting" })
 
