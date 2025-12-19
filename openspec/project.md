@@ -1,36 +1,61 @@
-# 项目概述
+# Project Context
 
-- Vue Admin：基于 Vue 3 + TypeScript + Vite 的后台管理模板，内置 Element Plus、动态路由、权限控制、Pinia 持久化、多语言与常用工程化配置。
+## Purpose
 
-## 技术栈与依赖
+Vue 3 admin dashboard template for building back-office applications with dynamic routing, role/permission checks, i18n, theming, and common admin pages.
 
-- 前端：Vue 3、TypeScript、Vite、Pinia、Vue Router、vue-i18n、Element Plus。
-- 工具链：pnpm、Vitest、Stylelint、unplugin-auto-import、unplugin-vue-components。
-- 请求层：alova + axios；样式：SCSS 与全局变量注入。
+## Tech Stack
 
-## 主要功能域
+- Vue 3, TypeScript, Vite (ESM project)
+- UI: Element Plus (+ @element-plus/icons-vue)
+- State: Pinia (+ pinia-plugin-persistedstate)
+- Routing: Vue Router with dynamic route registration
+- i18n: vue-i18n (syncs Element Plus locale)
+- HTTP: alova + axios
+- Styling: SCSS, UnoCSS (unocss)
+- Testing: Vitest + @vue/test-utils + jsdom
+- Tooling: vue-tsc, ESLint (@fonds/eslint-config)
 
-- 登录/登出与路由鉴权，角色/权限点校验，动态路由懒注册。
-- 主题与布局（亮/暗色、主题色、侧边栏折叠、标签栏缓存与刷新）。
-- 多语言（zh-CN/en-US）与 Element Plus locale 联动；全局水印。
-- 示例页面：仪表盘、系统管理、监控、组件示例、嵌套菜单、个人中心、关于等。
-- 工程化能力：自动导入、Stylelint 校验、构建信息输出、Vitest 单测。
+## Project Conventions
 
-## 运行与环境
+### Code Style
 
-- Node.js ≥ 18，包管理使用 pnpm。
-- 常用命令：`pnpm install`、`pnpm dev`、`pnpm build`、`pnpm preview`、`pnpm lint`、`pnpm test`。
-- 开发默认端口 5300，代理 `/api` 到 `VITE_API_BASE_URL`。
+- ESLint uses @fonds/eslint-config with Vue, TypeScript, JSX, and formatter rules enabled.
+- ESM modules ("type": "module" in package.json).
+- Prefer existing project patterns under src/ (router, stores, http/api, layout).
 
-## 质量基线与约定
+### Architecture Patterns
 
-- 语言与文档全部使用中文；英文专业名词需附中文解释。
-- 代码需中文注释说明关键逻辑；遵循 SOLID、DRY、KISS 与关注点分离。
-- 测试优先：Vitest 单测可作为质量门；类型检查与 Stylelint 需通过。
+- App bootstraps in src/main.ts: registers Element Plus, Pinia, Router, and i18n.
+- Dynamic routes are registered at runtime from backend menu data (router guards add layout children).
+- Auth/permission checks use roles + permissions; usePermission hook supports checks.
+- Request layer is centralized under src/http with API definitions under src/api.
+- Layout and admin UX components live under src/layout with tags-view + keep-alive caching.
 
-## OpenSpec 使用提示
+### Testing Strategy
 
-- `openspec/specs/`：当前源规范（source-of-truth），后续提案通过后归档至此。
-- `openspec/changes/`：进行中的或历史变更，建议以递增 ID 目录存放 proposal/tasks/spec。
-- `openspec/changes/archive/`：已归档变更存放处。
-- 建议先在 changes 目录提交提案，经评审后合并到 specs。
+- Vitest runs in jsdom with globals enabled (see vitest.config.ts).
+- Coverage provider is v8; reporters: text, json, html.
+- Scripts: pnpm test, pnpm test:coverage, pnpm type-check.
+
+### Git Workflow
+
+No explicit branching or commit conventions documented in the repository.
+
+## Domain Context
+
+- Admin template with login/logout, auth guards, dynamic menu-driven routes, and tabbed navigation.
+- Supports light/dark theme, theme color switch, and layout customization.
+- Built-in mock login and menu data for local development.
+
+## Important Constraints
+
+- Node.js >= 18; package manager is pnpm.
+- API response contract: { code, message, data }, with code === 0 treated as success.
+- 401 responses trigger auto-logout and redirect to login.
+- Env vars: VITE_APP_TITLE, VITE_API_BASE_URL, VITE_APP_ENV.
+
+## External Dependencies
+
+- Backend APIs: POST /auth/login, GET /auth/userinfo, POST /auth/logout, POST /auth/refresh.
+- Backend menu service returning BackendMenu structure for dynamic routing.
