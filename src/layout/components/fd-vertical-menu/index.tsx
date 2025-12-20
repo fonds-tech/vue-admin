@@ -45,9 +45,6 @@ export default defineComponent({
     /** 是否为移动端设备 */
     const isMobile = computed<boolean>(() => deviceStore.isMobile)
 
-    /** 当前选中的一级菜单路径（双列模式使用） */
-    const activeFirstLevelPath = ref<string>("")
-
     /** 是否为双列布局模式 */
     const isDualMode = computed<boolean>(() => settingsStore.isDualLayout)
 
@@ -77,24 +74,17 @@ export default defineComponent({
       "--menu-collapse-width": `${settingsStore.menuCollapseWidth}px`,
     }))
 
-    /** 一级菜单列表（双列模式） */
+    /** 一级菜单列表 */
     const firstLevelMenus = computed<Menu[]>(() => menuList.value)
 
-    /** 当前一级菜单对应的子菜单（双列模式） */
-    const currentSubMenus = computed<Menu[]>(() => {
-      if (!activeFirstLevelPath.value) return []
-      const currentMenu = firstLevelMenus.value.find(menu => menu.path === activeFirstLevelPath.value)
-      return currentMenu?.children || []
-    })
+    /** 当前选中的一级菜单路径（使用 store 统一管理） */
+    const activeFirstLevelPath = computed<string>(() => menuStore.activeFirstLevelPath)
 
-    /** 混合模式下的子菜单（从 store 获取） */
-    const mixedSubMenus = computed<Menu[]>(() => menuStore.currentSubMenus)
+    /** 当前一级菜单对应的子菜单（双列/混合模式共用） */
+    const currentSubMenus = computed<Menu[]>(() => menuStore.currentSubMenus)
 
-    /** 是否有子菜单可显示（双列模式） */
+    /** 是否有子菜单可显示 */
     const hasSubMenus = computed<boolean>(() => currentSubMenus.value.length > 0)
-
-    /** 混合模式下是否有子菜单 */
-    const hasMixedSubMenus = computed<boolean>(() => mixedSubMenus.value.length > 0)
 
     /** 左侧菜单容器样式 */
     const leftColumnStyle = computed<CSSProperties>(() => ({
@@ -128,39 +118,23 @@ export default defineComponent({
       return menu.path === activeFirstLevelPath.value
     }
 
-    /** 根据当前路由初始化一级菜单选中状态 */
-    function initActiveFirstLevel(): void {
-      const currentPath = route.path
-      const matchedMenu = firstLevelMenus.value.find((menu) => {
-        if (menu.path === currentPath) return true
-        if (currentPath.startsWith(`${menu.path}/`)) return true
-        return false
-      })
-      if (matchedMenu) {
-        activeFirstLevelPath.value = matchedMenu.path
-      }
-      else if (firstLevelMenus.value.length > 0) {
-        activeFirstLevelPath.value = firstLevelMenus.value[0]!.path
-      }
-    }
-
-    // 监听路由变化，更新一级菜单激活状态
+    // 监听路由变化，更新一级菜单激活状态（双列/混合模式共用）
     watch(
       () => route.path,
-      () => {
-        if (isDualMode.value) {
-          initActiveFirstLevel()
+      (path) => {
+        if (isDualMode.value || isMixedMode.value) {
+          menuStore.initActiveFirstLevel(path)
         }
       },
       { immediate: true },
     )
 
-    // 监听布局模式变化，切换到双列模式时初始化一级菜单
+    // 监听布局模式变化，切换到双列/混合模式时初始化一级菜单
     watch(
-      isDualMode,
-      (val) => {
-        if (val) {
-          initActiveFirstLevel()
+      [isDualMode, isMixedMode],
+      ([dual, mixed]) => {
+        if (dual || mixed) {
+          menuStore.initActiveFirstLevel(route.path)
         }
       },
     )
@@ -180,7 +154,7 @@ export default defineComponent({
         handleMenuSelect(menu.path)
         return
       }
-      activeFirstLevelPath.value = menu.path
+      menuStore.setActiveFirstLevelPath(menu.path)
     }
 
     /** 二级菜单选择处理（双列模式） */
@@ -327,7 +301,7 @@ export default defineComponent({
 
     /** 渲染混合模式菜单（显示二级菜单） */
     function renderMixedMenu() {
-      if (!hasMixedSubMenus.value) return null
+      if (!hasSubMenus.value) return null
       return (
         <ElScrollbar>
           <ElMenu
@@ -339,7 +313,7 @@ export default defineComponent({
             popperClass="fd-vertical-menu__popper"
             onSelect={handleMenuSelect}
           >
-            {mixedSubMenus.value.map(menu => renderMenuItem(menu, menuStore.activeFirstLevelPath))}
+            {currentSubMenus.value.map((menu: Menu) => renderMenuItem(menu, menuStore.activeFirstLevelPath))}
           </ElMenu>
         </ElScrollbar>
       )
@@ -498,7 +472,7 @@ export default defineComponent({
     function renderDesktopMenu() {
       // 混合模式下只显示二级菜单
       if (isMixedMode.value) {
-        if (!hasMixedSubMenus.value) return null
+        if (!hasSubMenus.value) return null
         return (
           <div class={containerClass.value} style={style.value}>
             {renderMixedLayout()}

@@ -54,7 +54,7 @@ import FdLogo from "../fd-logo/index.vue"
 import FdName from "../fd-name/index.vue"
 import FdBreadcrumb from "../fd-breadcrumb"
 import FdHorizontalMenu from "../fd-horizontal-menu"
-import { useMitt } from "@/hooks"
+import { useMitt, useLayoutMode } from "@/hooks"
 import { useDeviceStore, useSettingsStore } from "@/stores"
 
 import { ref, computed, onMounted, onUnmounted } from "vue"
@@ -65,19 +65,14 @@ const mitt = useMitt("layout")
 
 const deviceStore = useDeviceStore()
 const settingsStore = useSettingsStore()
+const { isHorizontal: isHorizontalLayout, showCollapse: layoutShowCollapse } = useLayoutMode()
 
 const isFullscreen = ref(false)
 
 const isMobile = computed(() => deviceStore.isMobile)
 
-const isVerticalLayout = computed(() => settingsStore.isVerticalLayout)
-
-const isHorizontalLayout = computed(() => settingsStore.isHorizontalLayout)
-
-const isMixedLayout = computed(() => settingsStore.isMixedLayout)
-
-/** 显示折叠按钮（垂直布局或混合布局下显示） */
-const showCollapse = computed(() => !isMobile.value && (isVerticalLayout.value || isMixedLayout.value))
+/** 显示折叠按钮（非移动端且布局支持折叠） */
+const showCollapse = computed(() => !isMobile.value && layoutShowCollapse.value)
 
 const collapseIcon = computed(() => {
   return settingsStore.isMenuCollapsed ? "ri:menu-unfold-line" : "ri:menu-fold-line"

@@ -88,8 +88,7 @@ export const useSettingsStore = defineStore("settings", {
               this.lastMenuLayout = this.menuLayout
               this.menuLayout = "vertical"
             }
-          }
-          else if (!isMobile && wasMobile) {
+          } else if (!isMobile && wasMobile) {
             if (this.lastMenuLayout) {
               this.menuLayout = this.lastMenuLayout
             }
@@ -175,6 +174,10 @@ export const useSettingsStore = defineStore("settings", {
      */
     setMenuLayout(layout: MenuLayout) {
       this.menuLayout = layout
+      // 水平和双列布局不支持菜单风格，重置为默认值
+      if (layout === "horizontal" || layout === "dual") {
+        this.menuStyle = "light"
+      }
     },
 
     /**

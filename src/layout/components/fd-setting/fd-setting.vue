@@ -1,5 +1,13 @@
 <template>
-  <el-drawer v-model="visible" title="系统设置" direction="rtl" size="320px" :show-close="true" :close-on-click-modal="true" class="fd-setting">
+  <el-drawer
+    v-model="visible"
+    title="系统设置"
+    direction="rtl"
+    size="320px"
+    :show-close="true"
+    :close-on-click-modal="true"
+    class="fd-setting"
+  >
     <div class="fd-setting__content">
       <!-- 主题风格 -->
       <div class="fd-setting__section">
@@ -24,11 +32,19 @@
       <div class="fd-setting__section">
         <div class="fd-setting__title">菜单布局</div>
         <div class="fd-setting__options">
-          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'vertical' }" @click="menuLayout = 'vertical'">
+          <div
+            class="fd-setting__card"
+            :class="{ 'is-active': menuLayout === 'vertical' }"
+            @click="menuLayout = 'vertical'"
+          >
             <div class="fd-setting__preview" v-html="layoutVerticalSvg"></div>
             <span>垂直</span>
           </div>
-          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'horizontal' }" @click="menuLayout = 'horizontal'">
+          <div
+            class="fd-setting__card"
+            :class="{ 'is-active': menuLayout === 'horizontal' }"
+            @click="menuLayout = 'horizontal'"
+          >
             <div class="fd-setting__preview" v-html="layoutHorizontalSvg"></div>
             <span>水平</span>
           </div>
@@ -47,13 +63,25 @@
       <div class="fd-setting__section">
         <div class="fd-setting__title">菜单风格</div>
         <div class="fd-setting__options">
-          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'light' }" @click="menuStyle = 'light'">
+          <div
+            class="fd-setting__card"
+            :class="{ 'is-active': menuStyle === 'light', 'is-disabled': isMenuStyleDisabled }"
+            @click="!isMenuStyleDisabled && (menuStyle = 'light')"
+          >
             <div class="fd-setting__preview" v-html="menuLightSvg"></div>
           </div>
-          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'dark' }" @click="menuStyle = 'dark'">
+          <div
+            class="fd-setting__card"
+            :class="{ 'is-active': menuStyle === 'dark', 'is-disabled': isMenuStyleDisabled }"
+            @click="!isMenuStyleDisabled && (menuStyle = 'dark')"
+          >
             <div class="fd-setting__preview" v-html="menuDarkSvg"></div>
           </div>
-          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'transparent' }" @click="menuStyle = 'transparent'">
+          <div
+            class="fd-setting__card"
+            :class="{ 'is-active': menuStyle === 'transparent', 'is-disabled': isMenuStyleDisabled }"
+            @click="!isMenuStyleDisabled && (menuStyle = 'transparent')"
+          >
             <div class="fd-setting__preview" v-html="menuTransparentSvg"></div>
           </div>
         </div>
@@ -63,7 +91,13 @@
       <div class="fd-setting__section">
         <div class="fd-setting__title">系统主题色</div>
         <div class="fd-setting__colors">
-          <div v-for="color in themeColors" :key="color" class="fd-setting__color-option" :style="{ backgroundColor: color }" @click="setPrimaryColor(color)">
+          <div
+            v-for="color in themeColors"
+            :key="color"
+            class="fd-setting__color-option"
+            :style="{ backgroundColor: color }"
+            @click="setPrimaryColor(color)"
+          >
             <el-icon v-if="primaryColor === color" :size="14"><check /></el-icon>
           </div>
         </div>
@@ -106,13 +140,12 @@
           </div>
         </div>
       </div>
-
     </div>
   </el-drawer>
 </template>
 
 <script setup lang="ts">
-import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, TransitionName } from "@/stores/settings/types"
+import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, TransitionName } from "@/stores"
 import menuDarkSvg from "@/assets/svg/menu-dark.svg?raw"
 
 // 导入菜单风格 SVG 图标
@@ -140,7 +173,7 @@ const settingsStore = useSettingsStore()
 /** 抽屉可见状态 - 与 store 同步 */
 const visible = computed({
   get: () => settingsStore.settingsDrawerOpened,
-  set: val => (val ? settingsStore.openSettingsDrawer() : settingsStore.closeSettingsDrawer()),
+  set: (val) => (val ? settingsStore.openSettingsDrawer() : settingsStore.closeSettingsDrawer()),
 })
 
 /** 预设主题色列表 */
@@ -160,51 +193,55 @@ const theme = computed(() => settingsStore.themeStyle)
 /** 当前主题色 */
 const primaryColor = computed({
   get: () => settingsStore.primaryColor,
-  set: val => settingsStore.setPrimaryColor(val),
+  set: (val) => settingsStore.setPrimaryColor(val),
 })
 
 /** 显示标签栏 */
 const showProcess = computed({
   get: () => settingsStore.showProcess,
-  set: val => settingsStore.setShowProcess(val),
+  set: (val) => settingsStore.setShowProcess(val),
 })
 
 /** 固定顶栏 */
 const fixedHeader = computed({
   get: () => settingsStore.fixedHeader,
-  set: val => settingsStore.setFixedHeader(val),
+  set: (val) => settingsStore.setFixedHeader(val),
 })
 
 /** 显示水印 */
 const showWatermark = computed({
   get: () => settingsStore.showWatermark,
-  set: val => settingsStore.setShowWatermark(val),
+  set: (val) => settingsStore.setShowWatermark(val),
 })
 
 /** 菜单布局 */
 const menuLayout = computed({
   get: () => settingsStore.menuLayout,
-  set: val => settingsStore.setMenuLayout(val as MenuLayout),
+  set: (val) => settingsStore.setMenuLayout(val as MenuLayout),
 })
 
 /** 菜单风格 */
 const menuStyle = computed({
   get: () => settingsStore.menuStyle,
-  set: val => settingsStore.setMenuStyle(val as MenuStyle),
+  set: (val) => settingsStore.setMenuStyle(val as MenuStyle),
+})
+
+/** 菜单风格是否禁用（水平和双列布局下禁用） */
+const isMenuStyleDisabled = computed(() => {
+  return settingsStore.isHorizontalLayout || settingsStore.isDualLayout
 })
 
 /** 菜单模式 */
 const menuMode = computed({
   get: () => settingsStore.menuMode,
-  set: val => settingsStore.setMenuMode(val as MenuMode),
+  set: (val) => settingsStore.setMenuMode(val as MenuMode),
 })
 
 /** 过渡动画 */
 const transition = computed({
   get: () => settingsStore.transition,
-  set: val => settingsStore.setTransition(val as TransitionName),
+  set: (val) => settingsStore.setTransition(val as TransitionName),
 })
-
 
 /** 设置主题（从点击位置开始圆形扩散动画） */
 function setTheme(mode: ThemeStyle, event: MouseEvent) {
@@ -220,8 +257,7 @@ function setTheme(mode: ThemeStyle, event: MouseEvent) {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     settingsStore.setThemeStyle("auto")
     settingsStore.setTheme(isDark ? "dark" : "light", animationOptions)
-  }
-  else {
+  } else {
     // 手动指定 light 或 dark
     settingsStore.setThemeStyle(mode)
     settingsStore.setTheme(mode as "light" | "dark", animationOptions)
@@ -232,7 +268,6 @@ function setTheme(mode: ThemeStyle, event: MouseEvent) {
 function setPrimaryColor(color: string) {
   settingsStore.setPrimaryColor(color)
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -283,6 +318,15 @@ function setPrimaryColor(color: string) {
 
       span {
         color: var(--el-color-primary);
+      }
+    }
+
+    &.is-disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+
+      .fd-setting__preview {
+        pointer-events: none;
       }
     }
   }
