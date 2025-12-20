@@ -16,7 +16,7 @@ import type { BreadcrumbItem } from "./types"
 import { computed } from "vue"
 import { ArrowRight } from "@element-plus/icons-vue"
 import { useRoute, useRouter } from "vue-router"
-import { useMenuStore, useDeviceStore } from "@/stores"
+import { useMenuStore, useDeviceStore, useSettingsStore } from "@/stores"
 
 defineOptions({ name: "fd-breadcrumb" })
 
@@ -31,8 +31,9 @@ const route = useRoute()
 const router = useRouter()
 const menuStore = useMenuStore()
 const deviceStore = useDeviceStore()
+const settingsStore = useSettingsStore()
 
-const show = computed(() => !deviceStore.isMobile)
+const show = computed(() => !deviceStore.isMobile && !settingsStore.isHorizontalLayout)
 
 /**
  * 计算面包屑数据

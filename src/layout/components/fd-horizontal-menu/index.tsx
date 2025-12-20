@@ -1,30 +1,32 @@
 import type { Menu } from "@/stores"
-import { Icon } from "@/components/core/fd-icon"
+import FdIcon from "@/components/core/fd-icon"
 import { useRoute, useRouter } from "vue-router"
-import { computed, defineComponent } from "vue"
 import { ElMenu, ElSubMenu, ElMenuItem } from "element-plus"
 import { useMenuStore, useSettingsStore } from "@/stores"
+import { ref, watch, computed, nextTick, onMounted, onUnmounted, defineComponent } from "vue"
 import "./index.scss"
-
-/** 菜单配置常量 */
-const MENU_CONFIG = {
-  /** 菜单项图标大小 */
-  ICON_SIZE: 18,
-  /** 子菜单图标大小 */
-  SUB_MENU_ICON_SIZE: 16,
-} as const
-
-// ==================== 组件定义 ====================
 
 export default defineComponent({
   name: "fd-horizontal-menu",
   setup() {
     const route = useRoute()
     const router = useRouter()
+
     const menuStore = useMenuStore()
     const settingsStore = useSettingsStore()
 
+    // ==================== 响应式状态 ====================
+
+    /** 菜单容器引用 */
+    const menuContainerRef = ref<HTMLElement | null>(null)
+
+    /** 可见菜单数量 */
+    const visibleCount = ref<number>(Infinity)
+
     // ==================== 计算属性 ====================
+
+    /** 是否显示水平菜单（仅在水平布局模式下显示） */
+    const show = computed<boolean>(() => settingsStore.isHorizontalLayout)
 
     /** 可见菜单列表 */
     const menuList = computed<Menu[]>(() => menuStore.menus)
@@ -38,6 +40,102 @@ export default defineComponent({
         return route.meta.activeMenu as string
       }
       return route.path
+    })
+
+    /** 可见的菜单项 */
+    const visibleMenus = computed<Menu[]>(() => {
+      if (visibleCount.value >= menuList.value.length) {
+        return menuList.value
+      }
+      return menuList.value.slice(0, visibleCount.value)
+    })
+
+    /** 溢出的菜单项（放入"更多"下拉菜单） */
+    const overflowMenus = computed<Menu[]>(() => {
+      if (visibleCount.value >= menuList.value.length) {
+        return []
+      }
+      return menuList.value.slice(visibleCount.value)
+    })
+
+    /** 是否有溢出菜单 */
+    const hasOverflow = computed<boolean>(() => overflowMenus.value.length > 0)
+
+    // ==================== 溢出计算 ====================
+
+    /** 计算可见菜单数量 */
+    function calculateVisibleCount() {
+      if (!menuContainerRef.value) return
+
+      const container = menuContainerRef.value
+      const containerWidth = container.clientWidth
+      const menuItems = container.querySelectorAll<HTMLElement>(".fd-horizontal-menu__menu-item")
+
+      if (menuItems.length === 0) return
+
+      // 预留"更多"按钮的宽度
+      const moreButtonWidth = 60
+      let totalWidth = 0
+      let count = 0
+
+      for (const item of menuItems) {
+        const itemWidth = item.offsetWidth + 8 // 加上 gap
+        if (totalWidth + itemWidth + moreButtonWidth <= containerWidth) {
+          totalWidth += itemWidth
+          count++
+        } else {
+          break
+        }
+      }
+
+      // 如果所有菜单都能放下，则不需要"更多"按钮
+      if (count === menuList.value.length) {
+        visibleCount.value = Infinity
+      } else {
+        // 至少显示一个菜单项
+        visibleCount.value = Math.max(1, count)
+      }
+    }
+
+    /** 防抖的计算函数 */
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null
+    function debouncedCalculate() {
+      if (resizeTimer) clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        // 先重置为显示所有，让 DOM 更新
+        visibleCount.value = Infinity
+        nextTick(() => {
+          calculateVisibleCount()
+        })
+      }, 100)
+    }
+
+    // ==================== 生命周期 ====================
+
+    let resizeObserver: ResizeObserver | null = null
+
+    onMounted(() => {
+      nextTick(() => {
+        if (menuContainerRef.value) {
+          resizeObserver = new ResizeObserver(debouncedCalculate)
+          resizeObserver.observe(menuContainerRef.value)
+          calculateVisibleCount()
+        }
+      })
+    })
+
+    onUnmounted(() => {
+      if (resizeObserver) {
+        resizeObserver.disconnect()
+      }
+      if (resizeTimer) {
+        clearTimeout(resizeTimer)
+      }
+    })
+
+    // 监听菜单列表变化
+    watch(menuList, () => {
+      nextTick(debouncedCalculate)
     })
 
     // ==================== 工具函数 ====================
@@ -54,35 +152,6 @@ export default defineComponent({
       return basePath ? `${basePath}/${path}`.replace(/\/+/g, "/") : `/${path}`
     }
 
-    /** 判断菜单是否只有单个可提升的子项 */
-    function isSinglePromotableChild(menu: Menu): boolean {
-      if (!menu.children || menu.children.length !== 1) return false
-      return !menu.children[0]?.children?.length
-    }
-
-    /**
-     * 递归过滤菜单项，移除隐藏的菜单
-     * 如果一个父菜单的所有子菜单都被隐藏，则父菜单也会被隐藏
-     */
-    function filterMenuItems(items: Menu[]): Menu[] {
-      return items
-        .filter((item) => {
-          if (item.meta?.hidden) return false
-          if (item.children && item.children.length > 0) {
-            const filteredChildren = filterMenuItems(item.children)
-            return filteredChildren.length > 0
-          }
-          return true
-        })
-        .map(item => ({
-          ...item,
-          children: item.children ? filterMenuItems(item.children) : undefined,
-        }))
-    }
-
-    /** 过滤后的菜单项列表 */
-    const filteredMenus = computed(() => filterMenuItems(menuList.value))
-
     // ==================== 事件处理 ====================
 
     /** 菜单选择处理 */
@@ -97,98 +166,104 @@ export default defineComponent({
     // ==================== 渲染函数 ====================
 
     /** 渲染菜单图标 */
-    function renderIcon(icon?: string, size: number = MENU_CONFIG.SUB_MENU_ICON_SIZE) {
+    function renderIcon(icon?: string, size: number = 18) {
       if (!icon) return null
-      return <Icon icon={icon} size={size} class="fd-horizontal-menu__icon" />
+      return <FdIcon icon={icon} size={size} class="fd-horizontal-menu__icon" />
     }
 
     /** 渲染菜单标题 */
     function renderTitle(title?: string) {
-      return <span class="fd-horizontal-menu__title">{title || "未命名菜单"}</span>
+      return <span class="fd-horizontal-menu__title">{title}</span>
     }
 
     /** 渲染叶子菜单项（无子菜单） */
-    function renderLeafMenuItem(menu: Menu, fullPath: string) {
+    function renderLeafMenuItem(menu: Menu, fullPath: string, isOverflow: boolean = false) {
       return (
-        <ElMenuItem key={menu.path} index={fullPath} class="fd-horizontal-menu__item">
-          {renderIcon(menu.icon, MENU_CONFIG.ICON_SIZE)}
+        <ElMenuItem
+          key={menu.path}
+          index={fullPath}
+          class={["fd-horizontal-menu__item", { "fd-horizontal-menu__menu-item": !isOverflow }]}
+        >
+          {renderIcon(menu.icon)}
           {renderTitle(menu.title)}
         </ElMenuItem>
       )
     }
 
     /** 渲染子菜单（有子菜单项） */
-    function renderSubMenu(menu: Menu, fullPath: string, level: number = 0) {
-      const popperClass = level === 0 ? "fd-horizontal-menu__popper" : "fd-horizontal-menu__popper--nested"
-
+    function renderSubMenu(menu: Menu, fullPath: string, isOverflow: boolean = false) {
+      const children = menu.children || []
       return (
-        <ElSubMenu key={menu.path} index={fullPath} class="fd-horizontal-menu__submenu" popperClass={popperClass}>
+        <ElSubMenu
+          key={menu.path}
+          index={fullPath}
+          class={["fd-horizontal-menu__submenu", { "fd-horizontal-menu__menu-item": !isOverflow }]}
+          popperClass="fd-horizontal-menu__popper"
+        >
           {{
-            title: () => (
-              <>
-                {renderIcon(menu.icon, MENU_CONFIG.ICON_SIZE)}
-                {renderTitle(menu.title)}
-              </>
-            ),
-            default: () => menu.children?.map((child: Menu) => renderMenuItem(child, fullPath, level + 1)),
+            title: () => [renderIcon(menu.icon), renderTitle(menu.title)],
+            default: () => children.map((child: Menu) => renderMenuItem(child, fullPath, true)),
           }}
         </ElSubMenu>
       )
     }
 
     /** 递归渲染菜单项 */
-    function renderMenuItem(menu: Menu, basePath: string, level: number = 0) {
+    function renderMenuItem(menu: Menu, basePath: string, isOverflow: boolean = false) {
       const fullPath = getFullPath(menu.path, basePath)
 
-      // 过滤隐藏的菜单
-      if (menu.hidden) return null
-
-      // 无子菜单，渲染叶子节点
+      // 没有子菜单，渲染为叶子菜单项
       if (!menu.children || menu.children.length === 0) {
-        return renderLeafMenuItem(menu, fullPath)
+        return renderLeafMenuItem(menu, fullPath, isOverflow)
       }
 
-      // 只有一个可提升的子项
-      if (isSinglePromotableChild(menu)) {
-        const firstChild = menu.children[0]!
-        const childFullPath = getFullPath(firstChild.path, fullPath)
-        return (
-          <ElMenuItem key={childFullPath} index={childFullPath} class="fd-horizontal-menu__item">
-            {renderIcon(firstChild.meta?.icon || menu.icon, MENU_CONFIG.ICON_SIZE)}
-            {renderTitle(firstChild.meta?.title || menu.title)}
-          </ElMenuItem>
-        )
-      }
+      // 有子菜单，渲染为可展开的子菜单
+      return renderSubMenu(menu, fullPath, isOverflow)
+    }
 
-      // 有多个子菜单
-      return renderSubMenu(menu, fullPath, level)
+    /** 渲染"更多"按钮 */
+    function renderMoreButton() {
+      if (!hasOverflow.value) return null
+
+      return (
+        <ElSubMenu
+          index="__more__"
+          class="fd-horizontal-menu__more"
+          popperClass="fd-horizontal-menu__popper"
+        >
+          {{
+            title: () => <FdIcon icon="ri:more-fill" size={20} />,
+            default: () => overflowMenus.value.map(menu => renderMenuItem(menu, "", true)),
+          }}
+        </ElSubMenu>
+      )
     }
 
     /** 渲染水平菜单 */
     function renderHorizontalMenu() {
       return (
-        <div class="fd-horizontal-menu">
+        <div class="fd-horizontal-menu" ref={menuContainerRef}>
           <ElMenu
             class="fd-horizontal-menu__container"
             mode="horizontal"
-            ellipsis={true}
+            ellipsis={false}
+            hideTimeout={50}
             showTimeout={50}
-            hideTimeout={500000}
-            popperOffset={-6}
             defaultActive={activeMenuPath.value}
             uniqueOpened={isAccordionMode.value}
             backgroundColor="transparent"
-            textColor="var(--el-text-color-primary)"
-            activeTextColor="var(--el-color-primary)"
             popperClass="fd-horizontal-menu__popper"
             onSelect={handleMenuSelect}
           >
-            {filteredMenus.value.map(menu => renderMenuItem(menu, "", 0))}
+            {visibleMenus.value.map(menu => renderMenuItem(menu, "", false))}
+            {renderMoreButton()}
           </ElMenu>
         </div>
       )
     }
 
-    return () => renderHorizontalMenu()
+    // ==================== 主渲染 ====================
+
+    return () => (show.value ? renderHorizontalMenu() : null)
   },
 })

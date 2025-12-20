@@ -4,10 +4,17 @@
       <div v-if="isMobile" class="fd-header__action-btn" @click="handleOpenMobileMenu">
         <fd-icon icon="ri:menu-line" :size="20" />
       </div>
+      <template v-else-if="isHorizontalLayout">
+        <div class="fd-header__logo">
+          <fd-logo />
+          <fd-name />
+        </div>
+      </template>
       <div v-else-if="showCollapse" class="fd-header__action-btn" @click="handleToggleCollapse">
         <fd-icon :icon="collapseIcon" :size="20" />
       </div>
       <fd-breadcrumb />
+      <fd-horizontal-menu />
     </div>
     <div class="fd-header__right">
       <div class="fd-header__action-btn" @click="handleOpenSearch">
@@ -43,7 +50,10 @@
 
 <script setup lang="ts">
 import type { LanguageType } from "@/stores"
+import FdLogo from "../fd-logo/index.vue"
+import FdName from "../fd-name/index.vue"
 import FdBreadcrumb from "../fd-breadcrumb"
+import FdHorizontalMenu from "../fd-horizontal-menu"
 import { useMitt } from "@/hooks"
 import { useDeviceStore, useSettingsStore } from "@/stores"
 
@@ -61,6 +71,8 @@ const isFullscreen = ref(false)
 const isMobile = computed(() => deviceStore.isMobile)
 
 const isVerticalLayout = computed(() => settingsStore.isVerticalLayout)
+
+const isHorizontalLayout = computed(() => settingsStore.isHorizontalLayout)
 
 const showCollapse = computed(() => !isMobile.value && isVerticalLayout.value)
 
@@ -163,6 +175,14 @@ function handleOpenSettings() {
     gap: 12px;
     display: flex;
     align-items: center;
+  }
+
+  &__logo {
+    gap: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
   }
 
   &__action-btn {
