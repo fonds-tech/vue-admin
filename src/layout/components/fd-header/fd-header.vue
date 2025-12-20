@@ -56,13 +56,11 @@ import FdBreadcrumb from "../fd-breadcrumb"
 import FdHorizontalMenu from "../fd-horizontal-menu"
 import { useMitt, useLayoutMode } from "@/hooks"
 import { useDeviceStore, useSettingsStore } from "@/stores"
-
 import { ref, computed, onMounted, onUnmounted } from "vue"
 
 defineOptions({ name: "fd-header" })
 
 const mitt = useMitt("layout")
-
 const deviceStore = useDeviceStore()
 const settingsStore = useSettingsStore()
 const { isHorizontal: isHorizontalLayout, showCollapse: layoutShowCollapse } = useLayoutMode()

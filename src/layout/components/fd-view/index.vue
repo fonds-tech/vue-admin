@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { useMitt } from "@/hooks"
-import { ref, computed, onUnmounted } from "vue"
 import { useProcessStore, useSettingsStore } from "@/stores"
+import { ref, computed, onUnmounted, onBeforeMount } from "vue"
 
 defineOptions({ name: "fd-view" })
 
@@ -34,14 +34,6 @@ const transitionName = computed(() => (settingsStore.transition === "none" ? "" 
 /** 是否启用过渡动画 */
 const transitionEnabled = computed(() => settingsStore.transition !== "none")
 
-/**
- * 处理页面刷新
- * 通过临时移除组件实现刷新效果
- */
-function handleRefresh() {
-  key.value += 1
-}
-
 onBeforeMount(() => {
   mitt.on("process:refresh", handleRefresh)
 })
@@ -49,6 +41,14 @@ onBeforeMount(() => {
 onUnmounted(() => {
   mitt.off("process:refresh", handleRefresh)
 })
+
+/**
+ * 处理页面刷新
+ * 通过临时移除组件实现刷新效果
+ */
+function handleRefresh() {
+  key.value += 1
+}
 </script>
 
 <style lang="scss">

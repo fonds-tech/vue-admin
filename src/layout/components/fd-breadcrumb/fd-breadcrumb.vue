@@ -19,7 +19,6 @@ import { useRoute, useRouter } from "vue-router"
 import { useMenuStore, useDeviceStore, useSettingsStore } from "@/stores"
 
 defineOptions({ name: "fd-breadcrumb" })
-
 /** 首页路径 */
 const HOME_PATH = "/dashboard"
 /** 首页标题 */

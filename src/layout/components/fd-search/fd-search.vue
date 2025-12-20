@@ -90,11 +90,7 @@ import { useMitt } from "@/hooks"
 import { useRouter } from "vue-router"
 import { treeToList } from "@/utils/array"
 import { useMenuStore } from "@/stores"
-import { ref, watch, computed, nextTick } from "vue"
-
-defineOptions({ name: "fd-search" })
-
-const mitt = useMitt("layout")
+import { ref, watch, computed, nextTick, onBeforeMount } from "vue"
 
 // ===================== 类型定义 =====================
 
@@ -108,42 +104,29 @@ interface SearchResult {
   type: number
 }
 
-// ===================== 状态管理 =====================
+// ===================== 常量与配置 =====================
 
+defineOptions({ name: "fd-search" })
+
+// ===================== 依赖注入 =====================
+
+const mitt = useMitt("layout")
 const router = useRouter()
 const menuStore = useMenuStore()
+
+// ===================== 状态管理 =====================
+
 const visible = ref(false)
 const searchQuery = ref("")
 const activeIndex = ref(-1)
 const inputRef = ref<HTMLInputElement>()
 
-// ===================== 搜索逻辑 =====================
+// ===================== 计算属性 =====================
 
 /** 获取扁平化的菜单列表 */
 const flatMenuList = computed<Menu[]>(() => {
   return treeToList(menuStore.menus)
 })
-
-/**
- * 获取完整的菜单标题链
- * 例如: 用户管理 -> 系统管理
- */
-function getMenuChain(menu: Menu): string[] {
-  const chain: string[] = [menu.title]
-  let current = menu
-  let parent = flatMenuList.value.find(m => m.id === current.parentId)
-
-  // 向上查找父级（最多3级）
-  let depth = 0
-  while (parent && parent.parentId > 0 && depth < 3) {
-    chain.unshift(parent.title)
-    current = parent
-    parent = flatMenuList.value.find(m => m.id === current.parentId)
-    depth++
-  }
-
-  return chain
-}
 
 /**
  * 过滤菜单 - 只返回可访问的页面 (type === 1)
@@ -189,7 +172,49 @@ const filteredResults = computed<SearchResult[]>(() => {
   return results
 })
 
-// ===================== 键盘导航 =====================
+// ===================== 监听器 =====================
+
+// 监听输入实时搜索（已包含在 computed 中）
+// 搜索结果为空时重置索引
+watch(searchQuery, (newVal) => {
+  if (!newVal) {
+    activeIndex.value = -1
+  }
+})
+
+// ===================== 生命周期 =====================
+
+onBeforeMount(() => {
+  mitt.on("search:open", () => {
+    console.log(333)
+    open()
+  })
+})
+
+// ===================== 工具函数 =====================
+
+/**
+ * 获取完整的菜单标题链
+ * 例如: 用户管理 -> 系统管理
+ */
+function getMenuChain(menu: Menu): string[] {
+  const chain: string[] = [menu.title]
+  let current = menu
+  let parent = flatMenuList.value.find(m => m.id === current.parentId)
+
+  // 向上查找父级（最多3级）
+  let depth = 0
+  while (parent && parent.parentId > 0 && depth < 3) {
+    chain.unshift(parent.title)
+    current = parent
+    parent = flatMenuList.value.find(m => m.id === current.parentId)
+    depth++
+  }
+
+  return chain
+}
+
+// ===================== 事件处理 =====================
 
 function navigateList(direction: number) {
   if (filteredResults.value.length === 0) return
@@ -216,8 +241,6 @@ function handleSelect() {
   }
 }
 
-// ===================== 导航处理 =====================
-
 function navigateTo(item: SearchResult) {
   if (!item) return
 
@@ -231,8 +254,6 @@ function navigateTo(item: SearchResult) {
   searchQuery.value = ""
   activeIndex.value = -1
 }
-
-// ===================== 弹窗控制 =====================
 
 function open() {
   visible.value = true
@@ -250,28 +271,11 @@ function close() {
   activeIndex.value = -1
 }
 
-onBeforeMount(() => {
-  mitt.on("search:open", () => {
-    console.log(333)
-    open()
-  })
-})
-
 // ===================== 暴露 API =====================
 
 defineExpose({
   open,
   close,
-})
-
-// ===================== 监听器 =====================
-
-// 监听输入实时搜索（已包含在 computed 中）
-// 搜索结果为空时重置索引
-watch(searchQuery, (newVal) => {
-  if (!newVal) {
-    activeIndex.value = -1
-  }
 })
 </script>
 

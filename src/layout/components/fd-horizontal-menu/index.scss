@@ -21,11 +21,7 @@ $popup-menu-radius: 6px;
 }
 
 // 菜单项 hover/active 交互状态
-@mixin menu-item-states(
-  $hover-bg: var(--el-fill-color-dark),
-  $active-color: var(--el-color-primary),
-  $active-bg: var(--el-color-primary-light-9)
-) {
+@mixin menu-item-states($hover-bg: var(--el-fill-color-dark), $active-color: var(--el-color-primary), $active-bg: var(--el-color-primary-light-9)) {
   &:hover {
     color: var(--el-color-primary);
     background-color: $hover-bg;
@@ -83,12 +79,12 @@ $popup-menu-radius: 6px;
     border-right: none;
 
     .el-menu-item {
-      height: 40px;
       cursor: pointer;
+      height: 40px;
       padding: 0 16px;
       font-size: 14px;
-      border-radius: $menu-item-radius;
       border-bottom: none !important;
+      border-radius: $menu-item-radius;
 
       .fd-horizontal-menu__icon {
         @include menu-icon;
@@ -106,8 +102,8 @@ $popup-menu-radius: 6px;
         height: 40px;
         padding: 0 16px;
         font-size: 14px;
-        border-radius: $menu-item-radius;
         border-bottom: none !important;
+        border-radius: $menu-item-radius;
 
         &:hover {
           color: var(--el-color-primary);
@@ -124,8 +120,8 @@ $popup-menu-radius: 6px;
       }
 
       &__icon-arrow {
-        width: fit-content;
         color: var(--el-text-color-secondary);
+        width: fit-content;
       }
 
       // 展开状态
@@ -149,12 +145,12 @@ $popup-menu-radius: 6px;
     .el-sub-menu__title {
       width: 40px;
       height: 40px;
-      padding: 0 !important;
       display: flex;
+      padding: 0 !important;
       align-items: center;
-      justify-content: center;
-      border-radius: $menu-item-radius;
       border-bottom: none !important;
+      border-radius: $menu-item-radius;
+      justify-content: center;
 
       .el-sub-menu__icon-arrow {
         display: none;
@@ -174,8 +170,8 @@ $popup-menu-radius: 6px;
   .el-menu {
     gap: 6px;
     display: flex;
-    flex-direction: column;
     border-radius: 6px;
+    flex-direction: column;
 
     .el-sub-menu {
       &__title {

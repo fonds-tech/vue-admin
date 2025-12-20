@@ -11,7 +11,6 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const router = useRouter()
-
     const menuStore = useMenuStore()
     const settingsStore = useSettingsStore()
 
@@ -22,6 +21,9 @@ export default defineComponent({
 
     /** 可见菜单数量 */
     const visibleCount = ref<number>(Infinity)
+
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null
+    let resizeObserver: ResizeObserver | null = null
 
     // ==================== 计算属性 ====================
 
@@ -71,7 +73,46 @@ export default defineComponent({
     /** 是否有溢出菜单 */
     const hasOverflow = computed<boolean>(() => overflowMenus.value.length > 0)
 
-    // ==================== 溢出计算 ====================
+    // ==================== 监听器 ====================
+
+    // 监听菜单列表变化
+    watch(menuList, () => {
+      nextTick(debouncedCalculate)
+    })
+
+    // 混合模式下监听路由变化，更新一级菜单选中状态
+    watch(
+      () => route.path,
+      (path) => {
+        if (isMixedLayout.value) {
+          menuStore.initActiveFirstLevel(path)
+        }
+      },
+      { immediate: true },
+    )
+
+    // ==================== 生命周期 ====================
+
+    onMounted(() => {
+      nextTick(() => {
+        if (menuContainerRef.value) {
+          resizeObserver = new ResizeObserver(debouncedCalculate)
+          resizeObserver.observe(menuContainerRef.value)
+          calculateVisibleCount()
+        }
+      })
+    })
+
+    onUnmounted(() => {
+      if (resizeObserver) {
+        resizeObserver.disconnect()
+      }
+      if (resizeTimer) {
+        clearTimeout(resizeTimer)
+      }
+    })
+
+    // ==================== 工具函数 ====================
 
     /** 计算可见菜单数量 */
     function calculateVisibleCount() {
@@ -108,7 +149,6 @@ export default defineComponent({
     }
 
     /** 防抖的计算函数 */
-    let resizeTimer: ReturnType<typeof setTimeout> | null = null
     function debouncedCalculate() {
       if (resizeTimer) clearTimeout(resizeTimer)
       resizeTimer = setTimeout(() => {
@@ -119,47 +159,6 @@ export default defineComponent({
         })
       }, 100)
     }
-
-    // ==================== 生命周期 ====================
-
-    let resizeObserver: ResizeObserver | null = null
-
-    onMounted(() => {
-      nextTick(() => {
-        if (menuContainerRef.value) {
-          resizeObserver = new ResizeObserver(debouncedCalculate)
-          resizeObserver.observe(menuContainerRef.value)
-          calculateVisibleCount()
-        }
-      })
-    })
-
-    onUnmounted(() => {
-      if (resizeObserver) {
-        resizeObserver.disconnect()
-      }
-      if (resizeTimer) {
-        clearTimeout(resizeTimer)
-      }
-    })
-
-    // 监听菜单列表变化
-    watch(menuList, () => {
-      nextTick(debouncedCalculate)
-    })
-
-    // 混合模式下监听路由变化，更新一级菜单选中状态
-    watch(
-      () => route.path,
-      (path) => {
-        if (isMixedLayout.value) {
-          menuStore.initActiveFirstLevel(path)
-        }
-      },
-      { immediate: true },
-    )
-
-    // ==================== 工具函数 ====================
 
     /** 判断是否为外链 */
     function isExternalLink(path: string): boolean {

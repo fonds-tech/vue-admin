@@ -159,6 +159,15 @@ export default defineComponent({
       return props.showFirstLevelText ? "60px" : "48px"
     })
 
+    // ==================== 监听器 ====================
+
+    // 监听路由变化，更新一级菜单激活状态
+    watch(
+      () => route.path,
+      () => initActiveFirstLevel(),
+      { immediate: true },
+    )
+
     // ==================== 工具函数 ====================
 
     /**
@@ -197,12 +206,10 @@ export default defineComponent({
       return !menu.children[0]?.children?.length
     }
 
-    // ==================== 初始化 ====================
-
     /**
      * 根据当前路由初始化一级菜单选中状态
      */
-    const initActiveFirstLevel = (): void => {
+    function initActiveFirstLevel(): void {
       const currentPath = route.path
       // 查找匹配的一级菜单
       const matchedMenu = firstLevelMenus.value.find((menu) => {
@@ -218,13 +225,6 @@ export default defineComponent({
         activeFirstLevelPath.value = firstLevelMenus.value[0]?.path || ""
       }
     }
-
-    // 监听路由变化，更新一级菜单激活状态
-    watch(
-      () => route.path,
-      () => initActiveFirstLevel(),
-      { immediate: true },
-    )
 
     // ==================== 事件处理 ====================
 

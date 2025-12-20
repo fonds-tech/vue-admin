@@ -55,6 +55,25 @@ const router = useRouter()
 const processStore = useProcessStore()
 const scrollContainer = ref<HTMLElement | null>(null)
 
+// ==================== 监听器 ====================
+
+// 路由变化时滚动到激活标签
+watch(
+  () => route.path,
+  () => {
+    scrollToActive()
+  },
+)
+
+// ==================== 生命周期 ====================
+
+// 初始化时滚动到激活标签
+onMounted(() => {
+  scrollToActive()
+})
+
+// ==================== 工具函数 ====================
+
 /**
  * 跳转到最后一个标签或首页
  */
@@ -65,6 +84,20 @@ function toLastOrHome() {
     router.push(last ? last.fullPath : "/")
   }
 }
+
+/**
+ * 滚动到激活的标签
+ */
+function scrollToActive() {
+  nextTick(() => {
+    const activeEl = scrollContainer.value?.querySelector(".is-active")
+    if (activeEl) {
+      activeEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
+    }
+  })
+}
+
+// ==================== 事件处理 ====================
 
 /**
  * 点击返回按钮
@@ -157,31 +190,6 @@ function onWheel(event: WheelEvent) {
     scrollContainer.value.scrollLeft += event.deltaY * 2
   }
 }
-
-/**
- * 滚动到激活的标签
- */
-function scrollToActive() {
-  nextTick(() => {
-    const activeEl = scrollContainer.value?.querySelector(".is-active")
-    if (activeEl) {
-      activeEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
-    }
-  })
-}
-
-// 路由变化时滚动到激活标签
-watch(
-  () => route.path,
-  () => {
-    scrollToActive()
-  },
-)
-
-// 初始化时滚动到激活标签
-onMounted(() => {
-  scrollToActive()
-})
 </script>
 
 <style lang="scss">

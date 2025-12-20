@@ -147,18 +147,12 @@
 <script setup lang="ts">
 import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, TransitionName } from "@/stores"
 import menuDarkSvg from "@/assets/svg/menu-dark.svg?raw"
-
-// 导入菜单风格 SVG 图标
 import menuLightSvg from "@/assets/svg/menu-light.svg?raw"
 import themeDarkSvg from "@/assets/svg/theme-dark.svg?raw"
 import layoutDualSvg from "@/assets/svg/layout-dual.svg?raw"
-
-// 导入主题风格 SVG 图标
 import themeLightSvg from "@/assets/svg/theme-light.svg?raw"
 import layoutMixedSvg from "@/assets/svg/layout-mixed.svg?raw"
 import themeSystemSvg from "@/assets/svg/theme-system.svg?raw"
-
-// 导入菜单布局 SVG 图标
 import layoutVerticalSvg from "@/assets/svg/layout-vertical.svg?raw"
 import menuTransparentSvg from "@/assets/svg/menu-transparent.svg?raw"
 import layoutHorizontalSvg from "@/assets/svg/layout-horizontal.svg?raw"
@@ -166,15 +160,9 @@ import { Check } from "@element-plus/icons-vue"
 import { computed } from "vue"
 import { useSettingsStore } from "@/stores"
 
+// ==================== 常量与配置 ====================
+
 defineOptions({ name: "fd-setting" })
-
-const settingsStore = useSettingsStore()
-
-/** 抽屉可见状态 - 与 store 同步 */
-const visible = computed({
-  get: () => settingsStore.settingsDrawerOpened,
-  set: (val) => (val ? settingsStore.openSettingsDrawer() : settingsStore.closeSettingsDrawer()),
-})
 
 /** 预设主题色列表 */
 const themeColors = [
@@ -186,6 +174,18 @@ const themeColors = [
   "#fa8c16", // 橙
   "#f43f5e", // 粉/红
 ]
+
+// ==================== 依赖注入 ====================
+
+const settingsStore = useSettingsStore()
+
+// ==================== 计算属性 ====================
+
+/** 抽屉可见状态 - 与 store 同步 */
+const visible = computed({
+  get: () => settingsStore.settingsDrawerOpened,
+  set: (val) => (val ? settingsStore.openSettingsDrawer() : settingsStore.closeSettingsDrawer()),
+})
 
 /** 当前主题 */
 const theme = computed(() => settingsStore.themeStyle)
@@ -242,6 +242,8 @@ const transition = computed({
   get: () => settingsStore.transition,
   set: (val) => settingsStore.setTransition(val as TransitionName),
 })
+
+// ==================== 事件处理 ====================
 
 /** 设置主题（从点击位置开始圆形扩散动画） */
 function setTheme(mode: ThemeStyle, event: MouseEvent) {

@@ -16,31 +16,17 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const router = useRouter()
-
     const menuStore = useMenuStore()
     const deviceStore = useDeviceStore()
     const settingsStore = useSettingsStore()
-
     const mitt = useMitt("layout")
+
+    // ==================== 响应式状态 ====================
 
     /** mobile drawer visibility */
     const mobileMenuOpen = ref<boolean>(false)
 
-    function handleOpenMobileMenu() {
-      mobileMenuOpen.value = true
-    }
-
-    function handleClose() {
-      mobileMenuOpen.value = false
-    }
-
-    onMounted(() => {
-      mitt.on("mobile-menu:open", handleOpenMobileMenu)
-    })
-
-    onUnmounted(() => {
-      mitt.off("mobile-menu:open", handleOpenMobileMenu)
-    })
+    // ==================== 计算属性 ====================
 
     /** 是否为移动端设备 */
     const isMobile = computed<boolean>(() => deviceStore.isMobile)
@@ -98,25 +84,13 @@ export default defineComponent({
       flexShrink: 0,
     }))
 
-    /** 判断是否为外链 */
-    function isExternalLink(path: string): boolean {
-      return /^https?:\/\//.test(path)
-    }
+    /** 菜单容器类名（根据布局模式添加修饰符） */
+    const containerClass = computed(() => [
+      "fd-vertical-menu",
+      `fd-vertical-menu--${settingsStore.menuLayout}`,
+    ])
 
-    /** 计算完整路径 */
-    function getFullPath(path: string, basePath: string): string {
-      if (isExternalLink(path)) return path
-      if (path.startsWith("/")) return path
-      return basePath ? `${basePath}/${path}`.replace(/\/+/g, "/") : `/${path}`
-    }
-
-    /** 判断一级菜单是否激活（双列模式） */
-    function isFirstLevelActive(menu: Menu): boolean {
-      if (!menu.children?.length) {
-        return menu.path === route.path
-      }
-      return menu.path === activeFirstLevelPath.value
-    }
+    // ==================== 监听器 ====================
 
     // 监听路由变化，更新一级菜单激活状态（双列/混合模式共用）
     watch(
@@ -138,6 +112,48 @@ export default defineComponent({
         }
       },
     )
+
+    // ==================== 生命周期 ====================
+
+    onMounted(() => {
+      mitt.on("mobile-menu:open", handleOpenMobileMenu)
+    })
+
+    onUnmounted(() => {
+      mitt.off("mobile-menu:open", handleOpenMobileMenu)
+    })
+
+    // ==================== 工具函数 ====================
+
+    /** 判断是否为外链 */
+    function isExternalLink(path: string): boolean {
+      return /^https?:\/\//.test(path)
+    }
+
+    /** 计算完整路径 */
+    function getFullPath(path: string, basePath: string): string {
+      if (isExternalLink(path)) return path
+      if (path.startsWith("/")) return path
+      return basePath ? `${basePath}/${path}`.replace(/\/+/g, "/") : `/${path}`
+    }
+
+    /** 判断一级菜单是否激活（双列模式） */
+    function isFirstLevelActive(menu: Menu): boolean {
+      if (!menu.children?.length) {
+        return menu.path === route.path
+      }
+      return menu.path === activeFirstLevelPath.value
+    }
+
+    // ==================== 事件处理 ====================
+
+    function handleOpenMobileMenu() {
+      mobileMenuOpen.value = true
+    }
+
+    function handleClose() {
+      mobileMenuOpen.value = false
+    }
 
     /** 菜单选择处理（单列模式） */
     function handleMenuSelect(path: string): void {
@@ -161,6 +177,8 @@ export default defineComponent({
     function handleSubMenuSelect(path: string): void {
       handleMenuSelect(path)
     }
+
+    // ==================== 渲染函数 ====================
 
     /** 渲染菜单图标 */
     function renderIcon(icon?: string, size: number = 18) {
@@ -459,14 +477,6 @@ export default defineComponent({
         </ElDrawer>
       )
     }
-
-    // ==================== 主渲染函数 ====================
-
-    /** 菜单容器类名（根据布局模式添加修饰符） */
-    const containerClass = computed(() => [
-      "fd-vertical-menu",
-      `fd-vertical-menu--${settingsStore.menuLayout}`,
-    ])
 
     /** 渲染桌面端菜单 */
     function renderDesktopMenu() {
