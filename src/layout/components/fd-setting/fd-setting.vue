@@ -107,20 +107,12 @@
         </div>
       </div>
 
-      <!-- 语言设置 -->
-      <div class="fd-setting__section">
-        <div class="fd-setting__title">语言设置</div>
-        <el-select v-model="language" class="fd-setting__select" @change="changeLanguage">
-          <el-option value="zh-CN" label="简体中文" />
-          <el-option value="en-US" label="English" />
-        </el-select>
-      </div>
     </div>
   </el-drawer>
 </template>
 
 <script setup lang="ts">
-import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, LanguageType, TransitionName } from "@/stores/settings/types"
+import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, TransitionName } from "@/stores/settings/types"
 import menuDarkSvg from "@/assets/svg/menu-dark.svg?raw"
 
 // 导入菜单风格 SVG 图标
@@ -213,11 +205,6 @@ const transition = computed({
   set: val => settingsStore.setTransition(val as TransitionName),
 })
 
-/** 当前语言 */
-const language = computed({
-  get: () => settingsStore.language,
-  set: val => settingsStore.setLanguage(val as LanguageType),
-})
 
 /** 设置主题（从点击位置开始圆形扩散动画） */
 function setTheme(mode: ThemeStyle, event: MouseEvent) {
@@ -246,10 +233,6 @@ function setPrimaryColor(color: string) {
   settingsStore.setPrimaryColor(color)
 }
 
-/** 切换语言 */
-function changeLanguage() {
-  window.location.reload()
-}
 </script>
 
 <style lang="scss" scoped>
