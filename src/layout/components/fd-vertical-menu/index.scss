@@ -30,7 +30,11 @@ $popup-menu-radius: 6px;
 }
 
 // 菜单项 hover/active 交互状态
-@mixin menu-item-states($hover-bg: var(--el-color-primary-light-9), $active-color: var(--el-color-primary), $active-bg: var(--el-color-primary-light-9)) {
+@mixin menu-item-states(
+  $hover-bg: var(--el-color-primary-light-9),
+  $active-color: var(--el-color-primary),
+  $active-bg: var(--el-color-primary-light-9)
+) {
   &:hover {
     color: var(--el-color-primary);
     background-color: var(--el-fill-color-dark);
@@ -137,7 +141,7 @@ $popup-menu-radius: 6px;
       }
 
       &__icon-arrow {
-        width: auto;
+        width: fit-content;
       }
     }
 
@@ -242,8 +246,6 @@ $popup-menu-radius: 6px;
     svg,
     .el-icon {
       font-size: $menu-icon-size;
-      flex-shrink: 0;
-      margin-right: 12px;
     }
 
     @include menu-item-states;
@@ -282,7 +284,7 @@ $popup-menu-radius: 6px;
       }
 
       &__icon-arrow {
-        width: auto;
+        width: fit-content;
       }
     }
 
