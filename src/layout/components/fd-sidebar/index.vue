@@ -13,7 +13,7 @@ defineOptions({ name: "fd-sidebar" })
 
 const settingsStore = useSettingsStore()
 
-/** 是否显示侧边栏（水平菜单模式下隐藏） */
+/** 是否显示侧边栏（水平菜单模式下隐藏，混合模式下显示） */
 const show = computed(() => !settingsStore.isHorizontalLayout)
 </script>
 

@@ -33,7 +33,7 @@ const menuStore = useMenuStore()
 const deviceStore = useDeviceStore()
 const settingsStore = useSettingsStore()
 
-const show = computed(() => !deviceStore.isMobile && !settingsStore.isHorizontalLayout)
+const show = computed(() => !deviceStore.isMobile && !settingsStore.isHorizontalLayout && !settingsStore.isMixedLayout)
 
 /**
  * 计算面包屑数据

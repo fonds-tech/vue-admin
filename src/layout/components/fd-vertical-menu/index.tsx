@@ -51,6 +51,9 @@ export default defineComponent({
     /** 是否为双列布局模式 */
     const isDualMode = computed<boolean>(() => settingsStore.isDualLayout)
 
+    /** 是否为混合布局模式 */
+    const isMixedMode = computed<boolean>(() => settingsStore.isMixedLayout)
+
     /** 可见菜单列表 */
     const menuList = computed<Menu[]>(() => menuStore.menus)
 
@@ -77,15 +80,21 @@ export default defineComponent({
     /** 一级菜单列表（双列模式） */
     const firstLevelMenus = computed<Menu[]>(() => menuList.value)
 
-    /** 当前一级菜单对应的子菜单 */
+    /** 当前一级菜单对应的子菜单（双列模式） */
     const currentSubMenus = computed<Menu[]>(() => {
       if (!activeFirstLevelPath.value) return []
       const currentMenu = firstLevelMenus.value.find(menu => menu.path === activeFirstLevelPath.value)
       return currentMenu?.children || []
     })
 
-    /** 是否有子菜单可显示 */
+    /** 混合模式下的子菜单（从 store 获取） */
+    const mixedSubMenus = computed<Menu[]>(() => menuStore.currentSubMenus)
+
+    /** 是否有子菜单可显示（双列模式） */
     const hasSubMenus = computed<boolean>(() => currentSubMenus.value.length > 0)
+
+    /** 混合模式下是否有子菜单 */
+    const hasMixedSubMenus = computed<boolean>(() => mixedSubMenus.value.length > 0)
 
     /** 左侧菜单容器样式 */
     const leftColumnStyle = computed<CSSProperties>(() => ({
@@ -302,6 +311,50 @@ export default defineComponent({
       )
     }
 
+    // ==================== 混合模式渲染函数 ====================
+
+    /** 渲染混合模式头部（Logo + Name） */
+    function renderMixedHeader() {
+      return (
+        <div class="fd-vertical-menu__header">
+          <div class="fd-vertical-menu__header__inner">
+            {renderLogo()}
+            {isCollapsed.value ? null : renderName()}
+          </div>
+        </div>
+      )
+    }
+
+    /** 渲染混合模式菜单（显示二级菜单） */
+    function renderMixedMenu() {
+      if (!hasMixedSubMenus.value) return null
+      return (
+        <ElScrollbar>
+          <ElMenu
+            showTimeout={50}
+            hideTimeout={50000}
+            defaultActive={activeMenuPath.value}
+            collapse={isCollapsed.value}
+            uniqueOpened={isAccordionMode.value}
+            popperClass="fd-vertical-menu__popper"
+            onSelect={handleMenuSelect}
+          >
+            {mixedSubMenus.value.map(menu => renderMenuItem(menu, menuStore.activeFirstLevelPath))}
+          </ElMenu>
+        </ElScrollbar>
+      )
+    }
+
+    /** 渲染混合模式布局（包含 header） */
+    function renderMixedLayout() {
+      return (
+        <>
+          {renderMixedHeader()}
+          {renderMixedMenu()}
+        </>
+      )
+    }
+
     // ==================== 双列模式渲染函数 ====================
 
     /** 渲染双列左侧头部（仅 Logo） */
@@ -443,6 +496,15 @@ export default defineComponent({
 
     /** 渲染桌面端菜单 */
     function renderDesktopMenu() {
+      // 混合模式下只显示二级菜单
+      if (isMixedMode.value) {
+        if (!hasMixedSubMenus.value) return null
+        return (
+          <div class={containerClass.value} style={style.value}>
+            {renderMixedLayout()}
+          </div>
+        )
+      }
       return (
         <div class={containerClass.value} style={style.value}>
           {isDualMode.value ? renderDualLayout() : renderSingleLayout()}

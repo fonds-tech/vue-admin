@@ -12,6 +12,8 @@ export interface MenuState {
   permissions: string[]
   /** 是否已初始化 */
   initialized: boolean
+  /** 混合模式下当前选中的一级菜单路径 */
+  activeFirstLevelPath: string
 }
 
 /** 菜单类型：0-目录 1-菜单 2-权限 */

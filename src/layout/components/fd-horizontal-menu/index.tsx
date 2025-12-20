@@ -25,8 +25,14 @@ export default defineComponent({
 
     // ==================== 计算属性 ====================
 
-    /** 是否显示水平菜单（仅在水平布局模式下显示） */
-    const show = computed<boolean>(() => settingsStore.isHorizontalLayout)
+    /** 是否为水平布局模式 */
+    const isHorizontalLayout = computed<boolean>(() => settingsStore.isHorizontalLayout)
+
+    /** 是否为混合布局模式 */
+    const isMixedLayout = computed<boolean>(() => settingsStore.isMixedLayout)
+
+    /** 是否显示水平菜单（水平或混合布局模式下显示） */
+    const show = computed<boolean>(() => isHorizontalLayout.value || isMixedLayout.value)
 
     /** 可见菜单列表 */
     const menuList = computed<Menu[]>(() => menuStore.menus)
@@ -36,6 +42,10 @@ export default defineComponent({
 
     /** 当前激活的菜单路径 */
     const activeMenuPath = computed<string>(() => {
+      // 混合模式下使用一级菜单路径
+      if (isMixedLayout.value) {
+        return menuStore.activeFirstLevelPath
+      }
       if (route.meta.activeMenu) {
         return route.meta.activeMenu as string
       }
@@ -138,6 +148,17 @@ export default defineComponent({
       nextTick(debouncedCalculate)
     })
 
+    // 混合模式下监听路由变化，更新一级菜单选中状态
+    watch(
+      () => route.path,
+      (path) => {
+        if (isMixedLayout.value) {
+          menuStore.initActiveFirstLevel(path)
+        }
+      },
+      { immediate: true },
+    )
+
     // ==================== 工具函数 ====================
 
     /** 判断是否为外链 */
@@ -152,6 +173,22 @@ export default defineComponent({
       return basePath ? `${basePath}/${path}`.replace(/\/+/g, "/") : `/${path}`
     }
 
+    /**
+     * 递归查找菜单下第一个可跳转的页面路径
+     */
+    function findFirstChildPath(menu: Menu): string | undefined {
+      // 如果没有子菜单，返回当前路径
+      if (!menu.children || menu.children.length === 0) {
+        return menu.path
+      }
+      // 递归查找第一个子菜单
+      for (const child of menu.children) {
+        const result = findFirstChildPath(child)
+        if (result) return result
+      }
+      return undefined
+    }
+
     // ==================== 事件处理 ====================
 
     /** 菜单选择处理 */
@@ -160,6 +197,20 @@ export default defineComponent({
         window.open(path, "_blank", "noopener,noreferrer")
         return
       }
+
+      // 混合模式下，点击一级菜单时更新 store 并跳转到第一个子页面
+      if (isMixedLayout.value) {
+        const menu = menuList.value.find(m => m.path === path)
+        if (menu) {
+          menuStore.setActiveFirstLevelPath(path)
+          const targetPath = findFirstChildPath(menu)
+          if (targetPath && targetPath !== route.path) {
+            router.push(targetPath)
+          }
+          return
+        }
+      }
+
       router.push(path)
     }
 
@@ -174,6 +225,20 @@ export default defineComponent({
     /** 渲染菜单标题 */
     function renderTitle(title?: string) {
       return <span class="fd-horizontal-menu__title">{title}</span>
+    }
+
+    /** 渲染一级菜单项（混合模式下不展开子菜单） */
+    function renderFirstLevelMenuItem(menu: Menu, isOverflow: boolean = false) {
+      return (
+        <ElMenuItem
+          key={menu.path}
+          index={menu.path}
+          class={["fd-horizontal-menu__item", { "fd-horizontal-menu__menu-item": !isOverflow }]}
+        >
+          {renderIcon(menu.icon)}
+          {renderTitle(menu.title)}
+        </ElMenuItem>
+      )
     }
 
     /** 渲染叶子菜单项（无子菜单） */
@@ -221,6 +286,16 @@ export default defineComponent({
       return renderSubMenu(menu, fullPath, isOverflow)
     }
 
+    /** 渲染菜单项（根据模式选择渲染方式） */
+    function renderMenuItemByMode(menu: Menu, isOverflow: boolean = false) {
+      // 混合模式下只渲染一级菜单
+      if (isMixedLayout.value) {
+        return renderFirstLevelMenuItem(menu, isOverflow)
+      }
+      // 水平模式下递归渲染
+      return renderMenuItem(menu, "", isOverflow)
+    }
+
     /** 渲染"更多"按钮 */
     function renderMoreButton() {
       if (!hasOverflow.value) return null
@@ -233,7 +308,7 @@ export default defineComponent({
         >
           {{
             title: () => <FdIcon icon="ri:more-fill" size={20} />,
-            default: () => overflowMenus.value.map(menu => renderMenuItem(menu, "", true)),
+            default: () => overflowMenus.value.map(menu => renderMenuItemByMode(menu, true)),
           }}
         </ElSubMenu>
       )
@@ -255,7 +330,7 @@ export default defineComponent({
             popperClass="fd-horizontal-menu__popper"
             onSelect={handleMenuSelect}
           >
-            {visibleMenus.value.map(menu => renderMenuItem(menu, "", false))}
+            {visibleMenus.value.map(menu => renderMenuItemByMode(menu, false))}
             {renderMoreButton()}
           </ElMenu>
         </div>

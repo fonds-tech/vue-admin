@@ -74,7 +74,10 @@ const isVerticalLayout = computed(() => settingsStore.isVerticalLayout)
 
 const isHorizontalLayout = computed(() => settingsStore.isHorizontalLayout)
 
-const showCollapse = computed(() => !isMobile.value && isVerticalLayout.value)
+const isMixedLayout = computed(() => settingsStore.isMixedLayout)
+
+/** 显示折叠按钮（垂直布局或混合布局下显示） */
+const showCollapse = computed(() => !isMobile.value && (isVerticalLayout.value || isMixedLayout.value))
 
 const collapseIcon = computed(() => {
   return settingsStore.isMenuCollapsed ? "ri:menu-unfold-line" : "ri:menu-fold-line"

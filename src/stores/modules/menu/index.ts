@@ -12,7 +12,26 @@ export const useMenuStore = defineStore("menu", {
     routes: [],
     permissions: [],
     initialized: false,
+    activeFirstLevelPath: "",
   }),
+
+  getters: {
+    /** 一级菜单列表（混合模式用） */
+    firstLevelMenus: (state): Menu[] => state.menus,
+
+    /** 当前一级菜单对应的子菜单（混合模式用） */
+    currentSubMenus: (state): Menu[] => {
+      if (!state.activeFirstLevelPath) return []
+      const currentMenu = state.menus.find((menu) => menu.path === state.activeFirstLevelPath)
+      return currentMenu?.children || []
+    },
+
+    /** 是否有子菜单可显示（混合模式用） */
+    hasSubMenus(): boolean {
+      return this.currentSubMenus.length > 0
+    },
+  },
+
   actions: {
     /**
      * 初始化菜单
@@ -29,8 +48,8 @@ export const useMenuStore = defineStore("menu", {
     async fetchMenus() {
       this.list = treeToList(mockMenus)
 
-      const menus = this.list.filter(menu => isEmpty(menu.hidden) && [0, 1].includes(menu.type))
-      const routes = this.list.filter(menu => isEmpty(menu.hidden) && [1].includes(menu.type))
+      const menus = this.list.filter((menu) => isEmpty(menu.hidden) && [0, 1].includes(menu.type))
+      const routes = this.list.filter((menu) => isEmpty(menu.hidden) && [1].includes(menu.type))
 
       this.menus = listToTree(menus)
 
@@ -48,7 +67,7 @@ export const useMenuStore = defineStore("menu", {
      * @param path 路由路径
      */
     findMenu(path: string): Menu | undefined {
-      return this.list.find(menu => menu.path === path)
+      return this.list.find((menu) => menu.path === path)
     },
 
     /**
@@ -60,6 +79,31 @@ export const useMenuStore = defineStore("menu", {
     },
 
     /**
+     * 设置当前选中的一级菜单路径（混合模式用）
+     * @param path 一级菜单路径
+     */
+    setActiveFirstLevelPath(path: string) {
+      this.activeFirstLevelPath = path
+    },
+
+    /**
+     * 根据当前路由初始化一级菜单选中状态（混合模式用）
+     * @param currentPath 当前路由路径
+     */
+    initActiveFirstLevel(currentPath: string) {
+      const matchedMenu = this.menus.find((menu) => {
+        if (menu.path === currentPath) return true
+        if (currentPath.startsWith(`${menu.path}/`)) return true
+        return false
+      })
+      if (matchedMenu) {
+        this.activeFirstLevelPath = matchedMenu.path
+      } else if (this.menus.length > 0) {
+        this.activeFirstLevelPath = this.menus[0]!.path
+      }
+    },
+
+    /**
      * 重置菜单状态
      */
     reset() {
@@ -68,6 +112,7 @@ export const useMenuStore = defineStore("menu", {
       this.routes = []
       this.permissions = []
       this.initialized = false
+      this.activeFirstLevelPath = ""
     },
   },
 })

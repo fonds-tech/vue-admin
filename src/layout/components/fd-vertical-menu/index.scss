@@ -76,6 +76,10 @@ $popup-menu-radius: 6px;
     flex-direction: column;
   }
 
+  &--mixed {
+    flex-direction: column;
+  }
+
   // 头部区域样式
   &__header {
     width: 100%;
