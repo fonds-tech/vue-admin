@@ -15,6 +15,6 @@ export default eslint(
     },
   },
   {
-    ignores: ["dist", "node_modules", "*.d.ts"],
+    ignores: ["dist", "openspec", "node_modules", "*.d.ts"],
   },
 )

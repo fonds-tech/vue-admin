@@ -3,7 +3,9 @@
     <router-view v-slot="{ Component, route }">
       <keep-alive :key="key" :include="cacheList">
         <el-scrollbar>
-          <component :is="Component" :key="route.path" />
+          <transition :name="transitionName" :css="transitionEnabled" :mode="transitionEnabled ? 'out-in' : undefined">
+            <component :is="Component" :key="route.path" />
+          </transition>
         </el-scrollbar>
       </keep-alive>
     </router-view>
@@ -12,18 +14,25 @@
 
 <script setup lang="ts">
 import { useMitt } from "@/hooks"
-import { useProcessStore } from "@/stores"
 import { ref, computed, onUnmounted } from "vue"
+import { useProcessStore, useSettingsStore } from "@/stores"
 
 defineOptions({ name: "fd-view" })
 
 const mitt = useMitt("layout")
 const processStore = useProcessStore()
+const settingsStore = useSettingsStore()
 
 const key = ref(1)
 
 /** 缓存列表 */
 const cacheList = computed(() => processStore.cacheList)
+
+/** 过渡动画名称 */
+const transitionName = computed(() => (settingsStore.transition === "none" ? "" : `page-${settingsStore.transition}`))
+
+/** 是否启用过渡动画 */
+const transitionEnabled = computed(() => settingsStore.transition !== "none")
 
 /**
  * 处理页面刷新
