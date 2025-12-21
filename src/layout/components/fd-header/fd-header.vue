@@ -183,13 +183,13 @@ function handleOpenSettings() {
 
   &__action-btn {
     width: var(--fd-header-action-size);
-    border: var(--fd-header-action-border-width) solid var(--el-fill-color-dark);
+    border: 1px solid var(--el-fill-color-dark);
     cursor: pointer;
     height: var(--fd-header-action-size);
     display: flex;
     transition: all 0.2s ease-in-out;
     align-items: center;
-    border-radius: var(--fd-header-action-radius);
+    border-radius: var(--el-border-radius-small);
     justify-content: center;
 
     &:hover {

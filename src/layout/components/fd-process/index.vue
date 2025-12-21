@@ -1,20 +1,20 @@
 <template>
   <div class="fd-process">
     <!-- 导航操作区 -->
-    <div class="fd-process__nav">
-      <div class="fd-process__nav-item" title="返回" @click="onClickBack">
+    <div class="fd-process__left">
+      <div class="fd-process__left-item" title="返回" @click="onClickBack">
         <fd-icon icon="ri:arrow-left-line" :size="14" />
       </div>
-      <div class="fd-process__nav-item" title="刷新" @click="onClickRefresh">
+      <div class="fd-process__left-item" title="刷新" @click="onClickRefresh">
         <fd-icon icon="ri:refresh-line" :size="14" />
       </div>
-      <div class="fd-process__nav-item" title="首页" @click="onClickHome">
+      <div class="fd-process__left-item" title="首页" @click="onClickHome">
         <fd-icon icon="ri:home-4-line" :size="14" />
       </div>
     </div>
 
     <!-- 标签列表区 -->
-    <div ref="scrollContainer" class="fd-process__list" @wheel="onWheel">
+    <div ref="scrollContainer" class="fd-process__right" @wheel="onWheel">
       <div class="process__scroll">
         <div
           v-for="(item, index) in processStore.list"
@@ -78,7 +78,7 @@ onMounted(() => {
  * 跳转到最后一个标签或首页
  */
 function toLastOrHome() {
-  const activeItem = processStore.list.find(e => e.active)
+  const activeItem = processStore.list.find((e) => e.active)
   if (!activeItem) {
     const last = processStore.list[processStore.list.length - 1]
     router.push(last ? last.fullPath : "/")
@@ -195,13 +195,14 @@ function onWheel(event: WheelEvent) {
 <style lang="scss">
 .fd-process {
   gap: var(--fd-process-gap);
+  height: var(--fd-process-height);
   display: flex;
-  padding: var(--fd-process-padding-y) var(--fd-process-padding-x);
+  padding: 0 var(--fd-process-padding-x);
   position: relative;
   align-items: center;
   background-color: var(--el-bg-color);
 
-  &::before {
+  &::after {
     left: 0;
     right: 0;
     bottom: 0;
@@ -212,23 +213,22 @@ function onWheel(event: WheelEvent) {
   }
 
   // 导航操作区
-  &__nav {
-    gap: var(--fd-process-nav-gap);
-    height: 100%;
+  &__left {
+    gap: var(--fd-process-gap);
     display: flex;
     align-items: center;
     flex-shrink: 0;
 
     // 导航按钮项
     &-item {
-      width: var(--fd-process-nav-size);
+      width: var(--fd-process-action-size);
       border: 1px solid var(--el-fill-color-dark);
       cursor: pointer;
-      height: var(--fd-process-nav-size);
+      height: var(--fd-process-action-size);
       display: flex;
       transition: all 0.2s ease-in-out;
       align-items: center;
-      border-radius: var(--fd-process-nav-radius);
+      border-radius: var(--el-border-radius-small);
       justify-content: center;
 
       &:hover {
@@ -239,9 +239,8 @@ function onWheel(event: WheelEvent) {
   }
 
   // 标签列表区
-  &__list {
+  &__right {
     flex: 1;
-    height: 100%;
     overflow: hidden;
     position: relative;
     min-width: 0;
@@ -256,10 +255,8 @@ function onWheel(event: WheelEvent) {
 
   // 滚动容器
   .process__scroll {
-    gap: var(--fd-process-item-gap);
-    height: 100%;
+    gap: var(--fd-process-gap);
     display: flex;
-    padding: var(--fd-process-scroll-padding-y) 0;
     align-items: center;
   }
 
@@ -268,14 +265,14 @@ function onWheel(event: WheelEvent) {
     color: $text-regular;
     border: 1px solid var(--el-fill-color-dark);
     cursor: pointer;
-    height: var(--fd-process-item-height);
+    height: var(--fd-process-action-size);
     display: flex;
     padding: 0 var(--fd-process-item-padding-x);
     position: relative;
     font-size: 12px;
     transition: all 0.2s ease-in-out;
     align-items: center;
-    border-radius: var(--fd-process-item-radius);
+    border-radius: var(--el-border-radius-small);
     background-color: transparent;
 
     &__title {
@@ -290,7 +287,7 @@ function onWheel(event: WheelEvent) {
       overflow: hidden;
       font-size: 10px;
       transition: all 0.2s ease-in-out;
-      border-radius: var(--fd-process-item-radius);
+      border-radius: var(--el-border-radius-small);
 
       &:hover {
         background-color: rgb(0 0 0 / 10%);
@@ -321,7 +318,7 @@ function onWheel(event: WheelEvent) {
       .process-item__close {
         width: var(--fd-process-close-size);
         opacity: 1;
-        margin-left: var(--fd-process-item-gap);
+        margin-left: var(--fd-process-gap);
       }
     }
   }

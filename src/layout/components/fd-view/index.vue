@@ -1,13 +1,13 @@
 <template>
   <div class="fd-view">
     <router-view v-slot="{ Component, route }">
-      <keep-alive :key="key" :include="cacheList">
-        <el-scrollbar>
-          <transition :name="transitionName" :css="transitionEnabled" :mode="transitionEnabled ? 'out-in' : undefined">
-            <component :is="Component" :key="route.path" />
-          </transition>
-        </el-scrollbar>
-      </keep-alive>
+      <transition :name="transitionName" :css="transitionEnabled" :mode="transitionEnabled ? 'out-in' : undefined">
+        <keep-alive :key="key" :include="cacheList">
+          <el-scrollbar :key="route.path">
+            <component :is="Component" />
+          </el-scrollbar>
+        </keep-alive>
+      </transition>
     </router-view>
   </div>
 </template>
