@@ -1,5 +1,14 @@
 import type { ThemeMode, ThemeToggleOptions } from "@/utils/theme"
-import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, LanguageType, SettingsState, TransitionName } from "./types"
+import type {
+  UiTheme,
+  MenuMode,
+  MenuStyle,
+  MenuLayout,
+  ThemeStyle,
+  LanguageType,
+  SettingsState,
+  TransitionName,
+} from "./types"
 import { watch } from "vue"
 import { defineStore } from "pinia"
 import { useDeviceStore } from "@/stores/modules/device"
@@ -21,6 +30,8 @@ export const useSettingsStore = defineStore("settings", {
     menuMode: "accordion",
     /** 主题风格 */
     themeStyle: "light",
+    /** 界面主题 */
+    uiTheme: "aurora",
     /** 主题色 */
     primaryColor: "#6366f1",
     /** 是否显示进程标签栏 */
@@ -71,6 +82,7 @@ export const useSettingsStore = defineStore("settings", {
       this.initMenuLayout()
       this.initPrimaryColor()
       this.initThemeSettings()
+      this.initUiTheme()
     },
 
     /**
@@ -115,11 +127,27 @@ export const useSettingsStore = defineStore("settings", {
     },
 
     /**
+     * 初始化界面主题
+     * @description 应用启动时调用，不触发动画
+     */
+    initUiTheme() {
+      this.executeUiThemeApply(this.uiTheme)
+    },
+
+    /**
      * 应用主题到 DOM
      * @description 直接执行 CSS 类名切换，不包含动画逻辑
      */
     executeThemeApply() {
       applyTheme(this.themeStyle as ThemeMode)
+    },
+
+    /**
+     * 应用界面主题到 DOM
+     * @param theme - 界面主题
+     */
+    executeUiThemeApply(theme: UiTheme) {
+      document.documentElement.setAttribute("data-ui-theme", theme)
     },
 
     /**
@@ -129,6 +157,15 @@ export const useSettingsStore = defineStore("settings", {
      */
     setThemeStyle(style: ThemeStyle) {
       this.themeStyle = style
+    },
+
+    /**
+     * 设置界面主题
+     * @param theme - 界面主题
+     */
+    setUiTheme(theme: UiTheme) {
+      this.uiTheme = theme
+      this.executeUiThemeApply(theme)
     },
 
     /**
@@ -272,6 +309,7 @@ export const useSettingsStore = defineStore("settings", {
         menuCollapsed: false,
         menuMode: "accordion",
         themeStyle: "light",
+        uiTheme: "aurora",
         primaryColor: "#6366f1",
         showProcess: true,
         showWatermark: false,

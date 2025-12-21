@@ -87,6 +87,20 @@
         </div>
       </div>
 
+      <!-- 界面主题 -->
+      <div class="fd-setting__section">
+        <div class="fd-setting__title">界面主题</div>
+        <div class="fd-setting__items">
+          <div class="fd-setting__item">
+            <span>主题方案</span>
+            <el-select v-model="uiTheme">
+              <el-option value="aurora" label="Aurora 清亮" />
+              <el-option value="graphite" label="Graphite 石墨" />
+            </el-select>
+          </div>
+        </div>
+      </div>
+
       <!-- 系统主题色 -->
       <div class="fd-setting__section">
         <div class="fd-setting__title">系统主题色</div>
@@ -145,7 +159,7 @@
 </template>
 
 <script setup lang="ts">
-import type { MenuMode, MenuStyle, MenuLayout, ThemeStyle, TransitionName } from "@/stores"
+import type { UiTheme, MenuMode, MenuStyle, MenuLayout, ThemeStyle, TransitionName } from "@/stores"
 import menuDarkSvg from "@/assets/svg/menu-dark.svg?raw"
 import menuLightSvg from "@/assets/svg/menu-light.svg?raw"
 import themeDarkSvg from "@/assets/svg/theme-dark.svg?raw"
@@ -189,6 +203,12 @@ const visible = computed({
 
 /** 当前主题 */
 const theme = computed(() => settingsStore.themeStyle)
+
+/** 界面主题 */
+const uiTheme = computed({
+  get: () => settingsStore.uiTheme,
+  set: (val) => settingsStore.setUiTheme(val as UiTheme),
+})
 
 /** 当前主题色 */
 const primaryColor = computed({

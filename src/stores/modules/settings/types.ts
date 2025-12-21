@@ -14,6 +14,9 @@ export type MenuMode = "accordion" | "expand" | "collapse"
 /** 主题风格 */
 export type ThemeStyle = "light" | "dark" | "auto"
 
+/** 界面主题 */
+export type UiTheme = "aurora" | "graphite"
+
 /** 过渡动画类型 */
 export type TransitionName = "fade" | "slide" | "zoom" | "none"
 
@@ -36,6 +39,8 @@ export interface SettingsState {
   menuMode: MenuMode
   /** 主题风格 */
   themeStyle: ThemeStyle
+  /** 界面主题 */
+  uiTheme: UiTheme
   /** 主题色（十六进制） */
   primaryColor: string
   /** 是否显示进程标签栏 */

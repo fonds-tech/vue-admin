@@ -1,0 +1,34 @@
+/**
+ * 布局相关变量
+ * 说明：当前仅提供变量定义，不修改任何组件样式
+ */
+
+:root {
+  /* 顶栏与布局结构 */
+  --layout-header-height: 50px;
+  --layout-content-padding: 12px;
+  --layout-tags-height: 34px;
+
+  /* 侧边栏宽度 */
+  --menu-expand-width: 250px;
+  --menu-collapse-width: 60px;
+
+  /* 菜单项结构 */
+  --menu-item-height: 44px;
+  --menu-item-padding-x: 16px;
+  --menu-item-radius: var(--el-border-radius-base);
+
+  /* 混合菜单宽度 */
+  --menu-first-width-icon: 64px;
+  --menu-first-width-text: 80px;
+  --menu-second-width: 200px;
+
+  /* 标签栏（进程） */
+  --process-item-height: 30px;
+  --process-item-padding-x: 8px;
+  --process-gap: 6px;
+
+  /* 顶栏按钮与间距 */
+  --header-action-size: 30px;
+  --header-gap: 12px;
+}
