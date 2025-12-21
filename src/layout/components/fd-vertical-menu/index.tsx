@@ -72,12 +72,6 @@ export default defineComponent({
     /** 是否有子菜单可显示 */
     const hasSubMenus = computed<boolean>(() => currentSubMenus.value.length > 0)
 
-    /** 左侧菜单容器样式 */
-    const leftColumnStyle = computed<CSSProperties>(() => ({
-      width: "62px",
-      flexShrink: 0,
-    }))
-
     /** 右侧菜单容器样式（双列模式） */
     const rightColumnStyle = computed<CSSProperties>(() => ({
       width: `${settingsStore.menuExpandWidth}px`,
@@ -183,18 +177,18 @@ export default defineComponent({
     /** 渲染菜单图标 */
     function renderIcon(icon?: string, size: number = 18) {
       if (!icon) return null
-      return <FdIcon icon={icon} size={size} class="fd-menu__icon" />
+      return <FdIcon icon={icon} size={size} class="fd-vertical-menu__icon" />
     }
 
     /** 渲染菜单标题 */
     function renderTitle(title?: string) {
-      return <span class="fd-menu__title">{title}</span>
+      return <span class="fd-vertical-menu__title">{title}</span>
     }
 
     /** 渲染叶子菜单项（无子菜单） */
     function renderLeafMenuItem(menu: Menu, fullPath: string) {
       return (
-        <ElMenuItem key={menu.path} index={fullPath} class="fd-menu__item">
+        <ElMenuItem key={menu.path} index={fullPath} class="fd-vertical-menu__item">
           {renderIcon(menu.icon)}
           {renderTitle(menu.title)}
         </ElMenuItem>
@@ -204,7 +198,7 @@ export default defineComponent({
     /** 渲染子菜单（有子菜单项） */
     function renderSubMenu(menu: Menu, fullPath: string) {
       return (
-        <ElSubMenu key={menu.path} index={fullPath} class="fd-menu__submenu">
+        <ElSubMenu key={menu.path} index={fullPath} class="fd-vertical-menu__submenu">
           {{
             title: () => (
               <>
@@ -236,8 +230,10 @@ export default defineComponent({
       const isActive = isFirstLevelActive(menu)
 
       const itemContent = (
-        <div class={["fd-vertical-menu__left-item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
-          {renderIcon(menu.icon, 20)}
+        <div class="fd-vertical-menu__left-item" onClick={() => handleFirstLevelClick(menu)}>
+          <div class={["fd-vertical-menu__left-item-inner", { "is-active": isActive }]}>
+            {renderIcon(menu.icon, 20)}
+          </div>
         </div>
       )
 
@@ -266,7 +262,7 @@ export default defineComponent({
     function renderSingleHeader() {
       return (
         <div class="fd-vertical-menu__header">
-          <div class="fd-vertical-menu__header__inner">
+          <div class="fd-vertical-menu__header-inner">
             {renderLogo()}
             {isCollapsed.value ? null : renderName()}
           </div>
@@ -309,7 +305,7 @@ export default defineComponent({
     function renderMixedHeader() {
       return (
         <div class="fd-vertical-menu__header">
-          <div class="fd-vertical-menu__header__inner">
+          <div class="fd-vertical-menu__header-inner">
             {renderLogo()}
             {isCollapsed.value ? null : renderName()}
           </div>
@@ -352,7 +348,7 @@ export default defineComponent({
     /** 渲染双列左侧头部（仅 Logo） */
     function renderDualLeftHeader() {
       return (
-        <div class="fd-vertical-menu__left-header">
+        <div class="fd-vertical-menu__header fd-vertical-menu__header--left">
           {renderLogo()}
         </div>
       )
@@ -362,9 +358,7 @@ export default defineComponent({
     function renderDualLeftMenu() {
       return (
         <ElScrollbar>
-          <div class="fd-vertical-menu__left-menu">
-            {firstLevelMenus.value.map(menu => renderDualLeftItem(menu))}
-          </div>
+          {firstLevelMenus.value.map(menu => renderDualLeftItem(menu))}
         </ElScrollbar>
       )
     }
@@ -372,7 +366,7 @@ export default defineComponent({
     /** 渲染左侧区域（双列模式） */
     function renderDualLeft() {
       return (
-        <div class="fd-vertical-menu__left" style={leftColumnStyle.value}>
+        <div class="fd-vertical-menu__left">
           {renderDualLeftHeader()}
           {renderDualLeftMenu()}
         </div>
@@ -382,7 +376,7 @@ export default defineComponent({
     /** 渲染双列右侧头部（仅 Name） */
     function renderDualRightHeader() {
       return (
-        <div class="fd-vertical-menu__right-header">
+        <div class="fd-vertical-menu__header fd-vertical-menu__header--right">
           {renderName()}
         </div>
       )

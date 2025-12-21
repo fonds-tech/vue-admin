@@ -34,7 +34,11 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 }
 
 // 菜单项 hover/active 交互状态
-@mixin menu-item-states($hover-bg: var(--el-color-primary-light-9), $active-color: var(--el-color-primary), $active-bg: var(--el-color-primary-light-9)) {
+@mixin menu-item-states(
+  $hover-bg: var(--el-color-primary-light-9),
+  $active-color: var(--el-color-primary),
+  $active-bg: var(--el-color-primary-light-9)
+) {
   &:hover {
     color: var(--el-color-primary);
     background-color: var(--el-fill-color-dark);
@@ -61,7 +65,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   overflow-x: hidden;
   background-color: var(--el-fill-color-blank);
 
-  &::before {
+  &::after {
     top: 0;
     right: 0;
     width: 1px;
@@ -89,7 +93,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     z-index: 10;
     position: relative;
 
-    &__inner {
+    &-inner {
       gap: var(--fd-header-gap);
       top: 50%;
       left: 50%;
@@ -115,11 +119,11 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
       cursor: pointer;
 
-      .fd-menu__icon {
+      .fd-vertical-menu__icon {
         @include menu-icon;
       }
 
-      .fd-menu__title {
+      .fd-vertical-menu__title {
         @include menu-title-ellipsis;
       }
     }
@@ -135,11 +139,11 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
           background-color: var(--el-fill-color-dark);
         }
 
-        .fd-menu__icon {
+        .fd-vertical-menu__icon {
           @include menu-icon;
         }
 
-        .fd-menu__title {
+        .fd-vertical-menu__title {
           @include menu-title-ellipsis;
         }
       }
@@ -153,13 +157,13 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
       width: var(--fd-vertical-menu-collapse-width);
 
       .el-sub-menu__title {
-        .fd-menu__title {
+        .fd-vertical-menu__title {
           width: 0;
           opacity: 0;
           overflow: hidden;
         }
 
-        .fd-menu__icon {
+        .fd-vertical-menu__icon {
           margin-right: 0;
         }
       }
@@ -170,40 +174,49 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
   // 左侧一级菜单
   &__left {
+    width: var(--fd-vertical-menu-left-width);
     display: flex;
     overflow: hidden;
-    border-right: 1px solid var(--el-border-color-lighter);
+    flex-shrink: 0;
     flex-direction: column;
   }
 
-  &__left-header {
+  &__header {
     height: var(--fd-header-height);
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    justify-content: center;
-  }
 
-  &__left-menu {
-    gap: var(--fd-vertical-menu-group-gap);
-    display: flex;
-    flex-direction: column;
+    &--left {
+      justify-content: center;
+    }
+
+    &--right {
+      padding: 0 var(--fd-vertical-menu-right-header-padding-x);
+    }
   }
 
   &__left-item {
-    width: var(--fd-vertical-menu-first-item-size);
-    cursor: pointer;
-    height: var(--fd-vertical-menu-first-item-size);
-    margin: 0 auto;
+    width: 100%;
+    height: var(--fd-vertical-menu-left-item-size);
     display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__left-item-inner {
+    width: var(--fd-vertical-menu-left-item-inner-size);
+    height: var(--fd-vertical-menu-left-item-inner-size);
+    display: flex;
+    cursor: pointer;
     transition: all 0.2s ease;
     align-items: center;
-    border-radius: $menu-item-radius;
+    border-radius: var(--el-border-radius-small);
     justify-content: center;
 
     .iconify,
     svg {
-      font-size: var(--fd-vertical-menu-first-icon-size);
+      font-size: var(--fd-vertical-menu-left-icon-size);
     }
 
     @include menu-item-states;
@@ -216,14 +229,6 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     overflow: hidden;
     flex-direction: column;
     background-color: var(--el-bg-color);
-  }
-
-  &__right-header {
-    height: var(--fd-header-height);
-    display: flex;
-    padding: 0 var(--fd-vertical-menu-right-header-padding-x);
-    align-items: center;
-    flex-shrink: 0;
   }
 
   &__right-title {
@@ -278,11 +283,11 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
           background-color: var(--el-fill-color-dark);
         }
 
-        .fd-menu__icon {
+        .fd-vertical-menu__icon {
           @include menu-icon;
         }
 
-        .fd-menu__title {
+        .fd-vertical-menu__title {
           @include menu-title-ellipsis;
         }
       }
@@ -296,11 +301,11 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
       @include menu-item-base;
       @include menu-item-states;
 
-      .fd-menu__icon {
+      .fd-vertical-menu__icon {
         @include menu-icon;
       }
 
-      .fd-menu__title {
+      .fd-vertical-menu__title {
         @include menu-title-ellipsis;
       }
     }

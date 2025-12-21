@@ -34,20 +34,26 @@
   /* ===== fd-vertical-menu ================================ */
   /* 菜单组间距 */
   --fd-vertical-menu-group-gap: 6px;
+  /* 菜单头部高度 */
+  --fd-vertical-menu-header-height: 50px;
   /* 菜单图标大小 */
   --fd-vertical-menu-icon-size: 18px;
-  /* 左侧一级菜单图标大小 */
-  --fd-vertical-menu-first-icon-size: 20px;
+  /* 左侧菜单图标大小 */
+  --fd-vertical-menu-left-icon-size: 20px;
   /* 菜单项高度 */
-  --fd-vertical-menu-item-height: 44px;
+  --fd-vertical-menu-item-height: 50px;
   /* 菜单项左右外边距 */
   --fd-vertical-menu-item-margin-x: 8px;
   /* 菜单项左右内边距 */
   --fd-vertical-menu-item-padding-x: 16px;
   /* 菜单项圆角 */
   --fd-vertical-menu-item-radius: var(--el-border-radius-base);
-  /* 左侧一级菜单尺寸 */
-  --fd-vertical-menu-first-item-size: 46px;
+  /* 左侧菜单项尺寸 */
+  --fd-vertical-menu-left-item-size: 50px;
+  /* 左侧菜单内层尺寸 */
+  --fd-vertical-menu-left-item-inner-size: 44px;
+  /* 左侧菜单列宽度 */
+  --fd-vertical-menu-left-width: 62px;
   /* 右侧标题字号 */
   --fd-vertical-menu-right-title-size: 18px;
   /* 右侧标题字重 */
