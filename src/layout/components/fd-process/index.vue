@@ -200,17 +200,8 @@ function onWheel(event: WheelEvent) {
   padding: 0 var(--fd-process-padding-x);
   position: relative;
   align-items: center;
+  border-bottom: 1px solid var(--el-border-color-lighter);
   background-color: var(--el-bg-color);
-
-  &::after {
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    content: "";
-    position: absolute;
-    background-color: var(--el-border-color-lighter);
-  }
 
   // 导航操作区
   &__left {

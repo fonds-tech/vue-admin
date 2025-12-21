@@ -10,12 +10,12 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 // 菜单项基础布局（宽度、高度、边距、圆角）
 @mixin menu-item-base(
   $height: var(--fd-vertical-menu-item-height),
-  $margin: var(--fd-vertical-menu-item-margin-x),
+  $margin: var(--fd-vertical-menu-gap),
   $radius: var(--fd-vertical-menu-item-radius)
 ) {
-  width: calc(100% - (#{$margin} + #{$margin}));
   height: $height;
-  margin-left: $margin;
+  margin: 0 $margin;
+  line-height: $height;
   border-radius: $radius;
 }
 
@@ -51,7 +51,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 }
 
 // 菜单容器 flex 布局
-@mixin menu-flex-column($gap: var(--fd-vertical-menu-group-gap)) {
+@mixin menu-flex-column($gap: var(--fd-vertical-menu-gap)) {
   gap: $gap;
   display: flex;
   flex-direction: column;
@@ -64,17 +64,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   position: relative;
   overflow-x: hidden;
   background-color: var(--el-fill-color-blank);
-
-  &::after {
-    top: 0;
-    right: 0;
-    width: 1px;
-    bottom: 0;
-    content: "";
-    z-index: 1;
-    position: absolute;
-    background-color: var(--el-border-color-extra-light);
-  }
+  border-right: 1px solid var(--el-border-color-lighter);
 
   &--vertical {
     flex-direction: column;
@@ -88,12 +78,13 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   &__header {
     width: 100%;
     cursor: pointer;
-    height: var(--fd-header-height);
+    height: var(--fd-vertical-menu-header-height);
     display: flex;
     z-index: 10;
+    flex-shrink: 0;
     position: relative;
 
-    &-inner {
+    &__inner {
       gap: var(--fd-header-gap);
       top: 50%;
       left: 50%;
@@ -108,6 +99,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     @include menu-flex-column;
 
     border-right: none;
+    padding: calc(var(--fd-vertical-menu-gap) / 2) 0;
 
     &:not(.el-menu--collapse) {
       width: var(--fd-vertical-menu-expand-width);
@@ -116,8 +108,6 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     .el-menu-item {
       @include menu-item-base;
       @include menu-item-states;
-
-      cursor: pointer;
 
       .fd-vertical-menu__icon {
         @include menu-icon;
@@ -176,44 +166,55 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   &__left {
     width: var(--fd-vertical-menu-left-width);
     display: flex;
-    overflow: hidden;
     flex-shrink: 0;
+    position: relative;
+    flex-direction: column;
+
+    &::after {
+      top: 0;
+      right: 0;
+      width: 1px;
+      bottom: 0;
+      content: "";
+      z-index: 1;
+      position: absolute;
+      background-color: var(--el-border-color-lighter);
+    }
+  }
+
+  &__left__header {
+    height: var(--fd-vertical-menu-header-height);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+
+  &__right__header {
+    height: var(--fd-vertical-menu-header-height);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0 var(--fd-vertical-menu-right-header-padding-x);
+  }
+
+  &__left__menu {
+    gap: var(--fd-vertical-menu-gap);
+    padding: calc(var(--fd-vertical-menu-gap) / 2) 0;
+    display: flex;
     flex-direction: column;
   }
 
-  &__header {
-    height: var(--fd-header-height);
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-
-    &--left {
-      justify-content: center;
-    }
-
-    &--right {
-      padding: 0 var(--fd-vertical-menu-right-header-padding-x);
-    }
-  }
-
-  &__left-item {
-    width: 100%;
-    height: var(--fd-vertical-menu-left-item-size);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__left-item-inner {
-    width: var(--fd-vertical-menu-left-item-inner-size);
-    height: var(--fd-vertical-menu-left-item-inner-size);
+  &__left__item {
+    width: var(--fd-vertical-menu-item-height);
+    height: var(--fd-vertical-menu-item-height);
     display: flex;
     cursor: pointer;
-    transition: all 0.2s ease;
+    margin: 0 auto;
     align-items: center;
-    border-radius: var(--el-border-radius-small);
     justify-content: center;
-
+    transition: all 0.2s ease;
+    border-radius: var(--el-border-radius-small);
     .iconify,
     svg {
       font-size: var(--fd-vertical-menu-left-icon-size);
@@ -231,7 +232,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     background-color: var(--el-bg-color);
   }
 
-  &__right-title {
+  &__right__title {
     color: var(--el-text-color-primary);
     margin: 0;
     overflow: hidden;
@@ -241,14 +242,22 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     text-overflow: ellipsis;
   }
 
-  &__right-menu {
+  &__right__menu {
     border: none;
   }
 
-  &__right-item,
-  &__right-submenu > .el-sub-menu__title {
+  &__right__item {
     height: var(--fd-vertical-menu-right-item-height);
-    margin: 0 var(--fd-vertical-menu-right-item-margin-x);
+    display: flex;
+    align-items: center;
+  }
+
+  &__right__item > .el-menu-item,
+  &__right__submenu > .el-sub-menu__title {
+    height: var(--fd-vertical-menu-item-inner-height);
+    display: flex;
+    transition: all 0.2s ease;
+    align-items: center;
     border-radius: $popup-menu-radius;
 
     .iconify,
@@ -260,7 +269,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     @include menu-item-states;
   }
 
-  &__right-submenu.is-opened > .el-sub-menu__title {
+  &__right__submenu.is-opened > .el-sub-menu__title {
     color: var(--el-color-primary);
     background-color: var(--el-color-primary-light-9);
   }

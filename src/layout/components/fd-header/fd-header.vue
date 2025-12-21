@@ -147,17 +147,8 @@ function handleOpenSettings() {
   position: relative;
   align-items: center;
   flex-shrink: 0;
+  border-bottom: 1px solid var(--el-border-color-lighter);
   justify-content: space-between;
-
-  &::after {
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    content: "";
-    position: absolute;
-    background-color: var(--el-border-color-lighter);
-  }
 
   &__left {
     gap: var(--fd-header-gap);

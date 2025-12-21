@@ -230,10 +230,8 @@ export default defineComponent({
       const isActive = isFirstLevelActive(menu)
 
       const itemContent = (
-        <div class="fd-vertical-menu__left-item" onClick={() => handleFirstLevelClick(menu)}>
-          <div class={["fd-vertical-menu__left-item-inner", { "is-active": isActive }]}>
-            {renderIcon(menu.icon, 20)}
-          </div>
+        <div class={["fd-vertical-menu__left__item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
+          {renderIcon(menu.icon, 20)}
         </div>
       )
 
@@ -262,7 +260,7 @@ export default defineComponent({
     function renderSingleHeader() {
       return (
         <div class="fd-vertical-menu__header">
-          <div class="fd-vertical-menu__header-inner">
+          <div class="fd-vertical-menu__header__inner">
             {renderLogo()}
             {isCollapsed.value ? null : renderName()}
           </div>
@@ -305,7 +303,7 @@ export default defineComponent({
     function renderMixedHeader() {
       return (
         <div class="fd-vertical-menu__header">
-          <div class="fd-vertical-menu__header-inner">
+          <div class="fd-vertical-menu__header__inner">
             {renderLogo()}
             {isCollapsed.value ? null : renderName()}
           </div>
@@ -348,7 +346,7 @@ export default defineComponent({
     /** 渲染双列左侧头部（仅 Logo） */
     function renderDualLeftHeader() {
       return (
-        <div class="fd-vertical-menu__header fd-vertical-menu__header--left">
+        <div class="fd-vertical-menu__left__header">
           {renderLogo()}
         </div>
       )
@@ -358,7 +356,9 @@ export default defineComponent({
     function renderDualLeftMenu() {
       return (
         <ElScrollbar>
-          {firstLevelMenus.value.map(menu => renderDualLeftItem(menu))}
+          <div class="fd-vertical-menu__left__menu">
+            {firstLevelMenus.value.map(menu => renderDualLeftItem(menu))}
+          </div>
         </ElScrollbar>
       )
     }
@@ -376,7 +376,7 @@ export default defineComponent({
     /** 渲染双列右侧头部（仅 Name） */
     function renderDualRightHeader() {
       return (
-        <div class="fd-vertical-menu__header fd-vertical-menu__header--right">
+        <div class="fd-vertical-menu__right__header">
           {renderName()}
         </div>
       )
@@ -389,7 +389,7 @@ export default defineComponent({
       // 没有子菜单，渲染为叶子菜单项
       if (!menu.children || menu.children.length === 0) {
         return (
-          <ElMenuItem key={menu.path} index={fullPath} class="fd-vertical-menu__right-item">
+          <ElMenuItem key={menu.path} index={fullPath}>
             {renderIcon(menu.icon)}
             {renderTitle(menu.title)}
           </ElMenuItem>
@@ -398,7 +398,7 @@ export default defineComponent({
 
       // 有子菜单，渲染为可展开的子菜单
       return (
-        <ElSubMenu key={menu.path} index={fullPath} class="fd-vertical-menu__right-submenu">
+        <ElSubMenu key={menu.path} index={fullPath} class="fd-vertical-menu__right__submenu">
           {{
             title: () => (
               <>
@@ -416,9 +416,9 @@ export default defineComponent({
     function renderDualRightMenu() {
       if (!hasSubMenus.value) return null
       return (
-        <ElScrollbar class="fd-vertical-menu__right-scroll">
+        <ElScrollbar class="fd-vertical-menu__right__scroll">
           <ElMenu
-            class="fd-vertical-menu__right-menu"
+            class="fd-vertical-menu__right__menu"
             defaultActive={activeMenuPath.value}
             collapseTransition={false}
             uniqueOpened={isAccordionMode.value}
