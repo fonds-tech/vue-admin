@@ -37,19 +37,13 @@
   /* 菜单头部高度 */
   --fd-vertical-menu-header-height: 50px;
   /* 菜单图标大小 */
-  --fd-vertical-menu-icon-size: 18px;
+  --fd-vertical-menu-icon-size: 20px;
   /* 菜单项高度 */
-  --fd-vertical-menu-item-height: 44px;
-  /* 菜单项左右外边距 */
-  --fd-vertical-menu-item-margin-x: 8px;
-  /* 菜单项左右内边距 */
-  --fd-vertical-menu-item-padding-x: 16px;
+  --fd-vertical-menu-item-height: 42px;
   /* 菜单项圆角 */
   --fd-vertical-menu-item-radius: var(--el-border-radius-small);
-  /* 左侧菜单项尺寸 */
-  --fd-vertical-menu-left-item-size: 50px;
   /* 左侧菜单内层尺寸 */
-  --fd-vertical-menu-left-item-inner-size: 44px;
+  --fd-vertical-menu-left-item-inner-size: 42px;
   /* 左侧菜单列宽度 */
   --fd-vertical-menu-left-width: 58px;
   /* 右侧标题字号 */
@@ -60,18 +54,12 @@
   --fd-vertical-menu-right-header-padding-x: 20px;
   /* 右侧菜单项高度 */
   --fd-vertical-menu-right-item-height: 50px;
-  /* 右侧菜单项左右外边距 */
-  --fd-vertical-menu-right-item-margin-x: 12px;
   /* 侧边栏展开宽度 */
   --fd-vertical-menu-expand-width: 250px;
   /* 侧边栏折叠宽度 */
   --fd-vertical-menu-collapse-width: 60px;
   /* 弹出菜单圆角 */
   --fd-vertical-menu-popper-radius: 6px;
-  /* 弹出菜单项高度 */
-  --fd-vertical-menu-popper-item-height: 44px;
-  /* 弹出菜单项左右外边距 */
-  --fd-vertical-menu-popper-item-margin-x: 8px;
 
   /* ===== fd-horizontal-menu ============================== */
   /* 菜单组间距（紧凑） */

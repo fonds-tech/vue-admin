@@ -1,5 +1,14 @@
 <template>
-  <icon v-if="isIconify" class="fd-icon" :icon="icon as string" :style="iconStyle" :horizontal-flip="hFlip" :vertical-flip="vFlip" :rotate="rotate" v-bind="$attrs" />
+  <icon
+    v-if="isIconify"
+    class="fd-icon"
+    :icon="icon as string"
+    :style="iconStyle"
+    :horizontal-flip="hFlip"
+    :vertical-flip="vFlip"
+    :rotate="rotate"
+    v-bind="$attrs"
+  />
   <component :is="icon" v-else class="fd-icon" :style="iconStyle" v-bind="$attrs" />
 </template>
 
@@ -46,9 +55,10 @@ const iconStyle = computed<CSSProperties>(() => {
   color: currentcolor;
   width: 1em;
   height: 1em;
-  display: inline-block;
+  display: flex;
   font-size: inherit;
+  align-items: center;
   flex-shrink: 0;
-  vertical-align: middle;
+  justify-content: center;
 }
 </style>

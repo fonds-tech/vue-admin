@@ -175,9 +175,9 @@ export default defineComponent({
     // ==================== 渲染函数 ====================
 
     /** 渲染菜单图标 */
-    function renderIcon(icon?: string, size: number = 18) {
+    function renderIcon(icon?: string) {
       if (!icon) return null
-      return <FdIcon icon={icon} size={size} class="fd-vertical-menu__icon" />
+      return <FdIcon icon={icon} class="fd-vertical-menu__icon" />
     }
 
     /** 渲染菜单标题 */
@@ -231,7 +231,7 @@ export default defineComponent({
 
       const itemContent = (
         <div class={["fd-vertical-menu__left__item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
-          {renderIcon(menu.icon, 20)}
+          {renderIcon(menu.icon)}
         </div>
       )
 

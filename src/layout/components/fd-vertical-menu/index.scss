@@ -20,9 +20,10 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 }
 
 // 菜单图标样式
-@mixin menu-icon($ml: -7px, $mr: 8px) {
+@mixin menu-icon($ml: -7px, $mr: 8px, $size: var(--fd-vertical-menu-icon-size)) {
   margin-left: $ml;
   margin-right: $mr;
+  font-size: $size;
 }
 
 // 菜单标题省略样式
@@ -254,7 +255,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
   &__right__item > .el-menu-item,
   &__right__submenu > .el-sub-menu__title {
-    height: var(--fd-vertical-menu-item-inner-height);
+    height: var(--fd-vertical-menu-item-height);
     display: flex;
     transition: all 0.2s ease;
     align-items: center;
