@@ -20,7 +20,14 @@
             </el-form-item>
 
             <el-form-item prop="password">
-              <el-input v-model="form.password" type="password" :placeholder="t('login.passwordPlaceholder')" prefix-icon="Lock" show-password @keyup.enter="handleLogin" />
+              <el-input
+                v-model="form.password"
+                type="password"
+                :placeholder="t('login.passwordPlaceholder')"
+                prefix-icon="Lock"
+                show-password
+                @keyup.enter="handleLogin"
+              />
             </el-form-item>
 
             <el-form-item>
@@ -53,10 +60,9 @@
  */
 import { useI18n } from "vue-i18n"
 import { ElMessage } from "element-plus"
-import { useAppStore } from "@/stores/app"
-import { useUserStore } from "@/stores/user"
 import { ref, reactive } from "vue"
 import { useRoute, useRouter } from "vue-router"
+import { useAppStore, useUserStore } from "@/stores"
 
 const router = useRouter()
 const route = useRoute()
@@ -92,11 +98,9 @@ async function handleLogin() {
     // 跳转到来源页面或首页
     const redirect = (route.query.redirect as string) || "/"
     router.push(redirect)
-  }
-  catch {
+  } catch {
     ElMessage.error(t("common.failed"))
-  }
-  finally {
+  } finally {
     loading.value = false
   }
 }

@@ -20,7 +20,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 }
 
 // 菜单图标样式
-@mixin menu-icon($ml: -7px, $mr: 8px, $size: var(--fd-vertical-menu-icon-size)) {
+@mixin menu-icon($ml: -6px, $mr: 8px, $size: var(--fd-vertical-menu-icon-size)) {
   margin-left: $ml;
   margin-right: $mr;
   font-size: $size;
