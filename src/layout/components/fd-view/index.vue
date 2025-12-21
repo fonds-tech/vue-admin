@@ -55,11 +55,11 @@ function handleRefresh() {
 .fd-view {
   flex: 1;
   overflow: hidden;
-  background-color: var(--el-fill-color-lighter);
+  background-color: var(--el-fill-color-light);
 
   .el-scrollbar__view {
     display: flex;
-    padding: 12px;
+    padding: var(--fd-view-content-padding);
     overflow-x: hidden;
     flex-direction: column;
   }

@@ -10,11 +10,11 @@
 // ==================== 变量定义 ====================
 
 $menu-transition: all 0.3s ease;
-$menu-item-height: 44px;
-$menu-item-radius: 8px;
-$second-level-width: 200px;
-$first-level-width-icon: 64px;
-$first-level-width-text: 80px;
+$menu-item-height: var(--fd-mixed-menu-item-height);
+$menu-item-radius: var(--fd-mixed-menu-item-radius);
+$second-level-width: var(--fd-mixed-menu-second-width);
+$first-level-width-icon: var(--fd-mixed-menu-first-width-icon);
+$first-level-width-text: var(--fd-mixed-menu-first-width-text);
 $second-level-collapsed-width: 0px;
 
 // ==================== 主容器 ====================
@@ -53,7 +53,7 @@ $second-level-collapsed-width: 0px;
     // 图标样式
     .iconify,
     svg {
-      font-size: 20px;
+      font-size: var(--fd-mixed-menu-first-icon-size);
       transition: color 0.2s ease;
     }
 
@@ -134,7 +134,7 @@ $second-level-collapsed-width: 0px;
     .iconify,
     svg,
     .el-icon {
-      font-size: 18px;
+      font-size: var(--fd-mixed-menu-icon-size);
       flex-shrink: 0;
       margin-right: 12px;
     }
@@ -166,8 +166,8 @@ $second-level-collapsed-width: 0px;
 
     .fd-mixed-menu__sub-item,
     .el-sub-menu__title {
-      margin-left: 20px;
-      margin-right: 12px;
+      margin-left: var(--fd-mixed-menu-sub-indent);
+      margin-right: var(--fd-mixed-menu-sub-margin-right);
     }
   }
 
@@ -176,17 +176,17 @@ $second-level-collapsed-width: 0px;
   &__collapse-btn {
     color: var(--el-text-color-secondary);
     right: 0;
-    width: 24px;
+    width: var(--fd-mixed-menu-collapse-btn-width);
     border: 1px solid var(--el-border-color-lighter);
     bottom: 20px;
     cursor: pointer;
-    height: 48px;
+    height: var(--fd-mixed-menu-collapse-btn-height);
     display: flex;
     position: absolute;
     transition: $menu-transition;
     align-items: center;
     border-right: none;
-    border-radius: 8px 0 0 8px;
+    border-radius: var(--fd-mixed-menu-collapse-btn-radius);
     justify-content: center;
     background-color: var(--el-bg-color);
 

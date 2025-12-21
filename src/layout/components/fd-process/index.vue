@@ -194,9 +194,9 @@ function onWheel(event: WheelEvent) {
 
 <style lang="scss">
 .fd-process {
-  gap: 6px;
+  gap: var(--fd-process-gap);
   display: flex;
-  padding: $spacing-xs $spacing-md;
+  padding: var(--fd-process-padding-y) var(--fd-process-padding-x);
   position: relative;
   align-items: center;
   background-color: var(--el-bg-color);
@@ -213,7 +213,7 @@ function onWheel(event: WheelEvent) {
 
   // 导航操作区
   &__nav {
-    gap: 6px;
+    gap: var(--fd-process-nav-gap);
     height: 100%;
     display: flex;
     align-items: center;
@@ -221,14 +221,14 @@ function onWheel(event: WheelEvent) {
 
     // 导航按钮项
     &-item {
-      width: 30px;
+      width: var(--fd-process-nav-size);
       border: 1px solid var(--el-fill-color-dark);
       cursor: pointer;
-      height: 30px;
+      height: var(--fd-process-nav-size);
       display: flex;
       transition: all 0.2s ease-in-out;
       align-items: center;
-      border-radius: 6px;
+      border-radius: var(--fd-process-nav-radius);
       justify-content: center;
 
       &:hover {
@@ -256,10 +256,10 @@ function onWheel(event: WheelEvent) {
 
   // 滚动容器
   .process__scroll {
-    gap: 6px;
+    gap: var(--fd-process-item-gap);
     height: 100%;
     display: flex;
-    padding: 4px 0;
+    padding: var(--fd-process-scroll-padding-y) 0;
     align-items: center;
   }
 
@@ -268,14 +268,14 @@ function onWheel(event: WheelEvent) {
     color: $text-regular;
     border: 1px solid var(--el-fill-color-dark);
     cursor: pointer;
-    height: 30px;
+    height: var(--fd-process-item-height);
     display: flex;
-    padding: 0 8px;
+    padding: 0 var(--fd-process-item-padding-x);
     position: relative;
     font-size: 12px;
     transition: all 0.2s ease-in-out;
     align-items: center;
-    border-radius: 4px;
+    border-radius: var(--fd-process-item-radius);
     background-color: transparent;
 
     &__title {
@@ -290,7 +290,7 @@ function onWheel(event: WheelEvent) {
       overflow: hidden;
       font-size: 10px;
       transition: all 0.2s ease-in-out;
-      border-radius: 4px;
+      border-radius: var(--fd-process-item-radius);
 
       &:hover {
         background-color: rgb(0 0 0 / 10%);
@@ -319,9 +319,9 @@ function onWheel(event: WheelEvent) {
     &:hover,
     &.is-active {
       .process-item__close {
-        width: 14px;
+        width: var(--fd-process-close-size);
         opacity: 1;
-        margin-left: 6px;
+        margin-left: var(--fd-process-item-gap);
       }
     }
   }

@@ -141,9 +141,9 @@ function handleOpenSettings() {
 
 <style lang="scss" scoped>
 .fd-header {
-  height: 50px;
+  height: var(--fd-header-height);
   display: flex;
-  padding: 0 12px;
+  padding: 0 var(--fd-header-padding-x);
   position: relative;
   align-items: center;
   flex-shrink: 0;
@@ -160,7 +160,7 @@ function handleOpenSettings() {
   }
 
   &__left {
-    gap: 12px;
+    gap: var(--fd-header-gap);
     flex: 1;
     display: flex;
     overflow: hidden;
@@ -168,13 +168,13 @@ function handleOpenSettings() {
   }
 
   &__right {
-    gap: 12px;
+    gap: var(--fd-header-gap);
     display: flex;
     align-items: center;
   }
 
   &__logo {
-    gap: 12px;
+    gap: var(--fd-header-gap);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -182,14 +182,14 @@ function handleOpenSettings() {
   }
 
   &__action-btn {
-    width: 30px;
-    border: 1px solid var(--el-fill-color-dark);
+    width: var(--fd-header-action-size);
+    border: var(--fd-header-action-border-width) solid var(--el-fill-color-dark);
     cursor: pointer;
-    height: 30px;
+    height: var(--fd-header-action-size);
     display: flex;
     transition: all 0.2s ease-in-out;
     align-items: center;
-    border-radius: 6px;
+    border-radius: var(--fd-header-action-radius);
     justify-content: center;
 
     &:hover {

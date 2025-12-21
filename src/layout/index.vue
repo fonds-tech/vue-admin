@@ -28,7 +28,6 @@ import FdSidebar from "./components/fd-sidebar/index.vue"
   height: 100vh;
   display: flex;
   overflow: hidden;
-  background-color: var(--el-bg-color);
 
   .app-sidebar {
     flex-shrink: 0;

@@ -153,7 +153,7 @@ function handleClick(item: BreadcrumbItem) {
   &__link {
     color: var(--el-text-color-regular);
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color var(--fd-breadcrumb-transition) ease;
 
     &:hover {
       color: var(--el-color-primary);
@@ -163,7 +163,7 @@ function handleClick(item: BreadcrumbItem) {
   // 当前页面（不可点击）
   &__current {
     color: var(--el-text-color-primary);
-    font-weight: 500;
+    font-weight: var(--fd-breadcrumb-current-weight);
   }
 }
 </style>

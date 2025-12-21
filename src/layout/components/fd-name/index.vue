@@ -12,8 +12,8 @@ const appTitle = import.meta.env.VITE_APP_TITLE
 .fd-name {
   color: var(--el-text-color-primary);
   margin: 0;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--fd-name-title-size);
+  font-weight: var(--fd-name-title-weight);
   white-space: nowrap;
 }
 </style>

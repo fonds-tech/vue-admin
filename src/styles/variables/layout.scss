@@ -3,10 +3,6 @@
  */
 
 :root {
-  /* ===== app-layout ======================================= */
-  /* 应用整体高度 */
-  --fd-layout-app-height: 100vh;
-
   /* ===== fd-view ========================================== */
   /* 主内容区内边距 */
   --fd-view-content-padding: 12px;
@@ -34,6 +30,8 @@
   --fd-process-nav-gap: 6px;
   /* 导航按钮尺寸 */
   --fd-process-nav-size: 30px;
+  /* 导航按钮圆角 */
+  --fd-process-nav-radius: 6px;
   /* 标签关闭按钮尺寸 */
   --fd-process-close-size: 14px;
   /* 标签项间距 */
@@ -56,6 +54,8 @@
   --fd-vertical-menu-group-gap: 6px;
   /* 菜单图标大小 */
   --fd-vertical-menu-icon-size: 18px;
+  /* 左侧一级菜单图标大小 */
+  --fd-vertical-menu-first-icon-size: 20px;
   /* 菜单项高度 */
   --fd-vertical-menu-item-height: 44px;
   /* 菜单项左右外边距 */
@@ -64,6 +64,18 @@
   --fd-vertical-menu-item-padding-x: 16px;
   /* 菜单项圆角 */
   --fd-vertical-menu-item-radius: var(--el-border-radius-base);
+  /* 左侧一级菜单尺寸 */
+  --fd-vertical-menu-first-item-size: 46px;
+  /* 右侧标题字号 */
+  --fd-vertical-menu-right-title-size: 18px;
+  /* 右侧标题字重 */
+  --fd-vertical-menu-right-title-weight: 600;
+  /* 右侧标题左右内边距 */
+  --fd-vertical-menu-right-header-padding-x: 20px;
+  /* 右侧菜单项高度 */
+  --fd-vertical-menu-right-item-height: 46px;
+  /* 右侧菜单项左右外边距 */
+  --fd-vertical-menu-right-item-margin-x: 12px;
   /* 侧边栏展开宽度 */
   --fd-vertical-menu-expand-width: 250px;
   /* 侧边栏折叠宽度 */
@@ -88,6 +100,8 @@
   --fd-horizontal-menu-item-radius: var(--el-border-radius-base);
   /* “更多”按钮尺寸 */
   --fd-horizontal-menu-more-size: 40px;
+  /* 弹出菜单间距 */
+  --fd-horizontal-menu-popper-gap: 6px;
   /* 弹出菜单圆角 */
   --fd-horizontal-menu-popper-radius: 6px;
   /* 弹出菜单项高度 */
@@ -116,6 +130,8 @@
   --fd-mixed-menu-second-width: 200px;
   /* 子菜单缩进 */
   --fd-mixed-menu-sub-indent: 20px;
+  /* 子菜单右侧外边距 */
+  --fd-mixed-menu-sub-margin-right: 12px;
   /* 折叠按钮宽度 */
   --fd-mixed-menu-collapse-btn-width: 24px;
   /* 折叠按钮高度 */
@@ -128,22 +144,26 @@
   --fd-search-dialog-width: 50vw;
   /* 搜索弹窗圆角 */
   --fd-search-dialog-radius: 12px;
-  /* 搜索输入区上下内边距 */
-  --fd-search-input-padding-y: 20px;
-  /* 搜索输入区左右内边距 */
-  --fd-search-input-padding-x: 20px;
   /* 搜索输入框高度 */
   --fd-search-input-height: 40px;
   /* 搜索输入框圆角 */
   --fd-search-input-radius: 8px;
+  /* 搜索输入区左右内边距 */
+  --fd-search-input-padding-x: 20px;
+  /* 搜索输入区上下内边距 */
+  --fd-search-input-padding-y: 20px;
+  /* 搜索输入区下内边距 */
+  --fd-search-input-padding-bottom: 16px;
   /* 搜索结果最大高度 */
   --fd-search-results-max-height: 320px;
-  /* 搜索结果项上下内边距 */
-  --fd-search-item-padding-y: 12px;
   /* 搜索结果项左右内边距 */
   --fd-search-item-padding-x: 20px;
+  /* 搜索结果项上下内边距 */
+  --fd-search-item-padding-y: 12px;
   /* 快捷键区间距 */
   --fd-search-shortcut-gap: 20px;
+  /* 弹窗底部区域内边距 */
+  --fd-search-footer-padding: 12px 20px 16px;
 
   /* ===== fd-name ========================================= */
   /* 品牌标题字号 */

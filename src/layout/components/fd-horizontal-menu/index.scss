@@ -1,8 +1,8 @@
 // ==================== 变量定义 ====================
 
-$menu-icon-size: 18px;
-$menu-item-radius: 6px;
-$popup-menu-radius: 6px;
+$menu-icon-size: var(--fd-horizontal-menu-icon-size);
+$menu-item-radius: var(--fd-horizontal-menu-item-radius);
+$popup-menu-radius: var(--fd-horizontal-menu-popper-radius);
 
 // ==================== Mixin 定义 ====================
 
@@ -34,7 +34,7 @@ $popup-menu-radius: 6px;
 }
 
 // 菜单容器 flex 布局
-@mixin menu-flex-row($gap: 4px) {
+@mixin menu-flex-row($gap: var(--fd-horizontal-menu-group-gap)) {
   gap: $gap;
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@ $popup-menu-radius: 6px;
 
 .fd-horizontal-menu {
   flex: 1;
-  height: 50px;
+  height: var(--fd-header-height);
   display: flex;
   overflow: hidden;
   align-items: center;
@@ -80,8 +80,8 @@ $popup-menu-radius: 6px;
 
     .el-menu-item {
       cursor: pointer;
-      height: 40px;
-      padding: 0 16px;
+      height: var(--fd-horizontal-menu-item-height);
+      padding: 0 var(--fd-horizontal-menu-item-padding-x);
       font-size: 14px;
       border-bottom: none !important;
       border-radius: $menu-item-radius;
@@ -99,8 +99,8 @@ $popup-menu-radius: 6px;
 
     .el-sub-menu {
       &__title {
-        height: 40px;
-        padding: 0 16px;
+        height: var(--fd-horizontal-menu-item-height);
+        padding: 0 var(--fd-horizontal-menu-item-padding-x);
         font-size: 14px;
         border-bottom: none !important;
         border-radius: $menu-item-radius;
@@ -143,8 +143,8 @@ $popup-menu-radius: 6px;
     flex-shrink: 0;
 
     .el-sub-menu__title {
-      width: 40px;
-      height: 40px;
+      width: var(--fd-horizontal-menu-more-size);
+      height: var(--fd-horizontal-menu-more-size);
       display: flex;
       padding: 0 !important;
       align-items: center;
@@ -168,15 +168,15 @@ $popup-menu-radius: 6px;
 
 .fd-horizontal-menu__popper {
   .el-menu {
-    gap: 6px;
+    gap: var(--fd-horizontal-menu-popper-gap);
     display: flex;
-    border-radius: 6px;
+    border-radius: $popup-menu-radius;
     flex-direction: column;
 
     .el-sub-menu {
       &__title {
-        height: 44px;
-        margin: 0 8px;
+        height: var(--fd-horizontal-menu-popper-item-height);
+        margin: 0 var(--fd-horizontal-menu-popper-item-margin-x);
         border-radius: $popup-menu-radius;
 
         &:hover {
@@ -199,8 +199,8 @@ $popup-menu-radius: 6px;
     }
 
     .el-menu-item {
-      height: 44px;
-      margin: 0 8px;
+      height: var(--fd-horizontal-menu-popper-item-height);
+      margin: 0 var(--fd-horizontal-menu-popper-item-margin-x);
       border-radius: $popup-menu-radius;
 
       .fd-horizontal-menu__icon {

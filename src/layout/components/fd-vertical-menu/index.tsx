@@ -56,8 +56,8 @@ export default defineComponent({
 
     /** 菜单容器样式（根据折叠状态动态设置宽度） */
     const style = computed<CSSProperties>(() => ({
-      "--menu-expand-width": `${settingsStore.menuExpandWidth}px`,
-      "--menu-collapse-width": `${settingsStore.menuCollapseWidth}px`,
+      "--fd-vertical-menu-expand-width": `${settingsStore.menuExpandWidth}px`,
+      "--fd-vertical-menu-collapse-width": `${settingsStore.menuCollapseWidth}px`,
     }))
 
     /** 一级菜单列表 */

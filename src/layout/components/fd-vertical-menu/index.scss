@@ -1,15 +1,19 @@
 // ==================== 变量定义 ====================
 
-$menu-icon-size: 18px;
-$menu-item-radius: 6px;
+$menu-icon-size: var(--fd-vertical-menu-icon-size);
+$menu-item-radius: var(--fd-vertical-menu-item-radius);
 $mobile-breakpoint: 768px;
-$popup-menu-radius: 6px;
+$popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
 // ==================== Mixin 定义 ====================
 
 // 菜单项基础布局（宽度、高度、边距、圆角）
-@mixin menu-item-base($height: 44px, $margin: 8px, $radius: 6px) {
-  width: calc(100% - #{$margin} * 2);
+@mixin menu-item-base(
+  $height: var(--fd-vertical-menu-item-height),
+  $margin: var(--fd-vertical-menu-item-margin-x),
+  $radius: var(--fd-vertical-menu-item-radius)
+) {
+  width: calc(100% - (#{$margin} + #{$margin}));
   height: $height;
   margin-left: $margin;
   border-radius: $radius;
@@ -43,7 +47,7 @@ $popup-menu-radius: 6px;
 }
 
 // 菜单容器 flex 布局
-@mixin menu-flex-column($gap: 6px) {
+@mixin menu-flex-column($gap: var(--fd-vertical-menu-group-gap)) {
   gap: $gap;
   display: flex;
   flex-direction: column;
@@ -80,13 +84,13 @@ $popup-menu-radius: 6px;
   &__header {
     width: 100%;
     cursor: pointer;
-    height: 50px;
+    height: var(--fd-header-height);
     display: flex;
     z-index: 10;
     position: relative;
 
     &__inner {
-      gap: 12px;
+      gap: var(--fd-header-gap);
       top: 50%;
       left: 50%;
       display: flex;
@@ -102,7 +106,7 @@ $popup-menu-radius: 6px;
     border-right: none;
 
     &:not(.el-menu--collapse) {
-      width: var(--menu-expand-width);
+      width: var(--fd-vertical-menu-expand-width);
     }
 
     .el-menu-item {
@@ -146,7 +150,7 @@ $popup-menu-radius: 6px;
     }
 
     &--collapse {
-      width: var(--menu-collapse-width);
+      width: var(--fd-vertical-menu-collapse-width);
 
       .el-sub-menu__title {
         .fd-menu__title {
@@ -173,7 +177,7 @@ $popup-menu-radius: 6px;
   }
 
   &__left-header {
-    height: 50px;
+    height: var(--fd-header-height);
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -181,15 +185,15 @@ $popup-menu-radius: 6px;
   }
 
   &__left-menu {
-    gap: 6px;
+    gap: var(--fd-vertical-menu-group-gap);
     display: flex;
     flex-direction: column;
   }
 
   &__left-item {
-    width: 46px;
+    width: var(--fd-vertical-menu-first-item-size);
     cursor: pointer;
-    height: 46px;
+    height: var(--fd-vertical-menu-first-item-size);
     margin: 0 auto;
     display: flex;
     transition: all 0.2s ease;
@@ -199,7 +203,7 @@ $popup-menu-radius: 6px;
 
     .iconify,
     svg {
-      font-size: 20px;
+      font-size: var(--fd-vertical-menu-first-icon-size);
     }
 
     @include menu-item-states;
@@ -215,9 +219,9 @@ $popup-menu-radius: 6px;
   }
 
   &__right-header {
-    height: 50px;
+    height: var(--fd-header-height);
     display: flex;
-    padding: 0 20px;
+    padding: 0 var(--fd-vertical-menu-right-header-padding-x);
     align-items: center;
     flex-shrink: 0;
   }
@@ -226,8 +230,8 @@ $popup-menu-radius: 6px;
     color: var(--el-text-color-primary);
     margin: 0;
     overflow: hidden;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: var(--fd-vertical-menu-right-title-size);
+    font-weight: var(--fd-vertical-menu-right-title-weight);
     white-space: nowrap;
     text-overflow: ellipsis;
   }
@@ -238,8 +242,8 @@ $popup-menu-radius: 6px;
 
   &__right-item,
   &__right-submenu > .el-sub-menu__title {
-    height: 46px;
-    margin: 0 12px;
+    height: var(--fd-vertical-menu-right-item-height);
+    margin: 0 var(--fd-vertical-menu-right-item-margin-x);
     border-radius: $popup-menu-radius;
 
     .iconify,
@@ -263,7 +267,7 @@ $popup-menu-radius: 6px;
   .el-menu {
     @include menu-flex-column;
 
-    border-radius: 6px;
+    border-radius: $popup-menu-radius;
 
     .el-sub-menu {
       &__title {
@@ -313,7 +317,7 @@ $popup-menu-radius: 6px;
 
   // 确保菜单填满抽屉
   .fd-vertical-menu {
-    width: var(--menu-expand-width);
+    width: var(--fd-vertical-menu-expand-width);
     height: 100%;
 
     // 移动端双列模式只显示单列
