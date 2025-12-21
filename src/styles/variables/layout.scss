@@ -40,14 +40,14 @@
   --fd-vertical-menu-icon-size: 18px;
   /* 左侧菜单图标大小 */
   --fd-vertical-menu-left-icon-size: 20px;
-  /* 菜单项高度 */
-  --fd-vertical-menu-item-height: 50px;
+  /* 菜单项内层高度 */
+  --fd-vertical-menu-item-inner-height: 44px;
   /* 菜单项左右外边距 */
   --fd-vertical-menu-item-margin-x: 8px;
   /* 菜单项左右内边距 */
   --fd-vertical-menu-item-padding-x: 16px;
   /* 菜单项圆角 */
-  --fd-vertical-menu-item-radius: var(--el-border-radius-base);
+  --fd-vertical-menu-item-radius: var(--el-border-radius-small);
   /* 左侧菜单项尺寸 */
   --fd-vertical-menu-left-item-size: 50px;
   /* 左侧菜单内层尺寸 */
@@ -61,7 +61,7 @@
   /* 右侧标题左右内边距 */
   --fd-vertical-menu-right-header-padding-x: 20px;
   /* 右侧菜单项高度 */
-  --fd-vertical-menu-right-item-height: 46px;
+  --fd-vertical-menu-right-item-height: 50px;
   /* 右侧菜单项左右外边距 */
   --fd-vertical-menu-right-item-margin-x: 12px;
   /* 侧边栏展开宽度 */

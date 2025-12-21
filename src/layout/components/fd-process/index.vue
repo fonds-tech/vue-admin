@@ -209,7 +209,7 @@ function onWheel(event: WheelEvent) {
     height: 1px;
     content: "";
     position: absolute;
-    background-color: var(--el-border-color-extra-light);
+    background-color: var(--el-border-color-lighter);
   }
 
   // 导航操作区

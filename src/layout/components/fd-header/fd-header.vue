@@ -149,14 +149,14 @@ function handleOpenSettings() {
   flex-shrink: 0;
   justify-content: space-between;
 
-  &::before {
+  &::after {
     left: 0;
     right: 0;
     bottom: 0;
     height: 1px;
     content: "";
     position: absolute;
-    background-color: var(--el-border-color-extra-light);
+    background-color: var(--el-border-color-lighter);
   }
 
   &__left {
