@@ -1,34 +1,159 @@
 /**
  * 布局相关变量
- * 说明：当前仅提供变量定义，不修改任何组件样式
  */
 
 :root {
-  /* 顶栏与布局结构 */
-  --layout-header-height: 50px;
-  --layout-content-padding: 12px;
-  --layout-tags-height: 34px;
+  /* ===== app-layout ======================================= */
+  /* 应用整体高度 */
+  --fd-layout-app-height: 100vh;
 
-  /* 侧边栏宽度 */
-  --menu-expand-width: 250px;
-  --menu-collapse-width: 60px;
+  /* ===== fd-view ========================================== */
+  /* 主内容区内边距 */
+  --fd-view-content-padding: 12px;
 
-  /* 菜单项结构 */
-  --menu-item-height: 44px;
-  --menu-item-padding-x: 16px;
-  --menu-item-radius: var(--el-border-radius-base);
+  /* ===== fd-header ======================================== */
+  /* 顶栏区块间距 */
+  --fd-header-gap: 12px;
+  /* 顶栏高度 */
+  --fd-header-height: 50px;
+  /* 顶栏左右内边距 */
+  --fd-header-padding-x: 12px;
+  /* 顶栏操作按钮尺寸 */
+  --fd-header-action-size: 30px;
+  /* 顶栏操作按钮圆角 */
+  --fd-header-action-radius: 6px;
+  /* 顶栏操作按钮边框宽度 */
+  --fd-header-action-border-width: 1px;
 
-  /* 混合菜单宽度 */
-  --menu-first-width-icon: 64px;
-  --menu-first-width-text: 80px;
-  --menu-second-width: 200px;
+  /* ===== fd-process ======================================= */
+  /* 标签栏整体间距 */
+  --fd-process-gap: 6px;
+  /* 标签栏高度 */
+  --fd-process-height: 34px;
+  /* 导航按钮间距 */
+  --fd-process-nav-gap: 6px;
+  /* 导航按钮尺寸 */
+  --fd-process-nav-size: 30px;
+  /* 标签关闭按钮尺寸 */
+  --fd-process-close-size: 14px;
+  /* 标签项间距 */
+  --fd-process-item-gap: 6px;
+  /* 标签项高度 */
+  --fd-process-item-height: 30px;
+  /* 标签项圆角 */
+  --fd-process-item-radius: 4px;
+  /* 标签栏容器左右内边距 */
+  --fd-process-padding-x: 12px;
+  /* 标签栏容器上下内边距 */
+  --fd-process-padding-y: 4px;
+  /* 标签项左右内边距 */
+  --fd-process-item-padding-x: 8px;
+  /* 标签滚动区上下内边距 */
+  --fd-process-scroll-padding-y: 4px;
 
-  /* 标签栏（进程） */
-  --process-item-height: 30px;
-  --process-item-padding-x: 8px;
-  --process-gap: 6px;
+  /* ===== fd-vertical-menu ================================ */
+  /* 菜单组间距 */
+  --fd-vertical-menu-group-gap: 6px;
+  /* 菜单图标大小 */
+  --fd-vertical-menu-icon-size: 18px;
+  /* 菜单项高度 */
+  --fd-vertical-menu-item-height: 44px;
+  /* 菜单项左右外边距 */
+  --fd-vertical-menu-item-margin-x: 8px;
+  /* 菜单项左右内边距 */
+  --fd-vertical-menu-item-padding-x: 16px;
+  /* 菜单项圆角 */
+  --fd-vertical-menu-item-radius: var(--el-border-radius-base);
+  /* 侧边栏展开宽度 */
+  --fd-vertical-menu-expand-width: 250px;
+  /* 侧边栏折叠宽度 */
+  --fd-vertical-menu-collapse-width: 60px;
+  /* 弹出菜单圆角 */
+  --fd-vertical-menu-popper-radius: 6px;
+  /* 弹出菜单项高度 */
+  --fd-vertical-menu-popper-item-height: 44px;
+  /* 弹出菜单项左右外边距 */
+  --fd-vertical-menu-popper-item-margin-x: 8px;
 
-  /* 顶栏按钮与间距 */
-  --header-action-size: 30px;
-  --header-gap: 12px;
+  /* ===== fd-horizontal-menu ============================== */
+  /* 菜单组间距（紧凑） */
+  --fd-horizontal-menu-group-gap: 4px;
+  /* 菜单图标大小 */
+  --fd-horizontal-menu-icon-size: 18px;
+  /* 菜单项高度 */
+  --fd-horizontal-menu-item-height: 40px;
+  /* 菜单项左右内边距 */
+  --fd-horizontal-menu-item-padding-x: 16px;
+  /* 菜单项圆角 */
+  --fd-horizontal-menu-item-radius: var(--el-border-radius-base);
+  /* “更多”按钮尺寸 */
+  --fd-horizontal-menu-more-size: 40px;
+  /* 弹出菜单圆角 */
+  --fd-horizontal-menu-popper-radius: 6px;
+  /* 弹出菜单项高度 */
+  --fd-horizontal-menu-popper-item-height: 44px;
+  /* 弹出菜单项左右外边距 */
+  --fd-horizontal-menu-popper-item-margin-x: 8px;
+
+  /* ===== fd-mixed-menu =================================== */
+  /* 菜单项高度 */
+  --fd-mixed-menu-item-height: 44px;
+  /* 大圆角菜单项 */
+  --fd-mixed-menu-item-radius: 8px;
+  /* 菜单图标大小 */
+  --fd-mixed-menu-icon-size: 18px;
+  /* 一级菜单图标大小 */
+  --fd-mixed-menu-first-icon-size: 20px;
+  /* 右侧标题字号 */
+  --fd-mixed-menu-right-title-size: 18px;
+  /* 右侧标题字重 */
+  --fd-mixed-menu-right-title-weight: 600;
+  /* 混合菜单图标列宽度 */
+  --fd-mixed-menu-first-width-icon: 64px;
+  /* 混合菜单文字列宽度 */
+  --fd-mixed-menu-first-width-text: 80px;
+  /* 混合菜单二级宽度 */
+  --fd-mixed-menu-second-width: 200px;
+  /* 子菜单缩进 */
+  --fd-mixed-menu-sub-indent: 20px;
+  /* 折叠按钮宽度 */
+  --fd-mixed-menu-collapse-btn-width: 24px;
+  /* 折叠按钮高度 */
+  --fd-mixed-menu-collapse-btn-height: 48px;
+  /* 折叠按钮圆角 */
+  --fd-mixed-menu-collapse-btn-radius: 8px 0 0 8px;
+
+  /* ===== fd-search ======================================= */
+  /* 搜索弹窗宽度 */
+  --fd-search-dialog-width: 50vw;
+  /* 搜索弹窗圆角 */
+  --fd-search-dialog-radius: 12px;
+  /* 搜索输入区上下内边距 */
+  --fd-search-input-padding-y: 20px;
+  /* 搜索输入区左右内边距 */
+  --fd-search-input-padding-x: 20px;
+  /* 搜索输入框高度 */
+  --fd-search-input-height: 40px;
+  /* 搜索输入框圆角 */
+  --fd-search-input-radius: 8px;
+  /* 搜索结果最大高度 */
+  --fd-search-results-max-height: 320px;
+  /* 搜索结果项上下内边距 */
+  --fd-search-item-padding-y: 12px;
+  /* 搜索结果项左右内边距 */
+  --fd-search-item-padding-x: 20px;
+  /* 快捷键区间距 */
+  --fd-search-shortcut-gap: 20px;
+
+  /* ===== fd-name ========================================= */
+  /* 品牌标题字号 */
+  --fd-name-title-size: 16px;
+  /* 品牌标题字重 */
+  --fd-name-title-weight: 600;
+
+  /* ===== fd-breadcrumb =================================== */
+  /* 当前面包屑字重 */
+  --fd-breadcrumb-current-weight: 500;
+  /* 面包屑 hover 过渡时长 */
+  --fd-breadcrumb-transition: 0.2s;
 }
