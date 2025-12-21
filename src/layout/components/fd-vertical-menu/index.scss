@@ -260,12 +260,6 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     align-items: center;
     border-radius: $popup-menu-radius;
 
-    .iconify,
-    svg,
-    .el-icon {
-      font-size: $menu-icon-size;
-    }
-
     @include menu-item-states;
   }
 
