@@ -387,10 +387,12 @@ export default defineComponent({
       // 没有子菜单，渲染为叶子菜单项
       if (!menu.children || menu.children.length === 0) {
         return (
-          <ElMenuItem key={menu.path} index={fullPath}>
-            {renderIcon(menu.icon)}
-            {renderTitle(menu.title)}
-          </ElMenuItem>
+          <div class="fd-vertical-menu__item">
+            <ElMenuItem key={menu.path} index={fullPath}>
+              {renderIcon(menu.icon)}
+              {renderTitle(menu.title)}
+            </ElMenuItem>
+          </div>
         )
       }
 

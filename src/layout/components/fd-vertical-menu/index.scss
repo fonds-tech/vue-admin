@@ -1,14 +1,5 @@
 // ==================== Mixin 定义 ====================
 
-// 菜单项基础布局（宽度、高度、边距、圆角）
-@mixin menu-item-base($height: 40px, $margin: 5px, $radius: var(--el-border-radius-small)) {
-  height: $height;
-  gap: 12px;
-  line-height: $height;
-  border-radius: $radius;
-  margin-bottom: $margin;
-}
-
 // 菜单标题省略样式
 @mixin menu-title-ellipsis {
   flex: 1;
@@ -32,13 +23,6 @@
     color: $active-color;
     background-color: $active-bg;
   }
-}
-
-// 菜单容器 flex 布局
-@mixin menu-flex-column($gap: 6px) {
-  gap: $gap;
-  display: flex;
-  flex-direction: column;
 }
 
 .fd-vertical-menu {
@@ -212,16 +196,6 @@
     background-color: var(--el-bg-color);
   }
 
-  &__right-title {
-    color: var(--el-text-color-primary);
-    margin: 0;
-    overflow: hidden;
-    font-size: 18px;
-    font-weight: 600;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
   &__right-menu {
     border: none;
     display: flex;
@@ -231,25 +205,8 @@
     .el-menu-item,
     .el-sub-menu__title {
       margin-bottom: 0;
-      line-height: 50px;
+      line-height: 40px;
     }
-  }
-
-  &__right-item {
-    height: 50px;
-    display: flex;
-    align-items: center;
-  }
-
-  &__right-item > .el-menu-item,
-  &__right-submenu > .el-sub-menu__title {
-    height: 50px;
-    display: flex;
-    transition: all 0.2s ease;
-    align-items: center;
-    border-radius: 6px;
-
-    @include menu-item-states;
   }
 
   &__right-submenu.is-opened > .el-sub-menu__title {
@@ -303,7 +260,6 @@
       line-height: 40px;
       border-radius: var(--el-border-radius-small);
 
-      // @include menu-item-base;
       @include menu-item-states;
 
       .fd-vertical-menu__title {
