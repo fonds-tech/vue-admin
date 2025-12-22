@@ -72,10 +72,10 @@ export default defineComponent({
       flexShrink: 0,
     }))
 
-    /** 菜单容器类名（根据布局模式添加修饰符） */
+    /** 菜单容器类名（仅保留有样式定义的修饰符） */
     const containerClass = computed(() => [
       "fd-vertical-menu",
-      `fd-vertical-menu--${settingsStore.menuLayout}`,
+      { "fd-vertical-menu--dual": isDualMode.value },
     ])
 
     // ==================== 监听器 ====================
@@ -194,7 +194,7 @@ export default defineComponent({
     /** 渲染子菜单（有子菜单项） */
     function renderSubMenu(menu: Menu, fullPath: string) {
       return (
-        <ElSubMenu key={menu.path} index={fullPath} class="fd-vertical-menu__submenu">
+        <ElSubMenu key={menu.path} index={fullPath}>
           {{
             title: () => (
               <>
@@ -414,7 +414,7 @@ export default defineComponent({
     function renderDualRightMenu() {
       if (!hasSubMenus.value) return null
       return (
-        <ElScrollbar class="fd-vertical-menu__right__scroll">
+        <ElScrollbar>
           <div class="fd-vertical-menu__list">
 
             <ElMenu
@@ -462,7 +462,6 @@ export default defineComponent({
           withHeader={false}
           showClose={false}
           modal={true}
-          modalClass="fd-vertical-menu__drawer-modal"
           class="fd-vertical-menu__drawer"
           onClose={handleClose}
         >
