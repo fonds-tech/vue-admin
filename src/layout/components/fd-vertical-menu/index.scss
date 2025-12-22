@@ -1,17 +1,10 @@
-// ==================== 变量定义 ====================
-
-$menu-icon-size: var(--fd-vertical-menu-icon-size);
-$menu-item-radius: var(--fd-vertical-menu-item-radius);
-$mobile-breakpoint: 768px;
-$popup-menu-radius: var(--fd-vertical-menu-popper-radius);
-
 // ==================== Mixin 定义 ====================
 
 // 菜单项基础布局（宽度、高度、边距、圆角）
 @mixin menu-item-base(
-  $height: var(--fd-vertical-menu-item-height),
-  $margin: var(--fd-vertical-menu-gap),
-  $radius: var(--fd-vertical-menu-item-radius)
+  $height: 40px,
+  $margin: 6px,
+  $radius: var(--el-border-radius-small)
 ) {
   height: $height;
   margin: 0 $margin;
@@ -20,7 +13,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 }
 
 // 菜单图标样式
-@mixin menu-icon($ml: -6px, $mr: 8px, $size: var(--fd-vertical-menu-icon-size)) {
+@mixin menu-icon($ml: -6px, $mr: 8px, $size: 20px) {
   margin-left: $ml;
   margin-right: $mr;
   font-size: $size;
@@ -52,7 +45,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 }
 
 // 菜单容器 flex 布局
-@mixin menu-flex-column($gap: var(--fd-vertical-menu-gap)) {
+@mixin menu-flex-column($gap: 6px) {
   gap: $gap;
   display: flex;
   flex-direction: column;
@@ -79,14 +72,14 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   &__header {
     width: 100%;
     cursor: pointer;
-    height: var(--fd-vertical-menu-header-height);
+    height: 50px;
     display: flex;
     z-index: 10;
     flex-shrink: 0;
     position: relative;
 
     &__inner {
-      gap: var(--fd-header-gap);
+      gap: 12px;
       top: 50%;
       left: 50%;
       display: flex;
@@ -103,15 +96,15 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     padding: 0;
 
     &:not(.el-menu--collapse) {
-      width: var(--fd-vertical-menu-expand-width);
+      width: 250px;
     }
 
     .el-menu-item {
       @include menu-item-base;
       @include menu-item-states;
 
-      line-height: var(--fd-vertical-menu-item-inner-height);
-      margin-bottom: var(--fd-vertical-menu-gap);
+      line-height: 42px;
+      margin-bottom: 6px;
 
       .fd-vertical-menu__icon {
         @include menu-icon;
@@ -128,8 +121,8 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
       &__title {
         @include menu-item-base;
 
-        line-height: var(--fd-vertical-menu-item-inner-height);
-        margin-bottom: var(--fd-vertical-menu-gap);
+        line-height: 42px;
+        margin-bottom: 6px;
 
         &:hover {
           color: var(--el-color-primary);
@@ -151,7 +144,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     }
 
     &--collapse {
-      width: var(--fd-vertical-menu-collapse-width);
+      width: 60px;
 
       .el-sub-menu__title {
         .fd-vertical-menu__title {
@@ -171,7 +164,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
   // 左侧一级菜单
   &__left {
-    width: var(--fd-vertical-menu-left-width);
+    width: 58px;
     display: flex;
     flex-shrink: 0;
     position: relative;
@@ -190,7 +183,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   }
 
   &__left__header {
-    height: var(--fd-vertical-menu-header-height);
+    height: 50px;
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -198,23 +191,23 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   }
 
   &__right__header {
-    height: var(--fd-vertical-menu-header-height);
+    height: 50px;
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    padding: 0 var(--fd-vertical-menu-right-header-padding-x);
+    padding: 0 20px;
   }
 
   &__left__menu {
-    gap: var(--fd-vertical-menu-gap);
-    padding: calc(var(--fd-vertical-menu-gap) / 2) 0;
+    gap: 6px;
+    padding: 3px 0;
     display: flex;
     flex-direction: column;
   }
 
   &__left__item {
-    width: var(--fd-vertical-menu-item-height);
-    height: var(--fd-vertical-menu-item-height);
+    width: 40px;
+    height: 40px;
     display: flex;
     cursor: pointer;
     margin: 0 auto;
@@ -224,7 +217,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     border-radius: var(--el-border-radius-small);
     .iconify,
     svg {
-      font-size: var(--fd-vertical-menu-left-icon-size);
+      font-size: 20px;
     }
 
     @include menu-item-states;
@@ -243,8 +236,8 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     color: var(--el-text-color-primary);
     margin: 0;
     overflow: hidden;
-    font-size: var(--fd-vertical-menu-right-title-size);
-    font-weight: var(--fd-vertical-menu-right-title-weight);
+    font-size: 18px;
+    font-weight: 600;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
@@ -253,28 +246,28 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     border: none;
     display: flex;
     flex-direction: column;
-    gap: var(--fd-vertical-menu-gap);
+    gap: 6px;
 
     .el-menu-item,
     .el-sub-menu__title {
       margin-bottom: 0;
-      line-height: var(--fd-vertical-menu-right-item-height);
+      line-height: 50px;
     }
   }
 
   &__right__item {
-    height: var(--fd-vertical-menu-right-item-height);
+    height: 50px;
     display: flex;
     align-items: center;
   }
 
   &__right__item > .el-menu-item,
   &__right__submenu > .el-sub-menu__title {
-    height: var(--fd-vertical-menu-right-item-height);
+    height: 50px;
     display: flex;
     transition: all 0.2s ease;
     align-items: center;
-    border-radius: $popup-menu-radius;
+    border-radius: 6px;
 
     @include menu-item-states;
   }
@@ -291,7 +284,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   .el-menu {
     @include menu-flex-column;
 
-    border-radius: $popup-menu-radius;
+    border-radius: 6px;
 
     .el-sub-menu {
       &__title {
@@ -341,7 +334,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
   // 确保菜单填满抽屉
   .fd-vertical-menu {
-    width: var(--fd-vertical-menu-expand-width);
+    width: 250px;
     height: 100%;
 
     // 移动端双列模式只显示单列

@@ -54,12 +54,6 @@ export default defineComponent({
       return route.path
     })
 
-    /** 菜单容器样式（根据折叠状态动态设置宽度） */
-    const style = computed<CSSProperties>(() => ({
-      "--fd-vertical-menu-expand-width": `${settingsStore.menuExpandWidth}px`,
-      "--fd-vertical-menu-collapse-width": `${settingsStore.menuCollapseWidth}px`,
-    }))
-
     /** 一级菜单列表 */
     const firstLevelMenus = computed<Menu[]>(() => menuList.value)
 
@@ -465,7 +459,7 @@ export default defineComponent({
           class="fd-vertical-menu__drawer"
           onClose={handleClose}
         >
-          <div class={containerClass.value} style={style.value}>
+          <div class={containerClass.value}>
             {isDualMode.value ? renderDualLayout() : renderSingleLayout()}
           </div>
         </ElDrawer>
@@ -478,13 +472,13 @@ export default defineComponent({
       if (isMixedMode.value) {
         if (!hasSubMenus.value) return null
         return (
-          <div class={containerClass.value} style={style.value}>
+          <div class={containerClass.value}>
             {renderMixedLayout()}
           </div>
         )
       }
       return (
-        <div class={containerClass.value} style={style.value}>
+        <div class={containerClass.value}>
           {isDualMode.value ? renderDualLayout() : renderSingleLayout()}
         </div>
       )

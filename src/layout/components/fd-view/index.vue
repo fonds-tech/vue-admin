@@ -59,7 +59,7 @@ function handleRefresh() {
 
   .el-scrollbar__view {
     display: flex;
-    padding: var(--fd-view-content-padding);
+    padding: 12px;
     overflow-x: hidden;
     flex-direction: column;
   }

@@ -4,7 +4,7 @@
     :show-close="false"
     :close-on-click-modal="true"
     :close-on-press-escape="true"
-    width="var(--fd-search-dialog-width)"
+    width="50vw"
     class="fd-search"
     @close="close"
     @keydown.stop
@@ -284,7 +284,7 @@ defineExpose({
 .fd-search.el-dialog {
   background: var(--bg-color-container);
   box-shadow: 0 20px 48px rgb(0 0 0 / 15%);
-  border-radius: var(--fd-search-dialog-radius);
+  border-radius: 12px;
 
   .el-dialog__header {
     display: none;
@@ -299,10 +299,10 @@ defineExpose({
   }
 
   .el-dialog__footer {
-    padding: var(--fd-search-footer-padding);
+    padding: 12px 20px 16px;
     background: var(--bg-color-container);
     border-top: 1px solid var(--el-border-color-lighter);
-    border-radius: 0 0 var(--fd-search-dialog-radius) var(--fd-search-dialog-radius);
+    border-radius: 0 0 12px 12px;
   }
 }
 
@@ -324,7 +324,7 @@ defineExpose({
 .fd-search {
   /* 搜索输入框容器 */
   &__input-wrapper {
-    padding: var(--fd-search-input-padding-y) var(--fd-search-input-padding-x) var(--fd-search-input-padding-bottom);
+    padding: 20px 20px 16px;
     background: var(--bg-color-container);
     border-bottom: 1px solid var(--el-border-color-lighter);
   }
@@ -336,7 +336,7 @@ defineExpose({
     background: var(--el-fill-color-blank);
     transition: all 0.2s ease;
     align-items: center;
-    border-radius: var(--fd-search-input-radius);
+    border-radius: 8px;
 
     &:hover {
       border-color: var(--el-border-color-hover);
@@ -352,7 +352,7 @@ defineExpose({
     flex: 1;
     color: var(--el-text-color-primary);
     border: none;
-    height: var(--fd-search-input-height);
+    height: 40px;
     outline: none;
     padding: 0 12px;
     font-size: 14px;
@@ -388,7 +388,7 @@ defineExpose({
   /* 搜索结果区域 */
   &__results {
     flex: 1;
-    max-height: var(--fd-search-results-max-height);
+    max-height: 320px;
     min-height: 120px;
     overflow-y: auto;
 
@@ -430,7 +430,7 @@ defineExpose({
   &__item {
     cursor: pointer;
     display: flex;
-    padding: var(--fd-search-item-padding-y) var(--fd-search-item-padding-x);
+    padding: 12px 20px;
     font-size: 13px;
     transition: all 0.15s ease;
     align-items: center;
@@ -499,7 +499,7 @@ defineExpose({
 
   /* 快捷键提示 */
   &__shortcuts {
-    gap: var(--fd-search-shortcut-gap);
+    gap: 20px;
     display: flex;
     padding-top: 8px;
     justify-content: center;

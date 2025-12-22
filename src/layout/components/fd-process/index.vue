@@ -194,10 +194,10 @@ function onWheel(event: WheelEvent) {
 
 <style lang="scss">
 .fd-process {
-  gap: var(--fd-process-gap);
-  height: var(--fd-process-height);
+  gap: 6px;
+  height: 50px;
   display: flex;
-  padding: 0 var(--fd-process-padding-x);
+  padding: 0 12px;
   position: relative;
   align-items: center;
   border-bottom: 1px solid var(--el-border-color-lighter);
@@ -205,17 +205,17 @@ function onWheel(event: WheelEvent) {
 
   // 导航操作区
   &__left {
-    gap: var(--fd-process-gap);
+    gap: 6px;
     display: flex;
     align-items: center;
     flex-shrink: 0;
 
     // 导航按钮项
     &-item {
-      width: var(--fd-process-action-size);
+      width: 30px;
       border: 1px solid var(--el-fill-color-dark);
       cursor: pointer;
-      height: var(--fd-process-action-size);
+      height: 30px;
       display: flex;
       transition: all 0.2s ease-in-out;
       align-items: center;
@@ -246,19 +246,19 @@ function onWheel(event: WheelEvent) {
 
   // 滚动容器
   .process__scroll {
-    gap: var(--fd-process-gap);
+    gap: 6px;
     display: flex;
     align-items: center;
   }
 
   // 标签项
   .process-item {
-    color: $text-regular;
+    color: var(--el-text-color-regular);
     border: 1px solid var(--el-fill-color-dark);
     cursor: pointer;
-    height: var(--fd-process-action-size);
+    height: 30px;
     display: flex;
-    padding: 0 var(--fd-process-item-padding-x);
+    padding: 0 8px;
     position: relative;
     font-size: 12px;
     transition: all 0.2s ease-in-out;
@@ -307,9 +307,9 @@ function onWheel(event: WheelEvent) {
     &:hover,
     &.is-active {
       .process-item__close {
-        width: var(--fd-process-close-size);
+        width: 14px;
         opacity: 1;
-        margin-left: var(--fd-process-gap);
+        margin-left: 6px;
       }
     }
   }
