@@ -1,9 +1,23 @@
 /**
- * Icon 组件导出
+ * FdIcon 图标组件
+ *
+ * 支持 Iconify 图标和 Vue 组件图标
+ *
+ * @example
+ * ```vue
+ * <!-- Iconify 图标 -->
+ * <FdIcon icon="mdi:home" size="24px" color="#333" />
+ *
+ * <!-- Element Plus 图标 -->
+ * <FdIcon :icon="ElIconUser" size="20" />
+ *
+ * <!-- 翻转和旋转 -->
+ * <FdIcon icon="mdi:arrow-right" :rotate="1" h-flip />
+ * ```
  */
 
-import Icon from "./fd-icon.vue"
+import FdIcon from "./fd-icon.vue"
 
-export { Icon }
+export { FdIcon }
 export * from "./types"
-export default Icon
+export default FdIcon

@@ -12,6 +12,7 @@ export default eslint(
     rules: {
       "style/brace-style": "off",
       "style/arrow-parens": "off",
+      "style/member-delimiter-style": "off",
     },
   },
   {

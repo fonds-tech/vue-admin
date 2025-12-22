@@ -1,22 +1,12 @@
 // ==================== Mixin 定义 ====================
 
 // 菜单项基础布局（宽度、高度、边距、圆角）
-@mixin menu-item-base(
-  $height: 40px,
-  $margin: 6px,
-  $radius: var(--el-border-radius-small)
-) {
+@mixin menu-item-base($height: 40px, $margin: 5px, $radius: var(--el-border-radius-small)) {
   height: $height;
-  margin: 0 $margin;
+  gap: 12px;
   line-height: $height;
   border-radius: $radius;
-}
-
-// 菜单图标样式
-@mixin menu-icon($ml: -6px, $mr: 8px, $size: 20px) {
-  margin-left: $ml;
-  margin-right: $mr;
-  font-size: $size;
+  margin-bottom: $margin;
 }
 
 // 菜单标题省略样式
@@ -51,24 +41,19 @@
   flex-direction: column;
 }
 
-// ==================== 单列菜单 ====================
 .fd-vertical-menu {
   height: 100vh;
   display: flex;
   position: relative;
   overflow-x: hidden;
+  flex-direction: column;
   background-color: var(--el-fill-color-blank);
   border-right: 1px solid var(--el-border-color-lighter);
 
-  &--vertical {
-    flex-direction: column;
+  &--dual {
+    flex-direction: row;
   }
 
-  &--mixed {
-    flex-direction: column;
-  }
-
-  // 头部区域样式
   &__header {
     width: 100%;
     cursor: pointer;
@@ -77,6 +62,7 @@
     z-index: 10;
     flex-shrink: 0;
     position: relative;
+    border-bottom: 1px solid var(--el-border-color-lighter);
 
     &__inner {
       gap: 12px;
@@ -89,26 +75,32 @@
     }
   }
 
-  .el-menu {
-    display: block;
+  &__list {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    scrollbar-width: none;
+  }
 
+  .el-menu {
+    display: flex;
     border-right: none;
-    padding: 0;
+    flex-direction: column;
 
     &:not(.el-menu--collapse) {
       width: 250px;
     }
 
     .el-menu-item {
-      @include menu-item-base;
+      gap: 12px;
+      margin: 0 5px;
+      height: 40px;
+      padding: 0 20px;
+      line-height: 40px;
+      margin-bottom: 5px;
+      border-radius: var(--el-border-radius-small);
       @include menu-item-states;
-
-      line-height: 42px;
-      margin-bottom: 6px;
-
-      .fd-vertical-menu__icon {
-        @include menu-icon;
-      }
 
       .fd-vertical-menu__title {
         @include menu-title-ellipsis;
@@ -116,21 +108,18 @@
     }
 
     .el-sub-menu {
-      display: block;
-
       &__title {
-        @include menu-item-base;
-
-        line-height: 42px;
-        margin-bottom: 6px;
+        gap: 12px;
+        margin: 0 5px;
+        height: 40px;
+        padding: 0 20px;
+        line-height: 40px;
+        margin-bottom: 5px;
+        border-radius: var(--el-border-radius-small);
 
         &:hover {
           color: var(--el-color-primary);
           background-color: var(--el-fill-color-dark);
-        }
-
-        .fd-vertical-menu__icon {
-          @include menu-icon;
         }
 
         .fd-vertical-menu__title {
@@ -145,16 +134,12 @@
 
     &--collapse {
       width: 60px;
-
-      .el-sub-menu__title {
-        .fd-vertical-menu__title {
-          width: 0;
-          opacity: 0;
-          overflow: hidden;
-        }
-
-        .fd-vertical-menu__icon {
-          margin-right: 0;
+      .el-sub-menu {
+        &__title {
+          margin: 5px;
+          height: 40px;
+          padding: 0 15px;
+          border-radius: var(--el-border-radius-small);
         }
       }
     }
@@ -282,13 +267,19 @@
 
 .fd-vertical-menu__popper {
   .el-menu {
-    @include menu-flex-column;
-
-    border-radius: 6px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--el-border-radius-small);
 
     .el-sub-menu {
       &__title {
-        @include menu-item-base;
+        gap: 12px;
+        height: 40px;
+        margin: 0 5px;
+        padding: 0 15px;
+        line-height: 40px;
+        border-radius: var(--el-border-radius-small);
 
         &:hover {
           color: var(--el-color-primary);
@@ -296,7 +287,7 @@
         }
 
         .fd-vertical-menu__icon {
-          @include menu-icon;
+          font-size: 20px;
         }
 
         .fd-vertical-menu__title {
@@ -310,12 +301,15 @@
     }
 
     .el-menu-item {
-      @include menu-item-base;
-      @include menu-item-states;
+      gap: 12px;
+      height: 40px;
+      margin: 0 5px;
+      padding: 0 15px;
+      line-height: 40px;
+      border-radius: var(--el-border-radius-small);
 
-      .fd-vertical-menu__icon {
-        @include menu-icon;
-      }
+      // @include menu-item-base;
+      @include menu-item-states;
 
       .fd-vertical-menu__title {
         @include menu-title-ellipsis;

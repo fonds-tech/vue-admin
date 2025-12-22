@@ -1,6 +1,6 @@
 import type { Menu } from "@/stores"
 import type { PropType, CSSProperties } from "vue"
-import { Icon } from "@/components/core/fd-icon"
+import Icon from "@/components/core/fd-icon"
 import { useRoute, useRouter } from "vue-router"
 import { useMenuStore, useSettingsStore } from "@/stores"
 import { ref, watch, computed, defineComponent } from "vue"

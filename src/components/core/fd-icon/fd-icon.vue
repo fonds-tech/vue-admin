@@ -1,64 +1,55 @@
+<!-- FdIcon 图标组件 -->
 <template>
   <icon
-    v-if="isIconify"
+    v-if="icon"
+    :icon="icon"
     class="fd-icon"
-    :icon="icon as string"
+    :class="[$attrs.class]"
     :style="iconStyle"
     :horizontal-flip="hFlip"
     :vertical-flip="vFlip"
     :rotate="rotate"
-    v-bind="$attrs"
   />
-  <component :is="icon" v-else class="fd-icon" :style="iconStyle" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">
 import type { IconProps } from "./types"
 import type { CSSProperties } from "vue"
 import { Icon } from "@iconify/vue"
-import { computed } from "vue"
 
-defineOptions({
-  name: "fd-icon",
-  inheritAttrs: false,
-})
+defineOptions({ name: "fd-icon", inheritAttrs: false })
 
-const props = withDefaults(defineProps<IconProps>(), {
-  hFlip: false,
-  vFlip: false,
-  rotate: 0,
-})
+const props = withDefaults(defineProps<IconProps>(), { size: "" })
 
-/** 判断是否为 Iconify 图标（字符串格式且包含冒号） */
-const isIconify = computed<boolean>(() => {
-  return typeof props.icon === "string" && props.icon.includes(":")
-})
+const attrs = useAttrs()
 
-/** 计算图标样式（只在用户传入自定义值时才设置，避免覆盖外部样式） */
+/** 合并样式 */
 const iconStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}
-  const size = typeof props.size === "number" ? `${props.size}px` : props.size
 
-  if (size) {
+  // 尺寸处理
+  if (props.size) {
+    const size = typeof props.size === "number" ? `${props.size}px` : props.size
     style.fontSize = size
   }
+
+  // 颜色
   if (props.color) {
     style.color = props.color
+  }
+
+  // 合并外部传入的 style
+  if (attrs.style) {
+    Object.assign(style, attrs.style)
   }
 
   return style
 })
 </script>
 
-<style lang="scss">
+<style scoped>
 .fd-icon {
-  color: currentcolor;
-  width: 1em;
-  height: 1em;
-  display: flex;
-  font-size: inherit;
-  align-items: center;
+  display: inline;
   flex-shrink: 0;
-  justify-content: center;
 }
 </style>

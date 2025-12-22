@@ -40,9 +40,9 @@
 
 <script setup lang="ts">
 import type { ProcessItem } from "@/stores"
+import FdIcon from "@/components/core/fd-icon"
 import { useMitt } from "@/hooks"
 import { contextMenu } from "@fonds/vue-crud"
-import { Icon as FdIcon } from "@/components/core/fd-icon"
 import { useProcessStore } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 import { ref, watch, nextTick, onMounted } from "vue"
@@ -200,7 +200,6 @@ function onWheel(event: WheelEvent) {
   padding: 0 12px;
   position: relative;
   align-items: center;
-  border-bottom: 1px solid var(--el-border-color-lighter);
   background-color: var(--el-bg-color);
 
   // 导航操作区

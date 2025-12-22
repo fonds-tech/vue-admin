@@ -171,7 +171,7 @@ export default defineComponent({
     /** 渲染菜单图标 */
     function renderIcon(icon?: string) {
       if (!icon) return null
-      return <FdIcon icon={icon} class="fd-vertical-menu__icon" />
+      return <FdIcon icon={icon} size="20" class="fd-vertical-menu__icon" />
     }
 
     /** 渲染菜单标题 */
@@ -265,7 +265,7 @@ export default defineComponent({
     /** 渲染单列模式菜单（含滚动容器） */
     function renderSingleMenu() {
       return (
-        <ElScrollbar>
+        <div class="fd-vertical-menu__list">
           <ElMenu
             showTimeout={50}
             hideTimeout={50000}
@@ -277,7 +277,7 @@ export default defineComponent({
           >
             {menuList.value.map(menu => renderMenuItem(menu, ""))}
           </ElMenu>
-        </ElScrollbar>
+        </div>
       )
     }
 
