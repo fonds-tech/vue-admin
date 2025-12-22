@@ -19,7 +19,7 @@ export const useSettingsStore = defineStore("settings", {
     /** 菜单展开宽度（px） */
     menuExpandWidth: 250,
     /** 菜单折叠宽度（px） */
-    menuCollapseWidth: 60,
+    menuCollapseWidth: 52,
     /** 菜单布局模式 */
     menuLayout: "vertical",
     /** 菜单风格 */

@@ -97,10 +97,10 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
   }
 
   .el-menu {
-    @include menu-flex-column;
+    display: block;
 
     border-right: none;
-    padding: calc(var(--fd-vertical-menu-gap) / 2) 0;
+    padding: 0;
 
     &:not(.el-menu--collapse) {
       width: var(--fd-vertical-menu-expand-width);
@@ -109,6 +109,9 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     .el-menu-item {
       @include menu-item-base;
       @include menu-item-states;
+
+      line-height: var(--fd-vertical-menu-item-inner-height);
+      margin-bottom: var(--fd-vertical-menu-gap);
 
       .fd-vertical-menu__icon {
         @include menu-icon;
@@ -120,10 +123,13 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
     }
 
     .el-sub-menu {
-      @include menu-flex-column;
+      display: block;
 
       &__title {
         @include menu-item-base;
+
+        line-height: var(--fd-vertical-menu-item-inner-height);
+        margin-bottom: var(--fd-vertical-menu-gap);
 
         &:hover {
           color: var(--el-color-primary);
@@ -245,6 +251,15 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
   &__right__menu {
     border: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--fd-vertical-menu-gap);
+
+    .el-menu-item,
+    .el-sub-menu__title {
+      margin-bottom: 0;
+      line-height: var(--fd-vertical-menu-right-item-height);
+    }
   }
 
   &__right__item {
@@ -255,7 +270,7 @@ $popup-menu-radius: var(--fd-vertical-menu-popper-radius);
 
   &__right__item > .el-menu-item,
   &__right__submenu > .el-sub-menu__title {
-    height: var(--fd-vertical-menu-item-height);
+    height: var(--fd-vertical-menu-right-item-height);
     display: flex;
     transition: all 0.2s ease;
     align-items: center;
