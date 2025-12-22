@@ -182,10 +182,12 @@ export default defineComponent({
     /** 渲染叶子菜单项（无子菜单） */
     function renderLeafMenuItem(menu: Menu, fullPath: string) {
       return (
-        <ElMenuItem key={menu.path} index={fullPath} class="fd-vertical-menu__item">
-          {renderIcon(menu.icon)}
-          {renderTitle(menu.title)}
-        </ElMenuItem>
+        <div class="fd-vertical-menu__item">
+          <ElMenuItem key={menu.path} index={fullPath}>
+            {renderIcon(menu.icon)}
+            {renderTitle(menu.title)}
+          </ElMenuItem>
+        </div>
       )
     }
 
@@ -310,17 +312,19 @@ export default defineComponent({
       if (!hasSubMenus.value) return null
       return (
         <ElScrollbar>
-          <ElMenu
-            showTimeout={50}
-            hideTimeout={50000}
-            defaultActive={activeMenuPath.value}
-            collapse={isCollapsed.value}
-            uniqueOpened={isAccordionMode.value}
-            popperClass="fd-vertical-menu__popper"
-            onSelect={handleMenuSelect}
-          >
-            {currentSubMenus.value.map((menu: Menu) => renderMenuItem(menu, menuStore.activeFirstLevelPath))}
-          </ElMenu>
+          <div class="fd-vertical-menu__list">
+            <ElMenu
+              showTimeout={50}
+              hideTimeout={50000}
+              defaultActive={activeMenuPath.value}
+              collapse={isCollapsed.value}
+              uniqueOpened={isAccordionMode.value}
+              popperClass="fd-vertical-menu__popper"
+              onSelect={handleMenuSelect}
+            >
+              {currentSubMenus.value.map((menu: Menu) => renderMenuItem(menu, menuStore.activeFirstLevelPath))}
+            </ElMenu>
+          </div>
         </ElScrollbar>
       )
     }
@@ -340,7 +344,7 @@ export default defineComponent({
     /** 渲染双列左侧头部（仅 Logo） */
     function renderDualLeftHeader() {
       return (
-        <div class="fd-vertical-menu__left__header">
+        <div class="fd-vertical-menu__header">
           {renderLogo()}
         </div>
       )
@@ -411,16 +415,19 @@ export default defineComponent({
       if (!hasSubMenus.value) return null
       return (
         <ElScrollbar class="fd-vertical-menu__right__scroll">
-          <ElMenu
-            class="fd-vertical-menu__right__menu"
-            defaultActive={activeMenuPath.value}
-            collapseTransition={false}
-            uniqueOpened={isAccordionMode.value}
-            backgroundColor="transparent"
-            onSelect={handleSubMenuSelect}
-          >
-            {currentSubMenus.value.map(menu => renderDualRightItem(menu, activeFirstLevelPath.value))}
-          </ElMenu>
+          <div class="fd-vertical-menu__list">
+
+            <ElMenu
+              class="fd-vertical-menu__right__menu"
+              defaultActive={activeMenuPath.value}
+              collapseTransition={false}
+              uniqueOpened={isAccordionMode.value}
+              backgroundColor="transparent"
+              onSelect={handleSubMenuSelect}
+            >
+              {currentSubMenus.value.map(menu => renderDualRightItem(menu, activeFirstLevelPath.value))}
+            </ElMenu>
+          </div>
         </ElScrollbar>
       )
     }

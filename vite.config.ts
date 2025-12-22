@@ -17,7 +17,9 @@ export default defineConfig(({ mode }) => {
     },
     css: {
       preprocessorOptions: {
-        scss: {},
+        scss: {
+          additionalData: `@use "${resolve(__dirname, "src/styles/variables.scss").replace(/\\/g, "/")}" as *;`,
+        },
       },
     },
     server: {
@@ -28,7 +30,7 @@ export default defineConfig(({ mode }) => {
         "/api": {
           target: env.VITE_API_BASE_URL || "http://localhost:3000",
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ""),
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
     },

@@ -10,7 +10,7 @@
           <fd-name />
         </div>
       </template>
-      <div v-else-if="showCollapse" class="fd-header__action-btn" @click="handleToggleCollapse">
+      <div v-if="showCollapse" class="fd-header__action-btn" @click="handleToggleCollapse">
         <fd-icon :icon="collapseIcon" :size="20" />
       </div>
       <fd-breadcrumb />

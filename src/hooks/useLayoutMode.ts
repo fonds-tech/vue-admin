@@ -27,7 +27,7 @@ export function useLayoutMode() {
   const showHorizontalMenu = computed(() => isHorizontal.value || isMixed.value)
 
   /** 是否需要显示折叠按钮（垂直、混合或双列布局） */
-  const showCollapse = computed(() => isVertical.value || isMixed.value || isDual.value)
+  const showCollapse = computed(() => isVertical.value)
 
   return {
     isVertical,

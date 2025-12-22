@@ -42,6 +42,8 @@
 }
 
 .fd-vertical-menu {
+  --el-menu-base-level-padding: 15px;
+
   height: 100vh;
   display: flex;
   position: relative;
@@ -62,6 +64,8 @@
     z-index: 10;
     flex-shrink: 0;
     position: relative;
+    align-items: center;
+    justify-content: center;
     border-bottom: 1px solid var(--el-border-color-lighter);
 
     &__inner {
@@ -78,9 +82,14 @@
   &__list {
     flex: 1;
     display: flex;
+    padding: 5px 0;
     overflow-y: auto;
     flex-direction: column;
     scrollbar-width: none;
+  }
+
+  &__item {
+    margin-bottom: 5px;
   }
 
   .el-menu {
@@ -98,8 +107,8 @@
       height: 40px;
       padding: 0 20px;
       line-height: 40px;
-      margin-bottom: 5px;
       border-radius: var(--el-border-radius-small);
+
       @include menu-item-states;
 
       .fd-vertical-menu__title {
@@ -108,11 +117,14 @@
     }
 
     .el-sub-menu {
+      display: flex;
+      flex-direction: column;
+
       &__title {
         gap: 12px;
         margin: 0 5px;
         height: 40px;
-        padding: 0 20px;
+        padding: 0 15px;
         line-height: 40px;
         margin-bottom: 5px;
         border-radius: var(--el-border-radius-small);
@@ -136,9 +148,11 @@
       width: 60px;
       .el-sub-menu {
         &__title {
-          margin: 5px;
           height: 40px;
           padding: 0 15px;
+          margin-left: 5px;
+          margin-right: 5px;
+          margin-bottom: 5px;
           border-radius: var(--el-border-radius-small);
         }
       }
@@ -149,30 +163,12 @@
 
   // 左侧一级菜单
   &__left {
-    width: 58px;
+    width: 60px;
     display: flex;
     flex-shrink: 0;
     position: relative;
     flex-direction: column;
-
-    &::after {
-      top: 0;
-      right: 0;
-      width: 1px;
-      bottom: 0;
-      content: "";
-      z-index: 1;
-      position: absolute;
-      background-color: var(--el-border-color-lighter);
-    }
-  }
-
-  &__left__header {
-    height: 50px;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    justify-content: center;
+    border-right: 1px solid var(--el-border-color-lighter);
   }
 
   &__right__header {
@@ -184,18 +180,17 @@
   }
 
   &__left__menu {
-    gap: 6px;
-    padding: 3px 0;
+    gap: 5px;
+    padding: 5px 0;
     display: flex;
     flex-direction: column;
   }
 
   &__left__item {
-    width: 40px;
     height: 40px;
     display: flex;
     cursor: pointer;
-    margin: 0 auto;
+    margin: 0 5px;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
