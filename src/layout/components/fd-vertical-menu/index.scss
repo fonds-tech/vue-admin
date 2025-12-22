@@ -68,7 +68,7 @@
     justify-content: center;
     border-bottom: 1px solid var(--el-border-color-lighter);
 
-    &__inner {
+    &-inner {
       gap: 12px;
       top: 50%;
       left: 50%;
@@ -171,7 +171,7 @@
     border-right: 1px solid var(--el-border-color-lighter);
   }
 
-  &__right__header {
+  &__right-header {
     height: 50px;
     display: flex;
     align-items: center;
@@ -179,14 +179,14 @@
     padding: 0 20px;
   }
 
-  &__left__menu {
+  &__left-menu {
     gap: 5px;
     padding: 5px 0;
     display: flex;
     flex-direction: column;
   }
 
-  &__left__item {
+  &__left-item {
     height: 40px;
     display: flex;
     cursor: pointer;
@@ -212,7 +212,7 @@
     background-color: var(--el-bg-color);
   }
 
-  &__right__title {
+  &__right-title {
     color: var(--el-text-color-primary);
     margin: 0;
     overflow: hidden;
@@ -222,7 +222,7 @@
     text-overflow: ellipsis;
   }
 
-  &__right__menu {
+  &__right-menu {
     border: none;
     display: flex;
     flex-direction: column;
@@ -235,14 +235,14 @@
     }
   }
 
-  &__right__item {
+  &__right-item {
     height: 50px;
     display: flex;
     align-items: center;
   }
 
-  &__right__item > .el-menu-item,
-  &__right__submenu > .el-sub-menu__title {
+  &__right-item > .el-menu-item,
+  &__right-submenu > .el-sub-menu__title {
     height: 50px;
     display: flex;
     transition: all 0.2s ease;
@@ -252,7 +252,7 @@
     @include menu-item-states;
   }
 
-  &__right__submenu.is-opened > .el-sub-menu__title {
+  &__right-submenu.is-opened > .el-sub-menu__title {
     color: var(--el-color-primary);
     background-color: var(--el-color-primary-light-9);
   }
