@@ -28,12 +28,7 @@ export interface ThemeToggleOptions {
  * 检测浏览器是否支持 View Transitions API
  */
 function supportsViewTransitions(): boolean {
-  return (
-    typeof document !== "undefined" &&
-    "startViewTransition" in document &&
-    // 检查是否偏好减少动画
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  )
+  return typeof document !== "undefined" && "startViewTransition" in document && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
 }
 
 /**

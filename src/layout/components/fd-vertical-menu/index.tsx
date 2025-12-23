@@ -44,8 +44,8 @@ export default defineComponent({
 
     /** 当前激活的菜单路径 */
     const activeMenuPath = computed<string>(() => {
-      if (route.meta.activeMenu) {
-        return route.meta.activeMenu as string
+      if (typeof route.meta.activeMenu === "string" && route.meta.activeMenu.length > 0) {
+        return route.meta.activeMenu
       }
       return route.path
     })
