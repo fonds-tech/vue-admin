@@ -1,6 +1,15 @@
-<!-- FdIcon 图标组件 -->
 <template>
-  <icon v-if="icon" :icon="icon" class="fd-icon" :class="[$attrs.class]" :style="iconStyle" :horizontal-flip="hFlip" :vertical-flip="vFlip" :rotate="rotate" />
+  <icon
+    v-if="icon"
+    v-bind="filteredAttrs"
+    :icon="icon"
+    class="fd-icon"
+    :class="[$attrs.class]"
+    :style="iconStyle"
+    :horizontal-flip="hFlip"
+    :vertical-flip="vFlip"
+    :rotate="rotate"
+  />
 </template>
 
 <script setup lang="ts">
@@ -13,6 +22,12 @@ defineOptions({ name: "fd-icon", inheritAttrs: false })
 const props = withDefaults(defineProps<IconProps>(), { size: "" })
 
 const attrs = useAttrs()
+
+/** 过滤掉 class 和 style（它们已单独处理），保留事件等其他属性 */
+const filteredAttrs = computed(() => {
+  const { class: _class, style: _style, ...rest } = attrs
+  return rest
+})
 
 /** 合并样式 */
 const iconStyle = computed<CSSProperties>(() => {
