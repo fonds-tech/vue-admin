@@ -1,7 +1,3 @@
-// ==================== Mixin 定义 ====================
-
-// ==================== 变量定义 ====================
-
 $menu-item-height: 40px;
 $menu-item-height-lg: 50px;
 $menu-item-gap: 12px;
@@ -152,9 +148,6 @@ $menu-item-radius: var(--el-border-radius-small);
     }
   }
 
-  // ==================== 双列模式 ====================
-
-  // 左侧一级菜单
   &__left {
     width: 60px;
     display: flex;
@@ -230,8 +223,6 @@ $menu-item-radius: var(--el-border-radius-small);
   }
 }
 
-// ==================== 弹出菜单 ====================
-
 .fd-vertical-menu__popper {
   .el-menu {
     border-radius: var(--el-border-radius-small);
@@ -244,10 +235,6 @@ $menu-item-radius: var(--el-border-radius-small);
         &:hover {
           color: var(--el-color-primary);
           background-color: var(--el-fill-color-dark);
-        }
-
-        .fd-vertical-menu__icon {
-          font-size: 20px;
         }
 
         .fd-vertical-menu__title {
@@ -269,10 +256,12 @@ $menu-item-radius: var(--el-border-radius-small);
         @include menu-title-ellipsis;
       }
     }
+
+    .fd-vertical-menu__item {
+      padding-bottom: 0;
+    }
   }
 }
-
-// ==================== 移动端抽屉菜单样式 ====================
 
 .fd-vertical-menu__drawer {
   // 移除抽屉内边距

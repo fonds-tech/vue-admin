@@ -21,7 +21,7 @@ export default defineComponent({
     const settingsStore = useSettingsStore()
     const mitt = useMitt("layout")
 
-    /** mobile drawer visibility */
+    /** 移动端抽屉菜单可见状态 */
     const mobileMenuOpen = ref<boolean>(false)
 
     /** 是否为移动端设备 */
@@ -168,8 +168,8 @@ export default defineComponent({
     /** 渲染叶子菜单项（无子菜单） */
     function renderLeafMenuItem(menu: Menu, fullPath: string) {
       return (
-        <div class="fd-vertical-menu__item">
-          <ElMenuItem key={menu.path} index={fullPath}>
+        <div class="fd-vertical-menu__item" key={fullPath}>
+          <ElMenuItem index={fullPath}>
             {renderIcon(menu.icon)}
             {renderMenuTitle(menu.title)}
           </ElMenuItem>
@@ -180,7 +180,7 @@ export default defineComponent({
     /** 渲染子菜单（有子菜单项） */
     function renderSubMenu(menu: Menu, fullPath: string) {
       return (
-        <ElSubMenu key={menu.path} index={fullPath}>
+        <ElSubMenu key={fullPath} index={fullPath}>
           {{
             title: () => (
               <>
@@ -212,9 +212,14 @@ export default defineComponent({
       const isActive = isFirstLevelActive(menu)
 
       const itemContent = (
-        <div class={["fd-vertical-menu__left-item", { "is-active": isActive }]} onClick={() => handleFirstLevelClick(menu)}>
+        <button
+          type="button"
+          class={["fd-vertical-menu__left-item", { "is-active": isActive }]}
+          aria-label={menu.title}
+          onClick={() => handleFirstLevelClick(menu)}
+        >
           {renderIcon(menu.icon)}
-        </div>
+        </button>
       )
 
       return (
@@ -246,7 +251,7 @@ export default defineComponent({
       )
     }
 
-    /** 渲染单列模式菜单（含滚动容器） */
+    /** 渲染单列模式菜单 */
     function renderSingleMenu() {
       return (
         <div class="fd-vertical-menu__list">
@@ -283,7 +288,7 @@ export default defineComponent({
           <div class="fd-vertical-menu__list">
             <ElMenu
               showTimeout={50}
-              hideTimeout={50000}
+              hideTimeout={50}
               defaultActive={activeMenuPath.value}
               collapse={isCollapsed.value}
               uniqueOpened={isAccordionMode.value}
@@ -353,8 +358,8 @@ export default defineComponent({
       // 没有子菜单，渲染为叶子菜单项
       if (!menu.children || menu.children.length === 0) {
         return (
-          <div class="fd-vertical-menu__item">
-            <ElMenuItem key={menu.path} index={fullPath}>
+          <div class="fd-vertical-menu__item" key={fullPath}>
+            <ElMenuItem index={fullPath}>
               {renderIcon(menu.icon)}
               {renderMenuTitle(menu.title)}
             </ElMenuItem>
@@ -364,7 +369,7 @@ export default defineComponent({
 
       // 有子菜单，渲染为可展开的子菜单
       return (
-        <ElSubMenu key={menu.path} index={fullPath} class="fd-vertical-menu__right-submenu">
+        <ElSubMenu key={fullPath} index={fullPath} class="fd-vertical-menu__right-submenu">
           {{
             title: () => (
               <>
@@ -384,7 +389,6 @@ export default defineComponent({
       return (
         <ElScrollbar>
           <div class="fd-vertical-menu__list">
-
             <ElMenu
               class="fd-vertical-menu__right-menu"
               defaultActive={activeMenuPath.value}
