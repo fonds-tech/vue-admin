@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from "vue-router"
+import type { MenuRoute } from "@/stores"
 import { isUrl } from "@fonds/utils"
 
 // 视图加载器：使用 glob 动态导入所有页面组件
@@ -37,10 +38,14 @@ export function loadIframe() {
  * 解析路由组件
  * @returns 找到则返回新的路由对象，找不到返回 null
  */
-export function resolveRoute(route: RouteRecordRaw): RouteRecordRaw | null {
+export function resolveRoute(route: RouteRecordRaw | MenuRoute): RouteRecordRaw | null {
   const componentPath = (route.meta?.component as string) || ""
 
-  if (route.component) {
+  if ("component" in route && route.component) {
+    return { ...route }
+  }
+
+  if ("components" in route && route.components) {
     return { ...route }
   }
 

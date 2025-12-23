@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from "vue-router"
+import type { RouteMeta } from "vue-router"
 
 /** 菜单状态 */
 export interface MenuState {
@@ -7,7 +7,7 @@ export interface MenuState {
   /** 过滤后的菜单树（侧边栏渲染用） */
   menus: Menu[]
   /** 路由格式菜单（动态路由注册用） */
-  routes: RouteRecordRaw[]
+  routes: MenuRoute[]
   /** 权限标识集合（按钮权限判断用） */
   permissions: string[]
   /** 是否已初始化 */
@@ -56,22 +56,7 @@ export interface Menu {
 }
 
 /** 路由元信息 */
-export interface MenuMeta {
-  /** 是否公开路由（白名单） */
-  public?: boolean
-  /** 菜单图标 */
-  icon?: string
-  /** 菜单标题 */
-  title?: string
-  /** 是否隐藏菜单 */
-  hidden?: boolean
-  /** 是否缓存页面（用于 keep-alive） */
-  cache?: boolean
-  /** 内嵌 iframe */
-  iframe?: boolean
-  /** 组件路径 */
-  component?: string
-}
+export type MenuMeta = RouteMeta
 
 /** 符合 Vue Router 的菜单路由结构 */
 export interface MenuRoute {

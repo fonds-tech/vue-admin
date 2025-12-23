@@ -1,12 +1,11 @@
-import type { Menu } from "@/stores"
-import type { RouteRecordRaw } from "vue-router"
+import type { Menu, MenuRoute } from "@/stores"
 
 /**
- * 将 Menu 转换为 RouteRecordRaw 格式
+ * 将 Menu 转换为菜单路由格式
  * @param menu 菜单数据
- * @returns 路由格式菜单
+ * @returns 菜单路由
  */
-export function menuToRoute(menu: Menu): RouteRecordRaw {
+export function menuToRoute(menu: Menu): MenuRoute {
   const meta = {
     title: menu.meta?.title ?? menu.title,
     icon: menu.meta?.icon ?? menu.icon,
@@ -15,9 +14,10 @@ export function menuToRoute(menu: Menu): RouteRecordRaw {
     public: menu.meta?.public,
     iframe: menu.meta?.iframe,
     component: menu.meta?.component ?? menu.component,
+    dynamic: true,
   }
 
-  const route: RouteRecordRaw = {
+  const route: MenuRoute = {
     path: menu.path,
     name: menu.name,
     meta,

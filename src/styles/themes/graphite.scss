@@ -1,48 +1,48 @@
 /* 主题：Graphite（偏中性石墨） */
 :root[data-ui-theme="graphite"] {
   /* 品牌色 */
+  --el-color-info: #6b7280;
+  --el-color-danger: #dc2626;
   --el-color-primary: #64748b;
+
+  --el-color-success: #16a34a;
+  --el-color-warning: #d97706;
   --el-color-primary-light-3: #94a3b8;
   --el-color-primary-light-5: #cbd5e1;
   --el-color-primary-light-7: #e2e8f0;
   --el-color-primary-light-8: #e5e7eb;
   --el-color-primary-light-9: #f1f5f9;
 
-  --el-color-success: #16a34a;
-  --el-color-warning: #d97706;
-  --el-color-danger: #dc2626;
-  --el-color-info: #6b7280;
-
   /* 文字系统 */
   --el-text-color-primary: #111827;
   --el-text-color-regular: #374151;
+  --el-text-color-disabled: #cbd5e1;
   --el-text-color-secondary: #6b7280;
   --el-text-color-placeholder: #9ca3af;
-  --el-text-color-disabled: #cbd5e1;
 
   /* 背景与填充 */
   --el-bg-color: #f8fafc;
-  --el-bg-color-page: #f1f5f9;
-  --el-bg-color-overlay: var(--el-bg-color);
   --el-fill-color: #e5e7eb;
+  --el-bg-color-page: #f1f5f9;
+  --el-fill-color-dark: #d1d5db;
+  --el-bg-color-overlay: var(--el-bg-color);
+  --el-fill-color-blank: #ffffff;
   --el-fill-color-light: #f3f4f6;
   --el-fill-color-lighter: #f1f5f9;
   --el-fill-color-extra-light: #e5e7eb;
-  --el-fill-color-dark: #d1d5db;
-  --el-fill-color-blank: #ffffff;
 
   /* 边框系统 */
   --el-border-color: #d1d5db;
+  --el-border-color-dark: #9ca3af;
+  --el-border-color-hover: #94a3b8;
   --el-border-color-light: #e5e7eb;
   --el-border-color-lighter: #f1f5f9;
   --el-border-color-extra-light: #f8fafc;
-  --el-border-color-dark: #9ca3af;
-  --el-border-color-hover: #94a3b8;
 
   /* 圆角系统 */
   --el-border-radius-base: 8px;
-  --el-border-radius-small: 4px;
   --el-border-radius-round: 999px;
+  --el-border-radius-small: 4px;
 
   /* 阴影系统 */
   --el-box-shadow: 0 12px 24px rgb(17 24 39 / 12%);

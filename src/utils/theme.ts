@@ -29,10 +29,10 @@ export interface ThemeToggleOptions {
  */
 function supportsViewTransitions(): boolean {
   return (
-    typeof document !== "undefined" &&
-    "startViewTransition" in document &&
+    typeof document !== "undefined"
+    && "startViewTransition" in document
     // 检查是否偏好减少动画
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   )
 }
 

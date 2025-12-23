@@ -1,48 +1,48 @@
 /* 主题：Aurora（偏清亮蓝调） */
 :root[data-ui-theme="aurora"] {
   /* 品牌色 */
+  --el-color-info: #64748b;
+  --el-color-danger: #ef4444;
   --el-color-primary: #3b82f6;
+
+  --el-color-success: #22c55e;
+  --el-color-warning: #f59e0b;
   --el-color-primary-light-3: #93c5fd;
   --el-color-primary-light-5: #bfdbfe;
   --el-color-primary-light-7: #dbeafe;
   --el-color-primary-light-8: #e0e7ff;
   --el-color-primary-light-9: #eff6ff;
 
-  --el-color-success: #22c55e;
-  --el-color-warning: #f59e0b;
-  --el-color-danger: #ef4444;
-  --el-color-info: #64748b;
-
   /* 文字系统 */
   --el-text-color-primary: #0f172a;
   --el-text-color-regular: #334155;
+  --el-text-color-disabled: #cbd5e1;
   --el-text-color-secondary: #64748b;
   --el-text-color-placeholder: #94a3b8;
-  --el-text-color-disabled: #cbd5e1;
 
   /* 背景与填充 */
   --el-bg-color: #ffffff;
-  --el-bg-color-page: #f8fafc;
-  --el-bg-color-overlay: var(--el-bg-color);
   --el-fill-color: #f1f5f9;
+  --el-bg-color-page: #f8fafc;
+  --el-fill-color-dark: #e2e8f0;
+  --el-bg-color-overlay: var(--el-bg-color);
+  --el-fill-color-blank: #ffffff;
   --el-fill-color-light: #f8fafc;
   --el-fill-color-lighter: #f1f5f9;
   --el-fill-color-extra-light: #e2e8f0;
-  --el-fill-color-dark: #e2e8f0;
-  --el-fill-color-blank: #ffffff;
 
   /* 边框系统 */
   --el-border-color: #e2e8f0;
+  --el-border-color-dark: #cbd5e1;
+  --el-border-color-hover: #94a3b8;
   --el-border-color-light: #e2e8f0;
   --el-border-color-lighter: #f1f5f9;
   --el-border-color-extra-light: #f8fafc;
-  --el-border-color-dark: #cbd5e1;
-  --el-border-color-hover: #94a3b8;
 
   /* 圆角系统 */
   --el-border-radius-base: 8px;
-  --el-border-radius-small: 4px;
   --el-border-radius-round: 999px;
+  --el-border-radius-small: 4px;
 
   /* 阴影系统 */
   --el-box-shadow: 0 12px 24px rgb(15 23 42 / 12%);

@@ -16,6 +16,16 @@ declare module "vue-router" {
     affix?: boolean
     /** 是否缓存页面（keep-alive） */
     keepAlive?: boolean
+    /** 是否缓存页面（与 keepAlive 等价） */
+    cache?: boolean
+    /** 是否公开路由（白名单） */
+    public?: boolean
+    /** 内嵌 iframe */
+    iframe?: boolean
+    /** 组件路径 */
+    component?: string
+    /** 是否忽略路由守卫 */
+    ignore?: boolean
     /** 所需权限列表 */
     permissions?: string[]
     /** 所需角色列表 */

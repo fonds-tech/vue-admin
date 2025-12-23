@@ -1,10 +1,10 @@
-$menu-item-height: 40px;
-$menu-item-height-lg: 50px;
 $menu-item-gap: 12px;
+$menu-item-height: 40px;
+$menu-item-radius: var(--el-border-radius-small);
 $menu-item-margin-x: 5px;
+$menu-item-height-lg: 50px;
 $menu-item-padding-x: 15px;
 $menu-item-padding-x-wide: 20px;
-$menu-item-radius: var(--el-border-radius-small);
 
 // 菜单容器 flex 布局
 @mixin menu-flex-column($gap: null) {
@@ -23,8 +23,8 @@ $menu-item-radius: var(--el-border-radius-small);
   margin-left: $margin-x;
   margin-right: $margin-x;
   padding-left: $padding-x;
-  padding-right: $padding-x;
   border-radius: $radius;
+  padding-right: $padding-x;
 }
 
 // 菜单标题省略样式
@@ -49,15 +49,14 @@ $menu-item-radius: var(--el-border-radius-small);
 }
 
 .fd-vertical-menu {
-  --el-menu-base-level-padding: 15px;
-
   height: 100vh;
   display: flex;
   position: relative;
   overflow-x: hidden;
+  border-right: 1px solid var(--el-border-color-lighter);
   flex-direction: column;
   background-color: var(--el-fill-color-blank);
-  border-right: 1px solid var(--el-border-color-lighter);
+  --el-menu-base-level-padding: 15px;
 
   &--dual {
     flex-direction: row;
@@ -69,9 +68,9 @@ $menu-item-radius: var(--el-border-radius-small);
     height: 50px;
     display: flex;
     z-index: 10;
-    flex-shrink: 0;
     position: relative;
     align-items: center;
+    flex-shrink: 0;
     justify-content: center;
 
     &-inner {
@@ -151,18 +150,18 @@ $menu-item-radius: var(--el-border-radius-small);
   &__left {
     width: 60px;
     display: flex;
-    flex-shrink: 0;
     position: relative;
-    flex-direction: column;
+    flex-shrink: 0;
     border-right: 1px solid var(--el-border-color-lighter);
+    flex-direction: column;
   }
 
   &__right-header {
     height: 50px;
     display: flex;
+    padding: 0 20px;
     align-items: center;
     flex-shrink: 0;
-    padding: 0 20px;
   }
 
   &__left-menu {
@@ -171,14 +170,14 @@ $menu-item-radius: var(--el-border-radius-small);
   }
 
   &__left-item {
-    height: $menu-item-height;
-    display: flex;
     cursor: pointer;
+    height: $menu-item-height;
     margin: 0 $menu-item-margin-x;
-    align-items: center;
-    justify-content: center;
+    display: flex;
     transition: all 0.2s ease;
+    align-items: center;
     border-radius: $menu-item-radius;
+    justify-content: center;
     .iconify,
     svg {
       font-size: 20px;
@@ -202,8 +201,8 @@ $menu-item-radius: var(--el-border-radius-small);
 
     .el-menu-item,
     .el-sub-menu__title {
-      margin-bottom: 0;
       line-height: $menu-item-height-lg;
+      margin-bottom: 0;
     }
   }
 
