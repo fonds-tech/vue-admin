@@ -6,5 +6,11 @@ import vueJsx from "@vitejs/plugin-vue-jsx"
  * 包含 Vue SFC 和 JSX/TSX 支持
  */
 export function createVuePlugin() {
-  return [vue(), vueJsx()]
+  return [
+    vue(),
+    vueJsx({
+      // 启用 HMR 支持 - 对 defineComponent 包裹的组件启用热更新
+      include: /\.[jt]sx$/,
+    }),
+  ]
 }
