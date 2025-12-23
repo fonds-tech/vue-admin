@@ -25,13 +25,7 @@
           @contextmenu="(e: MouseEvent) => onContextMenu(e, item, index)"
         >
           <span class="process-item__title">{{ item.title }}</span>
-          <fd-icon
-            v-if="!item.affix"
-            icon="ri:close-line"
-            :size="14"
-            class="process-item__close"
-            @click.stop="onClickClose(index)"
-          />
+          <fd-icon v-if="!item.affix" icon="ri:close-line" :size="14" class="process-item__close" @click.stop="onClickClose(index)" />
         </div>
       </div>
     </div>

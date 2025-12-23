@@ -1,14 +1,5 @@
 <template>
-  <el-dialog
-    v-model="visible"
-    :show-close="false"
-    :close-on-click-modal="true"
-    :close-on-press-escape="true"
-    width="50vw"
-    class="fd-search"
-    @close="close"
-    @keydown.stop
-  >
+  <el-dialog v-model="visible" :show-close="false" :close-on-click-modal="true" :close-on-press-escape="true" width="50vw" class="fd-search" @close="close" @keydown.stop>
     <div class="flex flex-col">
       <!-- 搜索输入框 -->
       <div class="fd-search__input-wrapper">
@@ -139,7 +130,7 @@ const filteredResults = computed<SearchResult[]>(() => {
   const query = searchQuery.value.toLowerCase().trim()
 
   const results = flatMenuList.value
-    .filter(menu => menu.type === 1 && menu.status === 1) // 只返回页面类型
+    .filter((menu) => menu.type === 1 && menu.status === 1) // 只返回页面类型
     .filter((menu) => {
       const title = menu.title?.toLowerCase() || ""
       const name = menu.name?.toLowerCase() || ""
@@ -164,8 +155,7 @@ const filteredResults = computed<SearchResult[]>(() => {
   // 重置激活索引当搜索结果变化
   if (results.length > 0) {
     activeIndex.value = 0
-  }
-  else {
+  } else {
     activeIndex.value = -1
   }
 
@@ -200,14 +190,14 @@ onBeforeMount(() => {
 function getMenuChain(menu: Menu): string[] {
   const chain: string[] = [menu.title]
   let current = menu
-  let parent = flatMenuList.value.find(m => m.id === current.parentId)
+  let parent = flatMenuList.value.find((m) => m.id === current.parentId)
 
   // 向上查找父级（最多3级）
   let depth = 0
   while (parent && parent.parentId > 0 && depth < 3) {
     chain.unshift(parent.title)
     current = parent
-    parent = flatMenuList.value.find(m => m.id === current.parentId)
+    parent = flatMenuList.value.find((m) => m.id === current.parentId)
     depth++
   }
 
@@ -224,8 +214,7 @@ function navigateList(direction: number) {
   // 循环导航
   if (newIndex < 0) {
     newIndex = filteredResults.value.length - 1
-  }
-  else if (newIndex >= filteredResults.value.length) {
+  } else if (newIndex >= filteredResults.value.length) {
     newIndex = 0
   }
 

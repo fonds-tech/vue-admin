@@ -77,18 +77,15 @@ export function useForm<T extends object>(options: FormOptions<T>) {
       if (isEdit.value && formData.id && updateApi) {
         await updateApi(formData.id, data)
         ElMessage.success("更新成功")
-      }
-      else if (createApi) {
+      } else if (createApi) {
         await createApi(data)
         ElMessage.success("新增成功")
       }
       close()
       onSuccess?.()
-    }
-    catch (error) {
+    } catch (error) {
       console.error("提交失败:", error)
-    }
-    finally {
+    } finally {
       loading.value = false
     }
   }

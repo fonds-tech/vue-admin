@@ -41,5 +41,5 @@ export function menuToRoute(menu: Menu): RouteRecordRaw {
  * @returns 权限标识数组
  */
 export function extractPermissions(list: Menu[]): string[] {
-  return list.filter(menu => menu.permission).map(menu => menu.permission!)
+  return list.filter((menu) => menu.permission).map((menu) => menu.permission!)
 }

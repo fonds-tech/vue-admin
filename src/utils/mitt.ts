@@ -30,13 +30,11 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
    * @param list 事件列表
    */
   init(list?: Partial<Record<EventName<Events>, Handler<EventArgs<Events, EventName<Events>>>>>): void {
-    if (!list)
-      return
+    if (!list) return
 
     for (const key in list) {
       const handler = list[key as EventName<Events>]
-      if (handler)
-        this.on(key as EventName<Events>, handler as Handler)
+      if (handler) this.on(key as EventName<Events>, handler as Handler)
     }
   }
 
@@ -47,16 +45,11 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
    */
   on(name: "*", handler: Handler<[string, ...any[]]>): void
   on<K extends EventName<Events>>(name: K, handler: Handler<EventArgs<Events, K>>): void
-  on(
-    name: EventNameWithStar<Events>,
-    handler: Handler<[string, ...any[]]> | Handler<EventArgs<Events, EventName<Events>>>,
-  ): void {
+  on(name: EventNameWithStar<Events>, handler: Handler<[string, ...any[]]> | Handler<EventArgs<Events, EventName<Events>>>): void {
     const key = this.name(name)
     const handlers = events.get(key)
-    if (handlers)
-      handlers.push(handler as AnyHandler)
-    else
-      events.set(key, [handler as AnyHandler])
+    if (handlers) handlers.push(handler as AnyHandler)
+    else events.set(key, [handler as AnyHandler])
   }
 
   /**
@@ -66,21 +59,16 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
    */
   once(name: "*", handler: Handler<[string, ...any[]]>): void
   once<K extends EventName<Events>>(name: K, handler: Handler<EventArgs<Events, K>>): void
-  once(
-    name: EventNameWithStar<Events>,
-    handler: Handler<[string, ...any[]]> | Handler<EventArgs<Events, EventName<Events>>>,
-  ): void {
+  once(name: EventNameWithStar<Events>, handler: Handler<[string, ...any[]]> | Handler<EventArgs<Events, EventName<Events>>>): void {
     const key = this.name(name)
     const wrappedHandler: AnyHandler = (...args: unknown[]) => {
-      handler(...args as [string, ...unknown[]])
+      handler(...(args as [string, ...unknown[]]))
       const handlers = events.get(key)
       handlers?.splice(handlers.indexOf(wrappedHandler) >>> 0, 1)
     }
     const handlers = events.get(key)
-    if (handlers)
-      handlers.push(wrappedHandler)
-    else
-      events.set(key, [wrappedHandler])
+    if (handlers) handlers.push(wrappedHandler)
+    else events.set(key, [wrappedHandler])
   }
 
   /**
@@ -91,13 +79,11 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
   off<K extends EventName<Events>>(name: K, handler?: Handler<EventArgs<Events, K>>): void {
     const key = this.name(name)
     const handlers = events.get(key)
-    if (!handlers)
-      return
+    if (!handlers) return
 
     if (handler) {
       handlers.splice(handlers.indexOf(handler as AnyHandler) >>> 0, 1)
-    }
-    else {
+    } else {
       events.set(key, [])
     }
   }
@@ -111,12 +97,12 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
     const key = this.name(name)
     const handlers = events.get(key)
     handlers?.slice().forEach((handler) => {
-      handler(...args as unknown[])
+      handler(...(args as unknown[]))
     })
 
     const anyHandlers = events.get("*")
     anyHandlers?.slice().forEach((handler) => {
-      handler(key, ...args as unknown[])
+      handler(key, ...(args as unknown[]))
     })
   }
 
@@ -126,8 +112,7 @@ export class Mitt<Events extends EventMap = Record<string, unknown[]>> {
   clear(): void {
     const prefix = `${this.namespace}:`
     for (const key of events.keys()) {
-      if (key.startsWith(prefix))
-        events.delete(key)
+      if (key.startsWith(prefix)) events.delete(key)
     }
   }
 }

@@ -13,9 +13,6 @@ export interface GuardCtx {
   added: Set<string>
 }
 
-export type GuardResult
-  = | { type: "next" }
-    | { type: "redirect", to: RouteLocationRaw }
-    | { type: "abort" }
+export type GuardResult = { type: "next" } | { type: "redirect"; to: RouteLocationRaw } | { type: "abort" }
 
 export type GuardStep = (ctx: GuardCtx) => Promise<GuardResult | void> | GuardResult | void

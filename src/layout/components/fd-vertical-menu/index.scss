@@ -1,5 +1,34 @@
 // ==================== Mixin 定义 ====================
 
+// ==================== 变量定义 ====================
+
+$menu-item-height: 40px;
+$menu-item-height-lg: 50px;
+$menu-item-gap: 12px;
+$menu-item-margin-x: 5px;
+$menu-item-padding-x: 15px;
+$menu-item-padding-x-wide: 20px;
+$menu-item-radius: var(--el-border-radius-small);
+
+// 菜单容器 flex 布局
+@mixin menu-flex-column($gap: null) {
+  display: flex;
+  flex-direction: column;
+  @if $gap != null {
+    gap: $gap;
+  }
+}
+
+// 菜单项基础结构
+@mixin menu-item-frame($height, $padding-x, $margin-x: $menu-item-margin-x, $radius: $menu-item-radius, $gap: $menu-item-gap) {
+  gap: $gap;
+  height: $height;
+  line-height: $height;
+  margin: 0 $margin-x;
+  padding: 0 $padding-x;
+  border-radius: $radius;
+}
+
 // 菜单标题省略样式
 @mixin menu-title-ellipsis {
   flex: 1;
@@ -9,11 +38,7 @@
 }
 
 // 菜单项 hover/active 交互状态
-@mixin menu-item-states(
-  $hover-bg: var(--el-color-primary-light-9),
-  $active-color: var(--el-color-primary),
-  $active-bg: var(--el-color-primary-light-9)
-) {
+@mixin menu-item-states($hover-bg: var(--el-color-primary-light-9), $active-color: var(--el-color-primary), $active-bg: var(--el-color-primary-light-9)) {
   &:hover {
     color: var(--el-color-primary);
     background-color: var(--el-fill-color-dark);
@@ -65,11 +90,10 @@
 
   &__list {
     flex: 1;
-    display: flex;
     padding: 5px 0;
     overflow-y: auto;
-    flex-direction: column;
     scrollbar-width: none;
+    @include menu-flex-column;
   }
 
   &__item {
@@ -77,21 +101,15 @@
   }
 
   .el-menu {
-    display: flex;
     border-right: none;
-    flex-direction: column;
+    @include menu-flex-column;
 
     &:not(.el-menu--collapse) {
       width: 250px;
     }
 
     .el-menu-item {
-      gap: 12px;
-      margin: 0 5px;
-      height: 40px;
-      padding: 0 20px;
-      line-height: 40px;
-      border-radius: var(--el-border-radius-small);
+      @include menu-item-frame($menu-item-height, $menu-item-padding-x-wide);
 
       @include menu-item-states;
 
@@ -101,17 +119,11 @@
     }
 
     .el-sub-menu {
-      display: flex;
-      flex-direction: column;
+      @include menu-flex-column;
 
       &__title {
-        gap: 12px;
-        margin: 0 5px;
-        height: 40px;
-        padding: 0 15px;
-        line-height: 40px;
         margin-bottom: 5px;
-        border-radius: var(--el-border-radius-small);
+        @include menu-item-frame($menu-item-height, $menu-item-padding-x);
 
         &:hover {
           color: var(--el-color-primary);
@@ -132,12 +144,8 @@
       width: 60px;
       .el-sub-menu {
         &__title {
-          height: 40px;
-          padding: 0 15px;
-          margin-left: 5px;
-          margin-right: 5px;
           margin-bottom: 5px;
-          border-radius: var(--el-border-radius-small);
+          @include menu-item-frame($menu-item-height, $menu-item-padding-x);
         }
       }
     }
@@ -164,21 +172,19 @@
   }
 
   &__left-menu {
-    gap: 5px;
     padding: 5px 0;
-    display: flex;
-    flex-direction: column;
+    @include menu-flex-column(5px);
   }
 
   &__left-item {
-    height: 40px;
+    height: $menu-item-height;
     display: flex;
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0 $menu-item-margin-x;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    border-radius: var(--el-border-radius-small);
+    border-radius: $menu-item-radius;
     .iconify,
     svg {
       font-size: 20px;
@@ -198,15 +204,23 @@
 
   &__right-menu {
     border: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+    @include menu-flex-column(6px);
 
     .el-menu-item,
     .el-sub-menu__title {
       margin-bottom: 0;
-      line-height: 40px;
+      line-height: $menu-item-height-lg;
     }
+  }
+
+  &__right-submenu > .el-sub-menu__title {
+    height: $menu-item-height-lg;
+    display: flex;
+    transition: all 0.2s ease;
+    align-items: center;
+    border-radius: 6px;
+
+    @include menu-item-states;
   }
 
   &__right-submenu.is-opened > .el-sub-menu__title {
@@ -219,19 +233,12 @@
 
 .fd-vertical-menu__popper {
   .el-menu {
-    gap: 5px;
-    display: flex;
-    flex-direction: column;
     border-radius: var(--el-border-radius-small);
+    @include menu-flex-column(5px);
 
     .el-sub-menu {
       &__title {
-        gap: 12px;
-        height: 40px;
-        margin: 0 5px;
-        padding: 0 15px;
-        line-height: 40px;
-        border-radius: var(--el-border-radius-small);
+        @include menu-item-frame($menu-item-height, $menu-item-padding-x);
 
         &:hover {
           color: var(--el-color-primary);
@@ -253,12 +260,7 @@
     }
 
     .el-menu-item {
-      gap: 12px;
-      height: 40px;
-      margin: 0 5px;
-      padding: 0 15px;
-      line-height: 40px;
-      border-radius: var(--el-border-radius-small);
+      @include menu-item-frame($menu-item-height, $menu-item-padding-x);
 
       @include menu-item-states;
 

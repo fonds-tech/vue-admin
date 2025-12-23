@@ -20,14 +20,7 @@
             </el-form-item>
 
             <el-form-item prop="password">
-              <el-input
-                v-model="form.password"
-                type="password"
-                :placeholder="t('login.passwordPlaceholder')"
-                prefix-icon="Lock"
-                show-password
-                @keyup.enter="handleLogin"
-              />
+              <el-input v-model="form.password" type="password" :placeholder="t('login.passwordPlaceholder')" prefix-icon="Lock" show-password @keyup.enter="handleLogin" />
             </el-form-item>
 
             <el-form-item>

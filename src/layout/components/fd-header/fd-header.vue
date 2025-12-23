@@ -32,12 +32,8 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item command="zh-CN" :class="{ 'is-active': currentLang === 'zh-CN' }">
-              简体中文
-            </el-dropdown-item>
-            <el-dropdown-item command="en-US" :class="{ 'is-active': currentLang === 'en-US' }">
-              English
-            </el-dropdown-item>
+            <el-dropdown-item command="zh-CN" :class="{ 'is-active': currentLang === 'zh-CN' }"> 简体中文 </el-dropdown-item>
+            <el-dropdown-item command="en-US" :class="{ 'is-active': currentLang === 'en-US' }"> English </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

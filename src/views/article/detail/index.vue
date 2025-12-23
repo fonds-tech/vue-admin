@@ -26,8 +26,12 @@
                 <span>阅读 12m</span>
               </div>
               <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1"><el-icon><view /></el-icon> 8,234</span>
-                <span class="flex items-center gap-1"><el-icon><star /></el-icon> 542</span>
+                <span class="flex items-center gap-1"
+                  ><el-icon><view /></el-icon> 8,234</span
+                >
+                <span class="flex items-center gap-1"
+                  ><el-icon><star /></el-icon> 542</span
+                >
               </div>
             </div>
           </header>

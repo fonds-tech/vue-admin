@@ -88,9 +88,7 @@ function getMenuChain(menuId: number, result: BreadcrumbItem[] = []): Breadcrumb
  * @param parentId 父级菜单 ID
  */
 function findFirstChildMenuPath(parentId: number): string | undefined {
-  const children = menuStore.list
-    .filter((m) => m.parentId === parentId && !m.hidden && m.status === 1)
-    .sort((a, b) => a.sort - b.sort)
+  const children = menuStore.list.filter((m) => m.parentId === parentId && !m.hidden && m.status === 1).sort((a, b) => a.sort - b.sort)
 
   for (const child of children) {
     // 页面类型（type=1），直接返回路径

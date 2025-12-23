@@ -25,7 +25,7 @@ export function listToTree<T extends Record<string, any>>(list: T[], options: Li
   const map = new Map<T[keyof T], T & { children?: T[] }>()
 
   // 复制原始数据，避免修改原数组
-  const nodes = list.map(item => ({ ...item }))
+  const nodes = list.map((item) => ({ ...item }))
 
   // 建立映射关系
   nodes.forEach((node) => {
@@ -41,8 +41,7 @@ export function listToTree<T extends Record<string, any>>(list: T[], options: Li
     if (parentId === rootValue) {
       // 根节点
       tree.push(node)
-    }
-    else {
+    } else {
       // 子节点，找到父节点并添加到 children
       const parent = map.get(parentId)
       if (parent) {

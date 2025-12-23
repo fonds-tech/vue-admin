@@ -1,14 +1,5 @@
 import type { ThemeMode, ThemeToggleOptions } from "@/utils/theme"
-import type {
-  UiTheme,
-  MenuMode,
-  MenuStyle,
-  MenuLayout,
-  ThemeStyle,
-  LanguageType,
-  SettingsState,
-  TransitionName,
-} from "./types"
+import type { UiTheme, MenuMode, MenuStyle, MenuLayout, ThemeStyle, LanguageType, SettingsState, TransitionName } from "./types"
 import { watch } from "vue"
 import { defineStore } from "pinia"
 import { useDeviceStore } from "@/stores/modules/device"

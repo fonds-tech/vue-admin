@@ -1,15 +1,6 @@
 <!-- FdIcon 图标组件 -->
 <template>
-  <icon
-    v-if="icon"
-    :icon="icon"
-    class="fd-icon"
-    :class="[$attrs.class]"
-    :style="iconStyle"
-    :horizontal-flip="hFlip"
-    :vertical-flip="vFlip"
-    :rotate="rotate"
-  />
+  <icon v-if="icon" :icon="icon" class="fd-icon" :class="[$attrs.class]" :style="iconStyle" :horizontal-flip="hFlip" :vertical-flip="vFlip" :rotate="rotate" />
 </template>
 
 <script setup lang="ts">

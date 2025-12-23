@@ -2,7 +2,7 @@ import type { GuardStep } from "../types"
 import { resolveRoute } from "./utils"
 
 export const dynamic: GuardStep = ({ menu, router, to, added }) => {
-  const target = menu.routes.find(route => route.path === to.path || route.name === to.name)
+  const target = menu.routes.find((route) => route.path === to.path || route.name === to.name)
   if (!target) return
 
   const key = target.name || target.path

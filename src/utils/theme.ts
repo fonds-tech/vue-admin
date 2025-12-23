@@ -29,10 +29,10 @@ export interface ThemeToggleOptions {
  */
 function supportsViewTransitions(): boolean {
   return (
-    typeof document !== "undefined"
-    && "startViewTransition" in document
+    typeof document !== "undefined" &&
+    "startViewTransition" in document &&
     // 检查是否偏好减少动画
-    && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   )
 }
 
@@ -95,16 +95,8 @@ export function applyTheme(theme: ThemeMode): void {
  * // 禁用动画
  * await toggleTheme('light', { enableAnimation: false })
  */
-export async function toggleTheme(
-  theme?: ThemeMode,
-  options: ThemeToggleOptions = {},
-): Promise<void> {
-  const {
-    enableAnimation = true,
-    duration = 500,
-    x = window.innerWidth / 2,
-    y = window.innerHeight / 2,
-  } = options
+export async function toggleTheme(theme?: ThemeMode, options: ThemeToggleOptions = {}): Promise<void> {
+  const { enableAnimation = true, duration = 500, x = window.innerWidth / 2, y = window.innerHeight / 2 } = options
 
   // 确定目标主题
   const currentTheme = getCurrentTheme()
@@ -203,8 +195,7 @@ export async function toggleTheme(
   // 等待动画完成后清理样式
   try {
     await transition.finished
-  }
-  finally {
+  } finally {
     // 延迟清理，确保动画完全结束
     setTimeout(() => {
       if (styleEl) {
@@ -230,8 +221,7 @@ export async function setTheme(theme: ThemeMode, options?: ThemeToggleOptions): 
  * @param theme - 目标主题，不传则使用系统偏好
  */
 export function initTheme(theme?: ThemeMode): void {
-  const targetTheme
-    = theme ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  const targetTheme = theme ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
   applyTheme(targetTheme)
 }
 

@@ -25,13 +25,13 @@ export const useUserStore = defineStore("user", {
 
   getters: {
     /** 是否已登录 */
-    isLoggedIn: state => !!state.token,
+    isLoggedIn: (state) => !!state.token,
 
     /** 检查是否有指定角色 */
-    hasRole: state => (role: string) => state.userInfo.roles.includes(role),
+    hasRole: (state) => (role: string) => state.userInfo.roles.includes(role),
 
     /** 检查是否有指定权限 */
-    hasPermission: state => (permission: string) => {
+    hasPermission: (state) => (permission: string) => {
       // 超级管理员拥有所有权限
       if (state.userInfo.permissions.includes("*")) return true
       return state.userInfo.permissions.includes(permission)

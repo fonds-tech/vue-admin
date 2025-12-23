@@ -28,8 +28,7 @@ export function useLoading(initialValue = false) {
     try {
       startLoading()
       return await fn()
-    }
-    finally {
+    } finally {
       stopLoading()
     }
   }

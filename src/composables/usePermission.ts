@@ -16,7 +16,7 @@ export function usePermission() {
     if (!roles.length) return false
 
     if (Array.isArray(role)) {
-      return role.some(r => roles.includes(r))
+      return role.some((r) => roles.includes(r))
     }
     return roles.includes(role)
   }
@@ -32,7 +32,7 @@ export function usePermission() {
     if (permissions.includes("*")) return true
 
     if (Array.isArray(permission)) {
-      return permission.some(p => permissions.includes(p))
+      return permission.some((p) => permissions.includes(p))
     }
     return permissions.includes(permission)
   }

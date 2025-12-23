@@ -13,14 +13,12 @@ export const useProcessStore = defineStore("process", {
   getters: {
     /** 获取需要缓存的组件名列表（与 keep-alive 联动） */
     cacheList: (state): string[] => {
-      return state.list
-        .filter(item => item.name)
-        .map(item => item.name)
+      return state.list.filter((item) => item.name).map((item) => item.name)
     },
 
     /** 获取当前激活的标签 */
     activeItem: (state): ProcessItem | undefined => {
-      return state.list.find(item => item.active)
+      return state.list.find((item) => item.active)
     },
   },
 
@@ -36,7 +34,7 @@ export const useProcessStore = defineStore("process", {
       })
 
       // 查找是否已存在相同路径的标签
-      const index = this.list.findIndex(e => e.path === item.path)
+      const index = this.list.findIndex((e) => e.path === item.path)
 
       if (index < 0) {
         // 不存在则添加新标签
@@ -44,8 +42,7 @@ export const useProcessStore = defineStore("process", {
           ...item,
           active: true,
         })
-      }
-      else {
+      } else {
         // 存在则更新并激活
         const existItem = this.list[index]
         if (existItem) {
@@ -71,14 +68,14 @@ export const useProcessStore = defineStore("process", {
      * @param item 要保留的标签
      */
     removeOther(item: ProcessItem) {
-      this.list = this.list.filter(e => e.path === item.path || e.affix)
+      this.list = this.list.filter((e) => e.path === item.path || e.affix)
     },
 
     /**
      * 清空所有非固定标签
      */
     clear() {
-      this.list = this.list.filter(e => e.affix)
+      this.list = this.list.filter((e) => e.affix)
     },
 
     /**
@@ -104,7 +101,7 @@ export const useProcessStore = defineStore("process", {
      * @param title 新标题
      */
     setTitle(title: string) {
-      const item = this.list.find(e => e.active)
+      const item = this.list.find((e) => e.active)
       if (item) {
         item.title = title
       }

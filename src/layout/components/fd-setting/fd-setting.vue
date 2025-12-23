@@ -1,13 +1,5 @@
 <template>
-  <el-drawer
-    v-model="visible"
-    title="系统设置"
-    direction="rtl"
-    size="320px"
-    :show-close="true"
-    :close-on-click-modal="true"
-    class="fd-setting"
-  >
+  <el-drawer v-model="visible" title="系统设置" direction="rtl" size="320px" :show-close="true" :close-on-click-modal="true" class="fd-setting">
     <div class="fd-setting__content">
       <!-- 主题风格 -->
       <div class="fd-setting__section">
@@ -32,19 +24,11 @@
       <div class="fd-setting__section">
         <div class="fd-setting__title">菜单布局</div>
         <div class="fd-setting__options">
-          <div
-            class="fd-setting__card"
-            :class="{ 'is-active': menuLayout === 'vertical' }"
-            @click="menuLayout = 'vertical'"
-          >
+          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'vertical' }" @click="menuLayout = 'vertical'">
             <div class="fd-setting__preview" v-html="layoutVerticalSvg"></div>
             <span>垂直</span>
           </div>
-          <div
-            class="fd-setting__card"
-            :class="{ 'is-active': menuLayout === 'horizontal' }"
-            @click="menuLayout = 'horizontal'"
-          >
+          <div class="fd-setting__card" :class="{ 'is-active': menuLayout === 'horizontal' }" @click="menuLayout = 'horizontal'">
             <div class="fd-setting__preview" v-html="layoutHorizontalSvg"></div>
             <span>水平</span>
           </div>
@@ -63,18 +47,10 @@
       <div class="fd-setting__section">
         <div class="fd-setting__title">菜单风格</div>
         <div class="fd-setting__options">
-          <div
-            class="fd-setting__card"
-            :class="{ 'is-active': menuStyle === 'light', 'is-disabled': isMenuStyleDisabled }"
-            @click="!isMenuStyleDisabled && (menuStyle = 'light')"
-          >
+          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'light', 'is-disabled': isMenuStyleDisabled }" @click="!isMenuStyleDisabled && (menuStyle = 'light')">
             <div class="fd-setting__preview" v-html="menuLightSvg"></div>
           </div>
-          <div
-            class="fd-setting__card"
-            :class="{ 'is-active': menuStyle === 'dark', 'is-disabled': isMenuStyleDisabled }"
-            @click="!isMenuStyleDisabled && (menuStyle = 'dark')"
-          >
+          <div class="fd-setting__card" :class="{ 'is-active': menuStyle === 'dark', 'is-disabled': isMenuStyleDisabled }" @click="!isMenuStyleDisabled && (menuStyle = 'dark')">
             <div class="fd-setting__preview" v-html="menuDarkSvg"></div>
           </div>
           <div
@@ -105,13 +81,7 @@
       <div class="fd-setting__section">
         <div class="fd-setting__title">系统主题色</div>
         <div class="fd-setting__colors">
-          <div
-            v-for="color in themeColors"
-            :key="color"
-            class="fd-setting__color-option"
-            :style="{ backgroundColor: color }"
-            @click="setPrimaryColor(color)"
-          >
+          <div v-for="color in themeColors" :key="color" class="fd-setting__color-option" :style="{ backgroundColor: color }" @click="setPrimaryColor(color)">
             <el-icon v-if="primaryColor === color" :size="14"><check /></el-icon>
           </div>
         </div>

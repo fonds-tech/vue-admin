@@ -55,13 +55,11 @@ export function useTable<T = unknown, Q extends object = object>(options: TableO
       const result = await fetchApi(params)
       tableData.value = result.list
       pagination.total = result.total
-    }
-    catch (error) {
+    } catch (error) {
       console.error("获取表格数据失败:", error)
       tableData.value = []
       pagination.total = 0
-    }
-    finally {
+    } finally {
       loading.value = false
     }
   }
