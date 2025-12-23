@@ -24,8 +24,10 @@ $menu-item-radius: var(--el-border-radius-small);
   gap: $gap;
   height: $height;
   line-height: $height;
-  margin: 0 $margin-x;
-  padding: 0 $padding-x;
+  margin-left: $margin-x;
+  margin-right: $margin-x;
+  padding-left: $padding-x;
+  padding-right: $padding-x;
   border-radius: $radius;
 }
 
