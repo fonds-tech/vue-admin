@@ -152,13 +152,6 @@ const filteredResults = computed<SearchResult[]>(() => {
       }
     })
 
-  // 重置激活索引当搜索结果变化
-  if (results.length > 0) {
-    activeIndex.value = 0
-  } else {
-    activeIndex.value = -1
-  }
-
   return results
 })
 
@@ -170,6 +163,10 @@ watch(searchQuery, (newVal) => {
   if (!newVal) {
     activeIndex.value = -1
   }
+})
+
+watch(filteredResults, (results) => {
+  activeIndex.value = results.length > 0 ? 0 : -1
 })
 
 // ===================== 生命周期 =====================

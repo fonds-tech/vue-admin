@@ -1,52 +1,42 @@
 import type { Router } from "vue-router"
-import type { GuardCtx, GuardStep, GuardResult } from "../core"
-import { useAppStore, useMenuStore } from "@/stores"
-import {
-  auth,
-  menus,
-  dynamic,
-  fallback,
-  isSameSet,
-  whitelist,
-  registered,
-  collectRouteNames,
-  syncRemovedDynamicRoutes,
-} from "../core"
-
-const steps: GuardStep[] = [whitelist, auth, menus, registered, dynamic, fallback]
+import { useMenuStore, useUserStore } from "@/stores"
 
 export function setupBeforeEachGuard(router: Router) {
-  const menuStore = useMenuStore()
-  const added = new Set<string>()
-  let lastRouteNames = new Set<string>()
+  router.beforeEach(async (to, _from, next) => {
+    const userStore = useUserStore()
+    const menuStore = useMenuStore()
+    const appRouter = router as Router & {
+      add: (data: any | any[]) => void
+      find: (path: string) => { isReg: boolean; route?: any }
+    }
 
-  const base: Omit<GuardCtx, "to" | "from"> = {
-    router,
-    app: useAppStore(),
-    menu: menuStore,
-    added,
-  }
+    const ignorePaths = ["/login", "/403", "/404", "/500"]
+    const shouldIgnore = ignorePaths.includes(to.path) || to.meta?.ignore || to.meta?.public
 
-  router.beforeEach(async (to, from, next) => {
-    const ctx: GuardCtx = { ...base, to, from }
+    if (shouldIgnore) {
+      next()
+      return
+    }
 
-    for (const step of steps) {
-      const res = (await step(ctx)) as GuardResult | void
+    if (!userStore.isLoggedIn) {
+      next("/login")
+      return
+    }
 
-      if (step === menus) {
-        const currentNames = collectRouteNames(menuStore.routes)
-        if (!isSameSet(currentNames, lastRouteNames)) {
-          syncRemovedDynamicRoutes(router, currentNames)
-          added.clear()
-          lastRouteNames = currentNames
-        }
-      }
+    if (!menuStore.initialized) {
+      await menuStore.init()
+    }
 
-      if (!res) continue
+    const { isReg, route } = appRouter.find(to.path)
+    if (!route) {
+      next("/404")
+      return
+    }
 
-      if (res.type === "next") return next()
-      if (res.type === "redirect") return next(res.to)
-      if (res.type === "abort") return next(false)
+    if (!isReg) {
+      appRouter.add(route)
+      next(to.fullPath)
+      return
     }
 
     next()

@@ -10,7 +10,6 @@ export interface GuardCtx {
   from: RouteLocationNormalized
   app: AppStore
   menu: MenuStore
-  added: Set<string>
 }
 
 export type GuardResult = { type: "next" } | { type: "redirect"; to: RouteLocationRaw } | { type: "abort" }

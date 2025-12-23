@@ -5,8 +5,10 @@ export default eslint(
     vue: true,
     jsx: true,
     markdown: false,
-    typescript: true,
     formatters: true,
+    typescript: {
+      tsconfigPath: "./tsconfig.eslint.json",
+    },
   },
   {
     rules: {
@@ -16,6 +18,6 @@ export default eslint(
     },
   },
   {
-    ignores: ["dist", "openspec", "node_modules", "*.d.ts"],
+    ignores: ["dist", "openspec", "node_modules", "*.d.ts", "eslint.config.ts"],
   },
 )
