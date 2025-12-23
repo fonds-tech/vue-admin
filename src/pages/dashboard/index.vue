@@ -17,28 +17,9 @@
         <recent-activity />
       </el-col>
 
-      <!-- 快捷入口与待办 -->
+      <!-- 待办 -->
       <el-col :xs="24" :lg="8">
         <div class="right-panel">
-          <!-- 快捷入口 -->
-          <el-card shadow="hover" class="dashboard-card mb-4">
-            <template #header>
-              <div class="card-header">
-                <span class="title">快捷入口</span>
-              </div>
-            </template>
-            <div class="shortcuts">
-              <router-link v-for="item in shortcuts" :key="item.path" :to="item.path" class="shortcut-item">
-                <div class="icon-box" :style="{ color: item.color, backgroundColor: item.bg }">
-                  <el-icon :size="20">
-                    <component :is="item.icon" />
-                  </el-icon>
-                </div>
-                <span>{{ item.title }}</span>
-              </router-link>
-            </div>
-          </el-card>
-
           <!-- 待办事项 -->
           <el-card shadow="hover" class="dashboard-card">
             <template #header>
@@ -72,14 +53,6 @@ const stats = ref([
   { title: "活跃用户", value: "2,156", icon: "UserFilled", color: "#10b981", change: "+8.2%", badge: "日活" },
   { title: "订单总数", value: "15,890", icon: "ShoppingCart", color: "#f59e0b", change: "+23.1%", badge: "本月" },
   { title: "总收入", value: "¥48,250", icon: "Money", color: "#ef4444", change: "+5.6%", badge: "净收" },
-])
-
-// 快捷入口
-const shortcuts = ref([
-  { title: "用户管理", icon: "User", path: "/system/user", color: "#4f46e5", bg: "rgba(79, 70, 229, 0.1)" },
-  { title: "角色管理", icon: "UserFilled", path: "/system/role", color: "#10b981", bg: "rgba(16, 185, 129, 0.1)" },
-  { title: "菜单管理", icon: "Menu", path: "/system/menu", color: "#f59e0b", bg: "rgba(245, 158, 11, 0.1)" },
-  { title: "系统设置", icon: "Setting", path: "/system/setting", color: "#ef4444", bg: "rgba(239, 68, 68, 0.1)" },
 ])
 
 // 待办事项
@@ -123,41 +96,6 @@ const todos = ref([
       color: var(--el-text-color-primary);
       font-size: 16px;
       font-weight: 600;
-    }
-  }
-}
-
-.shortcuts {
-  gap: 12px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-
-  .shortcut-item {
-    gap: 12px;
-    color: var(--el-text-color-regular);
-    border: 1px solid transparent;
-    display: flex;
-    padding: 16px;
-    background: var(--el-bg-color-page);
-    transition: all 0.3s;
-    align-items: center;
-    border-radius: 8px;
-    text-decoration: none;
-
-    &:hover {
-      transform: translateY(-2px);
-      background: var(--el-bg-color);
-      box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
-      border-color: var(--el-border-color-lighter);
-    }
-
-    .icon-box {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      border-radius: 10px;
-      justify-content: center;
     }
   }
 }
