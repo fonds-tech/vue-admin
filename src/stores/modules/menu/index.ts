@@ -14,24 +14,6 @@ export const useMenuStore = defineStore("menu", {
     initialized: false,
     activeFirstLevelPath: "",
   }),
-
-  getters: {
-    /** 一级菜单列表（混合模式用） */
-    firstLevelMenus: (state): Menu[] => state.menus,
-
-    /** 当前一级菜单对应的子菜单（混合模式用） */
-    currentSubMenus: (state): Menu[] => {
-      if (!state.activeFirstLevelPath) return []
-      const currentMenu = state.menus.find((menu) => menu.path === state.activeFirstLevelPath)
-      return currentMenu?.children || []
-    },
-
-    /** 是否有子菜单可显示（混合模式用） */
-    hasSubMenus(): boolean {
-      return this.currentSubMenus.length > 0
-    },
-  },
-
   actions: {
     /**
      * 初始化菜单

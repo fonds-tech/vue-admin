@@ -57,7 +57,11 @@ export default defineComponent({
     const activeFirstLevelPath = computed<string>(() => menuStore.activeFirstLevelPath)
 
     /** 当前一级菜单对应的子菜单（双列/混合模式共用） */
-    const currentSubMenus = computed<Menu[]>(() => menuStore.currentSubMenus)
+    const currentSubMenus = computed<Menu[]>(() => {
+      if (!activeFirstLevelPath.value) return []
+      const currentMenu = firstLevelMenus.value.find((menu) => menu.path === activeFirstLevelPath.value)
+      return currentMenu?.children || []
+    })
 
     /** 是否有子菜单可显示 */
     const hasSubMenus = computed<boolean>(() => currentSubMenus.value.length > 0)

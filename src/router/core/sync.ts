@@ -1,14 +1,10 @@
-import type { Router, RouteRecordRaw } from "vue-router"
 import type { MenuRoute } from "@/stores"
+import type { Router, RouteRecordRaw } from "vue-router"
 
 type NamedRoute = RouteRecordRaw | MenuRoute
 
 export function collectRouteNames(routes: NamedRoute[]) {
-  return new Set(
-    routes
-      .map((route) => route.name)
-      .filter((name): name is string => typeof name === "string" && name.length > 0),
-  )
+  return new Set(routes.map((route) => route.name).filter((name): name is string => typeof name === "string" && name.length > 0))
 }
 
 export function isSameSet(a: Set<string>, b: Set<string>) {
