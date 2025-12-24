@@ -1,5 +1,6 @@
 import App from "./App.vue"
 import i18n from "./locales"
+import { Crud } from "@fonds/vue-crud"
 import { createApp } from "vue"
 import { setupRouter } from "@/router"
 import { setupStores } from "@/stores"
@@ -16,5 +17,6 @@ setupStores(app)
 setupRouter(app)
 
 app.use(i18n)
+app.use(Crud)
 
 app.mount("#app")

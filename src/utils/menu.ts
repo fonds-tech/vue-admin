@@ -14,7 +14,6 @@ export function menuToRoute(menu: Menu): MenuRoute {
     public: menu.meta?.public,
     iframe: menu.meta?.iframe,
     component: menu.meta?.component ?? menu.component,
-    dynamic: true,
   }
 
   const route: MenuRoute = {

@@ -1,42 +1,77 @@
 import type { Router } from "vue-router"
-import { useMenuStore, useUserStore } from "@/stores"
+import { isEmpty } from "@fonds/utils"
+import { createRouterMatcher } from "vue-router"
+import { useAppStore, useMenuStore } from "@/stores"
 
+const files = import.meta.glob(["/src/views/*/**/*", "!**/components"])
+
+/**
+ * 设置路由前置守卫
+ * @param router 路由实例
+ */
 export function setupBeforeEachGuard(router: Router) {
-  router.beforeEach(async (to, _from, next) => {
-    const userStore = useUserStore()
-    const menuStore = useMenuStore()
-    const appRouter = router as Router & {
-      add: (data: any | any[]) => void
-      find: (path: string) => { isReg: boolean; route?: any }
+  const app = useAppStore()
+  const menu = useMenuStore()
+
+  const addRoute = (route: any) => {
+    if (route.meta.component) {
+      const file = files[`/src/views/${route.meta.component}.vue`]
+      if (file) {
+        route.component = file
+      } else {
+        console.error(`组件${route.meta.component}不存在`)
+      }
     }
+    route.meta.dynamic = true
+    router.addRoute("Layout", route)
+  }
 
-    const ignorePaths = ["/login", "/403", "/404", "/500"]
-    const shouldIgnore = ignorePaths.includes(to.path) || to.meta?.ignore || to.meta?.public
+  const findRoute = (path: string) => {
+    let route: any
+    const list = [...router.getRoutes(), ...menu.routes]
+    const matcher = createRouterMatcher(list as any, {})
+    matcher.getRoutes().find((item) => {
+      const re = new RegExp(item.re)
+      if (re.test(path)) {
+        route = path === "/" ? list.find((e) => e.meta.home) : list.find((e) => e.path === item.record.path)
+        return true
+      }
+      return false
+    })
+    return route
+  }
 
-    if (shouldIgnore) {
+  router.beforeEach(async (to, from, next) => {
+    if (to.meta.public) {
       next()
       return
+    } else if (app.token) {
+      if (menu.initialized === false) {
+        await menu.fetchMenus()
+      }
+    } else {
+      next({ path: "/login" })
+      return
     }
+    const find = findRoute(to.path)
 
-    if (!userStore.isLoggedIn) {
-      next("/login")
+    if (isEmpty(find)) {
+      next(app.token ? "/404" : "/login")
       return
     }
 
-    if (!menuStore.initialized) {
-      await menuStore.init()
-    }
-
-    const { isReg, route } = appRouter.find(to.path)
-    if (!route) {
-      next("/404")
-      return
-    }
-
-    if (!isReg) {
-      appRouter.add(route)
+    if (isEmpty(find.meta.dynamic)) {
+      addRoute(find)
       next(to.fullPath)
       return
+    }
+
+    if (to.path === "/") {
+      const home = router.getRoutes().find((e) => e.meta.home)
+      if (home) {
+        next(home.path)
+        return
+      }
     }
 
     next()

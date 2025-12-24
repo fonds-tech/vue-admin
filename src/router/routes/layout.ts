@@ -8,10 +8,10 @@ export const layoutRoutes: RouteRecordRaw[] = [
     redirect: "/dashboard",
     children: [
       {
-        path: "dashboard",
+        path: "/dashboard",
         name: "Dashboard",
-        component: () => import("@/pages/dashboard/index.vue"),
-        meta: { title: "首页", icon: "HomeFilled", affix: true },
+        meta: { title: "首页", icon: "HomeFilled", home: true, affix: true },
+        component: () => import("@/views/dashboard/index.vue"),
       },
     ],
   },

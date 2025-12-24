@@ -5,6 +5,6 @@ export const authRoutes: RouteRecordRaw[] = [
     path: "/login",
     name: "Login",
     component: () => import("@/pages/auth/login/index.vue"),
-    meta: { title: "登录", ignore: true },
+    meta: { title: "登录", public: true },
   },
 ]

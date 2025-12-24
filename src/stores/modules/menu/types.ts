@@ -1,5 +1,3 @@
-import type { RouteMeta } from "vue-router"
-
 /** 菜单状态 */
 export interface MenuState {
   /** 原始菜单列表（服务端返回） */
@@ -50,24 +48,32 @@ export interface Menu {
   /** 权限标识 */
   permission?: string
   /** 路由元信息（可选，用于扩展配置） */
-  meta?: MenuMeta
+  meta?: RouteMeta
   /** 子菜单 */
   children?: Menu[]
 }
 
 /** 路由元信息 */
-export type MenuMeta = RouteMeta
+export interface RouteMeta {
+  /** 是否首页 */
+  home?: boolean
+  /** 是否公共路由，不需要token即可访问 */
+  public?: boolean
+  /** 是否动态路由 */
+  dynamic?: boolean
+  [key: string]: any
+}
 
 /** 符合 Vue Router 的菜单路由结构 */
 export interface MenuRoute {
+  /** 路由元信息 */
+  meta: RouteMeta
   /** 路由路径 */
   path: string
   /** 路由名称 */
   name: string
   /** 重定向路径 */
   redirect?: string
-  /** 路由元信息 */
-  meta: MenuMeta
   /** 子路由 */
   children?: MenuRoute[]
 }
