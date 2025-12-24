@@ -19,4 +19,10 @@ export const errorRoutes: RouteRecordRaw[] = [
     component: () => import("@/pages/error/500.vue"),
     meta: { title: "500", public: true },
   },
+  {
+    path: "/:catchAll(.*)",
+    name: "404",
+    component: () => import("@/pages/error/404.vue"),
+    meta: { title: "404" },
+  },
 ]
