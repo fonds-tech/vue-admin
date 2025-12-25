@@ -54,14 +54,15 @@ export interface Menu {
 }
 
 /** 路由元信息 */
-export interface RouteMeta {
+export interface RouteMeta extends Record<PropertyKey, unknown> {
   /** 是否首页 */
   home?: boolean
   /** 是否公共路由，不需要token即可访问 */
   public?: boolean
   /** 是否动态路由 */
   dynamic?: boolean
-  [key: string]: any
+  /** 组件路径（相对 views 目录） */
+  component?: string
 }
 
 /** 符合 Vue Router 的菜单路由结构 */

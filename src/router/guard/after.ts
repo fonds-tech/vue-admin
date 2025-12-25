@@ -7,12 +7,14 @@ export function setupAfterEachGuard(router: Router) {
     if (to.meta?.ignore || to.meta?.process === false || to.meta?.fullScreen) return
 
     const processStore = useProcessStore()
-    const title = (to.meta?.title as string) || (to.name as string) || to.path
+    const metaTitle = to.meta?.title
+    const name = to.name
+    const title = typeof metaTitle === "string" ? metaTitle : typeof name === "string" ? name : to.path
 
     processStore.add({
       path: to.path,
       fullPath: to.fullPath,
-      name: (to.name as string) || to.path,
+      name: typeof name === "string" ? name : to.path,
       title,
       affix: !!to.meta?.affix,
     })
