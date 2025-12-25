@@ -21,8 +21,7 @@ export const errorRoutes: RouteRecordRaw[] = [
   },
   {
     path: "/:catchAll(.*)",
-    name: "404",
+    name: "NotFound",
     component: () => import("@/pages/error/404.vue"),
-    meta: { title: "404" },
   },
 ]
